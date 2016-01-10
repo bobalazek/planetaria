@@ -45,52 +45,16 @@ $app->mount(
     new Application\ControllerProvider\MembersArea\PostsControllerProvider()
 );
 
-/******** Buildings ********/
-$app->mount(
-    '/members-area/buildings',
-    new Application\ControllerProvider\MembersArea\BuildingsControllerProvider()
-);
-
 /******** Countries ********/
 $app->mount(
     '/members-area/countries',
     new Application\ControllerProvider\MembersArea\CountriesControllerProvider()
 );
 
-/******** Districts ********/
-$app->mount(
-    '/members-area/districts',
-    new Application\ControllerProvider\MembersArea\DistrictsControllerProvider()
-);
-
-/******** Items ********/
-$app->mount(
-    '/members-area/items',
-    new Application\ControllerProvider\MembersArea\ItemsControllerProvider()
-);
-
-/******** Resources ********/
-$app->mount(
-    '/members-area/resources',
-    new Application\ControllerProvider\MembersArea\ResourcesControllerProvider()
-);
-
-/******** Skills ********/
-$app->mount(
-    '/members-area/skills',
-    new Application\ControllerProvider\MembersArea\SkillsControllerProvider()
-);
-
 /******** Towns ********/
 $app->mount(
     '/members-area/towns',
     new Application\ControllerProvider\MembersArea\TownsControllerProvider()
-);
-
-/******** Units ********/
-$app->mount(
-    '/members-area/units',
-    new Application\ControllerProvider\MembersArea\UnitsControllerProvider()
 );
 
 /******** Statistics ********/

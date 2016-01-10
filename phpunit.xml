@@ -11,7 +11,7 @@
     bootstrap="app/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="Town Wars Test Suite">
+        <testsuite name="Planetaria Test Suite">
             <directory>./test</directory>
         </testsuite>
     </testsuites>

@@ -3,13 +3,13 @@
 return array(
     'environment' => 'development',
     'debug' => true,
-    'name' => 'Town Wars',
+    'name' => 'Planetaria',
     'version' => '0.1.0',
     'author' => 'Borut Balazek',
 
     // Admin email (& name)
     'email' => 'info@bobalazek.com',
-    'emailName' => 'Town Wars Mailer',
+    'emailName' => 'Planetaria Mailer',
 
     // Default Locale / Language stuff
     'locale' => 'en_US', // Default locale
@@ -69,9 +69,9 @@ return array(
         'default' => array(
             'driver' => 'pdo_mysql',
             'host' => 'localhost',
-            'dbname' => 'town_wars',
-            'user' => 'town_wars',
-            'password' => 'town_wars',
+            'dbname' => 'planetaria',
+            'user' => 'planetaria',
+            'password' => 'planetaria',
             'charset' => 'utf8',
         ),
     ),

@@ -22,22 +22,6 @@
             </a>
         </li>
     {% endif %}
-    {% if is_granted('ROLE_SKILLS_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.skills') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.skills') }}">
-                <i class="fa fa-fw fa-rocket"></i>
-                {{ 'Skills' | trans }}
-            </a>
-        </li>
-    {% endif %}
-    {% if is_granted('ROLE_RESOURCES_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.resources') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.resources') }}">
-                <i class="fa fa-fw fa-tree"></i>
-                {{ 'Resources' | trans }}
-            </a>
-        </li>
-    {% endif %}
     {% if is_granted('ROLE_COUNTRIES_EDITOR') or is_granted('ROLE_ADMIN') %}
         <li class="{{ path('members-area.countries') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.countries') }}">
@@ -46,43 +30,11 @@
             </a>
         </li>
     {% endif %}
-    {% if is_granted('ROLE_DISTRICTS_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.districts') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.districts') }}">
-                <i class="fa fa-fw fa-map"></i>
-                {{ 'Districts' | trans }}
-            </a>
-        </li>
-    {% endif %}
     {% if is_granted('ROLE_TOWNS_EDITOR') or is_granted('ROLE_ADMIN') %}
         <li class="{{ path('members-area.towns') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.towns') }}">
                 <i class="fa fa-fw fa-map-signs"></i>
                 {{ 'Towns' | trans }}
-            </a>
-        </li>
-    {% endif %}
-    {% if is_granted('ROLE_BUILDINGS_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.buildings') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.buildings') }}">
-                <i class="fa fa-fw fa-building"></i>
-                {{ 'Buildings' | trans }}
-            </a>
-        </li>
-    {% endif %}
-    {% if is_granted('ROLE_UNITS_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.units') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.units') }}">
-                <i class="fa fa-fw fa-tags"></i>
-                {{ 'Units' | trans }}
-            </a>
-        </li>
-    {% endif %}
-    {% if is_granted('ROLE_ITEMS_EDITOR') or is_granted('ROLE_ADMIN') %}
-        <li class="{{ path('members-area.items') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.items') }}">
-                <i class="fa fa-fw fa-archive"></i>
-                {{ 'Items' | trans }}
             </a>
         </li>
     {% endif %}

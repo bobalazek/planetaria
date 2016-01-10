@@ -1,9 +1,8 @@
 README
 ======
-**Town Wars**
+**Planetaria**
 
 The game!
-
 
 Requirements & Tools & Helpers
 -------------------
@@ -15,7 +14,7 @@ Requirements & Tools & Helpers
 Setup / Development
 -------------------
 * Navigate yor your web directory: `cd /var/www`
-* Clone this repo: `git clone git@bitbucket.org:bobalazek/town-wars.git`
+* Clone this repo: `git clone git@bitbucket.org:bobalazek/planetaria.git`
 * Configure database (and maybe other stuff if you want): `app/configs/global-local.php.dist` (create your own global-local.php by copy / paste-ing this file)
 * Run the following commands:
     * `composer install`
@@ -27,7 +26,7 @@ Setup / Development
 Database
 -------------------
 * We use the Doctrine database
-* Navigate to your project directory: `cd /var/www/town-wars`
+* Navigate to your project directory: `cd /var/www/planetaria`
 * Check the entities: `bin/console orm:info` (optional)
 * Update the schema: `bin/console orm:schema-tool:update --force`
 * Database updated!

@@ -74,13 +74,6 @@ class TownEntity extends AbstractAdvancedEntity
     protected $townResources;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"})
-     */
-    protected $townBuildings;
-
-    /**
      * The constructor
      */
     public function __construct()
@@ -159,27 +152,6 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $townResource->setTown(null);
         $this->townResources->removeElement($townResource);
-
-        return $this;
-    }
-
-    /*** Town Buildings ***/
-    /**
-     * @return ArrayCollection
-     */
-    public function getTownBuildings()
-    {
-        return $this->townBuildings->toArray();
-    }
-
-    /**
-     * @param ArrayCollection $townBuildings
-     *
-     * @return BuildingEntity
-     */
-    public function setTownBuildings($townBuildings)
-    {
-        $this->townBuildings = $townBuildings;
 
         return $this;
     }

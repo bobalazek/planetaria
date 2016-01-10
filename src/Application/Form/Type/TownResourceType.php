@@ -5,6 +5,7 @@ namespace Application\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Application\Game\Resources;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -19,14 +20,8 @@ class TownResourceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('resource', 'entity', array(
-            'required' => false,
-            'empty_value' => false,
-            'class' => 'Application\Entity\ResourceEntity',
-            'attr' => array(
-                'class' => 'select-picker',
-                'data-live-search' => 'true',
-            ),
+        $builder->add('resource', 'choice', array(
+            'choices' => Resources::getAll(),
         ));
         $builder->add('amount', 'number');
     }

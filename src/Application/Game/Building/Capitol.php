@@ -2,7 +2,7 @@
 
 namespace Application\Game\Building;
 
-use Application\Game\Resource\Resources;
+use Application\Game\Resources;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>

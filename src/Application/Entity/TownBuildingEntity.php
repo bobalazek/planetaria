@@ -23,6 +23,11 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(name="building", type="string", length=32)
+     */
+    protected $building;
 
     /**
      * At which level is the building?
@@ -88,18 +93,27 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
      */
     protected $town;
+    
+    /*** Building ***/
+    /**
+     * @return string
+     */
+    public function getBuilding()
+    {
+        return $this->building;
+    }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\BuildingEntity", inversedBy="townBuildings")
-     * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
+     * @param string $building
+     *
+     * @return TownBuildingEntity
      */
-    protected $building;
+    public function setBuilding($building)
+    {
+        $this->building = $building;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\DistrictEntity", inversedBy="townBuildings")
-     * @ORM\JoinColumn(name="district_id", referencedColumnName="id")
-     */
-    protected $district;
+        return $this;
+    }
 
     /*** Level ***/
     /**
@@ -223,48 +237,6 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function setTown(TownEntity $town)
     {
         $this->town = $town;
-
-        return $this;
-    }
-
-    /*** Building ***/
-    /**
-     * @return BuildingEntity
-     */
-    public function getBuilding()
-    {
-        return $this->building;
-    }
-
-    /**
-     * @param BuildingEntity $building
-     *
-     * @return TownBuildingEntity
-     */
-    public function setBuilding(BuildingEntity $building)
-    {
-        $this->building = $building;
-
-        return $this;
-    }
-
-    /*** District ***/
-    /**
-     * @return DistrictEntity
-     */
-    public function getDistrict()
-    {
-        return $this->district;
-    }
-
-    /**
-     * @param DistrictEntity $district
-     *
-     * @return TownBuildingEntity
-     */
-    public function setDistrict(DistrictEntity $district)
-    {
-        $this->district = $district;
 
         return $this;
     }

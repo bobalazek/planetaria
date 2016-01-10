@@ -3,18 +3,17 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Skill Entity
+ * Country Unit Entity
  *
- * @ORM\Table(name="skills")
- * @ORM\Entity(repositoryClass="Application\Repository\SkillRepository")
+ * @ORM\Table(name="country_units")
+ * @ORM\Entity(repositoryClass="Application\Repository\CountryUnitRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class SkillEntity extends AbstractAdvancedEntity
+class CountryUnitEntity extends AbstractBasicEntity
 {
     /**
      * @var integer
@@ -24,27 +23,11 @@ class SkillEntity extends AbstractAdvancedEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="unit", type="string", length=32)
      */
-    protected $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
-     */
-    protected $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    protected $description;
+    protected $unit;
 
     /**
      * @var \DateTime
@@ -61,29 +44,49 @@ class SkillEntity extends AbstractAdvancedEntity
     protected $timeUpdated;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Application\Entity\UserSkillEntity", mappedBy="skill", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Application\Entity\CountryEntity", inversedBy="countryUnits")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
-    protected $userSkills;
-
-    /*** User skills ***/
+    protected $country;
+    
+    /*** Unit ***/
     /**
-     * @return array
+     * @return string
      */
-    public function getUserSkills()
+    public function getUnit()
     {
-        return $this->userSkills->toArray();
+        return $this->unit;
     }
 
     /**
-     * @param ArrayCollection $userSkills
+     * @param string $unit
      *
-     * @return SkillEntity
+     * @return CountryUnitEntity
      */
-    public function setUserSkills($userSkills)
+    public function setUnit($unit)
     {
-        $this->userSkills = $userSkills;
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /*** Country ***/
+    /**
+     * @return CountryEntity
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param CountryEntity $country
+     *
+     * @return CountryUnitEntity
+     */
+    public function setCountry(CountryEntity $country)
+    {
+        $this->country = $country;
 
         return $this;
     }

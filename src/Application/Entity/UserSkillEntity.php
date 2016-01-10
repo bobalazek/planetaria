@@ -23,6 +23,11 @@ class UserSkillEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(name="skill", type="string", length=32)
+     */
+    protected $skill;
 
     /**
      * @var array
@@ -50,12 +55,27 @@ class UserSkillEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
+    
+    /*** Skill ***/
+    /**
+     * @return string
+     */
+    public function getSkill()
+    {
+        return $this->skill;
+    }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\SkillEntity", inversedBy="userSkills")
-     * @ORM\JoinColumn(name="skill_id", referencedColumnName="id")
+     * @param string $skill
+     *
+     * @return UserSkillEntity
      */
-    protected $skill;
+    public function setSkill($skill)
+    {
+        $this->skill = $skill;
+
+        return $this;
+    }
 
     /*** Points ***/
     /**
@@ -78,19 +98,6 @@ class UserSkillEntity extends AbstractBasicEntity
         return $this;
     }
 
-    /**
-     * @param string $role
-     *
-     * @return boolean
-     */
-    public function hasRole($role)
-    {
-        return in_array(
-            $role,
-            $this->getRoles()
-        );
-    }
-
     /*** User ***/
     /**
      * @return UserEntity
@@ -108,27 +115,6 @@ class UserSkillEntity extends AbstractBasicEntity
     public function setUser(UserEntity $user)
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /*** Skill ***/
-    /**
-     * @return SkillEntity
-     */
-    public function getSkill()
-    {
-        return $this->skill;
-    }
-
-    /**
-     * @param SkillEntity $skill
-     *
-     * @return UserSkillEntity
-     */
-    public function setSkill(SkillEntity $skill)
-    {
-        $this->skill = $skill;
 
         return $this;
     }

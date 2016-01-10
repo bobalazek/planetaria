@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Town Resource Entity
  *
- * @ORM\Table(name="town_resources", uniqueConstraints={@ORM\UniqueConstraint(columns={"town_id", "resource_id"})})
+ * @ORM\Table(name="town_resources", uniqueConstraints={@ORM\UniqueConstraint(columns={"town_id", "resource"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TownResourceRepository")
  * @ORM\HasLifecycleCallbacks()
  *
@@ -23,6 +23,11 @@ class TownResourceEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(name="resource", type="string", length=32)
+     */
+    protected $resource;
 
     /**
      * How much of that resource do we have in the storage?
@@ -62,11 +67,26 @@ class TownResourceEntity extends AbstractBasicEntity
      */
     protected $town;
 
+    /*** Resource ***/
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\ResourceEntity", inversedBy="townResources")
-     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     * @return string
      */
-    protected $resource;
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * @param string $resource
+     *
+     * @return TownResourceEntity
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+
+        return $this;
+    }
 
     /*** Amount ***/
     /**
@@ -127,27 +147,6 @@ class TownResourceEntity extends AbstractBasicEntity
     public function setTown(TownEntity $town = null)
     {
         $this->town = $town;
-
-        return $this;
-    }
-
-    /*** Resource ***/
-    /**
-     * @return ResourceEntity
-     */
-    public function getResource()
-    {
-        return $this->resource;
-    }
-
-    /**
-     * @param ResourceEntity $resource
-     *
-     * @return TownResourceEntity
-     */
-    public function setResource(ResourceEntity $resource)
-    {
-        $this->resource = $resource;
 
         return $this;
     }
