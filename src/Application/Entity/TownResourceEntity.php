@@ -23,7 +23,7 @@ class TownResourceEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="resource", type="string", length=32)
      */

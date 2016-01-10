@@ -23,7 +23,7 @@ class CountryUnitEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="unit", type="string", length=32)
      */
@@ -48,7 +48,7 @@ class CountryUnitEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     protected $country;
-    
+
     /*** Unit ***/
     /**
      * @return string

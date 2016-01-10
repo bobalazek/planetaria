@@ -23,7 +23,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="building", type="string", length=32)
      */
@@ -93,7 +93,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
      */
     protected $town;
-    
+
     /*** Building ***/
     /**
      * @return string

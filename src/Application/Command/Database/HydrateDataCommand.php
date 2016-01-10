@@ -8,12 +8,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Application\Entity\UserEntity;
 use Application\Entity\ProfileEntity;
-use Application\Entity\SkillEntity;
-use Application\Entity\ResourceEntity;
-use Application\Entity\DistrictEntity;
-use Application\Entity\DistrictResourceEntity;
-use Application\Entity\BuildingEntity;
-use Application\Entity\BuildingResourceEntity;
 use Silex\Application;
 
 /**

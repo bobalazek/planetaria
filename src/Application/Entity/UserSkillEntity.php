@@ -23,7 +23,7 @@ class UserSkillEntity extends AbstractBasicEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="skill", type="string", length=32)
      */
@@ -55,7 +55,7 @@ class UserSkillEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
-    
+
     /*** Skill ***/
     /**
      * @return string
