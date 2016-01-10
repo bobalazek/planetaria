@@ -4,6 +4,9 @@ namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Application\Game\Resources;
+use Application\Game\Buildings;
+use Application\Game\Building\Building;
 
 /**
  * Town Entity
@@ -154,6 +157,43 @@ class TownEntity extends AbstractAdvancedEntity
         $this->townResources->removeElement($townResource);
 
         return $this;
+    }
+
+    /*** Town resources production ***/
+    /**
+     * @return array
+     */
+    public function getTownResourcesProduction()
+    {
+        $resourcesProduction = array();
+        $resources = Resources::getAll();
+        $townBuildings = $this->getTownBuildings();
+
+        foreach ($resources as $resourceKey => $resourceName) {
+            $resourcesProduction[$resourceKey] = 0;
+        }
+
+        if (!empty($townBuildings)) {
+            foreach ($townBuildings as $townBuilding) {
+                $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
+                $level = $townBuilding->getLevel();
+                $building = new $className;
+                $buildingResourcesProduction = $building->getResourcesProduction();
+                
+                if (
+                    !empty($buildingResourcesProduction) &&
+                    isset($buildingResourcesProduction[$level])
+                ) {
+                    $buildingResourcesProduction = $buildingResourcesProduction[$level];
+                    
+                    foreach ($buildingResourcesProduction as $resource => $value) {
+                        $resourcesProduction[$resource] += $value;
+                    }
+                }
+            }
+        }
+        
+        return $resourcesProduction;
     }
 
     /**

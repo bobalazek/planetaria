@@ -101,9 +101,9 @@ final class Buildings
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public static function getAllByClassName($key = null)
+    public static function getClassName($key)
     {
         $all = array(
             self::CAPITOL => 'Capitol',
@@ -122,9 +122,6 @@ final class Buildings
             self::DOCK => 'Dock',
         );
 
-        return $key === null
-            ? $all
-            : $all[$key]
-        ;
+        return $all[$key];
     }
 }
