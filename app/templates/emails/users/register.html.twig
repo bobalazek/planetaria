@@ -1,0 +1,30 @@
+{% extends 'layouts/email.html.twig' %}
+
+{% block main %}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <h4>
+                    {{ 'Hello' | trans }}
+                    <b>{{ user.getUsername() }}</b>!
+                </h4>
+                <p>
+                     <b>{{ 'Username' | trans }}:</b>
+                     {{ user.getUsername() }}
+                </p>
+                <p>{{ 'Please click the link below, to activate your account' | trans }}:</p>
+                <table class="twelve columns">
+                    <tr>
+                        <td class="panel">
+                            <a href="{{ url('members-area.register', { code: user.getActivationCode() }) }}" target="_blank">
+                                {{ url('members-area.register', { code: user.getActivationCode() }) }}
+                            </a>
+                        </td>
+                        <td class="expander"></td>
+                    </tr>
+                </table>
+                <p>{{ 'If the link does not work, copy and paste it into your browser window' | trans }}</p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

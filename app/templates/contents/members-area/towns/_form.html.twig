@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.slug) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="town-resource-wrapper">
+                {% do form.townResources.setRendered %}
+                <div>
+                    {{ form_label(form.townResources) }}
+                    <a id="new-town-resource"
+                        class="btn btn-xs btn-success"
+                        href="#">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                {{ form_errors(form.townResources) }}
+                <ul id="townResources-fields-list"
+                    data-prototype="{{ form_widget(form.townResources.vars.prototype) | e }}">
+                    {% for townResource in form.townResources %}
+                        <li>
+                            {{ form_errors(townResource) }}
+                            {{ form_widget(townResource) }}
+                            <div class="clearfix">
+                                <div class="pull-right">
+                                    <a class="btn btn-xs btn-danger remove-town-resource-button"
+                                        href="#">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,160 @@
+Application\Entity\PostEntity:
+    properties:
+        title:
+            - NotBlank:
+                groups: [ newAndEdit ]
+
+Application\Entity\ProfileEntity:
+    properties:
+        image:
+            - Image:
+                groups: [ newAndEdit ]
+
+Application\Entity\UserEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: 'This email is already in use'
+            groups: [ new, edit, register, settings ]
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: 'This username is already in use'
+            groups: [ new, edit, register, settings ]
+    properties:
+        username:
+            - NotBlank:
+                groups: [ new, edit, register, settings ]
+        email:
+            - NotBlank:
+                groups: [ new, edit, register, settings, resetPasswordRequest ]
+            - Email:
+                groups: [ new, edit, register, settings, resetPasswordRequest ]
+        plainPassword:
+            - NotBlank:
+                groups: [ new, register, settingsPassword, resetPasswordReset ]
+        oldPassword:
+            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+                groups: [ settingsPassword ]
+        profile:
+            - Valid: ~
+
+Application\Entity\ResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+
+Application\Entity\CountryEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+
+Application\Entity\DistrictEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ coordinatesX, coordinatesY ]
+            message: 'This coordinates are already in use'
+            groups: [ newAndEdit ]
+    properties:
+        coordinatesX:
+            - NotBlank:
+                groups: [ newAndEdit ]
+            - Range:
+                min: -25
+                max: 25
+                groups: [ newAndEdit ]
+        coordinatesY:
+            - NotBlank:
+                groups: [ newAndEdit ]
+            - Range:
+                min: -25
+                max: 25
+                groups: [ newAndEdit ]
+        districtResources:
+            - Valid: ~
+
+Application\Entity\DistrictResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ district, resource ]
+            message: 'This district already has this resource'
+            groups: [ newAndEdit ]
+
+Application\Entity\TownEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+    properties:
+        townResources:
+            - Valid: ~
+
+Application\Entity\TownResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ town, resource ]
+            message: 'This town already has this resource'
+            groups: [ newAndEdit ]
+
+Application\Entity\BuildingEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+    properties:
+        buildingResources:
+            - Valid: ~
+            - Count:
+                min: 1
+                minMessage: 'You must define at least one resource'
+                groups: [ newAndEdit ]
+
+Application\Entity\BuildingResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ building, resource ]
+            message: 'This building already has this resource'
+            groups: [ newAndEdit ]
+
+Application\Entity\UnitEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+    properties:
+        unitResources:
+            - Valid: ~
+
+Application\Entity\UnitResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ unit, resource ]
+            message: 'This unit already has this resource'
+            groups: [ newAndEdit ]
+
+Application\Entity\ItemEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: slug
+            message: 'This slug is already in use'
+            groups: [ newAndEdit ]
+    properties:
+        itemResources:
+            - Valid: ~
+
+Application\Entity\ItemResourceEntity:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [ item, resource ]
+            message: 'This item already has this resource'
+            groups: [ newAndEdit ]

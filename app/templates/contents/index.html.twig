@@ -1,0 +1,18 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = false %}
+
+{% block main %}
+    <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>{{ app.name }}</h1>
+            <div id="main-content">
+                <h2>A new world is in creation. Why not join it?</h2>
+                <a class="btn btn-lg btn-block btn-success"
+                    href="{{ url('members-area.register') }}">
+                    {{ 'Register now!' | trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

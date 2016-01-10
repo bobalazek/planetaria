@@ -1,0 +1,90 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'Countries' | trans }}
+        <a class="btn btn-primary btn-sm"
+            href="{{ url('members-area.countries.new') }}">
+            {{ 'New' | trans }}
+        </a>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Countries' | trans }}
+        </li>
+    </ol>
+    {{ paginator_top_render(pagination) }}
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th width="100"></th>
+                    <th>{{ paginator_sortable(pagination, 'Name', 'c.name') }}</th>
+                    <th>{{ paginator_sortable(pagination, 'Slug', 'c.slug') }}</th>
+                    <th>{{ paginator_sortable(pagination, 'Description', 'c.description') }}</th>
+                    <th width="160">{{ paginator_sortable(pagination, 'Time Created', 'c.timeCreated') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for country in pagination.getItems() %}
+                    <tr>
+                        <td>
+                            <div class="object-checkbox-wrapper">
+                                <input class="object-checkbox"
+                                    type="checkbox"
+                                    name="ids[]"
+                                    value="{{ country.getId() }}" />
+                            </div>
+                            <a class="btn btn-xs btn-default"
+                                data-toggle="tooltip"
+                                title="{{ 'Edit' | trans }}"
+                                href="{{ url('members-area.countries.edit', { id: country.getId() }) }}">
+                                <i class="fa fa-fw fa-cog"></i>
+                            </a>
+                            <a class="btn btn-xs btn-danger"
+                                data-toggle="tooltip"
+                                title="{{ 'Remove' | trans }}"
+                                href="{{ url('members-area.countries.remove', { id: country.getId() }) }}">
+                                <i class="fa fa-fw fa-times"></i>
+                            </a>
+                        </td>
+                        <td>{{ country.getName() }}</td>
+                        <td>{{ country.getSlug() }}</td>
+                        <td>{{ country.getDescription() }}</td>
+                        <td>{{ country.getTimeCreated() | date(app.dateTimeFormat) }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">
+                            {{ 'No countries yet' | trans }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p>
+        <label>
+            <input id="check-all-checkbox"
+                type="checkbox" />
+            {{ 'Check All' | trans }}
+        </label>
+        -
+        {{ 'With Selected' | trans }}:
+        <a id="remove-selected-button"
+            class="btn btn-xs btn-danger"
+            data-toggle="tooltip"
+            title="{{ 'Remove' | trans }}"
+            href="{{ url('members-area.countries.remove', { id: 0 }) }}">
+            <i class="fa fa-fw fa-times"></i>
+        </a>
+    </p>
+    {{ paginator_bottom_render(pagination) }}
+{% endblock %}

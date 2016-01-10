@@ -1,0 +1,19 @@
+{% extends 'layouts/content.html.twig' %}
+
+{% set isContainerFluid = false %}
+
+{% block main %}
+    <h1>{{ 'Contact Us' | trans }}</h1>
+    <div id="main-content">
+        <p>
+            {{ 'If you have any questions, just write us a message and we will get in touch with you back as soon as possible!' | trans  }}
+        </p>
+        {% if success is defined %}
+            <div class="alert alert-success">
+                {{ successMessage }}
+            </div>
+        {% else %}
+            {{ form(form) }}
+        {% endif %}
+    </div>
+{% endblock %}

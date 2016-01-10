@@ -1,0 +1,45 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Dashboard' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'Dashboard' | trans }}</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Dashboard' | trans }}
+        </li>
+    </ol>
+    <div id="main-content">
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-block btn-lg btn-default"
+                    href="{{ url('game') }}">
+                    {{ 'To the Game' | trans }}
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-block btn-lg btn-default"
+                    href="{{ url('members-area.my.profile') }}">
+                    {{ 'To my Profile' | trans }}
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-block btn-lg btn-default"
+                    href="{{ url('members-area.my.profile.settings') }}">
+                    {{ 'To my Settings' | trans }}
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-block btn-lg btn-default"
+                    href="{{ url('members-area.my.profile.settings.password') }}">
+                    {{ 'Change password settings' | trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

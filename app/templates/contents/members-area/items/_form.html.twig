@@ -1,0 +1,64 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.slug) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.type) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.healthPoints) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.capacity) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.buildTime) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="item-resource-wrapper">
+                {% do form.itemResources.setRendered %}
+                <div>
+                    {{ form_label(form.itemResources) }}
+                    <a id="new-item-resource"
+                        class="btn btn-xs btn-success"
+                        href="#">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                {{ form_errors(form.itemResources) }}
+                <ul id="itemResources-fields-list"
+                    data-prototype="{{ form_widget(form.itemResources.vars.prototype) | e }}">
+                    {% for itemResource in form.itemResources %}
+                        <li>
+                            {{ form_errors(itemResource) }}
+                            {{ form_widget(itemResource) }}
+                            <div class="clearfix">
+                                <div class="pull-right">
+                                    <a class="btn btn-xs btn-danger remove-item-resource-button"
+                                        href="#">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

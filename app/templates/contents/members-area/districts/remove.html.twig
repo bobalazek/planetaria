@@ -1,0 +1,61 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Remove' | trans }} | {{ 'Districts' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {% if districts %}
+            {{ 'Remove Districts' | trans }}
+        {% else %}
+            {{ 'Remove District' | trans }}
+            <small>"{{ district }}"</small>
+        {% endif %}
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('members-area.districts') }}">
+                {{ 'Districts' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Remove' | trans }}
+        </li>
+    </ol>
+    <div class="alert alert-block alert-warning">
+        <h4 class="alert-heading">
+            {{ 'Warning!' | trans }}
+        </h4>
+        {% if districts %}
+            <p>{{ 'Are you sure you want to remove this districts?' | trans }}</p>
+            <ul style="margin-bottom: 10px;">
+                {% for district in districts %}
+                    <li>{{ district }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ 'Are you sure you want to remove this district?' | trans }}</p>
+        {% endif %}
+        <p>
+            {% if districts %}
+                <a class="btn btn-danger"
+                    href="{{ url('members-area.districts.remove', { id: 0, action: 'confirm', ids: ids }) }}">
+                    {{ 'Confirm' | trans }}
+                </a>
+            {% else %}
+                <a class="btn btn-danger"
+                    href="{{ url('members-area.districts.remove', { id: district.getId(), action: 'confirm' }) }}">
+                    {{ 'Confirm' | trans }}
+                </a>
+            {% endif %}
+            <a class="btn btn-success"
+                href="{{ url('members-area.districts') }}">
+                {{ 'Cancel' | trans }}
+            </a>
+        </p>
+    </div>
+{% endblock %}

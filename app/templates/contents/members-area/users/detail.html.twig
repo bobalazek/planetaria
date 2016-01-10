@@ -1,0 +1,52 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ user.getUsername() }} | {{ 'Users' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-responsive img-thumbnail"
+                src="{{ user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : '//api.randomuser.me/portraits/lego/1.jpg' }}"
+                alt="{{ 'Profile image' | trans }}"
+                style="max-height: 400px;" />
+        </div>
+        <div class="col-md-9">
+            <h1>{{ user.getUsername() }}</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    {% if user.getProfile().getFullName() %}
+                        <h4>
+                            {{ 'Name' | trans }}:
+                            {{ user.getProfile().getFullName() }}
+                        </h4>
+                    {% endif %}
+                    {% if user.getProfile().getDescription() %}
+                        <h4>{{ 'Description' | trans }}</h4>
+                        <p>{{ user.getProfile().getDescription() }}</p>
+                    {% endif %}
+                    <h4>
+                        {{ 'Registered' | trans }}:
+                        {{ user.getTimeCreated() | date(app.dateTimeFormat) }}
+                    </h4>
+                </div>
+                <div class="col-md-6">
+                    <h4>
+                        {{ 'Experience Points' | trans }}:
+                        {{ user.getExperiencePoints() }}
+                    </h4>
+                    <h4>
+                        {{ 'Experience Level' | trans }}:
+                        {{ user.getExperienceLevel() }}
+                    </h4>
+                    <h4>
+                        {{ 'Enabled' | trans }}:
+                        {{ (user.isEnabled() ? 'Yes' : 'No') | trans }}
+                    </h4>
+                    <h4>
+                        {{ 'Locked' | trans }}:
+                        {{ (user.isLocked() ? 'Yes' : 'No') | trans }}
+                    </h4>
+                </div>
+        </div>
+    </div>
+{% endblock %}

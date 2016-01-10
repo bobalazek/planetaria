@@ -1,0 +1,103 @@
+<ul id="sidebar-list" class="nav nav-pills nav-stacked">
+    <li class="{{ path('members-area') == app.currentUri ? 'active' : '' }}"
+        role="presentation">
+        <a href="{{ url('members-area') }}">
+            <i class="fa fa-fw fa-dashboard"></i>
+            {{ 'Dashboard' | trans }}
+        </a>
+    </li>
+    {% if is_granted('ROLE_USERS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.users') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.users') }}">
+                <i class="fa fa-fw fa-user"></i>
+                {{ 'Users' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_POSTS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.posts') in app.currentUri ? 'active' : '' }} hidden" role="presentation">
+            <a href="{{ url('members-area.posts') }}">
+                <i class="fa fa-fw fa-newspaper-o"></i>
+                {{ 'Posts' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_SKILLS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.skills') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.skills') }}">
+                <i class="fa fa-fw fa-rocket"></i>
+                {{ 'Skills' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_RESOURCES_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.resources') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.resources') }}">
+                <i class="fa fa-fw fa-tree"></i>
+                {{ 'Resources' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_COUNTRIES_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.countries') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.countries') }}">
+                <i class="fa fa-fw fa-globe"></i>
+                {{ 'Countries' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_DISTRICTS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.districts') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.districts') }}">
+                <i class="fa fa-fw fa-map"></i>
+                {{ 'Districts' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_TOWNS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.towns') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.towns') }}">
+                <i class="fa fa-fw fa-map-signs"></i>
+                {{ 'Towns' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_BUILDINGS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.buildings') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.buildings') }}">
+                <i class="fa fa-fw fa-building"></i>
+                {{ 'Buildings' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_UNITS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.units') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.units') }}">
+                <i class="fa fa-fw fa-tags"></i>
+                {{ 'Units' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_ITEMS_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.items') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.items') }}">
+                <i class="fa fa-fw fa-archive"></i>
+                {{ 'Items' | trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.statistics') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.statistics') }}">
+                <i class="fa fa-fw fa-bar-chart"></i>
+                {{ 'Statistics' | trans }}
+            </a>
+        </li>
+        <li class="{{ path('members-area.settings') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.settings') }}">
+                <i class="fa fa-fw fa-cog"></i>
+                {{ 'Settings' | trans }}
+            </a>
+        </li>
+    {% endif %}
+</ul>

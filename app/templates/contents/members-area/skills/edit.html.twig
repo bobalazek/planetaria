@@ -1,0 +1,31 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Edit' | trans }} | {{ 'Skills' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'Edit Skill' | trans }}
+        <a class="btn btn-primary btn-sm"
+            href="{{ url('members-area.skills.new') }}">
+            {{ 'New' | trans }}
+        </a>
+        <br />
+        <small>{{ skill }}</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('members-area.skills') }}">
+                {{ 'Skills' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Edit' | trans }}
+        </li>
+    </ol>
+    {% include 'contents/members-area/skills/_form.html.twig' %}
+{% endblock %}

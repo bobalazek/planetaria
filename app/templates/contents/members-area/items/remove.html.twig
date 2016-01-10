@@ -1,0 +1,61 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Remove' | trans }} | {{ 'Items' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {% if items %}
+            {{ 'Remove Items' | trans }}
+        {% else %}
+            {{ 'Remove Item' | trans }}
+            <small>"{{ item }}"</small>
+        {% endif %}
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('members-area.items') }}">
+                {{ 'Items' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Remove' | trans }}
+        </li>
+    </ol>
+    <div class="alert alert-block alert-warning">
+        <h4 class="alert-heading">
+            {{ 'Warning!' | trans }}
+        </h4>
+        {% if items %}
+            <p>{{ 'Are you sure you want to remove this items?' | trans }}</p>
+            <ul style="margin-bottom: 10px;">
+                {% for item in items %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ 'Are you sure you want to remove this item?' | trans }}</p>
+        {% endif %}
+        <p>
+            {% if items %}
+                <a class="btn btn-danger"
+                    href="{{ url('members-area.items.remove', { id: 0, action: 'confirm', ids: ids }) }}">
+                    {{ 'Confirm' | trans }}
+                </a>
+            {% else %}
+                <a class="btn btn-danger"
+                    href="{{ url('members-area.items.remove', { id: item.getId(), action: 'confirm' }) }}">
+                    {{ 'Confirm' | trans }}
+                </a>
+            {% endif %}
+            <a class="btn btn-success"
+                href="{{ url('members-area.items') }}">
+                {{ 'Cancel' | trans }}
+            </a>
+        </p>
+    </div>
+{% endblock %}
