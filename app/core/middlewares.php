@@ -129,7 +129,7 @@ $app->before(function () use ($app) {
             );
         }
     }
-    
+
     $app['gameData'] = array(
         'skills' => Skills::getAll(),
     );

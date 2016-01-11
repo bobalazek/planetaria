@@ -18,6 +18,11 @@ final class Skills
     const INTELLIGENCE = 'intelligence';
 
     /**
+     * @var string
+     */
+    const LEADERSHIP = 'leadership';
+
+    /**
      * @return array
      */
     public static function getAll()
@@ -25,6 +30,7 @@ final class Skills
         return array(
             self::STRENGTH => 'Strength',
             self::INTELLIGENCE => 'Intelligence',
+            self::LEADERSHIP => 'Leadership',
         );
     }
 }

@@ -3,9 +3,10 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Application\Game\Experience;
 
 /**
  * User Entity
@@ -627,7 +628,29 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      */
     public function getExperienceLevel()
     {
-        return 0;
+        return Experience::getLevelByPoints(
+            $this->getExperiencePoints()
+        );
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getCurrentExperienceLevelMinimumPoints()
+    {
+        return Experience::getPointsByLevel(
+            $this->getExperienceLevel()
+        );
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getNextExperienceLevelMinimumPoints()
+    {
+        return Experience::getPointsByLevel(
+            $this->getExperienceLevel()+1
+        );
     }
     
     /*** Health points ***/
@@ -944,6 +967,24 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         $this->userSkills = $userSkills;
 
         return $this;
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getUserSkillPointsByKey($key)
+    {
+        $userSkills = $this->getUserSkills();
+        
+        if (!empty($userSkills)) {
+            foreach ($userSkills as $userSkill) {
+                if ($userSkill->getSkill() == $key) {
+                    return $userSkill->getPoints();
+                }
+            }
+        }
+        
+        return 0;
     }
 
     /**

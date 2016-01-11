@@ -11,15 +11,10 @@
                 <h4 class="media-heading">
                     <b>{{ app.user.getUsername() }}</b>
                 </h4>
-                {{ 'Expirience points' | trans }}:
-                <b>{{ app.user.getExperiencePoints() }}</b>
-                <br />
-                {{ 'Expirience level' | trans }}:
-                <b>{{ app.user.getExperienceLevel() }}</b>
             </div>
         </div>
         <h4>
-            {{ 'Health points' | trans }}:
+            {{ 'Health' | trans }}:
             <b>{{ app.user.getHealthPointsPercentage() }}%</b>
             <small>({{ app.user.getHealthPointsLeft() }} {{ 'out of' | trans }} {{ app.user.getHealthPoints() }} {{ 'HP left' | trans }})</small>
         </h4>
@@ -33,16 +28,62 @@
                 <span class="sr-only">{{ app.user.getHealthPointsPercentage() }}%</span>
             </div>
         </div>
-        {% set userSkills = app.user.getUserSkills() %}
-        {% if userSkills %}
-            <h3>{{ 'Skills' | trans }}</h3>
+        <h4>{{ 'Experience' | trans }}</h4>
+        <h5>
+            {{ 'Level' | trans }}:
+            <b>{{ app.user.getExperienceLevel() }}</b>
+        </h5>
+        <h5>
+            {{ 'Points' | trans }}:
+            <b>{{ app.user.getExperiencePoints() }}</b>
+        </h5>
+        <h5>
+            {{ 'Next level' | trans }}:
+            <b>{{ app.user.getNextExperienceLevelMinimumPoints() }}</b>
+        </h5>
+        <h3>{{ 'Skills' | trans }}</h3>
+        <ul class="list-unstyled">
+            {% for skillKey, skill in app.gameData.skills %}
+                <li>
+                    <h4>
+                        {{ skill }}:
+                        <b>{{ app.user.getUserSkillPointsByKey(skillKey) }}</b>
+                    </h4>
+                </li>
+            {% endfor %}
+        </ul>
+        {% set userCountries = app.user.getUserCountries() %}
+        <h3>{{ 'Countries' | trans }}</h3>
+        {% if userCountries %}
             <ul class="list-unstyled">
-                {% for skill in userSkills %}
+                {% for userCountry in userCountries %}
                     <li>
-                        
+                        <h4>
+                            <a href="#">
+                                {{ userCountry.getCountry() }}
+                                <small>{{ userCountry.getRoles() | join(', ') }}</small>
+                            </a>
+                        </h4>
+                        {% set towns = userCountry.getCountry().getTowns() %}
+                        {% if towns %}
+                            <ul>
+                                {% for town in towns %}
+                                    <li>
+                                        <a href="#">{{ town.getName() }}</a> 
+                                        {% if town.getDescription() %}
+                                            - <small class="text-muted">{{ town.getDescription() }}</small>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'You do not have a country yet!' | trans }}
+            </div>
         {% endif %}
     </div>
 </div>
