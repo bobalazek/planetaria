@@ -11,7 +11,7 @@ final class CountryRoles
      * @var string
      */
     const CREATOR = 'creator';
-    
+
     /**
      * @return array
      */

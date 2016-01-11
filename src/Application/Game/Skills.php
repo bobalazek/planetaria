@@ -11,7 +11,7 @@ final class Skills
      * @var string
      */
     const STRENGTH = 'strength';
-    
+
     /**
      * @var string
      */

@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Application\Entity\UserEntity;
 use Application\Entity\ProfileEntity;
+use Application\Entity\PlanetEntity;
+use Application\Entity\TileEntity;
 use Silex\Application;
 
 /**
@@ -105,6 +107,46 @@ class HydrateDataCommand extends ContainerAwareCommand
             ;
 
             $app['orm.em']->persist($userEntity);
+        }
+        
+        // Planet
+        $planetEntity = new PlanetEntity();
+        $planetEntity
+            ->setId(1)
+            ->setName('Earth')
+            ->setSlug('earth')
+            ->setDescription('The planet earth.')
+        ;
+        $app['orm.em']->persist($planetEntity);
+        
+        // Tiles
+        $range = range(-16, 16);
+        $images = array(
+            'grass1.png',
+            'grass2.png',
+            'grass3.png',
+            'desert1.png',
+            'desert2.png',
+            'desert3.png',
+        );
+        
+        foreach ($range as $x) {
+            foreach ($range as $y) {
+                $tileEntity = new TileEntity();
+                
+                $rand = array_rand($images);
+                $image = $images[$rand];
+                
+                $tileEntity
+                    ->setType('terrain')
+                    ->setImage($image)
+                    ->setCoordinatesX($x)
+                    ->setCoordinatesY($y)
+                    ->setPlanet($planetEntity)
+                ;
+                
+                $app['orm.em']->persist($tileEntity);
+            }
         }
 
         try {

@@ -3,7 +3,6 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tile Entity
@@ -31,7 +30,7 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="type", type="string", length=255)
      */
     protected $type;
-    
+
     /**
      * @var string
      *
@@ -70,19 +69,19 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="time_updated", type="datetime")
      */
     protected $timeUpdated;
-    
+
     /**
      * @ORM\OneToOne(targetEntity="Application\Entity\TownBuildingEntity", inversedBy="tile")
      * @ORM\JoinColumn(name="town_building_id", referencedColumnName="id")
      */
     protected $townBuilding;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="PlanetEntity", inversedBy="tiles")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
-    
+
     /*** Type ***/
     /**
      * @return string
@@ -103,7 +102,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Image ***/
     /**
      * @return string
@@ -124,7 +123,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Coordinates X ***/
     /**
      * @return integer
@@ -167,6 +166,15 @@ class TileEntity extends AbstractBasicEntity
         return $this;
     }
     
+    /*** Coordinates ***/
+    /**
+     * @return string
+     */
+    public function getCoordinates()
+    {
+        return $this->getCoordinatesX().', '.$this->getCoordinatesY();
+    }
+
     /*** Town Building ***/
     /**
      * @return TownBuildingEntity
@@ -187,7 +195,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Planet ***/
     /**
      * @return PlanetEntity

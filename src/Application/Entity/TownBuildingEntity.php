@@ -75,7 +75,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
      */
     protected $town;
-    
+
     /**
      * @ORM\OneToOne(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding")
      **/
@@ -185,7 +185,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Tile ***/
     /**
      * @return TileEntity

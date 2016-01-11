@@ -27,7 +27,7 @@ final class Experience
             10 => 100000,
         );
     }
-    
+
     /**
      * @return integer
      */
@@ -35,27 +35,27 @@ final class Experience
     {
         $level = 0;
         $levels = self::getLevels();
-        
+
         foreach ($levels as $singleLevel => $minimumPoints) {
             if ($points > $minimumPoints) {
                 $level = $singleLevel;
             }
         }
-        
+
         return $level;
     }
-    
+
     /**
      * @return integer
      */
     public static function getPointsByLevel($level)
     {
         $levels = self::getLevels();
-        
+
         if (isset($levels[$level])) {
             return $levels[$level];
         }
-        
+
         return 0;
     }
 }

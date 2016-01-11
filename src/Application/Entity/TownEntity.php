@@ -75,7 +75,7 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownResourceEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townResources;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
@@ -182,25 +182,25 @@ class TownEntity extends AbstractAdvancedEntity
             foreach ($townBuildings as $townBuilding) {
                 $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
                 $level = $townBuilding->getLevel();
-                $building = new $className;
+                $building = new $className();
                 $buildingResourcesProduction = $building->getResourcesProduction();
-                
+
                 if (
                     !empty($buildingResourcesProduction) &&
                     isset($buildingResourcesProduction[$level])
                 ) {
                     $buildingResourcesProduction = $buildingResourcesProduction[$level];
-                    
+
                     foreach ($buildingResourcesProduction as $resource => $value) {
                         $resourcesProduction[$resource] += $value;
                     }
                 }
             }
         }
-        
+
         return $resourcesProduction;
     }
-    
+
     /*** Town Building ***/
     /**
      * @return TownBuildingEntity
@@ -220,12 +220,12 @@ class TownEntity extends AbstractAdvancedEntity
         foreach ($townBuildings as $townBuilding) {
             $townBuilding->setTown($this);
         }
-        
+
         $this->townBuildings = $townBuildings;
 
         return $this;
     }
-    
+
     /**
      * @param TownBuildingEntity $townBuilding
      *

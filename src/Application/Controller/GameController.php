@@ -23,7 +23,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *
@@ -37,7 +37,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *
@@ -51,7 +51,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *
@@ -65,7 +65,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *

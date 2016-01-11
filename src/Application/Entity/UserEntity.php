@@ -138,14 +138,14 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="experience_points", type="integer")
      */
     protected $experiencePoints = 0;
-    
+
     /**
      * @var integer
      *
      * @ORM\Column(name="health_points", type="integer")
      */
     protected $healthPoints = 100;
-    
+
     /**
      * @var integer
      *
@@ -632,7 +632,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             $this->getExperiencePoints()
         );
     }
-    
+
     /**
      * @return integer
      */
@@ -642,7 +642,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             $this->getExperienceLevel()
         );
     }
-    
+
     /**
      * @return integer
      */
@@ -652,7 +652,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             $this->getExperienceLevel()+1
         );
     }
-    
+
     /*** Health points ***/
     /**
      * @return integer
@@ -673,7 +673,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /*** Health points left ***/
     /**
      * @return integer
@@ -694,7 +694,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /*** Health points percentage ***/
     /**
      * @return integer
@@ -712,7 +712,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return ceil(($left / $total) * 100);
     }
-    
+
     /**
      * @return string
      */
@@ -968,14 +968,14 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /**
      * @return integer
      */
     public function getUserSkillPointsByKey($key)
     {
         $userSkills = $this->getUserSkills();
-        
+
         if (!empty($userSkills)) {
             foreach ($userSkills as $userSkill) {
                 if ($userSkill->getSkill() == $key) {
@@ -983,7 +983,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
                 }
             }
         }
-        
+
         return 0;
     }
 

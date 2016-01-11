@@ -15,3 +15,31 @@
 #logo-link {
     display: block;
 }
+
+/*** Game map ***/
+#map-wrapper {}
+
+#map {
+    margin: 0 auto;
+    max-width: 800px;
+    max-height: 800px;
+    overflow: scroll;
+}
+
+    .map-row {
+        height: 64px;
+        width: 1088px; /* To-Do */
+    }
+    
+    .map-tile {
+        width: 64px;
+        height: 64px;
+        border: 1px solid #000;
+        color: #fff;
+        display: block;
+        float: left;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
