@@ -1,13 +1,15 @@
-{% extends 'layouts/content/game.html.twig' %}
+{% extends 'layouts/content.html.twig' %}
 
 {% set isContainerFluid = false %}
+{% set showHeader = false %}
 
 {% block main %}
     <div class="row text-center">
         <div class="col-md-8 col-md-offset-2">
             <h1>{{ app.name }}</h1>
+            <h2></h2>
             <div id="main-content">
-                <h2>A new world is in creation. Why not join it?</h2>
+                <h3>A new world is in creation. Why not join it?</h3>
                 <a class="btn btn-lg btn-block btn-success"
                     href="{{ url('members-area.register') }}">
                     {{ 'Register now!' | trans }}

@@ -137,6 +137,20 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="experience_points", type="integer")
      */
     protected $experiencePoints = 0;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="health_points", type="integer")
+     */
+    protected $healthPoints = 100;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="health_points_left", type="integer")
+     */
+    protected $healthPointsLeft = 100;
 
     /**
      * @var \DateTime
@@ -586,7 +600,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** Experience Points ***/
+    /*** Experience points ***/
     /**
      * @return integer
      */
@@ -614,6 +628,83 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     public function getExperienceLevel()
     {
         return 0;
+    }
+    
+    /*** Health points ***/
+    /**
+     * @return integer
+     */
+    public function getHealthPoints()
+    {
+        return $this->healthPoints;
+    }
+
+    /**
+     * @param integer $healthPoints
+     *
+     * @return UserEntity
+     */
+    public function setHealthPoints($healthPoints)
+    {
+        $this->healthPoints = $healthPoints;
+
+        return $this;
+    }
+    
+    /*** Health points left ***/
+    /**
+     * @return integer
+     */
+    public function getHealthPointsLeft()
+    {
+        return $this->healthPointsLeft;
+    }
+
+    /**
+     * @param integer $healthPointsLeft
+     *
+     * @return UserEntity
+     */
+    public function setHealthPointsLeft($healthPointsLeft)
+    {
+        $this->healthPointsLeft = $healthPointsLeft;
+
+        return $this;
+    }
+    
+    /*** Health points percentage ***/
+    /**
+     * @return integer
+     */
+    public function getHealthPointsPercentage()
+    {
+        $total = $this->getHealthPoints();
+        $left = $this->getHealthPointsLeft();
+
+        if ($total == 0) {
+            return 100;
+        } elseif ($left == 0) {
+            return 0;
+        }
+
+        return ceil(($left / $total) * 100);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getHealthPointsColorType()
+    {
+        $percentage = $this->getHealthPointsPercentage();
+        $type = 'success';
+
+        if ($percentage <= 20) {
+            $type = 'danger';
+        } elseif ($percentage <= 40) {
+            $type = 'warning';
+        }
+
+        return $type;
     }
 
     /*** Time last active ***/

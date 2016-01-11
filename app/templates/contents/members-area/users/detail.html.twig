@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-3">
             <img class="img-responsive img-thumbnail"
-                src="{{ user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : '//api.randomuser.me/portraits/lego/1.jpg' }}"
+                src="{{ user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : app.baseUrl ~ '/assets/images/avatars/002.png' }}"
                 alt="{{ 'Profile image' | trans }}"
                 style="max-height: 400px;" />
         </div>

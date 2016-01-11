@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object"
+                    src="{{ app.user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : app.baseUrl ~ '/assets/images/avatars/002.png' }}"
+                    alt="Avatar"
+                    style="max-width: 80px;" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <b>{{ app.user.getUsername() }}</b>
+                </h4>
+                {{ 'Expirience points' | trans }}:
+                <b>{{ app.user.getExperiencePoints() }}</b>
+                <br />
+                {{ 'Expirience level' | trans }}:
+                <b>{{ app.user.getExperienceLevel() }}</b>
+            </div>
+        </div>
+        <h4>
+            {{ 'Health points' | trans }}:
+            <b>{{ app.user.getHealthPointsPercentage() }}%</b>
+            <small>({{ app.user.getHealthPointsLeft() }} {{ 'out of' | trans }} {{ app.user.getHealthPoints() }} {{ 'HP left' | trans }})</small>
+        </h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-{{ app.user.getHealthPointsColorType() }}"
+                role="progressbar"
+                aria-valuenow="{{ app.user.getHealthPointsPercentage() }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: {{ app.user.getHealthPointsPercentage() }}%;">
+                <span class="sr-only">{{ app.user.getHealthPointsPercentage() }}%</span>
+            </div>
+        </div>
+    </div>
+</div>

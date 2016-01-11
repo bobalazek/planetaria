@@ -17,3 +17,20 @@
         </div>
     </div>
 {% endblock %}
+
+{% block content %}
+    <div class="container{{ isContainerFluid ? '-fluid' : '' }}">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="sidebar" role="complementary">
+                    {% include 'layouts/content/game/_parts/sidebar.html.twig' %}
+                </div> <!-- /#sidebar -->
+            </div> <!-- /.col-md-3 -->
+            <div class="col-md-9">
+                <div id="main" role="main">
+                    {% block main %}{% endblock %}
+                </div> <!-- /#main -->
+            </div> <!-- /.col-md-9 -->
+        </div> <!-- /.row -->
+    </div> <!-- /.container-fluid -->
+{% endblock %}

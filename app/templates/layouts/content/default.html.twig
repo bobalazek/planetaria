@@ -42,9 +42,12 @@
                 <div id="wrapper">
                     {% block wrapper %}
                         {% set isContainerFluid = isContainerFluid is defined ? isContainerFluid : true %}
+                        {% set showHeader = showHeader is defined ? showHeader : true %}
                         <header id="header" role="banner">
                             {% block header %}
-                                {% include 'layouts/content/default/_parts/header.html.twig' %}
+                                {% if showHeader %}
+                                    {% include 'layouts/content/default/_parts/header.html.twig' %}
+                                {% endif %}
                             {% endblock %}
                         </header> <!-- /#header -->
                         <div id="content">
