@@ -7,15 +7,33 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>{{ 'Users' | trans }}</h2>
-                <p>To-Do</p>
+                {% for user in users %}
+                    {% include 'contents/game/statistics/_user.html.twig' %}
+                {% endfor %}
             </div>
             <div class="col-md-4">
                 <h2>{{ 'Countries' | trans }}</h2>
-                <p>To-Do</p>
+                {% if countries %}
+                    {% for country in countries %}
+                        {% include 'contents/game/statistics/_country.html.twig' %}
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'No countries yet' | trans }}
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-4">
                 <h2>{{ 'Towns' | trans }}</h2>
-                <p>To-Do</p>
+                {% if towns %}
+                    {% for town in towns %}
+                        {% include 'contents/game/statistics/_town.html.twig' %}
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'No towns yet' | trans }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

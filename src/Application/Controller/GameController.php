@@ -59,9 +59,30 @@ class GameController
      */
     public function statisticsAction(Application $app)
     {
+        $users = $app['orm.em']->getRepository('Application\Entity\UserEntity')->findBy(
+            array(),
+            array('experiencePoints' => 'DESC'),
+            10
+        );
+        $countries = $app['orm.em']->getRepository('Application\Entity\CountryEntity')->findBy(
+            array(),
+            array(), // TO-Do
+            10
+        );
+        $towns = $app['orm.em']->getRepository('Application\Entity\TownEntity')->findBy(
+            array(),
+            array(), // TO-Do
+            10
+        );
+        
         return new Response(
             $app['twig']->render(
-                'contents/game/statistics/index.html.twig'
+                'contents/game/statistics/index.html.twig',
+                array(
+                    'users' => $users,
+                    'countries' => $countries,
+                    'towns' => $towns,
+                )
             )
         );
     }

@@ -1,0 +1,22 @@
+<div class="panel panel-default text-left">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object"
+                    src="{{ user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : app.baseUrl ~ '/assets/images/avatars/002.png' }}"
+                    alt="Avatar"
+                    style="max-width: 80px;" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <b>{{ user.getUsername() }}</b>
+                </h4>
+                {{ 'Experience points' | trans }}:
+                <b>{{ user.getExperiencePoints() }}</b>
+                <br />
+                {{ 'Countries' | trans }}:
+                <b>{{ user.getUserCountries() | length }}</b>
+            </div>
+        </div>
+    </div>
+</div>
