@@ -77,6 +77,12 @@ class TileEntity extends AbstractBasicEntity
      */
     protected $townBuilding;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="PlanetEntity", inversedBy="tiles")
+     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     */
+    protected $planet;
+    
     /*** Type ***/
     /**
      * @return string
@@ -178,6 +184,27 @@ class TileEntity extends AbstractBasicEntity
     public function setTownBuilding(MapTileEntity $townBuilding)
     {
         $this->townBuilding = $townBuilding;
+
+        return $this;
+    }
+    
+    /*** Planet ***/
+    /**
+     * @return PlanetEntity
+     */
+    public function getPlanet()
+    {
+        return $this->planet;
+    }
+
+    /**
+     * @param PlanetEntity $planet
+     *
+     * @return TownEntity
+     */
+    public function setPlanet(PlanetEntity $planet)
+    {
+        $this->planet = $planet;
 
         return $this;
     }
