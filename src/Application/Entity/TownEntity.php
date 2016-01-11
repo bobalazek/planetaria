@@ -75,6 +75,11 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownResourceEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townResources;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
+     */
+    protected $townBuildings;
 
     /**
      * The constructor
@@ -194,6 +199,59 @@ class TownEntity extends AbstractAdvancedEntity
         }
         
         return $resourcesProduction;
+    }
+    
+    /*** Town Building ***/
+    /**
+     * @return TownBuildingEntity
+     */
+    public function getTownBuildings()
+    {
+        return $this->townBuildings;
+    }
+
+    /**
+     * @param ArrayCollection $townBuildings
+     *
+     * @return TownEntity
+     */
+    public function setTownBuildings($townBuildings)
+    {
+        foreach ($townBuildings as $townBuilding) {
+            $townBuilding->setTown($this);
+        }
+        
+        $this->townBuildings = $townBuildings;
+
+        return $this;
+    }
+    
+    /**
+     * @param TownBuildingEntity $townBuilding
+     *
+     * @return TownEntity
+     */
+    public function addTownBuilding(TownBuildingEntity $townBuilding)
+    {
+        if (!$this->townBuildings->contains($townBuilding)) {
+            $townBuilding->setTown($this);
+            $this->townBuildings->add($townBuilding);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TownBuildingEntity $townBuilding
+     *
+     * @return TownEntity
+     */
+    public function removeTownBuilding(TownBuildingEntity $townBuilding)
+    {
+        $townBuilding->setTown(null);
+        $this->townBuildings->removeElement($townBuilding);
+
+        return $this;
     }
 
     /**

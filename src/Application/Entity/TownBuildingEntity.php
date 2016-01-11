@@ -39,24 +39,6 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $level = 0;
 
     /**
-     * On a 2D map that would be the bottom left (start) pixel of that building.
-     *
-     * @var integer
-     *
-     * @ORM\Column(name="coordinates_x", type="integer")
-     */
-    protected $coordinatesX = 0;
-
-    /**
-     * On a 2D map that would be the bottom left (start) pixel of that building.
-     *
-     * @var integer
-     *
-     * @ORM\Column(name="coordinates_y", type="integer")
-     */
-    protected $coordinatesY = 0;
-
-    /**
      * How much can the buidling handle? A.k.a. hit points or damage points.
      *
      * @var integer
@@ -93,6 +75,11 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
      */
     protected $town;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Entity\MapTileEntity", mappedBy="townBuilding")
+     **/
+    protected $mapTile;
 
     /*** Building ***/
     /**
@@ -132,48 +119,6 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function setLevel($level)
     {
         $this->level = $level;
-
-        return $this;
-    }
-
-    /*** Coordinates X ***/
-    /**
-     * @return integer
-     */
-    public function getCoordinatesX()
-    {
-        return $this->coordinatesX;
-    }
-
-    /**
-     * @param integer $coordinatesX
-     *
-     * @return TownBuildingEntity
-     */
-    public function setCoordinatesX($coordinatesX)
-    {
-        $this->coordinatesX = $coordinatesX;
-
-        return $this;
-    }
-
-    /*** Coordinates Y ***/
-    /**
-     * @return integer
-     */
-    public function getCoordinatesY()
-    {
-        return $this->coordinatesY;
-    }
-
-    /**
-     * @param integer $coordinatesY
-     *
-     * @return TownBuildingEntity
-     */
-    public function setCoordinatesY($coordinatesY)
-    {
-        $this->coordinatesY = $coordinatesY;
 
         return $this;
     }
@@ -230,13 +175,34 @@ class TownBuildingEntity extends AbstractBasicEntity
     }
 
     /**
-     * @param TownEntity $user
+     * @param TownEntity $town
      *
      * @return TownBuildingEntity
      */
     public function setTown(TownEntity $town)
     {
         $this->town = $town;
+
+        return $this;
+    }
+    
+    /*** Map Tile ***/
+    /**
+     * @return MapTileEntity
+     */
+    public function getMapTile()
+    {
+        return $this->mapTile;
+    }
+
+    /**
+     * @param MapTileEntity $mapTile
+     *
+     * @return TownBuildingEntity
+     */
+    public function setMapTile(MapTileEntity $mapTile)
+    {
+        $this->mapTile = $mapTile;
 
         return $this;
     }
