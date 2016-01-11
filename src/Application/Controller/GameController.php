@@ -23,4 +23,60 @@ class GameController
             )
         );
     }
+    
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function mapAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/map/index.html.twig'
+            )
+        );
+    }
+    
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function marketAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/market/index.html.twig'
+            )
+        );
+    }
+    
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function statisticsAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/statistics/index.html.twig'
+            )
+        );
+    }
+    
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function premiumAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/premium/index.html.twig'
+            )
+        );
+    }
 }

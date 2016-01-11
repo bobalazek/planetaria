@@ -17,38 +17,58 @@
                 </a>
             </div>
             <div class="col-lg-9 col-sm-8">
-                <div class="clearfix">
+                <div id="header-upper"
+                    class="clearfix">
                     <div class="pull-right">
-                        <a class="btn btn-link"
+                        <span id="header-date">
+                            <i class="fa fa-calendar"></i>
+                            {{ app.currentDate | date(app.dateFormat) }}
+                        </span>
+                        <span id="header-time">
+                            <i class="fa fa-clock-o"></i>
+                            <span>{{ app.currentTime }}</span>
+                        </span>
+                        <a id="header-logout-link"
+                            class="btn btn-link"
                             href="{{ app.logoutUrl }}">
                             {{ 'Logout' | trans }}
                         </a>
                     </div>
                 </div>
                 <ul class="nav nav-tabs nav-justified">
-                    <li role="presentation" class="active">
+                    <li role="presentation"
+                        class="{{ path('game') == app.currentUri ? 'active' : '' }}">
                         <a href="{{ url('game') }}">
+                            <i class="fa fa-home"></i>
                             {{ 'Home' | trans }}
                         </a>
                     </li>
-                    <li role="presentation" >
-                        <a href="#">
+                    <li role="presentation"
+                        class="{{ path('game.map') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.map') }}">
+                            <i class="fa fa-map"></i>
                             {{ 'Map' | trans }}
                         </a>
                     </li>
-                    <li role="presentation" >
-                        <a href="#">
+                    <li role="presentation"
+                        class="{{ path('game.market') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.market') }}">
+                            <i class="fa fa-shopping-cart"></i>
                             {{ 'Market' | trans }}
                         </a>
                     </li>
-                    <li role="presentation" >
-                        <a href="#">
+                    <li role="presentation"
+                        class="{{ path('game.statistics') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.statistics') }}">
+                            <i class="fa fa-bar-chart"></i>
                             {{ 'Statistics' | trans }}
                         </a>
                     </li>
-                    <li role="presentation" >
-                        <a href="#">
-                            {{ 'Gold' | trans }}
+                    <li role="presentation"
+                        class="{{ path('game.premium') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.premium') }}">
+                            <i class="fa fa-star"></i>
+                            {{ 'Premium' | trans }}
                         </a>
                     </li>
                 </ul>
@@ -72,4 +92,12 @@
             </div> <!-- /.col-lg-9 -->
         </div> <!-- /.row -->
     </div> <!-- /.container-fluid -->
+{% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    <script id="game-js" type="text/javascript" src="{{ app.baseUri }}/assets/javascripts/game.js?version={{ app.version }}"></script>
+    <script id="game-initialize-js">
+        Game.initialize();
+    </script>
 {% endblock %}

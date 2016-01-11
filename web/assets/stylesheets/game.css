@@ -2,6 +2,16 @@
     padding: 20px 0;
 }
 
+    #header-upper {
+        margin-bottom: 10px;
+    }
+
+        #header-date,
+        #header-time {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
 #logo-link {
     display: block;
 }

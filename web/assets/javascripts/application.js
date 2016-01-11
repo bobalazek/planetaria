@@ -21,7 +21,7 @@ var Application = function () {
                 jQuery('#preloader').fadeOut(); // Hide preloader, when everything is ready...
 
                 initialized = true;
-                console.log('Application Initialized');
+                console.log('Application initialized');
             });
         },
         tooltipsInitialize: function() {
