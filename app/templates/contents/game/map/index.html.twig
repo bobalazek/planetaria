@@ -8,10 +8,12 @@
             <div id="main-content">
                 <div id="map-wrapper">
                     <div id="map">
-                        {% for x in -8..8 %}
+                        {% for x in -16..16 %}
                             <div class="map-row clearfix">
-                                {% for y in -8..8 %}
-                                    {% set tile = app['orm.em'].getRepository('Application\\Entity\\TileEntity').findOneBy({ coordinatesX: x, coordinatesY: y }) %}
+                                {% for y in -16..16 %}
+                                    {% set tile = app['orm.em']
+                                        .getRepository('Application\\Entity\\TileEntity')
+                                        .findOneBy({ coordinatesX: x, coordinatesY: y }) %}
                                     <div id="map-tile-{{ tile.getId() }}"
                                         class="map-tile"
                                         data-toggle="tooltip"

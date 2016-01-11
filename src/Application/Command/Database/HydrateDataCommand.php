@@ -10,6 +10,10 @@ use Application\Entity\UserEntity;
 use Application\Entity\ProfileEntity;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TileEntity;
+use Application\Entity\CountryEntity;
+use Application\Entity\TownEntity;
+use Application\Entity\UserCountryEntity;
+use Application\Game\CountryRoles;
 use Silex\Application;
 
 /**
@@ -109,6 +113,9 @@ class HydrateDataCommand extends ContainerAwareCommand
             $app['orm.em']->persist($userEntity);
         }
         
+        // Save them, because we'll need them soon!
+        $app['orm.em']->flush();
+        
         // Planet
         $planetEntity = new PlanetEntity();
         $planetEntity
@@ -120,7 +127,7 @@ class HydrateDataCommand extends ContainerAwareCommand
         $app['orm.em']->persist($planetEntity);
         
         // Tiles
-        $range = range(-16, 16);
+        $range = range(-32, 32);
         $images = array(
             'grass1.png',
             'grass2.png',
@@ -148,6 +155,39 @@ class HydrateDataCommand extends ContainerAwareCommand
                 $app['orm.em']->persist($tileEntity);
             }
         }
+        
+        // Country
+        $countryEntity = new CountryEntity();
+        $countryEntity
+            ->setId(1)
+            ->setName('Panem')
+            ->setSlug('panem')
+            ->setDescription('The main country')
+        ;
+        $app['orm.em']->persist($countryEntity);
+        
+        // Town
+        $townEntity = new TownEntity();
+        $townEntity
+            ->setId(1)
+            ->setName('Panonia')
+            ->setSlug('panonia')
+            ->setDescription('The main town')
+        ;
+        $app['orm.em']->persist($townEntity);
+        
+        // User country
+        $userCountryEntity = new UserCountryEntity();
+        $userCountryEntity
+            ->setId(1)
+            ->setRoles(array(
+                CountryRoles::CREATOR,
+                CountryRoles::OWNER,
+            ))
+            ->setCountry($countryEntity)
+            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
+        ;
+        $app['orm.em']->persist($userCountryEntity);
 
         try {
             $app['orm.em']->flush();
