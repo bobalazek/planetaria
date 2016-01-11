@@ -172,7 +172,7 @@ class TileEntity extends AbstractBasicEntity
      */
     public function getCoordinates()
     {
-        return $this->getCoordinatesX().', '.$this->getCoordinatesY();
+        return $this->getCoordinatesX().','.$this->getCoordinatesY();
     }
 
     /*** Town Building ***/
