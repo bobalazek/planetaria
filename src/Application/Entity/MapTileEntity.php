@@ -31,6 +31,13 @@ class MapTileEntity extends AbstractBasicEntity
      * @ORM\Column(name="type", type="string", length=255)
      */
     protected $type;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    protected $image;
 
     /**
      * On a 2D map that would be the bottom left (start) pixel of that building.
@@ -87,6 +94,27 @@ class MapTileEntity extends AbstractBasicEntity
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+    
+    /*** Image ***/
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     *
+     * @return TownBuildingEntity
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }
