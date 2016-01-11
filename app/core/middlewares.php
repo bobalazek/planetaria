@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Application\Entity\UserEntity;
+use Application\Game\Skills;
 
 /*** Database check ***/
 $app->before(function () use ($app) {
@@ -128,6 +129,10 @@ $app->before(function () use ($app) {
             );
         }
     }
+    
+    $app['gameData'] = array(
+        'skills' => Skills::getAll(),
+    );
 }, \Silex\Application::EARLY_EVENT);
 
 /*** Set Logut path ***/

@@ -11,6 +11,11 @@ final class Skills
      * @var string
      */
     const STRENGTH = 'strength';
+    
+    /**
+     * @var string
+     */
+    const INTELLIGENCE = 'intelligence';
 
     /**
      * @return array
@@ -19,6 +24,7 @@ final class Skills
     {
         return array(
             self::STRENGTH => 'Strength',
+            self::INTELLIGENCE => 'Intelligence',
         );
     }
 }
