@@ -77,9 +77,9 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $town;
     
     /**
-     * @ORM\OneToOne(targetEntity="Application\Entity\MapTileEntity", mappedBy="townBuilding")
+     * @ORM\OneToOne(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding")
      **/
-    protected $mapTile;
+    protected $tile;
 
     /*** Building ***/
     /**
@@ -186,23 +186,23 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $this;
     }
     
-    /*** Map Tile ***/
+    /*** Tile ***/
     /**
-     * @return MapTileEntity
+     * @return TileEntity
      */
-    public function getMapTile()
+    public function getTile()
     {
-        return $this->mapTile;
+        return $this->tile;
     }
 
     /**
-     * @param MapTileEntity $mapTile
+     * @param TileEntity $tile
      *
      * @return TownBuildingEntity
      */
-    public function setMapTile(MapTileEntity $mapTile)
+    public function setTile(TileEntity $tile)
     {
-        $this->mapTile = $mapTile;
+        $this->tile = $tile;
 
         return $this;
     }

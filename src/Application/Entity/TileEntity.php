@@ -6,15 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Map Tile Entity
+ * Tile Entity
  *
- * @ORM\Table(name="map_tiles")
- * @ORM\Entity(repositoryClass="Application\Repository\MapTileRepository")
+ * @ORM\Table(name="tiles")
+ * @ORM\Entity(repositoryClass="Application\Repository\TileRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class MapTileEntity extends AbstractBasicEntity
+class TileEntity extends AbstractBasicEntity
 {
     /**
      * @var integer
@@ -72,7 +72,7 @@ class MapTileEntity extends AbstractBasicEntity
     protected $timeUpdated;
     
     /**
-     * @ORM\OneToOne(targetEntity="Application\Entity\TownBuildingEntity", inversedBy="mapTile")
+     * @ORM\OneToOne(targetEntity="Application\Entity\TownBuildingEntity", inversedBy="tile")
      * @ORM\JoinColumn(name="town_building_id", referencedColumnName="id")
      */
     protected $townBuilding;
@@ -89,7 +89,7 @@ class MapTileEntity extends AbstractBasicEntity
     /**
      * @param string $type
      *
-     * @return TownBuildingEntity
+     * @return TileEntity
      */
     public function setType($type)
     {
@@ -110,7 +110,7 @@ class MapTileEntity extends AbstractBasicEntity
     /**
      * @param string $image
      *
-     * @return TownBuildingEntity
+     * @return TileEntity
      */
     public function setImage($image)
     {
@@ -131,7 +131,7 @@ class MapTileEntity extends AbstractBasicEntity
     /**
      * @param integer $coordinatesX
      *
-     * @return TownBuildingEntity
+     * @return TileEntity
      */
     public function setCoordinatesX($coordinatesX)
     {
@@ -152,7 +152,7 @@ class MapTileEntity extends AbstractBasicEntity
     /**
      * @param integer $coordinatesY
      *
-     * @return TownBuildingEntity
+     * @return TileEntity
      */
     public function setCoordinatesY($coordinatesY)
     {
@@ -173,7 +173,7 @@ class MapTileEntity extends AbstractBasicEntity
     /**
      * @param TownBuilding $townBuilding
      *
-     * @return TownBuildingEntity
+     * @return TileEntity
      */
     public function setTownBuilding(MapTileEntity $townBuilding)
     {
