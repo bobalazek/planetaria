@@ -112,10 +112,10 @@ class HydrateDataCommand extends ContainerAwareCommand
 
             $app['orm.em']->persist($userEntity);
         }
-        
+
         // Save them, because we'll need them soon!
         $app['orm.em']->flush();
-        
+
         // Planet
         $planetEntity = new PlanetEntity();
         $planetEntity
@@ -125,7 +125,7 @@ class HydrateDataCommand extends ContainerAwareCommand
             ->setDescription('The planet earth.')
         ;
         $app['orm.em']->persist($planetEntity);
-        
+
         // Tiles
         $range = range(-32, 32);
         $images = array(
@@ -136,14 +136,14 @@ class HydrateDataCommand extends ContainerAwareCommand
             'desert2.png',
             'desert3.png',
         );
-        
+
         foreach ($range as $x) {
             foreach ($range as $y) {
                 $tileEntity = new TileEntity();
-                
+
                 $rand = array_rand($images);
                 $image = $images[$rand];
-                
+
                 $tileEntity
                     ->setType('terrain')
                     ->setImage($image)
@@ -151,11 +151,11 @@ class HydrateDataCommand extends ContainerAwareCommand
                     ->setCoordinatesY($y)
                     ->setPlanet($planetEntity)
                 ;
-                
+
                 $app['orm.em']->persist($tileEntity);
             }
         }
-        
+
         // Country
         $countryEntity = new CountryEntity();
         $countryEntity
@@ -165,7 +165,7 @@ class HydrateDataCommand extends ContainerAwareCommand
             ->setDescription('The main country')
         ;
         $app['orm.em']->persist($countryEntity);
-        
+
         // Town
         $townEntity = new TownEntity();
         $townEntity
@@ -173,9 +173,10 @@ class HydrateDataCommand extends ContainerAwareCommand
             ->setName('Panonia')
             ->setSlug('panonia')
             ->setDescription('The main town')
+            ->setCountry($countryEntity)
         ;
         $app['orm.em']->persist($townEntity);
-        
+
         // User country
         $userCountryEntity = new UserCountryEntity();
         $userCountryEntity

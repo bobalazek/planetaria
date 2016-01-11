@@ -165,7 +165,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Coordinates ***/
     /**
      * @return string
