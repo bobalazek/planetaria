@@ -3,30 +3,26 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
-    <div class="row">
-        <div class="col-md-12">
-            <div id="main-content">
-                <div id="map-wrapper">
-                    <div id="map">
-                        {% for x in -16..16 %}
-                            <div class="map-row clearfix">
-                                {% for y in -16..16 %}
-                                    {% set tile = app['orm.em']
-                                        .getRepository('Application\\Entity\\TileEntity')
-                                        .findOneBy({ coordinatesX: x, coordinatesY: y }) %}
-                                    <div id="map-tile-{{ tile.getId() }}"
-                                        class="map-tile"
-                                        data-toggle="tooltip"
-                                        data-placement="bottom"
-                                        title="{{ tile.getCoordinates() }}"
-                                        style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getImage() }}')">
-                                    </div> <!-- /.map-tile -->
-                                {% endfor %}
-                            </div> <!-- /.map-row -->
+    <div id="main-content">
+        <div id="map-wrapper">
+            <div id="map">
+                {% for x in -16..16 %}
+                    <div class="map-row clearfix">
+                        {% for y in -16..16 %}
+                            {% set tile = app['orm.em']
+                                .getRepository('Application\\Entity\\TileEntity')
+                                .findOneBy({ coordinatesX: x, coordinatesY: y }) %}
+                            <div id="map-tile-{{ tile.getId() }}"
+                                class="map-tile"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="{{ tile.getCoordinates() }}"
+                                style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getImage() }}')">
+                            </div> <!-- /.map-tile -->
                         {% endfor %}
-                    </div> <!-- /#game-map -->
-                </div> <!-- /#game-map-wrapper -->
-            </div>
-        </div>
+                    </div> <!-- /.map-row -->
+                {% endfor %}
+            </div> <!-- /#game-map -->
+        </div> <!-- /#game-map-wrapper -->
     </div>
 {% endblock %}
