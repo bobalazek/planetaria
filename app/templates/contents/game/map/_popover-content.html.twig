@@ -3,12 +3,12 @@
 {% if tile.getTownBuilding() %}
     <h4>{{ 'Town' | trans }}:</h4>
     <p>
-        <span>{{ tile.getTownBuilding().getTown() }}</span>&nbsp;
+        <span>{{ tile.getTownBuilding().getTown() }}&nbsp;</span>
         <small>({{ tile.getTownBuilding().getTown().getCountry() }})</small>
     </p>
     <h4>{{ 'Building' | trans }}:</h4>
     <p>
-        <span>{{ tile.getTownBuilding().getBuilding() | humanize | trans }}</span>&nbsp;
+        <span>{{ tile.getTownBuilding().getBuilding() | humanize | trans }}&nbsp;</span>
         <small>({{ 'Level' | trans }}: {{ tile.getTownBuilding().getLevel() }})</small>
     </p>
 {% endif %}
@@ -17,7 +17,7 @@
     <ul class="list-unstyled">
         {%- for tileResource in tile.tileResources() -%}
             <li>
-                <span>- {{ tileResource.getResource() | humanize | trans }}</span>&nbsp;
+                <span>- {{ tileResource.getResource() | humanize | trans }}&nbsp;</span>
                 <small>{{ tileResource.getAmountPercentage() }}%</small>
             </li>
         {%- endfor -%}

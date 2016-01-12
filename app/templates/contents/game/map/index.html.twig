@@ -19,6 +19,8 @@
                                         data-id="{{ tile.getId() }}"
                                         data-x="{{ x }}"
                                         data-y="{{ y }}"
+                                        data-buildable="{{ tile.isBuildable() ? 'true' : 'false' }}"
+                                        data-buildable-currently="{{ tile.isBuildableCurrently() ? 'true' : 'false' }}"
                                         title="{{ tile.getCoordinates() }}"
                                         data-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
                                         style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
