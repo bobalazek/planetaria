@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tile Entity
  *
- * @ORM\Table(name="tiles")
+ * @ORM\Table(name="tiles", uniqueConstraints={@ORM\UniqueConstraint(columns={"coordinates_x", "coordinates_y", "planet_id"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TileRepository")
  * @ORM\HasLifecycleCallbacks()
  *
@@ -25,9 +25,11 @@ class TileEntity extends AbstractBasicEntity
     protected $id;
 
     /**
+     * watter, land, ... ?
+     *
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=16)
      */
     protected $type;
 
@@ -55,6 +57,15 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="coordinates_y", type="integer")
      */
     protected $coordinatesY = 0;
+    
+    /**
+     * Can a building be build on it?
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="buildable", type="boolean")
+     */
+    protected $buildable = true;
 
     /**
      * @var \DateTime
@@ -81,6 +92,13 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\TileResourceEntity", mappedBy="tile", cascade={"all"}, orphanRemoval=true)
+     */
+    protected $tileResources;
 
     /*** Type ***/
     /**
@@ -174,6 +192,35 @@ class TileEntity extends AbstractBasicEntity
     {
         return $this->getCoordinatesX().','.$this->getCoordinatesY();
     }
+    
+    /*** Buildable ***/
+    /**
+     * @return boolean
+     */
+    public function getBuildable()
+    {
+        return $this->buildable;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isBuildable()
+    {
+        return $this->buildable;
+    }
+
+    /**
+     * @param boolean $buildable
+     *
+     * @return TileEntity
+     */
+    public function setBuildable($buildable)
+    {
+        $this->buildable = $buildable;
+
+        return $this;
+    }
 
     /*** Town Building ***/
     /**
@@ -208,11 +255,64 @@ class TileEntity extends AbstractBasicEntity
     /**
      * @param PlanetEntity $planet
      *
-     * @return TownEntity
+     * @return TileEntity
      */
     public function setPlanet(PlanetEntity $planet)
     {
         $this->planet = $planet;
+
+        return $this;
+    }
+    
+    /*** Tile resources ***/
+    /**
+     * @return ArrayCollection
+     */
+    public function getTileResources()
+    {
+        return $this->tileResources->toArray();
+    }
+
+    /**
+     * @param ArrayCollection $tileResources
+     *
+     * @return TileEntity
+     */
+    public function setTileResources($tileResources)
+    {
+        foreach ($tileResources as $tileResource) {
+            $tileResource->setTile($this);
+        }
+
+        $this->tileResources = $tileResources;
+
+        return $this;
+    }
+
+    /**
+     * @param TileResourceEntity $tileResource
+     *
+     * @return TileEntity
+     */
+    public function addTileResource(TileResourceEntity $tileResource)
+    {
+        if (!$this->tileResources->contains($tileResource)) {
+            $tileResource->setTile($this);
+            $this->tileResources->add($tileResource);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TileResourceEntity $tileResource
+     *
+     * @return TileEntity
+     */
+    public function removeTileResource(TileResourceEntity $tileResource)
+    {
+        $tileResource->setTile(null);
+        $this->tileResources->removeElement($tileResource);
 
         return $this;
     }
