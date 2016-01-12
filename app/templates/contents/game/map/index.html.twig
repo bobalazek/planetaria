@@ -20,9 +20,13 @@
                                         data-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
                                         style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
                                         <div class="map-tile-hover-overlay"></div>
+                                        {% if tile.getTownBuilding() %}
+                                            <img class="img-responsive map-tile-building-image"
+                                                src="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuilding().getBuilding() }}/{{ tile.getBuildingSection() }}.png" />
+                                        {% endif %}
                                     </div> <!-- /.map-tile -->
                                 {% else %}
-                                    {# To-Do: Maybe some blank container or something #}
+                                    <div class="map-tile map-tile-unknown"></div>
                                 {% endif %}
                             {% endfor %}
                         </div> <!-- /.map-row -->

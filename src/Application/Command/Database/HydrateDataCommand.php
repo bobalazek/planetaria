@@ -8,10 +8,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Application\Entity\UserEntity;
 use Application\Entity\ProfileEntity;
-use Application\Entity\CountryEntity;
-use Application\Entity\TownEntity;
-use Application\Entity\UserCountryEntity;
-use Application\Game\CountryRoles;
 use Silex\Application;
 
 /**
@@ -115,40 +111,6 @@ class HydrateDataCommand extends ContainerAwareCommand
         $app['orm.em']->flush();
 
         $app['game.planets']->generateNew();
-
-        // Country
-        $countryEntity = new CountryEntity();
-        $countryEntity
-            ->setId(1)
-            ->setName('Panem')
-            ->setSlug('panem')
-            ->setDescription('The main country')
-        ;
-        $app['orm.em']->persist($countryEntity);
-
-        // Town
-        $townEntity = new TownEntity();
-        $townEntity
-            ->setId(1)
-            ->setName('Panonia')
-            ->setSlug('panonia')
-            ->setDescription('The main town')
-            ->setCountry($countryEntity)
-        ;
-        $app['orm.em']->persist($townEntity);
-
-        // User country
-        $userCountryEntity = new UserCountryEntity();
-        $userCountryEntity
-            ->setId(1)
-            ->setRoles(array(
-                CountryRoles::CREATOR,
-                CountryRoles::OWNER,
-            ))
-            ->setCountry($countryEntity)
-            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
-        ;
-        $app['orm.em']->persist($userCountryEntity);
 
         try {
             $app['orm.em']->flush();

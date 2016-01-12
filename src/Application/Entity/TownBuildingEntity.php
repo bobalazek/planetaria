@@ -47,7 +47,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      *
      * @ORM\Column(name="health_points", type="integer")
      */
-    protected $healthPoints;
+    protected $healthPoints = 1000;
 
     /**
      * If damage, how much is it left?
@@ -56,7 +56,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      *
      * @ORM\Column(name="health_points_left", type="integer")
      */
-    protected $healthPointsLeft;
+    protected $healthPointsLeft = 1000;
 
     /**
      * @var \DateTime
