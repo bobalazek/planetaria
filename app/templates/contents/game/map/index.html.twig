@@ -12,9 +12,10 @@
                             {% set tile = tiles[x~','~y] %}
                             <div id="map-tile-{{ tile.getId() }}"
                                 class="map-tile"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
+                                data-toggle="popover"
+                                data-trigger="hover"
                                 title="{{ tile.getCoordinates() }}"
+                                data-content="{% filter escape %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endfilter %}"
                                 style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
                             </div> <!-- /.map-tile -->
                         {% endfor %}

@@ -130,6 +130,24 @@ class TileResourceEntity extends AbstractBasicEntity
         return $this;
     }
 
+    /*** Amount percentage ***/
+    /**
+     * @return integer
+     */
+    public function getAmountPercentage()
+    {
+        $total = $this->getAmount();
+        $left = $this->getAmountLeft();
+
+        if ($total == 0) {
+            return 100;
+        } elseif ($left == 0) {
+            return 0;
+        }
+
+        return ceil(($left / $total) * 100);
+    }
+
     /*** Tile ***/
     /**
      * @return TileEntity

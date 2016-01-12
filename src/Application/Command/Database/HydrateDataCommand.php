@@ -144,7 +144,7 @@ class HydrateDataCommand extends ContainerAwareCommand
                 $tileEntity = new TileEntity();
 
                 $rand = array_rand($images);
-                $backgroundImage = $x == 0 && $y == 0 
+                $backgroundImage = $x == 0 && $y == 0
                     ? 'ground-zero.png'
                     : $images[$rand]
                 ;
@@ -158,7 +158,7 @@ class HydrateDataCommand extends ContainerAwareCommand
                 ;
 
                 $app['orm.em']->persist($tileEntity);
-                
+
                 // Tile resources
                 $randomNumberOfResources = rand(1, 4);
                 $resources = Resources::getAll();
@@ -166,25 +166,25 @@ class HydrateDataCommand extends ContainerAwareCommand
                     $resources,
                     $randomNumberOfResources
                 );
-                
+
                 if (is_string($randomResourceKeys)) {
                     $randomResourceKeys = array(
                         $randomResourceKeys,
                     );
                 }
-                
+
                 foreach ($randomResourceKeys as $randomResourceKey) {
                     $tileResourceEntity = new TileResourceEntity();
-                    
+
                     $amount = rand(5000, 20000);
-                    
+
                     $tileResourceEntity
                         ->setTile($tileEntity)
                         ->setResource($randomResourceKey)
                         ->setAmount($amount)
                         ->setAmountLeft($amount)
                     ;
-                    
+
                     $app['orm.em']->persist($tileResourceEntity);
                 }
             }

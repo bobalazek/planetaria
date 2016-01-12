@@ -6,7 +6,7 @@ var Application = function () {
         {
             // Some stuff here
             jQuery(document).ready( function() {
-                Application.tooltipsInitialize();
+                Application.tooltipsAndPopoversInitialize();
                 Application.timeAgoInitialize();
                 Application.paginatorInitialize();
                 Application.postMetasInitialize();
@@ -24,7 +24,10 @@ var Application = function () {
                 console.log('Application initialized');
             });
         },
-        tooltipsInitialize: function() {
+        tooltipsAndPopoversInitialize: function() {
+            jQuery('[data-toggle="popover"]').popover({
+                html : true,
+            })
             jQuery('[data-toggle="tooltip"]').tooltip();
         },
         timeAgoInitialize: function() {

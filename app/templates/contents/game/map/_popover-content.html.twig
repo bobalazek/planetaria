@@ -1,0 +1,10 @@
+{% set tileResources = tile.getTileResources() %}
+{{ 'Resources' | trans }}:
+<ul class="list-unstyled">
+    {% for tileResource in tileResources %}
+    <li>
+        - {{ tileResource.getResource() | humanize | trans }}
+        <small>{{ tileResource.getAmountPercentage() }}%</small>
+    </li>
+    {% endfor %}
+</ul>

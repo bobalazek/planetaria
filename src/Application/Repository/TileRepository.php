@@ -21,7 +21,7 @@ class TileRepository extends EntityRepository
             ->getSingleScalarResult()
         ;
     }
-    
+
     /**
      * @return array
      */
@@ -31,7 +31,7 @@ class TileRepository extends EntityRepository
         $endX = end($coordinatesRangeX);
         $startY = current($coordinatesRangeY);
         $endY = end($coordinatesRangeY);
-        
+
         return $this->createQueryBuilder('t')
             ->where(
                 't.coordinatesX >= ?1 AND

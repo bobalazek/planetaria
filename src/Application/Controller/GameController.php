@@ -35,20 +35,20 @@ class GameController
         $centerX = 0;
         $centerY = 0;
         $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
-        
+
         $coordinatesRangeX = range($centerX-$radius, $centerX+$radius);
         $coordinatesRangeY = range($centerY-$radius, $centerY+$radius);
-        
+
         $tiles = array();
         $tilesArray = $app['orm.em']
             ->getRepository('Application\Entity\TileEntity')
             ->getByCoordinatesRange($coordinatesRangeX, $coordinatesRangeY, $planet)
         ;
-        
+
         foreach ($tilesArray as $singleTile) {
             $tiles[$singleTile->getCoordinates()] = $singleTile;
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/map/index.html.twig',
@@ -97,7 +97,7 @@ class GameController
             array(), // TO-Do
             10
         );
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/statistics/index.html.twig',

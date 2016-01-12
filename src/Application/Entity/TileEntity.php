@@ -57,7 +57,7 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="coordinates_y", type="integer")
      */
     protected $coordinatesY = 0;
-    
+
     /**
      * Can a building be build on it?
      *
@@ -92,7 +92,7 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -192,7 +192,7 @@ class TileEntity extends AbstractBasicEntity
     {
         return $this->getCoordinatesX().','.$this->getCoordinatesY();
     }
-    
+
     /*** Buildable ***/
     /**
      * @return boolean
@@ -201,7 +201,7 @@ class TileEntity extends AbstractBasicEntity
     {
         return $this->buildable;
     }
-    
+
     /**
      * @return boolean
      */
@@ -263,7 +263,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Tile resources ***/
     /**
      * @return ArrayCollection
