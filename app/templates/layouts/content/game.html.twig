@@ -96,6 +96,7 @@
 
 {% block body_javascripts %}
     {{ parent() }}
+    <script id="jquery-nicescroll-js" type="text/javascript" src="{{ app.baseUri }}/assets/vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
     <script id="game-js" type="text/javascript" src="{{ app.baseUri }}/assets/javascripts/game.js?version={{ app.version }}"></script>
     <script id="game-initialize-js">
         Game.initialize();

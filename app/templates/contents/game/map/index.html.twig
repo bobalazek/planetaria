@@ -7,24 +7,30 @@
         <div id="map-wrapper">
             <div id="map">
                 <div id="map-inner">
-                    {% for x in coordinatesRangeX %}
+                    {% for y in coordinatesRangeY | reverse %}
                         <div class="map-row clearfix">
-                            {% for y in coordinatesRangeY %}
-                                {% set tile = tiles[x~','~y] %}
-                                <div id="map-tile-{{ tile.getId() }}"
-                                    class="map-tile"
-                                    data-toggle="popover"
-                                    data-trigger="hover"
-                                    title="{{ tile.getCoordinates() }}"
-                                    data-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
-                                    style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
-                                    <div class="map-tile-hover-overlay"></div>
-                                </div> <!-- /.map-tile -->
+                            {% for x in coordinatesRangeX %}
+                                {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
+                                {% if tile %}
+                                    <div id="map-tile-{{ tile.getId() }}"
+                                        class="map-tile"
+                                        data-toggle="popover"
+                                        data-trigger="hover"
+                                        title="{{ tile.getCoordinates() }}"
+                                        data-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
+                                        style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
+                                        <div class="map-tile-hover-overlay"></div>
+                                    </div> <!-- /.map-tile -->
+                                {% else %}
+                                    {# To-Do: Maybe some blank container or something #}
+                                {% endif %}
                             {% endfor %}
                         </div> <!-- /.map-row -->
                     {% endfor %}
                 </div> <!-- #map-inner -->
             </div> <!-- /#map -->
+            <hr />
+            {% include 'contents/game/map/_controls.html.twig' %}
         </div> <!-- /#map-wrapper -->
     </div>
 {% endblock %}

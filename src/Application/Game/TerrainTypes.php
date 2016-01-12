@@ -25,11 +25,6 @@ final class TerrainTypes
     /**
      * @var string
      */
-    const JUNGLE = 'jungle';
-
-    /**
-     * @var string
-     */
     const DESERT = 'desert';
 
     /**
@@ -71,7 +66,6 @@ final class TerrainTypes
             self::GRASSLAND => 'Grassland',
             self::PLAINS => 'Plains',
             self::FOREST => 'Forest',
-            self::JUNGLE => 'Jungle',
             self::DESERT => 'Desert',
             self::SWAMP => 'Swamp',
             self::HILLS => 'Hills',
@@ -97,7 +91,6 @@ final class TerrainTypes
             ),
             self::PLAINS => array(),
             self::FOREST => array(),
-            self::JUNGLE => array(),
             self::DESERT => array(
                 '001.png',
                 '002.png',

@@ -1,0 +1,69 @@
+<div id="map-controls"
+    class="text-center">
+    <div class="row">
+        <div class="col-xs-6">
+            <h4>{{ 'Controls' | trans }}</h4>
+            <div>
+                <a class="btn btn-sm btn-default"
+                    href="{{ url('game.map', { x: centerX, y: centerY + 4 }) }}">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="clearfix">
+                <div class="pull-left">
+                    <a class="btn btn-sm btn-default"
+                        href="{{ url('game.map', { x: centerX - 4, y: centerY }) }}">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
+                <div class="pull-right">
+                    <a class="btn btn-sm btn-default"
+                        href="{{ url('game.map', { x: centerX + 4, y: centerY }) }}">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-sm btn-default"
+                    href="{{ url('game.map', { x: centerX, y: centerY - 4 }) }}">
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </div>
+        </div> <!-- /.col-xs-6 -->
+        <div class="col-xs-6">
+            <h4>{{ 'Navigate to' | trans }}</h4>
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">X</span>
+                                <input id="map-controls-x"
+                                    class="form-control"
+                                    name="x"
+                                    value="{{ centerX }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Y</span>
+                                <input id="map-controls-y"
+                                    class="form-control" 
+                                    name="y"
+                                    value="{{ centerY }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-block btn-success"
+                            type="submit">
+                            {{ 'Go' | trans }}
+                        </button>
+                    </div>
+                </div> <!-- /.row -->
+            </form>
+        </div> <!-- /.col-xs-6 -->
+    </div> <!-- /.row -->
+</div> <!-- /#map-controls -->

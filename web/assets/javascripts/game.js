@@ -25,6 +25,11 @@ var Game = function () {
         },
         mapInitialize: function()
         {
+            jQuery('#map').niceScroll({
+                touchbehavior: true,
+                preventmultitouchscrolling: false, 
+            });
+            
             var mapElement = jQuery('#map');
             var mapHeight = mapElement.outerHeight();
             var mapWidth = mapElement.outerWidth();

@@ -17,7 +17,10 @@
 }
 
 /*** Game map ***/
-#map-wrapper {}
+#map-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
 #map {
     margin: 0 auto;
@@ -26,6 +29,12 @@
     overflow: scroll;
     padding-top: 1px;
     padding-left: 1px;
+}
+
+@media screen and (max-width: 767px) {
+    #map {
+        max-height: 600px;
+    }
 }
 
     .map-row {
@@ -63,3 +72,9 @@
         .map-tile:hover .map-tile-hover-overlay {
             display: block;   
         }
+
+/*** Fixes ***/
+/* Popover fix */
+.popover {
+    max-width: 100%;
+}

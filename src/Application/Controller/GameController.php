@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -29,15 +30,15 @@ class GameController
      *
      * @return Response
      */
-    public function mapAction(Application $app)
+    public function mapAction(Application $app, Request $request)
     {
         $radius = 16;
-        $centerX = 0;
-        $centerY = 0;
+        $centerX = (int) $request->query->get('x', 0);
+        $centerY = (int) $request->query->get('y', 0);
         $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
 
-        $coordinatesRangeX = range($centerX-$radius, $centerX+$radius);
-        $coordinatesRangeY = range($centerY-$radius, $centerY+$radius);
+        $coordinatesRangeX = range($centerX - $radius, $centerX + $radius);
+        $coordinatesRangeY = range($centerY - $radius, $centerY + $radius);
 
         $tiles = array();
         $tilesArray = $app['orm.em']
@@ -56,6 +57,8 @@ class GameController
                     'tiles' => $tiles,
                     'coordinatesRangeX' => $coordinatesRangeX,
                     'coordinatesRangeY' => $coordinatesRangeY,
+                    'centerX' => $centerX,
+                    'centerY' => $centerY,
                 )
             )
         );
