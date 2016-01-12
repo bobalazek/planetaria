@@ -16,6 +16,7 @@ use Application\Entity\TownEntity;
 use Application\Entity\UserCountryEntity;
 use Application\Game\CountryRoles;
 use Application\Game\Resources;
+use Application\Game\TerrainTypes;
 use Silex\Application;
 
 /**
@@ -151,7 +152,7 @@ class HydrateDataCommand extends ContainerAwareCommand
 
                 $tileEntity
                     ->setPlanet($planetEntity)
-                    ->setType('land')
+                    ->setTerrainType(TerrainTypes::GRASSLAND)
                     ->setBackgroundImage($backgroundImage)
                     ->setCoordinatesX($x)
                     ->setCoordinatesY($y)

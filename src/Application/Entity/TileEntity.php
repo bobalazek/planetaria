@@ -29,9 +29,9 @@ class TileEntity extends AbstractBasicEntity
      *
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=16)
+     * @ORM\Column(name="terrain_type", type="string", length=16)
      */
-    protected $type;
+    protected $terrainType;
 
     /**
      * @var string
@@ -135,23 +135,23 @@ class TileEntity extends AbstractBasicEntity
      */
     protected $tileResources;
 
-    /*** Type ***/
+    /*** Terrain type ***/
     /**
      * @return string
      */
-    public function getType()
+    public function getTerrainType()
     {
-        return $this->type;
+        return $this->terrainType;
     }
 
     /**
-     * @param string $type
+     * @param string $terrainType
      *
      * @return TileEntity
      */
-    public function setType($type)
+    public function setTerrainType($terrainType)
     {
-        $this->type = $type;
+        $this->terrainType = $terrainType;
 
         return $this;
     }

@@ -34,6 +34,7 @@
     }
     
     .map-tile {
+        position: relative;
         width: 64px;
         height: 64px;
         border: 1px dotted #666;
@@ -47,3 +48,18 @@
         -o-background-size: cover;
         background-size: cover;
     }
+    
+        .map-tile-hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0.2;
+            background-color: #fff;
+            display: none;
+        }
+        
+        .map-tile:hover .map-tile-hover-overlay {
+            display: block;   
+        }
