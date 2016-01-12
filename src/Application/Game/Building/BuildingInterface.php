@@ -7,110 +7,6 @@ namespace Application\Game\Building;
  */
 interface BuildingInterface
 {
-    /**
-     * What's the name of that building?
-     * Example: 'Iron mine'
-     *
-     * @var string
-     */
-    protected $name;
-    
-    /**
-     * What's the key of that building?
-     * Example: 'iron_mine'
-     *
-     * @var string
-     */
-    protected $key;
-    
-    /**
-     * What's the slug of that building?
-     * Example: 'iron-ime'
-     *
-     * @var string
-     */
-    protected $slug;
-    
-    /**
-     * What's the description of that building?
-     * Example: 'A building which is used to produce iron.''
-     *
-     * @var string
-     */
-    protected $description;
-    
-    /**
-     * What's the type of that building?
-     * Example: 'civil'
-     *
-     * @var string
-     */
-    protected $type;
-    
-    /**
-     * What's the size of that building?
-     * Example: '1x1'
-     *
-     * @var string
-     */
-    protected $size;
-    
-    /**
-     * What's the maximum level of that building?
-     * Example: 2
-     *
-     * @var integer
-     */
-    protected $maximumLevel;
-    
-    /**
-     * How much health points does that building have (per level)?
-     * Example: array( 0 => 400, 1 => 800, 2 => 1200 )
-     *
-     * @var array
-     */
-    protected $healthPoints;
-    
-    /**
-     * What's the size of that building (per level)?
-     * Example: array( 0 => 100, 1 => 200, 2 => 300 )
-     *
-     * @var array
-     */
-    protected $populationCapacity;
-    
-    /**
-     * What's the storage capacity of that building (per level)?
-     * Example: array( 0 => 50, 1 => 100, 2 => 200 )
-     *
-     * @var array
-     */
-    protected $storageCapacity;
-    
-    /**
-     * What's the build time of that building in seconds (per level)?
-     * Example: array( 0 => 30, 1 => 60, 2 => 120 )
-     *
-     * @var array
-     */
-    protected $buildTime;
-    
-    /**
-     * How much of what does that building cost (per level)?
-     * Example: array( 0 => array( 'wood' => 200 ), 1 => array( 'wood' => 200 ), 2 => array( 'wood' => 200 ) )
-     *
-     * @var array
-     */
-    protected $resourcesCost;
-    
-    /**
-     * How much of what does that building produce per minute (per level)?
-     * Example: array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
-     *
-     * @var array
-     */
-    protected $resourcesProduction;
-
     /***** Name *****/
     /**
      * @return string
@@ -197,60 +93,60 @@ interface BuildingInterface
     /**
      * @param array $healthPoints
      */
-    public function setHealthPoints($healthPoints);
+    public function setHealthPoints(array $healthPoints);
     
     /***** Population capacity *****/
     /**
      * @return array|integer
      */
-    public function getPopulationCapacity();
+    public function getPopulationCapacity($level);
     
     /**
      * @param array $populationCapacity
      */
-    public function setPopulationCapacity($populationCapacity);
+    public function setPopulationCapacity(array $populationCapacity);
     
     /***** Storage capacity *****/
     /**
      * @return array|integer
      */
-    public function getStorageCapacity();
+    public function getStorageCapacity($level);
     
     /**
      * @param array $storageCapacity
      */
-    public function setStorageCapacity($storageCapacity);
+    public function setStorageCapacity(array $storageCapacity);
     
     /***** Build time *****/
     /**
      * @return array|integer
      */
-    public function getBuildTime();
+    public function getBuildTime($level);
     
     /**
      * @param array $buildTime
      */
-    public function setBuildTime($buildTime);
+    public function setBuildTime(array $buildTime);
     
     /***** Resources cost *****/
     /**
      * @return array|integer
      */
-    public function getResourcesCost();
+    public function getResourcesCost($level, $resource);
     
     /**
      * @param array $resourcesCost
      */
-    public function setResourcesCost($resourcesCost);
+    public function setResourcesCost(array $resourcesCost);
     
     /***** Resources production *****/
     /**
      * @return array
      */
-    public function getResourcesProduction();
+    public function getResourcesProduction($level, $resource);
     
     /**
      * @param array $resourcesProduction
      */
-    public function setResourcesProduction($resourcesProduction);
+    public function setResourcesProduction(array $resourcesProduction);
 }

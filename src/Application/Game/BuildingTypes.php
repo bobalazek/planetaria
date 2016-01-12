@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Game\Resource;
+namespace Application\Game;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>

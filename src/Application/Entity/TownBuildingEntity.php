@@ -30,6 +30,17 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\Column(name="building", type="string", length=32)
      */
     protected $building;
+    
+    /**
+     * Statuses:
+     *   - constructing
+     *   - constructed
+     *   - damaged
+     *   - destroyed
+     *
+     * @ORM\Column(name="status", type="string", length=32)
+     */
+    protected $status = 'constructing';
 
     /**
      * At which level is the building?
@@ -100,6 +111,27 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function setBuilding($building)
     {
         $this->building = $building;
+
+        return $this;
+    }
+    
+    /*** Status ***/
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return TownBuildingEntity
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

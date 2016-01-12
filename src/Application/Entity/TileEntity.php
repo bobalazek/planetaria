@@ -383,6 +383,18 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
+    
+    /*** Town Building Image ***/
+    /**
+     * @return string
+     */
+    public function getTownBuildingImage()
+    {
+        return $this->getTownBuilding()->getBuilding().'/'.
+            $this->getTownBuilding()->getStatus().'/'.
+            $this->getBuildingSection().'.png'
+        ;
+    }
 
     /**
      * @ORM\PreUpdate

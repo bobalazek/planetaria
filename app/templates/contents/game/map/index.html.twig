@@ -12,24 +12,7 @@
                             {% for x in coordinatesRangeX %}
                                 {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
                                 {% if tile %}
-                                    <div id="map-tile-{{ tile.getId() }}"
-                                        class="map-tile {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"
-                                        data-toggle="popover"
-                                        data-trigger="hover"
-                                        data-id="{{ tile.getId() }}"
-                                        data-x="{{ x }}"
-                                        data-y="{{ y }}"
-                                        data-buildable="{{ tile.isBuildable() ? 'true' : 'false' }}"
-                                        data-buildable-currently="{{ tile.isBuildableCurrently() ? 'true' : 'false' }}"
-                                        title="{{ tile.getCoordinates() }}"
-                                        data-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
-                                        style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
-                                        <div class="map-tile-hover-overlay"></div>
-                                        {% if tile.getTownBuilding() %}
-                                            <img class="img-responsive map-tile-building-image"
-                                                src="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuilding().getBuilding() }}/{{ tile.getBuildingSection() }}.png" />
-                                        {% endif %}
-                                    </div> <!-- /.map-tile -->
+                                    {% include 'contents/game/map/_tile.html.twig' %}
                                 {% else %}
                                     <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"></div>
                                 {% endif %}

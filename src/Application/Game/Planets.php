@@ -160,58 +160,10 @@ class Planets
         $app['orm.em']->flush();
         
         // Town building
-        $townBuildingEntity = new TownBuildingEntity();
-        
-        $townBuildingEntity
-            ->setBuilding(Buildings::CAPITOL)
-            ->setTown($townEntity)
-        ;
-        
-        $app['orm.em']->persist($townBuildingEntity);
-        
-        // Town building tiles
-        // 1x1
-        $tile1x1Entity = $app['orm.em']
-            ->getRepository('Application\Entity\TileEntity')
-            ->findOneBy(array( 'coordinatesX' => 0, 'coordinatesY' => 0 ))
-        ;
-        $tile1x1Entity
-            ->setTownBuilding($townBuildingEntity)
-            ->setBuildingSection('1x1')
-        ;
-        $app['orm.em']->persist($tile1x1Entity);
-        
-        // 2x1
-        $tile2x1Entity = $app['orm.em']
-            ->getRepository('Application\Entity\TileEntity')
-            ->findOneBy(array( 'coordinatesX' => 1, 'coordinatesY' => 0 ))
-        ;
-        $tile2x1Entity
-            ->setTownBuilding($townBuildingEntity)
-            ->setBuildingSection('2x1')
-        ;
-        $app['orm.em']->persist($tile2x1Entity);
-        
-        // 1x2
-        $tile1x2Entity = $app['orm.em']
-            ->getRepository('Application\Entity\TileEntity')
-            ->findOneBy(array( 'coordinatesX' => 0, 'coordinatesY' => 1 ))
-        ;
-        $tile1x2Entity
-            ->setTownBuilding($townBuildingEntity)
-            ->setBuildingSection('1x2')
-        ;
-        $app['orm.em']->persist($tile1x2Entity);
-        
-        // 2x2
-        $tile2x2Entity = $app['orm.em']
-            ->getRepository('Application\Entity\TileEntity')
-            ->findOneBy(array( 'coordinatesX' => 1, 'coordinatesY' => 1 ))
-        ;
-        $tile2x2Entity
-            ->setTownBuilding($townBuildingEntity)
-            ->setBuildingSection('2x2')
-        ;
-        $app['orm.em']->persist($tile2x2Entity);
+        $app['game.buildings']->build(
+            $townEntity,
+            Buildings::CAPITOL,
+            array(-1, -1)
+        );
     }
 }

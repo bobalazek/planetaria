@@ -160,6 +160,10 @@ $app['paginator'] = $app->share(function () use ($app) {
 });
 
 /*** Game ***/
+$app['game.buildings'] = $app->share(function () use ($app) {
+    return new Application\Game\Buildings($app);
+});
+
 $app['game.planets'] = $app->share(function () use ($app) {
     return new Application\Game\Planets($app);
 });

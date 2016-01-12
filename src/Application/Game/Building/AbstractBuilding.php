@@ -142,7 +142,7 @@ class AbstractBuilding implements BuildingInterface
     /**
      * @param string $key
      */
-    public function setKey($name)
+    public function setKey($key)
     {
         $this->key = $key;
 
@@ -325,7 +325,7 @@ class AbstractBuilding implements BuildingInterface
      */
     public function setStorageCapacity(array $storageCapacity = array())
     {
-        $this->populationCapacity = $populationCapacity;
+        $this->storageCapacity = $storageCapacity;
 
         return $this;
     }

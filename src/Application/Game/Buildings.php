@@ -2,6 +2,10 @@
 
 namespace Application\Game;
 
+use Silex\Application;
+use Application\Entity\TownEntity;
+use Application\Entity\TownBuildingEntity;
+
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
@@ -76,6 +80,74 @@ final class Buildings
      * @var string
      */
     const DOCK = 'dock';
+    
+    /**
+     * @var Application
+     */
+    protected $app;
+
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+    
+    /**
+     * With this method we'll create the town building.
+     *
+     * @param TownEntity $town
+     * @param string $building
+     * @param array $coordinates The start coordinates (bottom left) of the location that building is going to be build
+     */
+    public function build(TownEntity $town, $building, array $startingCoordinates = array())
+    {
+        $app = $this->app;
+
+        $startX = $startingCoordinates[0];
+        $startY = $startingCoordinates[1];
+        
+        $townBuildingEntity = new TownBuildingEntity();
+        
+        $townBuildingEntity
+            ->setBuilding($building)
+            ->setStatus(BuildingStatuses::CONSTRUCTED)
+            ->setTown($town)
+        ;
+        
+        $app['orm.em']->persist($townBuildingEntity);
+        
+        $buildingClassName = 'Application\\Game\\Building\\'.$this->getClassName($building);
+        $buildingClass = new $buildingClassName();
+        
+        $size = $buildingClass->getSize();
+        list($sizeX, $sizeY) = explode('x', $size);
+        $x = $startX;
+        $y = $startY;
+
+        foreach (range(1, (int) $sizeY) as $sizeYSingle) {
+            $x = $startX;
+            foreach (range(1, (int) $sizeX) as $sizeXSingle) {
+                // Tiles
+                $tileEntity = $app['orm.em']
+                    ->getRepository('Application\Entity\TileEntity')
+                    ->findOneBy(array( 'coordinatesX' => $x, 'coordinatesY' => $y ))
+                ;
+                $tileEntity
+                    ->setTownBuilding($townBuildingEntity)
+                    ->setBuildingSection($sizeXSingle.'x'.$sizeYSingle)
+                ;
+                $app['orm.em']->persist($tileEntity);
+                
+                $x++;
+            }
+            
+            $y++;
+        }
+
+        $app['orm.em']->flush();
+    }
 
     /**
      * @return array

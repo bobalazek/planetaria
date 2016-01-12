@@ -3,6 +3,7 @@
 namespace Application\Game\Building;
 
 use Application\Game\Resources;
+use Application\Game\BuildingTypes;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -20,7 +21,7 @@ class Capitol extends AbstractBuilding
             ->setSlug('capitol')
             ->setDescription('The main town building.')
             ->setType(BuildingTypes::CIVIL)
-            ->setSize('2x2')
+            ->setSize('3x3')
             ->setMaximumLevel(3)
             ->setHealthPoints(array(
                 0 => 10000,
