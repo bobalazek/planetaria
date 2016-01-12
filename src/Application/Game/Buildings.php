@@ -82,6 +82,16 @@ final class Buildings
     const DOCK = 'dock';
 
     /**
+     * @var string
+     */
+    const ION_CANNON_CONTROL_CENTER = 'ion_cannon_control_center';
+
+    /**
+     * @var string
+     */
+    const MISSILE_LAUNCH_FACILITY = 'missile_launch_facility';
+
+    /**
      * @var Application
      */
     protected $app;
@@ -169,6 +179,8 @@ final class Buildings
             self::COLLIERY => 'Colliery',
             self::IRON_MINE => 'Iron mine',
             self::DOCK => 'Dock',
+            self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
+            self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
         );
     }
 
@@ -192,6 +204,8 @@ final class Buildings
             self::COLLIERY => 'Colliery',
             self::IRON_MINE => 'IronMine',
             self::DOCK => 'Dock',
+            self::ION_CANNON_CONTROL_CENTER => 'IonCannonControlCenter',
+            self::MISSILE_LAUNCH_FACILITY => 'MissileLaunchFacility',
         );
 
         return $all[$key];

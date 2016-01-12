@@ -27,7 +27,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $id;
 
     /**
-     * @ORM\Column(name="building", type="string", length=32)
+     * @ORM\Column(name="building", type="string", length=64)
      */
     protected $building;
 
