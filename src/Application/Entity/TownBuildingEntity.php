@@ -77,9 +77,9 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $town;
 
     /**
-     * @ORM\OneToOne(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding")
+     * @ORM\OneToMany(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding", cascade={"all"}, orphanRemoval=true)
      **/
-    protected $tile;
+    protected $tiles;
 
     /*** Building ***/
     /**
@@ -188,21 +188,21 @@ class TownBuildingEntity extends AbstractBasicEntity
 
     /*** Tile ***/
     /**
-     * @return TileEntity
+     * @return ArrayCollection
      */
-    public function getTile()
+    public function getTiles()
     {
-        return $this->tile;
+        return $this->tiles;
     }
 
     /**
-     * @param TileEntity $tile
+     * @param ArrayCollection $tiles
      *
      * @return TownBuildingEntity
      */
-    public function setTile(TileEntity $tile)
+    public function setTiles($tiles)
     {
-        $this->tile = $tile;
+        $this->tiles = $tiles;
 
         return $this;
     }

@@ -66,6 +66,41 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="buildable", type="boolean")
      */
     protected $buildable = true;
+    
+    /**
+     * Because a building can be multiple sizes big, we need to split them into multiple tiles.
+     * In this variable we'll define which section of the building that is.
+     * Example:
+     *   - If building size is 1x1: 
+     *     - 'full' (if the building is 1x1 and requires only 1 tile)
+     *   - If building size is 2x2, 3x3, ... then you need to think of it, as the COORDINATES SYSTEM:
+     *     - '1x1' would be the LOWER LEFT part of a 2x2 building
+     *     - '2x2' would be the UPPER RIGHT part of a 2x2 building
+     *     - '3x1' would be the UPPER CENTER part of a 3x3 building
+     *     - '2x2' would be the MIDDLE CENTER part of a 3x3 building
+     *
+     * Visual:
+     * 2x2
+     * -------------
+     * | 1x2 | 2x2 |
+     * -------------
+     * | 1x1 | 2x1 |
+     * -------------
+     *
+     * 3x3
+     * -------------------
+     * | 1x3 | 2x3 | 3x3 |
+     * -------------------
+     * | 1x2 | 2x2 | 3x2 |
+     * -------------------
+     * | 1x1 | 2x1 | 3x1 |
+     * -------------------
+     *
+     * @var string
+     *
+     * @ORM\Column(name="building_section", type="string", length=16, nullable=true)
+     */
+    protected $buildingSection;
 
     /**
      * @var \DateTime
@@ -82,7 +117,7 @@ class TileEntity extends AbstractBasicEntity
     protected $timeUpdated;
 
     /**
-     * @ORM\OneToOne(targetEntity="Application\Entity\TownBuildingEntity", inversedBy="tile")
+     * @ORM\ManyToOne(targetEntity="Application\Entity\TownBuildingEntity", inversedBy="tiles")
      * @ORM\JoinColumn(name="town_building_id", referencedColumnName="id")
      */
     protected $townBuilding;
@@ -218,6 +253,27 @@ class TileEntity extends AbstractBasicEntity
     public function setBuildable($buildable)
     {
         $this->buildable = $buildable;
+
+        return $this;
+    }
+    
+    /*** Building section ***/
+    /**
+     * @return string
+     */
+    public function getBuildingSection()
+    {
+        return $this->buildingSection;
+    }
+
+    /**
+     * @param string $buildingSection
+     *
+     * @return TileEntity
+     */
+    public function setBuildingSection($buildingSection)
+    {
+        $this->buildingSection = $buildingSection;
 
         return $this;
     }

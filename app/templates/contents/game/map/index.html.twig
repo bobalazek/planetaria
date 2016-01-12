@@ -6,22 +6,24 @@
     <div id="main-content">
         <div id="map-wrapper">
             <div id="map">
-                {% for x in coordinatesRangeX %}
-                    <div class="map-row clearfix">
-                        {% for y in coordinatesRangeY %}
-                            {% set tile = tiles[x~','~y] %}
-                            <div id="map-tile-{{ tile.getId() }}"
-                                class="map-tile"
-                                data-toggle="popover"
-                                data-trigger="hover"
-                                title="{{ tile.getCoordinates() }}"
-                                data-content="{% filter escape %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endfilter %}"
-                                style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
-                            </div> <!-- /.map-tile -->
-                        {% endfor %}
-                    </div> <!-- /.map-row -->
-                {% endfor %}
-            </div> <!-- /#game-map -->
-        </div> <!-- /#game-map-wrapper -->
+                <div id="map-inner">
+                    {% for x in coordinatesRangeX %}
+                        <div class="map-row clearfix">
+                            {% for y in coordinatesRangeY %}
+                                {% set tile = tiles[x~','~y] %}
+                                <div id="map-tile-{{ tile.getId() }}"
+                                    class="map-tile"
+                                    data-toggle="popover"
+                                    data-trigger="hover"
+                                    title="{{ tile.getCoordinates() }}"
+                                    data-content="{% filter escape %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endfilter %}"
+                                    style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
+                                </div> <!-- /.map-tile -->
+                            {% endfor %}
+                        </div> <!-- /.map-row -->
+                    {% endfor %}
+                </div> <!-- #map-inner -->
+            </div> <!-- /#map -->
+        </div> <!-- /#map-wrapper -->
     </div>
 {% endblock %}
