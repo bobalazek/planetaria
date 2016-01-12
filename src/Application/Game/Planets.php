@@ -41,29 +41,44 @@ class Planets
 
         // Tiles
         $range = range(-32, 32);
-        $images = array(
-            'grass1.png',
-            'grass2.png',
-            'grass3.png',
-            'desert1.png',
-            'desert2.png',
-            'desert3.png',
+        $terrains = array(
+            array(
+                'backgroundImage' => 'grassland/001.png',
+                'type' => TerrainTypes::GRASSLAND,
+            ),
+            array(
+                'backgroundImage' => 'grassland/002.png',
+                'type' => TerrainTypes::GRASSLAND,
+            ),
+            array(
+                'backgroundImage' => 'grassland/003.png',
+                'type' => TerrainTypes::GRASSLAND,
+            ),
+            array(
+                'backgroundImage' => 'desert/001.png',
+                'type' => TerrainTypes::DESERT,
+            ),
+            array(
+                'backgroundImage' => 'desert/002.png',
+                'type' => TerrainTypes::DESERT,
+            ),
+            array(
+                'backgroundImage' => 'desert/003.png',
+                'type' => TerrainTypes::DESERT,
+            ),
         );
 
         foreach ($range as $x) {
             foreach ($range as $y) {
                 $tileEntity = new TileEntity();
 
-                $rand = array_rand($images);
-                $backgroundImage = $x == 0 && $y == 0
-                    ? 'ground-zero.png'
-                    : $images[$rand]
-                ;
+                $randomIndex = array_rand($terrains);
+                $terrain = $terrains[$randomIndex];
 
                 $tileEntity
                     ->setPlanet($planetEntity)
-                    ->setTerrainType(TerrainTypes::GRASSLAND)
-                    ->setBackgroundImage($backgroundImage)
+                    ->setTerrainType($terrain['type'])
+                    ->setBackgroundImage($terrain['backgroundImage'])
                     ->setCoordinatesX($x)
                     ->setCoordinatesY($y)
                 ;

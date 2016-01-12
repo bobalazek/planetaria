@@ -81,4 +81,39 @@ final class TerrainTypes
             self::TUNDRA => 'Tundra',
         );
     }
+    
+    /**
+     * @param $terrain
+     *
+     * @return array
+     */
+    public static function getImages($terrain = null)
+    {
+        $images = array(
+            self::GRASSLAND => array(
+                '001.png',
+                '002.png',
+                '003.png',
+            ),
+            self::PLAINS => array(),
+            self::FOREST => array(),
+            self::JUNGLE => array(),
+            self::DESERT => array(
+                '001.png',
+                '002.png',
+                '003.png',
+            ),
+            self::SWAMP => array(),
+            self::HILLS => array(),
+            self::MOUNTAINS => array(),
+            self::OCEAN => array(),
+            self::GLACIER => array(),
+            self::TUNDRA => array(),
+        );
+
+        return $terrain == null
+            ? $images
+            : $images[$terrain]
+        ;
+    }
 }

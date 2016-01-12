@@ -3,6 +3,8 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Application\Game\Buildings\AbstractBuilding;
+use Application\Game\Buildings;
 
 /**
  * Town Building Entity
@@ -100,6 +102,18 @@ class TownBuildingEntity extends AbstractBasicEntity
         $this->building = $building;
 
         return $this;
+    }
+    
+    /**
+     * @return AbstractBuilding
+     */
+    public function getBuildingObject()
+    {
+        $className = 'Application\\Game\\Buildings\\'.Buildings::getClassName(
+            $this->getBuilding()
+        );
+
+        return new $className;
     }
 
     /*** Level ***/
