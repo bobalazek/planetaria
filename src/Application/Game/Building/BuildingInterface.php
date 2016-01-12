@@ -149,4 +149,26 @@ interface BuildingInterface
      * @param array $resourcesProduction
      */
     public function setResourcesProduction(array $resourcesProduction);
+    
+    /***** Units production *****/
+    /**
+     * @return array
+     */
+    public function getUnitsProduction($level, $unit);
+
+    /**
+     * @param array $unitsProduction
+     */
+    public function setUnitsProduction(array $unitsProduction);
+
+    /***** Items production *****/
+    /**
+     * @return array
+     */
+    public function getItemsProduction($level, $item);
+
+    /**
+     * @param array $itemsProduction
+     */
+    public function setItemsProduction(array $itemsProduction);
 }

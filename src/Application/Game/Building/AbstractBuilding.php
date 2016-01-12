@@ -105,11 +105,30 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much of what does that building produce per minute (per level)?
-     * Example: array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
+     * Example ( level => array( resource => amountPerMinute ) ): 
+     * array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
      *
      * @var array
      */
     protected $resourcesProduction;
+
+    /**
+     * How much of what does that building produce per minute (per level)?
+     * Example ( level => array( unit => buildingTimeInSeconds ) ): 
+     * array( 0 => array( 'sniper' => 600 )), 1 => array( 'sniper' => 300 ) )
+     *
+     * @var array
+     */
+    protected $unitsProduction;
+    
+    /**
+     * How much of what does that building produce per minute (per level)?
+     * Example ( level => array( unit => buildingTimeInSeconds ) ): 
+     * array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'sniper' => 3000 ) )
+     *
+     * @var array
+     */
+    protected $itemsProduction;
 
     /***** Name *****/
     /**
@@ -396,6 +415,54 @@ class AbstractBuilding implements BuildingInterface
     public function setResourcesProduction(array $resourcesProduction = array())
     {
         $this->resourcesProduction = $resourcesProduction;
+
+        return $this;
+    }
+
+    /***** Units production *****/
+    /**
+     * @return array
+     */
+    public function getUnitsProduction($level = null, $unit = null)
+    {
+        return $level === null
+            ? $this->unitProductions
+            : ($unit === null
+                ? $this->unitsProduction[$level]
+                : $this->unitsProduction[$level][$unit])
+        ;
+    }
+
+    /**
+     * @param array $unitsProduction
+     */
+    public function setUnitsProduction(array $unitsProduction = array())
+    {
+        $this->unitsProduction = $unitsProduction;
+
+        return $this;
+    }
+
+    /***** Items production *****/
+    /**
+     * @return array
+     */
+    public function getItemsProduction($level = null, $item = null)
+    {
+        return $level === null
+            ? $this->itemsProduction
+            : ($item === null
+                ? $this->itemsProduction[$level]
+                : $this->itemsProduction[$level][$item])
+        ;
+    }
+
+    /**
+     * @param array $itemsProduction
+     */
+    public function setItemsProduction(array $itemsProduction = array())
+    {
+        $this->itemsProduction = $itemsProduction;
 
         return $this;
     }
