@@ -6,12 +6,10 @@
     <div id="main-content">
         <div id="map-wrapper">
             <div id="map">
-                {% for x in -16..16 %}
+                {% for x in coordinatesRange %}
                     <div class="map-row clearfix">
-                        {% for y in -16..16 %}
-                            {% set tile = app['orm.em']
-                                .getRepository('Application\\Entity\\TileEntity')
-                                .findOneBy({ coordinatesX: x, coordinatesY: y }) %}
+                        {% for y in coordinatesRange %}
+                            {% set tile = tiles[x~','~y] %}
                             <div id="map-tile-{{ tile.getId() }}"
                                 class="map-tile"
                                 data-toggle="tooltip"

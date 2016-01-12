@@ -9,6 +9,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CountryRepository extends EntityRepository
 {
+    /**
+     * @return integer
+     */
     public function countAll()
     {
         return $this->createQueryBuilder('c')

@@ -31,9 +31,25 @@ class GameController
      */
     public function mapAction(Application $app)
     {
+        $coordinatesRange = range(-16, 16);
+        
+        $tiles = array();
+        $tilesArray = $app['orm.em']
+            ->getRepository('Application\Entity\TileEntity')
+            ->getByCoordinatesRange($coordinatesRange)
+        ;
+        
+        foreach ($tilesArray as $singleTile) {
+            $tiles[$singleTile->getCoordinates()] = $singleTile;
+        }
+        
         return new Response(
             $app['twig']->render(
-                'contents/game/map/index.html.twig'
+                'contents/game/map/index.html.twig',
+                array(
+                    'tiles' => $tiles,
+                    'coordinatesRange' => $coordinatesRange,
+                )
             )
         );
     }
