@@ -135,7 +135,7 @@ class TileEntity extends AbstractBasicEntity
      *
      * @return TileEntity
      */
-    public function setImage($backgroundImage)
+    public function setBackgroundImage($backgroundImage)
     {
         $this->backgroundImage = $backgroundImage;
 
