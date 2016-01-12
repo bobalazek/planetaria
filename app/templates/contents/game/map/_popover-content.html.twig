@@ -1,27 +1,25 @@
-{% set tileResources = tile.getTileResources() %}
+<h4>{{ 'Terrain type' | trans }}:</h4>
+<p>{{ tile.getTerrainType() | humanize | trans }}</p>
 {% if tile.getTownBuilding() %}
     <h4>{{ 'Town' | trans }}:</h4>
     <p>
-        <span>{{ tile.getTownBuilding().getTown() }}&nbsp;</span>
+        <span>{{ tile.getTownBuilding().getTown() }}</span>&nbsp;
         <small>({{ tile.getTownBuilding().getTown().getCountry() }})</small>
     </p>
     <h4>{{ 'Building' | trans }}:</h4>
     <p>
-        <span>{{ tile.getTownBuilding().getBuilding() | humanize | trans }}</span>
-        <small>
-            ({{ 'Level' | trans }}:
-            {{ tile.getTownBuilding().getLevel() }})
-        </small>
+        <span>{{ tile.getTownBuilding().getBuilding() | humanize | trans }}</span>&nbsp;
+        <small>({{ 'Level' | trans }}: {{ tile.getTownBuilding().getLevel() }})</small>
     </p>
 {% endif %}
-<h4>{{ 'Terrain type' | trans }}:</h4>
-<p>{{ tile.getTerrainType() | humanize | trans }}</p>
-<h4>{{ 'Resources' | trans }}:</h4>
-<ul class="list-unstyled">
-    {%- for tileResource in tileResources -%}
-        <li>
-            <span>- {{ tileResource.getResource() | humanize | trans }}&nbsp;</span>
-            <small>{{ tileResource.getAmountPercentage() }}%</small>
-        </li>
-    {%- endfor -%}
-</ul>
+{% if tile.tileResources() %}
+    <h4>{{ 'Resources' | trans }}:</h4>
+    <ul class="list-unstyled">
+        {%- for tileResource in tile.tileResources() -%}
+            <li>
+                <span>- {{ tileResource.getResource() | humanize | trans }}</span>&nbsp;
+                <small>{{ tileResource.getAmountPercentage() }}%</small>
+            </li>
+        {%- endfor -%}
+    </ul>
+{% endif %}
