@@ -38,6 +38,11 @@ final class Resources
     const CRUDE_OIL = 'crude_oil';
 
     /**
+     * @var string
+     */
+    const MONEY = 'money';
+
+    /**
      * @return array
      */
     public static function getAll()
@@ -49,6 +54,7 @@ final class Resources
             self::ROCK => 'Rock',
             self::IRON_ORE => 'Iron ore',
             self::CRUDE_OIL => 'Crude oil',
+            self::MONEY => 'Money',
         );
     }
 }
