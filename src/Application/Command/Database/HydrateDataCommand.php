@@ -142,14 +142,14 @@ class HydrateDataCommand extends ContainerAwareCommand
                 $tileEntity = new TileEntity();
 
                 $rand = array_rand($images);
-                $image = $x == 0 && $y == 0 
+                $backgroundImage = $x == 0 && $y == 0 
                     ? 'ground-zero.png'
                     : $images[$rand]
                 ;
 
                 $tileEntity
                     ->setType('terrain')
-                    ->setImage($image)
+                    ->setBackgroundImage($backgroundImage)
                     ->setCoordinatesX($x)
                     ->setCoordinatesY($y)
                     ->setPlanet($planetEntity)

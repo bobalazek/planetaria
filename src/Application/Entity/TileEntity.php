@@ -34,9 +34,9 @@ class TileEntity extends AbstractBasicEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="background_image", type="string", length=255)
      */
-    protected $image;
+    protected $backgroundImage;
 
     /**
      * On a 2D map that would be the bottom left (start) pixel of that building.
@@ -103,23 +103,23 @@ class TileEntity extends AbstractBasicEntity
         return $this;
     }
 
-    /*** Image ***/
+    /*** Background Image ***/
     /**
      * @return string
      */
-    public function getImage()
+    public function getBackgroundImage()
     {
-        return $this->image;
+        return $this->backgroundImage;
     }
 
     /**
-     * @param string $image
+     * @param string $backgroundImage
      *
      * @return TileEntity
      */
-    public function setImage($image)
+    public function setImage($backgroundImage)
     {
-        $this->image = $image;
+        $this->backgroundImage = $backgroundImage;
 
         return $this;
     }
