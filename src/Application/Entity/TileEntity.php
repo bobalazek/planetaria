@@ -66,12 +66,12 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="buildable", type="boolean")
      */
     protected $buildable = true;
-    
+
     /**
      * Because a building can be multiple sizes big, we need to split them into multiple tiles.
      * In this variable we'll define which section of the building that is.
      * Example:
-     *   - If building size is 1x1: 
+     *   - If building size is 1x1:
      *     - 'full' (if the building is 1x1 and requires only 1 tile)
      *   - If building size is 2x2, 3x3, ... then you need to think of it, as the COORDINATES SYSTEM:
      *     - '1x1' would be the LOWER LEFT part of a 2x2 building
@@ -256,7 +256,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Building section ***/
     /**
      * @return string

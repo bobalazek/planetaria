@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Game\Resource;
+namespace Application\Game;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -11,37 +11,37 @@ final class TerrainTypes
      * @var string
      */
     const GRASSLAND = 'grassland';
-    
+
     /**
      * @var string
      */
     const PLAINS = 'plains';
-    
+
     /**
      * @var string
      */
     const FOREST = 'forest';
-    
+
     /**
      * @var string
      */
     const JUNGLE = 'jungle';
-    
+
     /**
      * @var string
      */
     const DESERT = 'desert';
-    
+
     /**
      * @var string
      */
     const SWAMP = 'swamp';
-    
+
     /**
      * @var string
      */
     const HILLS = 'hills';
-    
+
     /**
      * @var string
      */
@@ -51,12 +51,12 @@ final class TerrainTypes
      * @var string
      */
     const OCEAN = 'ocean';
-    
+
     /**
      * @var string
      */
     const GLACIER = 'glacier';
-    
+
     /**
      * @var string
      */

@@ -159,6 +159,11 @@ $app['paginator'] = $app->share(function () use ($app) {
     return new Application\Paginator($app);
 });
 
+/*** Game ***/
+$app['game.planets'] = $app->share(function () use ($app) {
+    return new Application\Game\Planets($app);
+});
+
 /***** Form *****/
 $app->register(new Silex\Provider\FormServiceProvider());
 
