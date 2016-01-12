@@ -6,12 +6,9 @@ use Silex\Application;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TileEntity;
 use Application\Entity\TileResourceEntity;
-use Application\Entity\TownBuildingEntity;
 use Application\Entity\CountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\UserCountryEntity;
-use Application\Game\CountryRoles;
-use Application\Game\Buildings;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -121,7 +118,7 @@ class Planets
                 }
             }
         }
-        
+
         // Country
         $countryEntity = new CountryEntity();
         $countryEntity
@@ -155,10 +152,10 @@ class Planets
             ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
         ;
         $app['orm.em']->persist($userCountryEntity);
-        
+
         // Save them, because we'll need them soon!
         $app['orm.em']->flush();
-        
+
         // Town building
         $app['game.buildings']->build(
             $townEntity,

@@ -75,7 +75,7 @@ final class TerrainTypes
             self::TUNDRA => 'Tundra',
         );
     }
-    
+
     /**
      * @param $terrain
      *

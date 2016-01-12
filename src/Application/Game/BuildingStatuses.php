@@ -21,7 +21,7 @@ final class BuildingStatuses
      * @var string
      */
     const DAMAGED = 'damaged';
-    
+
     /**
      * @var string
      */

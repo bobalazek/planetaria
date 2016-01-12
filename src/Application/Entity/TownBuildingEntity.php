@@ -30,7 +30,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\Column(name="building", type="string", length=32)
      */
     protected $building;
-    
+
     /**
      * Statuses:
      *   - constructing
@@ -114,7 +114,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Status ***/
     /**
      * @return string
@@ -135,7 +135,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /**
      * @return AbstractBuilding
      */
@@ -145,7 +145,7 @@ class TownBuildingEntity extends AbstractBasicEntity
             $this->getBuilding()
         );
 
-        return new $className;
+        return new $className();
     }
 
     /*** Level ***/
