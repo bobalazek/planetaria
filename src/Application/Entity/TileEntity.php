@@ -80,14 +80,14 @@ class TileEntity extends AbstractBasicEntity
      *     - '2x2' would be the MIDDLE CENTER part of a 3x3 building
      *
      * Visual:
-     * 2x2
+     * - 2x2
      * -------------
      * | 1x2 | 2x2 |
      * -------------
      * | 1x1 | 2x1 |
      * -------------
      *
-     * 3x3
+     * - 3x3
      * -------------------
      * | 1x3 | 2x3 | 3x3 |
      * -------------------
