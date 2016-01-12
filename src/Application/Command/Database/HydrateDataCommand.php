@@ -10,10 +10,12 @@ use Application\Entity\UserEntity;
 use Application\Entity\ProfileEntity;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TileEntity;
+use Application\Entity\TileResourceEntity;
 use Application\Entity\CountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\UserCountryEntity;
 use Application\Game\CountryRoles;
+use Application\Game\Resources;
 use Silex\Application;
 
 /**
@@ -127,7 +129,7 @@ class HydrateDataCommand extends ContainerAwareCommand
         $app['orm.em']->persist($planetEntity);
 
         // Tiles
-        $range = range(-128, 128);
+        $range = range(-64, 64);
         $images = array(
             'grass1.png',
             'grass2.png',
@@ -148,14 +150,43 @@ class HydrateDataCommand extends ContainerAwareCommand
                 ;
 
                 $tileEntity
-                    ->setType('terrain')
+                    ->setPlanet($planetEntity)
+                    ->setType('land')
                     ->setBackgroundImage($backgroundImage)
                     ->setCoordinatesX($x)
                     ->setCoordinatesY($y)
-                    ->setPlanet($planetEntity)
                 ;
 
                 $app['orm.em']->persist($tileEntity);
+                
+                // Tile resources
+                $randomNumberOfResources = rand(1, 4);
+                $resources = Resources::getAll();
+                $randomResourceKeys = array_rand(
+                    $resources,
+                    $randomNumberOfResources
+                );
+                
+                if (is_string($randomResourceKeys)) {
+                    $randomResourceKeys = array(
+                        $randomResourceKeys,
+                    );
+                }
+                
+                foreach ($randomResourceKeys as $randomResourceKey) {
+                    $tileResourceEntity = new TileResourceEntity();
+                    
+                    $amount = rand(5000, 20000);
+                    
+                    $tileResourceEntity
+                        ->setTile($tileEntity)
+                        ->setResource($randomResourceKey)
+                        ->setAmount($amount)
+                        ->setAmountLeft($amount)
+                    ;
+                    
+                    $app['orm.em']->persist($tileResourceEntity);
+                }
             }
         }
 
