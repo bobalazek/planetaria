@@ -31,12 +31,17 @@ class GameController
      */
     public function mapAction(Application $app)
     {
-        $coordinatesRange = range(-16, 16);
+        $radius = 16;
+        $centerX = 0;
+        $centerY = 0;
+        
+        $coordinatesRangeX = range($centerX-$radius, $centerX+$radius);
+        $coordinatesRangeY = range($centerY-$radius, $centerY+$radius);
         
         $tiles = array();
         $tilesArray = $app['orm.em']
             ->getRepository('Application\Entity\TileEntity')
-            ->getByCoordinatesRange($coordinatesRange)
+            ->getByCoordinatesRange($coordinatesRangeX, $coordinatesRangeY)
         ;
         
         foreach ($tilesArray as $singleTile) {
@@ -48,7 +53,8 @@ class GameController
                 'contents/game/map/index.html.twig',
                 array(
                     'tiles' => $tiles,
-                    'coordinatesRange' => $coordinatesRange,
+                    'coordinatesRangeX' => $coordinatesRangeX,
+                    'coordinatesRangeY' => $coordinatesRangeY,
                 )
             )
         );

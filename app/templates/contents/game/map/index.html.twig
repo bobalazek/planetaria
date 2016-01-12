@@ -6,9 +6,9 @@
     <div id="main-content">
         <div id="map-wrapper">
             <div id="map">
-                {% for x in coordinatesRange %}
+                {% for x in coordinatesRangeX %}
                     <div class="map-row clearfix">
-                        {% for y in coordinatesRange %}
+                        {% for y in coordinatesRangeY %}
                             {% set tile = tiles[x~','~y] %}
                             <div id="map-tile-{{ tile.getId() }}"
                                 class="map-tile"

@@ -24,18 +24,24 @@ class TileRepository extends EntityRepository
     /**
      * @return array
      */
-    public function getByCoordinatesRange(array $coordinatesRange = array())
+    public function getByCoordinatesRange(array $coordinatesRangeX = array(), array $coordinatesRangeY = array())
     {
-        $start = current($coordinatesRange);
-        $end = end($coordinatesRange);
+        $startX = current($coordinatesRangeX);
+        $endX = end($coordinatesRangeX);
+        $startY = current($coordinatesRangeY);
+        $endY = end($coordinatesRangeY);
         
         return $this->createQueryBuilder('t')
-            ->where('t.coordinatesX >= ?1 AND
+            ->where(
+                't.coordinatesX >= ?1 AND
                 t.coordinatesX <= ?2 AND
-                t.coordinatesY >= ?1 AND
-                t.coordinatesY <= ?2')
-            ->setParameter(1, $start)
-            ->setParameter(2, $end)
+                t.coordinatesY >= ?3 AND
+                t.coordinatesY <= ?4'
+            )
+            ->setParameter(1, $startX)
+            ->setParameter(2, $endX)
+            ->setParameter(3, $startY)
+            ->setParameter(4, $endY)
             ->getQuery()
             ->getResult()
         ;
