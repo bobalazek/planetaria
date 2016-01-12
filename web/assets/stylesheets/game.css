@@ -14,6 +14,8 @@
 
 #logo-link {
     display: block;
+    max-width: 200px;
+    margin: 0 auto;
 }
 
 /*** Game map ***/
@@ -56,6 +58,11 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+    }
+    
+    .map-tile.map-tile-current {
+        border-color: #fff;
+        z-index: 1;
     }
     
         .map-tile-hover-overlay {

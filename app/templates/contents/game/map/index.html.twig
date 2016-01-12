@@ -13,7 +13,7 @@
                                 {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
                                 {% if tile %}
                                     <div id="map-tile-{{ tile.getId() }}"
-                                        class="map-tile"
+                                        class="map-tile {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"
                                         data-toggle="popover"
                                         data-trigger="hover"
                                         title="{{ tile.getCoordinates() }}"
