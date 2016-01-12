@@ -36,7 +36,7 @@ class TileResourceEntity extends AbstractBasicEntity
      *
      * @ORM\Column(name="amount", type="integer")
      */
-    protected $amount = 1000;
+    protected $amount = 10000;
 
     /**
      * How much is that resource left?
@@ -45,7 +45,7 @@ class TileResourceEntity extends AbstractBasicEntity
      *
      * @ORM\Column(name="amount_left", type="integer")
      */
-    protected $amountLeft = 1000;
+    protected $amountLeft = 10000;
 
     /**
      * @var \DateTime
