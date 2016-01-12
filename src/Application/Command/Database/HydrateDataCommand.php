@@ -127,7 +127,7 @@ class HydrateDataCommand extends ContainerAwareCommand
         $app['orm.em']->persist($planetEntity);
 
         // Tiles
-        $range = range(-32, 32);
+        $range = range(-128, 128);
         $images = array(
             'grass1.png',
             'grass2.png',
