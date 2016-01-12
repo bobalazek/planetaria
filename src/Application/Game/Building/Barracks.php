@@ -4,6 +4,7 @@ namespace Application\Game\Building;
 
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
+use Application\Game\Units;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -55,6 +56,17 @@ class Barracks extends AbstractBuilding
                 2 => array(
                     Resources::WOOD => 4000,
                     Resources::ROCK => 4000,
+                ),
+            ))
+            ->setUnitsProduction(array(
+                0 => array(
+                    Units::SOLDIER => 120,
+                ),
+                1 => array(
+                    Units::SOLDIER => 90,
+                ),
+                2 => array(
+                    Units::SOLDIER => 60,
                 ),
             ))
         ;

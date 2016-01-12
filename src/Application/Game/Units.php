@@ -10,7 +10,7 @@ final class Units
     /**
      * @var string
      */
-    const TANK = 'tank';
+    const SOLDIER = 'soldier';
 
     /**
      * @return array
@@ -18,7 +18,7 @@ final class Units
     public static function getAll()
     {
         return array(
-            self::TANK => 'Tank',
+            self::SOLDIER => 'Soldier',
         );
     }
 }

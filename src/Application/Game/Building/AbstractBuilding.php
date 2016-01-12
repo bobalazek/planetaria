@@ -105,7 +105,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much of what does that building produce per minute (per level)?
-     * Example ( level => array( resource => amountPerMinute ) ): 
+     * Example ( level => array( resource => amountPerMinute ) ):
      * array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
      *
      * @var array
@@ -114,17 +114,17 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much of what does that building produce per minute (per level)?
-     * Example ( level => array( unit => buildingTimeInSeconds ) ): 
-     * array( 0 => array( 'sniper' => 600 )), 1 => array( 'sniper' => 300 ) )
+     * Example ( level => array( unit => buildingTimeInSeconds ) ):
+     * array( 0 => array( 'soldier' => 600 )), 1 => array( 'soldier' => 300 ) )
      *
      * @var array
      */
     protected $unitsProduction;
-    
+
     /**
      * How much of what does that building produce per minute (per level)?
-     * Example ( level => array( unit => buildingTimeInSeconds ) ): 
-     * array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'sniper' => 3000 ) )
+     * Example ( level => array( unit => buildingTimeInSeconds ) ):
+     * array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'ion_cannon_satelite' => 3000 ) )
      *
      * @var array
      */
