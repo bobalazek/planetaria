@@ -25,7 +25,7 @@ class TileEntity extends AbstractBasicEntity
     protected $id;
 
     /**
-     * watter, land, ... ?
+     * water, land, ... ?
      *
      * @var string
      *
