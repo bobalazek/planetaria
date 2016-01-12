@@ -34,6 +34,7 @@ class GameController
         $radius = 16;
         $centerX = 0;
         $centerY = 0;
+        $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
         
         $coordinatesRangeX = range($centerX-$radius, $centerX+$radius);
         $coordinatesRangeY = range($centerY-$radius, $centerY+$radius);
@@ -41,7 +42,7 @@ class GameController
         $tiles = array();
         $tilesArray = $app['orm.em']
             ->getRepository('Application\Entity\TileEntity')
-            ->getByCoordinatesRange($coordinatesRangeX, $coordinatesRangeY)
+            ->getByCoordinatesRange($coordinatesRangeX, $coordinatesRangeY, $planet)
         ;
         
         foreach ($tilesArray as $singleTile) {
