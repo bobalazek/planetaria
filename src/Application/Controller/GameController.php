@@ -69,20 +69,6 @@ class GameController
      *
      * @return Response
      */
-    public function marketAction(Application $app)
-    {
-        return new Response(
-            $app['twig']->render(
-                'contents/game/market/index.html.twig'
-            )
-        );
-    }
-
-    /**
-     * @param Application $app
-     *
-     * @return Response
-     */
     public function statisticsAction(Application $app)
     {
         $users = $app['orm.em']->getRepository('Application\Entity\UserEntity')->findBy(

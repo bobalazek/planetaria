@@ -32,12 +32,6 @@ class GameControllerProvider implements ControllerProviderInterface
         ->bind('game.map');
 
         $controllers->match(
-            '/market',
-            'Application\Controller\GameController::marketAction'
-        )
-        ->bind('game.market');
-
-        $controllers->match(
             '/statistics',
             'Application\Controller\GameController::statisticsAction'
         )
