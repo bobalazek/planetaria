@@ -25,10 +25,38 @@ var Application = function () {
             });
         },
         tooltipsAndPopoversInitialize: function() {
-            jQuery('[data-toggle="popover"]').popover({
+            jQuery('[data-toggle="popover"], .popover-hover').popover({
                 html : true,
-            })
-            jQuery('[data-toggle="tooltip"]').tooltip();
+                trigger: 'hover',
+                title: function() {
+                    return jQuery(this).attr('data-popover-title');
+                },
+                content: function() {
+                    return jQuery(this).attr('data-popover-content');
+                },
+            });
+            jQuery('[data-toggle="tooltip"], .tooltip-hover').tooltip({
+                html : true,
+                trigger: 'hover',
+                title: function() {
+                    return jQuery(this).attr('data-tooltip');
+                },
+            });
+            
+            jQuery('.popover-click').popover({
+                html : true,
+                trigger: 'click',
+                title: function() {
+                    return jQuery(this).attr('data-popover-title');
+                },
+                content: function() {
+                    return jQuery(this).attr('data-popover-content');
+                },
+            });
+            
+            jQuery('.popover-click').on('click', function() {
+                jQuery('.popover-click').not(this).popover('hide');
+            });
         },
         timeAgoInitialize: function() {
             function updateTime() {

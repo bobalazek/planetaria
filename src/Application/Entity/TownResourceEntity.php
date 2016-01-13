@@ -150,6 +150,14 @@ class TownResourceEntity extends AbstractBasicEntity
 
         return $this;
     }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getResource();
+    }
 
     /**
      * @ORM\PreUpdate

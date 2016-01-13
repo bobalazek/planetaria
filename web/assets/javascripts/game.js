@@ -25,24 +25,32 @@ var Game = function () {
         },
         mapInitialize: function()
         {
-            jQuery('#map').niceScroll({
+            var mapElement = jQuery('#map');
+            var mapInnerElement = jQuery('#map-inner');
+            
+            // Activate nicescroll
+            mapElement.niceScroll({
                 touchbehavior: true,
                 preventmultitouchscrolling: false, 
             });
             
-            var mapElement = jQuery('#map');
+            // Get heights, widths and calculate scroll ofsets
             var mapHeight = mapElement.outerHeight();
             var mapWidth = mapElement.outerWidth();
-            
-            var mapInnerElement = jQuery('#map-inner');
             var mapInnerHeight = mapInnerElement.outerHeight();
             var mapInnerWidth = mapInnerElement.find('> div').outerWidth(); // Hack
-            
             var scrollTop = (mapInnerHeight / 2) - (mapHeight / 2);
             var scrollLeft = (mapInnerWidth / 2) - (mapWidth / 2);
-            
+            // Set to center
             mapElement.scrollTop(scrollTop);
             mapElement.scrollLeft(scrollLeft);
+            
+            // If any active popover, disable him!
+            mapElement.on('scroll', function() {
+                if (jQuery('.popover.in').length) {
+                    jQuery('.popover-click').popover('hide');
+                }
+            });
         },
     }
 }();
