@@ -1,0 +1,17 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>
+        {{ town.getName() }}
+        <small>{{ townBuilding.getBuilding() | humanize | trans }}</small>
+        <a class="btn btn-default"
+            href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            {{ 'Back to Town' | trans }}
+        </a>
+    </h1>
+    <div id="main-content">
+        SOON!
+    </div>
+{% endblock %}

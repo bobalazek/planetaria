@@ -1,0 +1,20 @@
+<ul class="list-group">
+    {% for townBuilding in townBuildings %}
+        {% set townBuildingTiles = townBuilding.getTiles() %}
+        <a class="list-group-item"
+            href="{{ url('game.towns.detail.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+            <h4 class="list-group-item-heading">
+                {{ townBuilding.getBuilding() | humanize | trans }}
+                <span class="badge"
+                    data-toggle="tooltip"
+                    title="{{ 'Level' | trans }}">
+                    {{ townBuilding.getLevel() }}
+                </span>
+            </h4>
+            <p>
+                <b>{{ 'Created' | trans }}:</b>
+                {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
+            </p>
+        </a>
+    {% endfor %}
+</ul>

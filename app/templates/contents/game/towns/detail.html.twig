@@ -24,26 +24,7 @@
             <div class="col-md-6">
                 <h2>{{ 'Buildings' | trans }}</h2>
                 {% if town.getTownBuildings() %}
-                    <ul class="list-group">
-                        {% for townBuilding in town.getTownBuildings() %}
-                            {% set townBuildingTiles = townBuilding.getTiles() %}
-                            <a class="list-group-item"
-                                href="{{ url('game.map', { x: townBuildingTiles[0].getCoordinatesX(), y: townBuildingTiles[0].getCoordinatesY() }) }}">
-                                <h4 class="list-group-item-heading">
-                                    {{ townBuilding.getBuilding() | humanize | trans }}
-                                    <span class="badge"
-                                        data-toggle="tooltip"
-                                        title="{{ 'Level' | trans }}">
-                                        {{ townBuilding.getLevel() }}
-                                    </span>
-                                </h4>
-                                <p>
-                                    <b>{{ 'Created' | trans }}:</b>
-                                    {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
-                                </p>
-                            </a>
-                        {% endfor %}
-                    </ul>
+                    {% include 'contents/game/_parts/town-buildings-list.html.twig' with { townBuildings: town.getTownBuildings() } %}
                 {% else %}
                     <div class="alert alert-info">
                         {{ 'This town has no buildings yet' | trans }}

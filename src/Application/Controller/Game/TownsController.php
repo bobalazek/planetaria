@@ -58,4 +58,42 @@ class TownsController
             )
         );
     }
+    
+    /**
+     * @param integer     $id
+     * @param integer     $buildingId
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function buildingsDetailAction($id, $buildingId, Application $app)
+    {
+        $town = $app['orm.em']->find(
+            'Application\Entity\TownEntity',
+            $id
+        );
+
+        if (!$town) {
+            $app->abort(404);
+        }
+        
+        $townBuilding = $app['orm.em']->find(
+            'Application\Entity\TownBuildingEntity',
+            $buildingId
+        );
+
+        if (!$townBuilding) {
+            $app->abort(404);
+        }
+
+        return new Response(
+            $app['twig']->render(
+                'contents/game/towns/buildings/detail.html.twig',
+                array(
+                    'town' => $town,
+                    'townBuilding' => $townBuilding,
+                )
+            )
+        );
+    }
 }
