@@ -21,7 +21,7 @@ class UnitTypes
      * @var string
      */
     const AIRCRAFT = 'aircraft';
-    
+
     /**
      * @var string
      */

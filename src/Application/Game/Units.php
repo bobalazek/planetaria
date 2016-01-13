@@ -11,57 +11,57 @@ class Units
      * @var string
      */
     const RIFLEMAN = 'rifleman';
-    
+
     /**
      * @var string
      */
     const GRENADIER = 'grenadier';
-    
+
     /**
      * @var string
      */
     const BAZOOKA_SOLDIER = 'bazooka_soldier';
-    
+
     /**
      * @var string
      */
     const LEOPARD_2 = 'leopard_2';
-    
+
     /**
      * @var string
      */
     const M1_ABRAMS = 'm1_abrams';
-    
+
     /**
      * @var string
      */
     const CHALLENGER_2 = 'challenger_2';
-    
+
     /**
      * @var string
      */
     const F22 = 'f22';
-    
+
     /**
      * @var string
      */
     const B2 = 'b2';
-    
+
     /**
      * @var string
      */
     const APACHE = 'apache';
-    
+
     /**
      * @var string
      */
     const DESTROYER = 'destroyer';
-    
+
     /**
      * @var string
      */
     const SUBMARINE = 'submarine';
-    
+
     /**
      * @var string
      */
