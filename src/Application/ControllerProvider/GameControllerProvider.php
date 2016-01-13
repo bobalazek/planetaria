@@ -48,6 +48,32 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\GameController::premiumAction'
         )
         ->bind('game.premium');
+        
+        /***** Countries *****/
+        $controllers->match(
+            '/countries',
+            'Application\Controller\Game\CountriesController::indexAction'
+        )
+        ->bind('game.countries');
+        
+        $controllers->match(
+            '/countries/{id}',
+            'Application\Controller\Game\CountriesController::detailAction'
+        )
+        ->bind('game.countries.detail');
+        
+        /***** Towns *****/
+        $controllers->match(
+            '/towns',
+            'Application\Controller\Game\TownsController::indexAction'
+        )
+        ->bind('game.towns');
+        
+        $controllers->match(
+            '/towns/{id}',
+            'Application\Controller\Game\TownsController::detailAction'
+        )
+        ->bind('game.towns.detail');
 
         return $controllers;
     }

@@ -125,7 +125,7 @@ class Planets
             ->setId(1)
             ->setName('Panem')
             ->setSlug('panem')
-            ->setDescription('The main country')
+            ->setDescription('The country of all countries')
         ;
         $app['orm.em']->persist($countryEntity);
 
@@ -135,7 +135,7 @@ class Planets
             ->setId(1)
             ->setName('Panonia')
             ->setSlug('panonia')
-            ->setDescription('The main town')
+            ->setDescription('The capital of Panem')
             ->setCountry($countryEntity)
         ;
         $app['orm.em']->persist($townEntity);
