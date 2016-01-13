@@ -88,7 +88,7 @@ interface BuildingInterface
     /**
      * @return array|integer
      */
-    public function getHealthPoints();
+    public function getHealthPoints($level);
 
     /**
      * @param array $healthPoints

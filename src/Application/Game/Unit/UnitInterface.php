@@ -88,12 +88,45 @@ interface UnitInterface
     /**
      * @return array|integer
      */
-    public function getHealthPoints();
+    public function getHealthPoints($level);
 
     /**
      * @param array $healthPoints
      */
     public function setHealthPoints(array $healthPoints);
+    
+    /***** Attack points *****/
+    /**
+     * @return array|integer
+     */
+    public function getAttackPoints($level);
+
+    /**
+     * @param array $attackPoints
+     */
+    public function setAttackPoints(array $attackPoints);
+
+    /***** Defense points *****/
+    /**
+     * @return array|integer
+     */
+    public function getDefensePoints($level);
+
+    /**
+     * @param array $defensePoints
+     */
+    public function setDefensePoints(array $defensePoints);
+    
+    /***** Speed *****/
+    /**
+     * @return array|integer
+     */
+    public function getSpeed($level);
+
+    /**
+     * @param array $speed
+     */
+    public function setSpeed(array $speed);
 
     /***** Build time *****/
     /**
@@ -116,37 +149,4 @@ interface UnitInterface
      * @param array $resourcesCost
      */
     public function setResourcesCost(array $resourcesCost);
-
-    /***** Resources production *****/
-    /**
-     * @return array
-     */
-    public function getResourcesProduction($level, $resource);
-
-    /**
-     * @param array $resourcesProduction
-     */
-    public function setResourcesProduction(array $resourcesProduction);
-
-    /***** Units production *****/
-    /**
-     * @return array
-     */
-    public function getUnitsProduction($level, $unit);
-
-    /**
-     * @param array $unitsProduction
-     */
-    public function setUnitsProduction(array $unitsProduction);
-
-    /***** Items production *****/
-    /**
-     * @return array
-     */
-    public function getItemsProduction($level, $item);
-
-    /**
-     * @param array $itemsProduction
-     */
-    public function setItemsProduction(array $itemsProduction);
 }

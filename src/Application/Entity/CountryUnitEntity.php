@@ -28,6 +28,15 @@ class CountryUnitEntity extends AbstractBasicEntity
      * @ORM\Column(name="unit", type="string", length=32)
      */
     protected $unit;
+    
+    /**
+     * At which level is the unit?
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="level", type="integer")
+     */
+    protected $level = 0;
 
     /**
      * @var \DateTime
@@ -87,6 +96,27 @@ class CountryUnitEntity extends AbstractBasicEntity
     public function setCountry(CountryEntity $country)
     {
         $this->country = $country;
+
+        return $this;
+    }
+    
+    /*** Level ***/
+    /**
+     * @return integer
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param integer $level
+     *
+     * @return CountryUnitEntity
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
 
         return $this;
     }
