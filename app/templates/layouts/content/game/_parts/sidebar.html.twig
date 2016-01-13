@@ -11,6 +11,26 @@
                 <h4 class="media-heading">
                     <b>{{ app.user.getUsername() }}</b>
                 </h4>
+                <div>
+                    <a class="btn btn-sm btn-default"
+                        data-toggle="tooltip"
+                        title="{{ 'Profile' | trans }}"
+                        href="{{ url('members-area.my.profile') }}">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default"
+                        data-toggle="tooltip"
+                        title="{{ 'Settings' | trans }}"
+                        href="{{ url('members-area.my.profile.settings') }}">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default"
+                        data-toggle="tooltip"
+                        title="{{ 'Change password' | trans }}"
+                        href="{{ url('members-area.my.profile.settings.password') }}">
+                        <i class="fa fa-lock"></i>
+                    </a>
+                </div>
             </div>
         </div>
         <h4>

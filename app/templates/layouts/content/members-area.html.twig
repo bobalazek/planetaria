@@ -3,9 +3,9 @@
 {% block title %}{{ 'Members area'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container{{is_granted('ROLE_ADMIN') ? '-fluid' : ''}}">
         <div class="row">
-            {% if app.user %}
+            {% if app.user and is_granted('ROLE_ADMIN') %}
                 <div class="col-md-2">
                     <div id="sidebar" role="complementary">
                         {% block sidebar %}
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="col-md-{{ app.user ? '10' : '12' }}">
+            <div class="col-md-{{ app.user and is_granted('ROLE_ADMIN') ? '10' : '12' }}">
                 <div id="main" role="main">
                     {% block main %}{% endblock %}
                 </div>

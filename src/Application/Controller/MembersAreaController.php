@@ -22,6 +22,12 @@ class MembersAreaController
      */
     public function indexAction(Application $app)
     {
+        if (!$app['security.authorization_checker']->isGranted('ROLE_ADMIN')) {
+            return $app->redirect(
+                $app['url_generator']->generate('game')
+            );
+        }
+        
         return new Response(
             $app['twig']->render(
                 'contents/members-area/index.html.twig'
