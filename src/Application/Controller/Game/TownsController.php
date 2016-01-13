@@ -58,7 +58,7 @@ class TownsController
             )
         );
     }
-    
+
     /**
      * @param integer     $id
      * @param integer     $buildingId
@@ -76,7 +76,7 @@ class TownsController
         if (!$town) {
             $app->abort(404);
         }
-        
+
         $townBuilding = $app['orm.em']->find(
             'Application\Entity\TownBuildingEntity',
             $buildingId
