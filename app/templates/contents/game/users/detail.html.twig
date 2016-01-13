@@ -1,0 +1,36 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>{{ user.getName() }}</h1>
+    <div id="main-content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{ 'Information' | trans }}</h2>
+                <ul class="list-group">
+                    {% if user.getProfile().getDescription() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Description' | trans }}:</b>
+                            {{ user.getProfile().getDescription() }}
+                        </li>
+                    {% endif %}
+                    <li class="list-group-item">
+                        <b>{{ 'Created' | trans }}:</b>
+                        {{ user.getTimeCreated() | date(app.dateTimeFormat) }}
+                    </li>
+                </ul>
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
+                <h2>{{ 'Towns' | trans }}</h2>
+                {% if user.getCountries() %}
+                    {% include 'contents/game/_parts/countries-list.html.twig' with { users: user.getCountries() } %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'This user has no countries yet' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-6 -->
+        </div> <!-- /.row -->
+    </div>
+{% endblock %}

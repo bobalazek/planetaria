@@ -6,17 +6,9 @@
     <div id="main-content">
         <div class="row">
             <div class="col-md-4">
-                <h2>{{ 'Users' | trans }}</h2>
-                {% for user in users %}
-                    {% include 'contents/game/statistics/_user.html.twig' %}
-                {% endfor %}
-            </div>
-            <div class="col-md-4">
                 <h2>{{ 'Countries' | trans }}</h2>
                 {% if countries %}
-                    {% for country in countries %}
-                        {% include 'contents/game/statistics/_country.html.twig' %}
-                    {% endfor %}
+                    {% include 'contents/game/_parts/countries-list.html.twig' %}
                 {% else %}
                     <div class="alert alert-info">
                         {{ 'No countries yet' | trans }}
@@ -26,14 +18,16 @@
             <div class="col-md-4">
                 <h2>{{ 'Towns' | trans }}</h2>
                 {% if towns %}
-                    {% for town in towns %}
-                        {% include 'contents/game/statistics/_town.html.twig' %}
-                    {% endfor %}
+                    {% include 'contents/game/_parts/towns-list.html.twig' %}
                 {% else %}
                     <div class="alert alert-info">
                         {{ 'No towns yet' | trans }}
                     </div>
                 {% endif %}
+            </div>
+            <div class="col-md-4">
+                <h2>{{ 'Users' | trans }}</h2>
+                {% include 'contents/game/_parts/users-list.html.twig' %}
             </div>
         </div>
     </div>

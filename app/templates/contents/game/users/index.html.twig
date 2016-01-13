@@ -1,0 +1,9 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <div id="main-content">
+        {% include 'contents/game/_parts/users-list.html.twig' %}
+    </div>
+{% endblock %}

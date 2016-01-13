@@ -51,6 +51,27 @@
                         </a>
                     </li>
                     <li role="presentation"
+                        class="{{ path('game.countries') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.countries') }}">
+                            <i class="fa fa-flag"></i>
+                            {{ 'Countries' | trans }}
+                        </a>
+                    </li>
+                    <li role="presentation"
+                        class="{{ path('game.towns') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.towns') }}">
+                            <i class="fa fa-building"></i>
+                            {{ 'Towns' | trans }}
+                        </a>
+                    </li>
+                    <li role="presentation"
+                        class="{{ path('game.users') in app.currentUri ? 'active' : '' }}">
+                        <a href="{{ url('game.users') }}">
+                            <i class="fa fa-users"></i>
+                            {{ 'Users' | trans }}
+                        </a>
+                    </li>
+                    <li role="presentation"
                         class="{{ path('game.statistics') in app.currentUri ? 'active' : '' }}">
                         <a href="{{ url('game.statistics') }}">
                             <i class="fa fa-bar-chart"></i>

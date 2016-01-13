@@ -1,0 +1,9 @@
+<ul class="list-group">
+    {% for countryUnit in countryUnits %}
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">
+                {{ countryUnit.getUnit() | humanize | trans }}
+            </h4>
+        </a>
+    {% endfor %}
+</ul>

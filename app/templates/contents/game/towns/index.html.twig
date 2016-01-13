@@ -1,0 +1,15 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <div id="main-content">
+        {% if towns %}
+            {% include 'contents/game/_parts/towns-list.html.twig' %}
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'No towns yet' | trans }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

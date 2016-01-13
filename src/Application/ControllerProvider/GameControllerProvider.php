@@ -68,6 +68,19 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::detailAction'
         )
         ->bind('game.towns.detail');
+        
+        /***** Users *****/
+        $controllers->match(
+            '/users',
+            'Application\Controller\Game\UsersController::indexAction'
+        )
+        ->bind('game.users');
+        
+        $controllers->match(
+            '/users/{id}',
+            'Application\Controller\Game\UsersController::detailAction'
+        )
+        ->bind('game.users.detail');
 
         return $controllers;
     }

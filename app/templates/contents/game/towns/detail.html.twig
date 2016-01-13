@@ -1,0 +1,55 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>{{ town.getName() }}</h1>
+    <div id="main-content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{ 'Information' | trans }}</h2>
+                <ul class="list-group">
+                    {% if town.getDescription() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Description' | trans }}:</b>
+                            {{ town.getDescription() }}
+                        </li>
+                    {% endif %}
+                    <li class="list-group-item">
+                        <b>{{ 'Created' | trans }}:</b>
+                        {{ town.getTimeCreated() | date(app.dateTimeFormat) }}
+                    </li>
+                </ul>
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
+                <h2>{{ 'Buildings' | trans }}</h2>
+                {% if town.getTownBuildings() %}
+                    <ul class="list-group">
+                        {% for townBuilding in town.getTownBuildings() %}
+                            {% set townBuildingTiles = townBuilding.getTiles() %}
+                            <a class="list-group-item"
+                                href="{{ url('game.map', { x: townBuildingTiles[0].getCoordinatesX(), y: townBuildingTiles[0].getCoordinatesY() }) }}">
+                                <h4 class="list-group-item-heading">
+                                    {{ townBuilding.getBuilding() | humanize | trans }}
+                                    <span class="badge"
+                                        data-toggle="tooltip"
+                                        title="{{ 'Level' | trans }}">
+                                        {{ townBuilding.getLevel() }}
+                                    </span>
+                                </h4>
+                                <p>
+                                    <b>{{ 'Created' | trans }}:</b>
+                                    {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
+                                </p>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'This town has no buildings yet' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-6 -->
+        </div> <!-- /.row -->
+    </div>
+{% endblock %}

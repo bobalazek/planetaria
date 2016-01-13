@@ -1,0 +1,46 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>{{ country.getName() }}</h1>
+    <div id="main-content">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>{{ 'Information' | trans }}</h2>
+                <ul class="list-group">
+                    {% if country.getDescription() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Description' | trans }}:</b>
+                            {{ country.getDescription() }}
+                        </li>
+                    {% endif %}
+                    <li class="list-group-item">
+                        <b>{{ 'Created' | trans }}:</b>
+                        {{ country.getTimeCreated() | date(app.dateTimeFormat) }}
+                    </li>
+                </ul>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4">
+                <h2>{{ 'Towns' | trans }}</h2>
+                {% if country.getTowns() %}
+                    {% include 'contents/game/_parts/towns-list.html.twig' with { towns: country.getTowns() } %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'This country has no towns yet' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4">
+                <h2>{{ 'Units' | trans }}</h2>
+                {% if country.getCountryUnits() %}
+                    {% include 'contents/game/_parts/country-units-list.html.twig' with { countryUnits: country.getCountryUnits() } %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'This country has no units yet' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-4 -->
+        </div> <!-- /.row -->
+    </div>
+{% endblock %}

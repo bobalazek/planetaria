@@ -1,0 +1,15 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <div id="main-content">
+        {% if countries %}
+            {% include 'contents/game/_parts/countries-list.html.twig' %}
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'No countries yet' | trans }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

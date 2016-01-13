@@ -1,0 +1,21 @@
+<ul class="list-group">
+    {% for town in towns %}
+        <a class="list-group-item"
+            href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            <h4 class="list-group-item-heading">
+                {{ town.getName() }}
+            </h4>
+            <p>
+                {% if town.getDescription() %}
+                    {{ town.getDescription() }}
+                    <br />
+                {% endif %}
+                <b>{{ 'Country' | trans }}:</b>
+                {{ town.getCountry() }}
+                <br />
+                <b>{{ 'Buildings' | trans }}:</b>
+                {{ town.getTownBuildings() | length }}
+            </p>
+        </a>
+    {% endfor %}
+</ul>

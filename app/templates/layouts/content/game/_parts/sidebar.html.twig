@@ -50,11 +50,14 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <h4>{{ 'Experience' | trans }}</h4>
-                <h5>
-                    {{ 'Level' | trans }}:
-                    <b>{{ app.user.getExperienceLevel() }}</b>
-                </h5>
+                <h4>
+                    {{ 'Experience' | trans }}
+                    <span class="badge"
+                        data-toggle="tooltip"
+                        title="{{ 'Level' | trans }}">
+                        {{ app.user.getExperienceLevel() }}
+                    </span>
+                </h4>
                 <h5>
                     {{ 'Points' | trans }}:
                     <b>{{ app.user.getExperiencePoints() }}</b>

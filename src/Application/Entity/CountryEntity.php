@@ -88,6 +88,7 @@ class CountryEntity extends AbstractAdvancedEntity
     {
         $this->userCountries = new ArrayCollection();
         $this->towns = new ArrayCollection();
+        $this->countryUnits = new ArrayCollection();
     }
 
     /*** User Countries ***/

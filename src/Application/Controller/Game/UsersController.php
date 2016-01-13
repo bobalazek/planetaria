@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class CountriesController
+class UsersController
 {
     /**
      * @param Application $app
@@ -18,16 +18,16 @@ class CountriesController
      */
     public function indexAction(Application $app)
     {
-        $countries = $app['orm.em']
-            ->getRepository('Application\Entity\CountryEntity')
+        $users = $app['orm.em']
+            ->getRepository('Application\Entity\UserEntity')
             ->findAll()
         ;
         
         return new Response(
             $app['twig']->render(
-                'contents/game/countries/index.html.twig',
+                'contents/game/users/index.html.twig',
                 array(
-                    'countries' => $countries,
+                    'users' => $users,
                 )
             )
         );
@@ -41,20 +41,20 @@ class CountriesController
      */
     public function detailAction($id, Application $app)
     {
-        $country = $app['orm.em']->find(
-            'Application\Entity\CountryEntity', 
+        $user = $app['orm.em']->find(
+            'Application\Entity\UserEntity', 
             $id
         );
 
-        if (!$country) {
+        if (!$user) {
             $app->abort(404);
         }
         
         return new Response(
             $app['twig']->render(
-                'contents/game/countries/detail.html.twig',
+                'contents/game/users/detail.html.twig',
                 array(
-                    'country' => $country,
+                    'user' => $user,
                 )
             )
         );
