@@ -9,7 +9,7 @@ use Application\Entity\TownBuildingEntity;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-final class Buildings
+class Buildings
 {
     /**
      * @var string

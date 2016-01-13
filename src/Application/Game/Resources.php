@@ -5,7 +5,7 @@ namespace Application\Game;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-final class Resources
+class Resources
 {
     /**
      * @var string

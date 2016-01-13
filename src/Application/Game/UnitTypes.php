@@ -5,27 +5,27 @@ namespace Application\Game;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class BuildingStatuses
+class UnitTypes
 {
     /**
      * @var string
      */
-    const CONSTRUCTING = 'constructing';
+    const INFANTRY = 'infantry';
 
     /**
      * @var string
      */
-    const CONSTRUCTED = 'constructed';
+    const VEHICLE = 'vehicle';
 
     /**
      * @var string
      */
-    const DAMAGED = 'damaged';
-
+    const AIRCRAFT = 'aircraft';
+    
     /**
      * @var string
      */
-    const DESTROYED = 'destroyed';
+    const NAVAL = 'naval';
 
     /**
      * @return array
@@ -33,10 +33,10 @@ class BuildingStatuses
     public static function getAll()
     {
         return array(
-            self::CONSTRUCTING => 'Constructing',
-            self::CONSTRUCTED => 'Constructed',
-            self::DAMAGED => 'Damaged',
-            self::DESTROYED => 'Destroyed',
+            self::INFANTRY => 'Infantry',
+            self::VEHICLE => 'Vehicle',
+            self::AIRCRAFT => 'Aircraft',
+            self::NAVAL => 'Naval',
         );
     }
 }

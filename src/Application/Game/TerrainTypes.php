@@ -5,7 +5,7 @@ namespace Application\Game;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-final class TerrainTypes
+class TerrainTypes
 {
     /**
      * @var string

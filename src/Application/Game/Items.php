@@ -5,12 +5,12 @@ namespace Application\Game;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-final class Items
+class Items
 {
     /**
      * @var string
      */
-    const SNIPER = 'sniper';
+    const ION_CANNON_SATELITE = 'ion_cannon_satelite';
 
     /**
      * @return array
@@ -18,7 +18,7 @@ final class Items
     public static function getAll()
     {
         return array(
-            self::SNIPER => 'Sniper',
+            self::ION_CANNON_SATELITE => 'Ion cannon satelite',
         );
     }
 }
