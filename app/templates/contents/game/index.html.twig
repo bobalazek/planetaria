@@ -3,8 +3,13 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
+    <h1>{{ 'Dashboard' | trans }}</h1>
+    <h2>
+        {{ 'Hello' | trans }}
+        {{ app.user.getUsername() }}!
+    </h2>
+    <h3>{{ 'How are you today?' | trans }}</h3>
     <div id="main-content">
-        Nothing much will be visible here.
-        Maybe some minor statistics or someting ...
+        ...
     </div>
 {% endblock %}

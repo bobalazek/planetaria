@@ -1,0 +1,21 @@
+<ul class="list-group">
+    {% for userCountry in userCountries %}
+        <a class="list-group-item"
+            href="{{ url('game.countries.detail', { id: userCountry.getCountry().getId() }) }}">
+            <h4 class="list-group-item-heading">
+                {{ userCountry.getCountry().getName() }}
+            </h4>
+            <p>
+                {% if userCountry.getCountry().getDescription() %}
+                    {{ userCountry.getCountry().getDescription() }}
+                    <br /> <br />
+                {% endif %}
+                <b>{{ 'Towns' | trans }}:</b>
+                {{ userCountry.getCountry().getTowns() | length }}
+                <br />
+                <b>{{ 'Units' | trans }}:</b>
+                {{ userCountry.getCountry().getCountryUnits() | length }}
+            </p>
+        </a>
+    {% endfor %}
+</ul>

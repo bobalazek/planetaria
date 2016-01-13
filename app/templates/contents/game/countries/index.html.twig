@@ -3,6 +3,7 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
+    <h1>{{ 'Countries' | trans }}</h1>
     <div id="main-content">
         {% if countries %}
             {% include 'contents/game/_parts/countries-list.html.twig' %}

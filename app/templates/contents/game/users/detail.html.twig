@@ -3,7 +3,7 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
-    <h1>{{ user.getName() }}</h1>
+    <h1>{{ user.getUsername() }}</h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-6">
@@ -23,8 +23,8 @@
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
                 <h2>{{ 'Towns' | trans }}</h2>
-                {% if user.getCountries() %}
-                    {% include 'contents/game/_parts/countries-list.html.twig' with { users: user.getCountries() } %}
+                {% if user.getUserCountries() %}
+                    {% include 'contents/game/_parts/user-countries-list.html.twig' with { userCountries: user.getUserCountries() } %}
                 {% else %}
                     <div class="alert alert-info">
                         {{ 'This user has no countries yet' | trans }}
