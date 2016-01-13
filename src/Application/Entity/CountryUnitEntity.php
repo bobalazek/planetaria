@@ -28,7 +28,7 @@ class CountryUnitEntity extends AbstractBasicEntity
      * @ORM\Column(name="unit", type="string", length=32)
      */
     protected $unit;
-    
+
     /**
      * At which level is the unit?
      *
@@ -99,7 +99,7 @@ class CountryUnitEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Level ***/
     /**
      * @return integer

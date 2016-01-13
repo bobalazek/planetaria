@@ -4,7 +4,6 @@ namespace Application\Controller\Game;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -22,7 +21,7 @@ class CountriesController
             ->getRepository('Application\Entity\CountryEntity')
             ->findAll()
         ;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/countries/index.html.twig',
@@ -32,9 +31,9 @@ class CountriesController
             )
         );
     }
-    
+
     /**
-     * @param integer $id
+     * @param integer     $id
      * @param Application $app
      *
      * @return Response
@@ -42,14 +41,14 @@ class CountriesController
     public function detailAction($id, Application $app)
     {
         $country = $app['orm.em']->find(
-            'Application\Entity\CountryEntity', 
+            'Application\Entity\CountryEntity',
             $id
         );
 
         if (!$country) {
             $app->abort(404);
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/countries/detail.html.twig',

@@ -27,7 +27,7 @@ class MembersAreaController
                 $app['url_generator']->generate('game')
             );
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/members-area/index.html.twig'

@@ -4,7 +4,6 @@ namespace Application\Controller\Game;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -22,7 +21,7 @@ class UsersController
             ->getRepository('Application\Entity\UserEntity')
             ->findAll()
         ;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/users/index.html.twig',
@@ -32,9 +31,9 @@ class UsersController
             )
         );
     }
-    
+
     /**
-     * @param integer $id
+     * @param integer     $id
      * @param Application $app
      *
      * @return Response
@@ -42,14 +41,14 @@ class UsersController
     public function detailAction($id, Application $app)
     {
         $user = $app['orm.em']->find(
-            'Application\Entity\UserEntity', 
+            'Application\Entity\UserEntity',
             $id
         );
 
         if (!$user) {
             $app->abort(404);
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/users/detail.html.twig',

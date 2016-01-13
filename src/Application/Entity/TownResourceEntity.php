@@ -150,7 +150,7 @@ class TownResourceEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /**
      * @return string
      */

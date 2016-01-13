@@ -4,7 +4,6 @@ namespace Application\Controller\Game;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -22,7 +21,7 @@ class TownsController
             ->getRepository('Application\Entity\TownEntity')
             ->findAll()
         ;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/towns/index.html.twig',
@@ -32,9 +31,9 @@ class TownsController
             )
         );
     }
-    
+
     /**
-     * @param integer $id
+     * @param integer     $id
      * @param Application $app
      *
      * @return Response
@@ -42,14 +41,14 @@ class TownsController
     public function detailAction($id, Application $app)
     {
         $town = $app['orm.em']->find(
-            'Application\Entity\TownEntity', 
+            'Application\Entity\TownEntity',
             $id
         );
 
         if (!$town) {
             $app->abort(404);
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/towns/detail.html.twig',

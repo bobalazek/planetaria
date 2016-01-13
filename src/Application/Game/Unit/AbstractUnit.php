@@ -54,7 +54,7 @@ class AbstractUnit implements UnitInterface
      * @var integer
      */
     protected $maximumLevel;
-    
+
     /**
      * How much population capacity will this unit use?
      *
@@ -69,7 +69,7 @@ class AbstractUnit implements UnitInterface
      * @var array
      */
     protected $healthPoints;
-    
+
     /**
      * How much attack points does that unit have (per level)?
      * Example: array( 0 => 400, 1 => 800, 2 => 1200 )
@@ -77,7 +77,7 @@ class AbstractUnit implements UnitInterface
      * @var array
      */
     protected $attackPoints;
-    
+
     /**
      * How much defense points does that unit have (per level)?
      * Example: array( 0 => 400, 1 => 800, 2 => 1200 )
@@ -85,7 +85,7 @@ class AbstractUnit implements UnitInterface
      * @var array
      */
     protected $defensePoints;
-    
+
     /**
      * How much speed does that unit have in tiles per minute (per level)?
      * Example: array( 0 => 1, 1 => 2, 2 => 4 )
@@ -223,7 +223,7 @@ class AbstractUnit implements UnitInterface
 
         return $this;
     }
-    
+
     /***** Capacity *****/
     /**
      * @return integer

@@ -72,7 +72,7 @@ interface UnitInterface
      * @param integer $maximumLevel
      */
     public function setMaximumLevel($maximumLevel);
-    
+
     /***** Capacity *****/
     /**
      * @return integer
@@ -94,7 +94,7 @@ interface UnitInterface
      * @param array $healthPoints
      */
     public function setHealthPoints(array $healthPoints);
-    
+
     /***** Attack points *****/
     /**
      * @return array|integer
@@ -116,7 +116,7 @@ interface UnitInterface
      * @param array $defensePoints
      */
     public function setDefensePoints(array $defensePoints);
-    
+
     /***** Speed *****/
     /**
      * @return array|integer
