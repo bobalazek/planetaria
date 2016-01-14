@@ -82,16 +82,29 @@ class TownEntity extends AbstractAdvancedEntity
     protected $townBuildings;
 
     /**
+     * How much is the limit for population?
+     *
      * @var integer
      */
     protected $populationCapacity;
+    
+    /**
+     * How much is the current population of that town?
+     *
+     * @var integer
+     */
+    protected $population;
 
     /**
+     * What's the limit for the resources?
+     *
      * @var array
      */
     protected $storageCapacity;
 
     /**
+     * How much resources does this town produces?
+     *
      * @var array
      */
     protected $resourcesProduction;
@@ -216,6 +229,25 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
+    
+    /*** Population ***/
+    /**
+     * @return integer
+     */
+    public function getPopulation()
+    {
+        return $this->population;
+    }
+
+    /**
+     * @return integer $population
+     */
+    public function setPopulation($population)
+    {
+        $this->population = $population;
+
+        return $this;
+    }
 
     /*** Storage capacity ***/
     /**
@@ -330,6 +362,7 @@ class TownEntity extends AbstractAdvancedEntity
         $resourcesProduction = array();
         $storageCapacity = array();
         $populationCapacity = 0;
+        $population = 0;
         $allResources = Resources::getAll();
         $townBuildings = $this->getTownBuildings();
 
@@ -384,6 +417,7 @@ class TownEntity extends AbstractAdvancedEntity
         $this->setResourcesProduction($resourcesProduction);
         $this->setStorageCapacity($storageCapacity);
         $this->setPopulationCapacity($populationCapacity);
+        $this->setPopulation($population);
     }
 
     /**

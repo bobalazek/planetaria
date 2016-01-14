@@ -22,7 +22,9 @@
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <b>{{ 'Population capacity' | trans }}:</b>
+                        <b>{{ 'Population' | trans }}:</b>
+                        {{ town.getPopulation() }}
+                        {{ 'out of' | trans }}
                         {{ town.getPopulationCapacity() }}
                     </li>
                     <li class="list-group-item">
