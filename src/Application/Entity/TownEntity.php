@@ -80,17 +80,17 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townBuildings;
-    
+
     /**
      * @var integer
      */
     protected $populationCapacity;
-    
+
     /**
      * @var array
      */
     protected $storageCapacity;
-    
+
     /**
      * @var array
      */
@@ -187,17 +187,17 @@ class TownEntity extends AbstractAdvancedEntity
     {
         return $this->resourcesProduction;
     }
-    
+
     /**
      * @return array $resourcesProduction
      */
     public function setResourcesProduction($resourcesProduction)
     {
         $this->resourcesProduction = $resourcesProduction;
-        
+
         return $this;
     }
-    
+
     /*** Population capacity ***/
     /**
      * @return integer
@@ -206,17 +206,17 @@ class TownEntity extends AbstractAdvancedEntity
     {
         return $this->populationCapacity;
     }
-    
+
     /**
      * @return integer $populationCapacity
      */
     public function setPopulationCapacity($populationCapacity)
     {
         $this->populationCapacity = $populationCapacity;
-        
+
         return $this;
     }
-    
+
     /*** Storage capacity ***/
     /**
      * @return integer
@@ -225,17 +225,17 @@ class TownEntity extends AbstractAdvancedEntity
     {
         return $this->storageCapacity;
     }
-    
+
     /**
      * @return integer $storageCapacity
      */
     public function setStorageCapacity(array $storageCapacity = array())
     {
         $this->storageCapacity = $storageCapacity;
-        
+
         return $this;
     }
-    
+
     /*** Resources ***/
     /**
      * The combiened version of resources:
@@ -252,7 +252,7 @@ class TownEntity extends AbstractAdvancedEntity
         $resourcesProduction = $this->getResourcesProduction();
         $storageCapacity = $this->getStorageCapacity();
         $townResources = $this->getTownResources();
-        
+
         foreach ($allResources as $resourceKey => $resourceName) {
             $resources[$resourceKey] = array(
                 'amount' => 0,
@@ -260,12 +260,12 @@ class TownEntity extends AbstractAdvancedEntity
                 'production' => $resourcesProduction[$resourceKey],
             );
         }
-        
+
         foreach ($townResources as $townResource) {
             $resourceKey = $townResource->getResource();
             $resources[$resourceKey]['amount'] = $townResource->getAmount();
         }
-        
+
         return $resources;
     }
 
@@ -321,7 +321,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /**
      * @return void
      */
@@ -343,7 +343,7 @@ class TownEntity extends AbstractAdvancedEntity
                 $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
                 $level = $townBuilding->getLevel();
                 $building = new $className();
-                
+
                 // Resources production
                 $buildingResourcesProduction = $building->getResourcesProduction();
                 if (
@@ -356,7 +356,7 @@ class TownEntity extends AbstractAdvancedEntity
                         $resourcesProduction[$resource] += $value;
                     }
                 }
-                
+
                 // Storage capacity
                 $buildingStorageCapacity = $building->getStorageCapacity();
                 if (
@@ -369,7 +369,7 @@ class TownEntity extends AbstractAdvancedEntity
                         $storageCapacity[$resource] += $buildingStorageCapacity;
                     }
                 }
-                
+
                 // Ppulation capacity
                 $buildingPopulationCapacity = $building->getPopulationCapacity();
                 if (
@@ -385,7 +385,7 @@ class TownEntity extends AbstractAdvancedEntity
         $this->setStorageCapacity($storageCapacity);
         $this->setPopulationCapacity($populationCapacity);
     }
-    
+
     /**
      * @ORM\PostLoad
      */

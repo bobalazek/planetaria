@@ -162,7 +162,7 @@ class Planets
             Buildings::CAPITOL,
             array(-1, -1) // Start (bottom left) coordinates
         );
-        
+
         // Town building - Farms
         $farmsCoordinates = array(
             array(2, 2),
@@ -170,14 +170,14 @@ class Planets
             array(-2, -2),
             array(-2, 2),
         );
-        foreach ($farmsCoordinates as $farmCoordinates)  {
+        foreach ($farmsCoordinates as $farmCoordinates) {
             $app['game.buildings']->build(
                 $townEntity,
                 Buildings::FARM,
                 $farmCoordinates
             );
         }
-        
+
         // Town building - Houses
         $housesCoordinates = array(
             array(0, 3),
@@ -185,7 +185,7 @@ class Planets
             array(0, -3),
             array(-3, 0),
         );
-        foreach ($housesCoordinates as $houseCoordinates)  {
+        foreach ($housesCoordinates as $houseCoordinates) {
             $app['game.buildings']->build(
                 $townEntity,
                 Buildings::HOUSE,
