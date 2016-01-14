@@ -21,8 +21,8 @@ $app->before(function () use ($app) {
             $app['db']->connect();
         } catch (PDOException $e) {
             return new Response(
-                'Whoops, your database is configured wrong.
-                Please check that again! Message: '.$e->getMessage()
+                'Whoops, your database is configured wrong. '.
+                'Please check that again! Message: '.$e->getMessage()
             );
         }
     }
