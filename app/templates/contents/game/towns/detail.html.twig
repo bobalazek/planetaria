@@ -16,6 +16,33 @@
                         </li>
                     {% endif %}
                     <li class="list-group-item">
+                        <b>{{ 'Population capacity' | trans }}:</b>
+                        {{ town.getPopulationCapacity() }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'Resources' | trans }}:</b>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Resource</th>
+                                    <th>Amount</th>
+                                    <th>Storage</th>
+                                    <th>Production</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for resourceKey, resourceData in town.getResources() %}
+                                    <tr>
+                                        <td>{{ resourceKey | humanize | trans }}</td>
+                                        <td>{{ resourceData.amount }}</td>
+                                        <td>{{ resourceData.storage }}</td>
+                                        <td>{{ resourceData.production }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
                         <b>{{ 'Created' | trans }}:</b>
                         {{ town.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>

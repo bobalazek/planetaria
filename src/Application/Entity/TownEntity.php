@@ -80,6 +80,21 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townBuildings;
+    
+    /**
+     * @var integer
+     */
+    protected $populationCapacity = 0;
+    
+    /**
+     * @var array
+     */
+    protected $storageCapacity;
+    
+    /**
+     * @var array
+     */
+    protected $resourcesProduction;
 
     /**
      * The constructor
@@ -164,41 +179,94 @@ class TownEntity extends AbstractAdvancedEntity
         return $this;
     }
 
-    /*** Town resources production ***/
+    /*** Resources production ***/
     /**
      * @return array
      */
-    public function getTownResourcesProduction()
+    public function getResourcesProduction()
     {
-        $resourcesProduction = array();
-        $resources = Resources::getAll();
-        $townBuildings = $this->getTownBuildings();
-
-        foreach ($resources as $resourceKey => $resourceName) {
-            $resourcesProduction[$resourceKey] = 0;
+        return $this->resourcesProduction;
+    }
+    
+    /**
+     * @return array $resourcesProduction
+     */
+    public function setResourcesProduction($resourcesProduction)
+    {
+        $this->resourcesProduction = $resourcesProduction;
+        
+        return $this;
+    }
+    
+    /*** Population capacity ***/
+    /**
+     * @return integer
+     */
+    public function getPopulationCapacity()
+    {
+        return $this->populationCapacity;
+    }
+    
+    /**
+     * @return integer $populationCapacity
+     */
+    public function setPopulationCapacity($populationCapacity)
+    {
+        $this->populationCapacity = $populationCapacity;
+        
+        return $this;
+    }
+    
+    /*** Storage capacity ***/
+    /**
+     * @return integer
+     */
+    public function getStorageCapacity()
+    {
+        return $this->storageCapacity;
+    }
+    
+    /**
+     * @return integer $storageCapacity
+     */
+    public function setStorageCapacity(array $storageCapacity = array())
+    {
+        $this->storageCapacity = $storageCapacity;
+        
+        return $this;
+    }
+    
+    /*** Resources ***/
+    /**
+     * The combiened version of resources:
+     *   - amount
+     *   - storage
+     *   - production
+     *
+     * @return array
+     */
+    public function getResources()
+    {
+        $resources = array();
+        $allResources = Resources::getAll();
+        $resourcesProduction = $this->getResourcesProduction();
+        $storageCapacity = $this->getStorageCapacity();
+        $townResources = $this->getTownResources();
+        
+        foreach ($allResources as $resourceKey => $resourceName) {
+            $resources[$resourceKey] = array(
+                'amount' => 0,
+                'storage' => $storageCapacity[$resourceKey],
+                'production' => $resourcesProduction[$resourceKey],
+            );
         }
-
-        if (!empty($townBuildings)) {
-            foreach ($townBuildings as $townBuilding) {
-                $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
-                $level = $townBuilding->getLevel();
-                $building = new $className();
-                $buildingResourcesProduction = $building->getResourcesProduction();
-
-                if (
-                    !empty($buildingResourcesProduction) &&
-                    isset($buildingResourcesProduction[$level])
-                ) {
-                    $buildingResourcesProduction = $buildingResourcesProduction[$level];
-
-                    foreach ($buildingResourcesProduction as $resource => $value) {
-                        $resourcesProduction[$resource] += $value;
-                    }
-                }
-            }
+        
+        foreach ($townResources as $townResource) {
+            $resourceKey = $townResource->getResource();
+            $resources[$resourceKey]['amount'] = $townResource->getAmount();
         }
-
-        return $resourcesProduction;
+        
+        return $resources;
     }
 
     /*** Town Building ***/
@@ -252,6 +320,67 @@ class TownEntity extends AbstractAdvancedEntity
         $this->townBuildings->removeElement($townBuilding);
 
         return $this;
+    }
+    
+    /**
+     * @return void
+     */
+    public function initialize()
+    {
+        $resourcesProduction = array();
+        $storageCapacity = array();
+        $allResources = Resources::getAll();
+        $townBuildings = $this->getTownBuildings();
+
+        foreach ($allResources as $resourceKey => $resourceName) {
+            $resourcesProduction[$resourceKey] = 0;
+            $storageCapacity[$resourceKey] = 0;
+        }
+
+        if (!empty($townBuildings)) {
+            foreach ($townBuildings as $townBuilding) {
+                $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
+                $level = $townBuilding->getLevel();
+                $building = new $className();
+                
+                // Resources production
+                $buildingResourcesProduction = $building->getResourcesProduction();
+                if (
+                    !empty($buildingResourcesProduction) &&
+                    isset($buildingResourcesProduction[$level])
+                ) {
+                    $buildingResourcesProduction = $buildingResourcesProduction[$level];
+
+                    foreach ($buildingResourcesProduction as $resource => $value) {
+                        $resourcesProduction[$resource] += $value;
+                    }
+                }
+                
+                // Storage capacity
+                $buildingStorageCapacity = $building->getStorageCapacity();
+                if (
+                    !empty($buildingStorageCapacity) &&
+                    isset($buildingStorageCapacity[$level])
+                ) {
+                    $buildingStorageCapacity = $buildingStorageCapacity[$level];
+
+                    foreach ($allResources as $resource => $resourceName) {
+                        $storageCapacity[$resource] += $buildingStorageCapacity;
+                    }
+                }
+            }
+        }
+
+        $this->setResourcesProduction($resourcesProduction);
+        $this->setStorageCapacity($storageCapacity);
+    }
+    
+    /**
+     * @ORM\PostLoad
+     */
+    public function postLoad()
+    {
+        $this->initialize();
     }
 
     /**
