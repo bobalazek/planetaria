@@ -84,7 +84,7 @@ class TownEntity extends AbstractAdvancedEntity
     /**
      * @var integer
      */
-    protected $populationCapacity = 0;
+    protected $populationCapacity;
     
     /**
      * @var array
@@ -329,6 +329,7 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $resourcesProduction = array();
         $storageCapacity = array();
+        $populationCapacity = 0;
         $allResources = Resources::getAll();
         $townBuildings = $this->getTownBuildings();
 
@@ -368,11 +369,21 @@ class TownEntity extends AbstractAdvancedEntity
                         $storageCapacity[$resource] += $buildingStorageCapacity;
                     }
                 }
+                
+                // Ppulation capacity
+                $buildingPopulationCapacity = $building->getPopulationCapacity();
+                if (
+                    !empty($buildingPopulationCapacity) &&
+                    isset($buildingPopulationCapacity[$level])
+                ) {
+                    $populationCapacity += $buildingPopulationCapacity[$level];
+                }
             }
         }
 
         $this->setResourcesProduction($resourcesProduction);
         $this->setStorageCapacity($storageCapacity);
+        $this->setPopulationCapacity($populationCapacity);
     }
     
     /**

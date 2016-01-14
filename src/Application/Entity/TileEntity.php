@@ -72,7 +72,7 @@ class TileEntity extends AbstractBasicEntity
      * In this variable we'll define which section of the building that is.
      * Example:
      *   - If building size is 1x1:
-     *     - 'full' (if the building is 1x1 and requires only 1 tile)
+     *     - '1x1' (if the building is 1x1 and requires only 1 tile)
      *   - If building size is 2x2, 3x3, ... then you need to think of it, as the COORDINATES SYSTEM:
      *     - '1x1' would be the LOWER LEFT part of a 2x2 building
      *     - '2x2' would be the UPPER RIGHT part of a 2x2 building

@@ -156,11 +156,26 @@ class Planets
         // Save them, because we'll need them soon!
         $app['orm.em']->flush();
 
-        // Town building
+        // Town building - Capitol
         $app['game.buildings']->build(
             $townEntity,
             Buildings::CAPITOL,
-            array(-1, -1)
+            array(-1, -1) // Start (bottom left) coordinates
         );
+        
+        // Town building - Farms
+        $farmsCoordinates = array(
+            array(2, 2),
+            array(2, -2),
+            array(-2, -2),
+            array(-2, 2),
+        );
+        foreach ($farmsCoordinates as $farmCoordinates)  {
+            $app['game.buildings']->build(
+                $townEntity,
+                Buildings::FARM,
+                $farmCoordinates
+            );
+        }
     }
 }
