@@ -16,6 +16,12 @@
                         </li>
                     {% endif %}
                     <li class="list-group-item">
+                        <b>{{ 'Country' | trans }}:</b>
+                        <a href="{{ url('game.countries.detail', { id: town.getCountry().getId() }) }}">
+                            {{ town.getCountry() }}
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <b>{{ 'Population capacity' | trans }}:</b>
                         {{ town.getPopulationCapacity() }}
                     </li>
@@ -49,7 +55,12 @@
                 </ul>
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
-                <h2>{{ 'Buildings' | trans }}</h2>
+                <h2>
+                    {{ 'Buildings' | trans }}
+                    <span class="badge">
+                        {{ town.getTownBuildings() | length }}
+                    </span>
+                </h2>
                 {% if town.getTownBuildings() %}
                     {% include 'contents/game/_parts/town-buildings-list.html.twig' with { townBuildings: town.getTownBuildings() } %}
                 {% else %}

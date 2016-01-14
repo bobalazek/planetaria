@@ -7,14 +7,8 @@
     <div id="main-content">
         <div class="row">
             <div class="col-md-4">
-                <h2>{{ 'Countries' | trans }}</h2>
-                {% if countries %}
-                    {% include 'contents/game/_parts/countries-list.html.twig' %}
-                {% else %}
-                    <div class="alert alert-info">
-                        {{ 'No countries yet' | trans }}
-                    </div>
-                {% endif %}
+                <h2>{{ 'Users' | trans }}</h2>
+                {% include 'contents/game/_parts/users-list.html.twig' %}
             </div>
             <div class="col-md-4">
                 <h2>{{ 'Towns' | trans }}</h2>
@@ -27,8 +21,14 @@
                 {% endif %}
             </div>
             <div class="col-md-4">
-                <h2>{{ 'Users' | trans }}</h2>
-                {% include 'contents/game/_parts/users-list.html.twig' %}
+                <h2>{{ 'Countries' | trans }}</h2>
+                {% if countries %}
+                    {% include 'contents/game/_parts/countries-list.html.twig' %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'No countries yet' | trans }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
