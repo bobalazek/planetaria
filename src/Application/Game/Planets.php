@@ -177,5 +177,20 @@ class Planets
                 $farmCoordinates
             );
         }
+        
+        // Town building - Houses
+        $housesCoordinates = array(
+            array(0, 2),
+            array(2, 0),
+            array(0, -2),
+            array(-2, 0),
+        );
+        foreach ($housesCoordinates as $houseCoordinates)  {
+            $app['game.buildings']->build(
+                $townEntity,
+                Buildings::HOUSE,
+                $houseCoordinates
+            );
+        }
     }
 }
