@@ -180,10 +180,10 @@ class Planets
         
         // Town building - Houses
         $housesCoordinates = array(
-            array(0, 2),
-            array(2, 0),
-            array(0, -2),
-            array(-2, 0),
+            array(0, 3),
+            array(3, 0),
+            array(0, -3),
+            array(-3, 0),
         );
         foreach ($housesCoordinates as $houseCoordinates)  {
             $app['game.buildings']->build(
