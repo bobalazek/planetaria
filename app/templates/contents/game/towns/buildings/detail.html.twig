@@ -14,6 +14,10 @@
     <h2>
         {{ townBuilding.getBuilding() | humanize | trans }}
         <span class="badge">{{ townBuilding.getLevel() }}</span>
+        <a class="btn btn-default btn-xs"
+            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
+            {{ 'View on map' | trans }}
+        </a>
     </h2>
     <div id="main-content">
         <div class="row">

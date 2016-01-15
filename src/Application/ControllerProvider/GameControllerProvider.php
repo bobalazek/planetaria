@@ -86,7 +86,7 @@ class GameControllerProvider implements ControllerProviderInterface
             '/towns/{id}/buildings/{buildingId}',
             'Application\Controller\Game\TownsController::buildingsDetailAction'
         )
-        ->bind('game.towns.detail.buildings.detail');
+        ->bind('game.towns.buildings.detail');
 
         /***** Users *****/
         $controllers->match(

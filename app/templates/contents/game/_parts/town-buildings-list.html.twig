@@ -2,7 +2,7 @@
     {% for townBuilding in townBuildings %}
         {% set townBuildingTiles = townBuilding.getTiles() %}
         <a class="list-group-item clearfix"
-            href="{{ url('game.towns.detail.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+            href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
             <img class="pull-left"
                 src="{{ app.baseUrl }}/assets/images/buildings/{{ townBuilding.getBuilding() }}/{{ townBuilding.getStatus() }}/full.png"
                 style="max-width: 48px; margin-right: 20px;" />

@@ -144,7 +144,7 @@ class GameController
         $building = $request->query->get('building');
         if ($building) {
             if (array_key_exists($building, $buildings)) {
-                // to-do: Check if enough resources.
+                // @to-do: Check if enough resources in this town
                 
                 try {
                     $app['game.buildings']->build(

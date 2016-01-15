@@ -26,7 +26,14 @@
         {{ 'Center map' | trans }}
     </a>
 </p>
-{% if tile.getTownBuilding() is null %}
+{% if tile.getTownBuilding() %}
+    <p>
+        <a class="btn btn-xs btn-default btn-block"
+            href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
+            {{ 'Visit' | trans }}
+        </a>
+    </p>
+{% else %}
     <p>
         <a class="btn btn-xs btn-default btn-block"
             href="{{ url('game.map.build', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">

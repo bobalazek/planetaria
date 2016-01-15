@@ -310,6 +310,35 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $populationCapacity;
     }
+    
+    /*** Coordinates ***/
+    /**
+     * @return integer
+     */
+    public function getCoordinates()
+    {
+        return $this->getCoordinatesX().','.$this->getCoordinatesY();
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getCoordinatesX()
+    {
+        $tiles = $this->getTiles();
+
+        return $tiles[0]->getCoordinatesX();
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getCoordinatesY()
+    {
+        $tiles = $this->getTiles();
+
+        return $tiles[0]->getCoordinatesY();
+    }
 
     /**
      * @ORM\PreUpdate
