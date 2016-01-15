@@ -107,6 +107,8 @@ class Buildings
     /**
      * With this method we'll create the town building.
      *
+     * @to-do: Throw exception if it's not buildable (is overlapping an extisting building on a tile).
+     *
      * @param TownEntity $town
      * @param string     $building
      * @param array      $coordinates The start coordinates (bottom left) of the location that building is going to be build
@@ -115,6 +117,7 @@ class Buildings
     {
         $app = $this->app;
 
+        // @to-do: Check is startingCoordinates is a array with 2 values (x, y)
         $startX = $startingCoordinates[0];
         $startY = $startingCoordinates[1];
 

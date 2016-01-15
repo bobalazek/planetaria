@@ -129,6 +129,15 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $itemsProduction;
+    
+    /**
+     * Which buildings do we need before we can build this one?
+     * Example ( level => array( building => minimumLevel ) ):
+     * array( 0 => array( 'farm' => 0 )) )
+     *
+     * @var array
+     */
+    protected $requiredBuildings;
 
     /***** Name *****/
     /**
@@ -463,6 +472,30 @@ class AbstractBuilding implements BuildingInterface
     public function setItemsProduction(array $itemsProduction = array())
     {
         $this->itemsProduction = $itemsProduction;
+
+        return $this;
+    }
+
+    /***** Required buildings *****/
+    /**
+     * @return array
+     */
+    public function getRequiredBuildings($level = null, $building = null)
+    {
+        return $level === null
+            ? $this->requiredBuildings
+            : ($item === null
+                ? $this->requiredBuildings[$level]
+                : $this->requiredBuildings[$level][$building])
+        ;
+    }
+
+    /**
+     * @param array $requiredBuildings
+     */
+    public function setRequiredBuildings(array $requiredBuildings = array())
+    {
+        $this->requiredBuildings = $requiredBuildings;
 
         return $this;
     }
