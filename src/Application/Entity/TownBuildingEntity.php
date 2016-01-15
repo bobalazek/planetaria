@@ -141,7 +141,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function getBuildingObject()
     {
-        $className = 'Application\\Game\\Buildings\\'.Buildings::getClassName(
+        $className = 'Application\\Game\\Building\\'.Buildings::getClassName(
             $this->getBuilding()
         );
 
@@ -251,6 +251,64 @@ class TownBuildingEntity extends AbstractBasicEntity
         $this->tiles = $tiles;
 
         return $this;
+    }
+    
+    /***** Resources production *****/
+    /**
+     * @todo: Take damages & stuff into consideration
+     *
+     * @return array
+     */
+    public function getResourcesProduction()
+    {
+        $level = $this->getLevel();
+        $resourcesProduction = array();
+        
+        $buildingResourcesProduction = $this->getBuildingObject()->getResourcesProduction();
+        
+        if (isset($buildingResourcesProduction[$level])) {
+            $resourcesProduction = $buildingResourcesProduction[$level];
+        }
+        
+        return $resourcesProduction;
+    }
+    
+    /**
+     * @todo: Take damages & stuff into consideration
+     *
+     * @return array
+     */
+    public function getStorageCapacity()
+    {
+        $level = $this->getLevel();
+        $storageCapacity = array();
+        
+        $buildingStorageCapacity = $this->getBuildingObject()->getStorageCapacity();
+        
+        if (isset($buildingStorageCapacity[$level])) {
+            $storageCapacity = $buildingStorageCapacity[$level];
+        }
+        
+        return $storageCapacity;
+    }
+    
+    /**
+     * @todo: Take damages & stuff into consideration
+     *
+     * @return array
+     */
+    public function getPopulationCapacity()
+    {
+        $level = $this->getLevel();
+        $populationCapacity = array();
+        
+        $buildingPopulationCapacity = $this->getBuildingObject()->getPopulationCapacity();
+        
+        if (isset($buildingPopulationCapacity[$level])) {
+            $populationCapacity = $buildingPopulationCapacity[$level];
+        }
+        
+        return $populationCapacity;
     }
 
     /**

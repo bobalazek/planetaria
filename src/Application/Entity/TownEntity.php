@@ -373,43 +373,26 @@ class TownEntity extends AbstractAdvancedEntity
 
         if (!empty($townBuildings)) {
             foreach ($townBuildings as $townBuilding) {
-                $className = 'Application\\Game\\Building\\'.Buildings::getClassName($townBuilding->getBuilding());
-                $level = $townBuilding->getLevel();
-                $building = new $className();
-
                 // Resources production
-                $buildingResourcesProduction = $building->getResourcesProduction();
-                if (
-                    !empty($buildingResourcesProduction) &&
-                    isset($buildingResourcesProduction[$level])
-                ) {
-                    $buildingResourcesProduction = $buildingResourcesProduction[$level];
-
+                $buildingResourcesProduction = $townBuilding->getResourcesProduction();
+                if (!empty($buildingResourcesProduction)) {
                     foreach ($buildingResourcesProduction as $resource => $value) {
                         $resourcesProduction[$resource] += $value;
                     }
                 }
 
                 // Storage capacity
-                $buildingStorageCapacity = $building->getStorageCapacity();
-                if (
-                    !empty($buildingStorageCapacity) &&
-                    isset($buildingStorageCapacity[$level])
-                ) {
-                    $buildingStorageCapacity = $buildingStorageCapacity[$level];
-
+                $buildingStorageCapacity = $townBuilding->getStorageCapacity();
+                if (!empty($buildingStorageCapacity)) {
                     foreach ($allResources as $resource => $resourceName) {
                         $storageCapacity[$resource] += $buildingStorageCapacity;
                     }
                 }
 
-                // Ppulation capacity
-                $buildingPopulationCapacity = $building->getPopulationCapacity();
-                if (
-                    !empty($buildingPopulationCapacity) &&
-                    isset($buildingPopulationCapacity[$level])
-                ) {
-                    $populationCapacity += $buildingPopulationCapacity[$level];
+                // Population capacity
+                $buildingPopulationCapacity = $townBuilding->getPopulationCapacity();
+                if (!empty($buildingPopulationCapacity)) {
+                    $populationCapacity += $buildingPopulationCapacity;
                 }
             }
         }
