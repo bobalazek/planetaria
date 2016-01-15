@@ -18,7 +18,6 @@ class UnitsController
      */
     public function indexAction(Application $app)
     {
-        
         return new Response(
             $app['twig']->render(
                 'contents/members-area/units/index.html.twig',

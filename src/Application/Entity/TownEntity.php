@@ -5,7 +5,6 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Game\Resources;
-use Application\Game\Buildings;
 use Application\Game\Building\Building;
 
 /**
@@ -87,7 +86,7 @@ class TownEntity extends AbstractAdvancedEntity
      * @var integer
      */
     protected $populationCapacity;
-    
+
     /**
      * How much is the current population of that town?
      *
@@ -229,7 +228,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Population ***/
     /**
      * @return integer

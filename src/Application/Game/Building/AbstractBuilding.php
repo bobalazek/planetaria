@@ -129,7 +129,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $itemsProduction;
-    
+
     /**
      * Which buildings do we need before we can build this one?
      * Example ( level => array( building => minimumLevel ) ):

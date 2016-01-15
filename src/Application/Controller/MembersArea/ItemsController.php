@@ -18,7 +18,6 @@ class ItemsController
      */
     public function indexAction(Application $app)
     {
-        
         return new Response(
             $app['twig']->render(
                 'contents/members-area/items/index.html.twig',

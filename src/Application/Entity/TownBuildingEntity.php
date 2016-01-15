@@ -252,7 +252,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /***** Resources production *****/
     /**
      * @todo: Take damages & stuff into consideration
@@ -263,16 +263,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $level = $this->getLevel();
         $resourcesProduction = array();
-        
+
         $buildingResourcesProduction = $this->getBuildingObject()->getResourcesProduction();
-        
+
         if (isset($buildingResourcesProduction[$level])) {
             $resourcesProduction = $buildingResourcesProduction[$level];
         }
-        
+
         return $resourcesProduction;
     }
-    
+
     /**
      * @todo: Take damages & stuff into consideration
      *
@@ -282,16 +282,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $level = $this->getLevel();
         $storageCapacity = array();
-        
+
         $buildingStorageCapacity = $this->getBuildingObject()->getStorageCapacity();
-        
+
         if (isset($buildingStorageCapacity[$level])) {
             $storageCapacity = $buildingStorageCapacity[$level];
         }
-        
+
         return $storageCapacity;
     }
-    
+
     /**
      * @todo: Take damages & stuff into consideration
      *
@@ -301,13 +301,13 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $level = $this->getLevel();
         $populationCapacity = array();
-        
+
         $buildingPopulationCapacity = $this->getBuildingObject()->getPopulationCapacity();
-        
+
         if (isset($buildingPopulationCapacity[$level])) {
             $populationCapacity = $buildingPopulationCapacity[$level];
         }
-        
+
         return $populationCapacity;
     }
 

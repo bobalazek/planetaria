@@ -18,7 +18,6 @@ class BuildingsController
      */
     public function indexAction(Application $app)
     {
-        
         return new Response(
             $app['twig']->render(
                 'contents/members-area/buildings/index.html.twig',

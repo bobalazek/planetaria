@@ -18,7 +18,6 @@ class SkillsController
      */
     public function indexAction(Application $app)
     {
-        
         return new Response(
             $app['twig']->render(
                 'contents/members-area/skills/index.html.twig',
