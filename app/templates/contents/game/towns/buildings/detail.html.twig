@@ -5,6 +5,7 @@
 {% block main %}
     <h1>
         {{ town.getName() }}
+        <small>{{ town.getCountry() }}</small>
         <a class="btn btn-default"
             href="{{ url('game.towns.detail', { id: town.getId() }) }}">
             {{ 'Back to the Town' | trans }}

@@ -81,34 +81,5 @@
                 </ul>
             </div>
         </div> <!-- /.row -->
-        {% set userCountries = app.user.getUserCountries() %}
-        <h4>{{ 'Countries' | trans }}</h4>
-        {% if userCountries %}
-            <ul class="list-unstyled">
-                {% for userCountry in userCountries %}
-                    <li>
-                        <a href="{{ url('game.countries.detail', { id: userCountry.getCountry().getId() }) }}">
-                            {{ userCountry.getCountry() }}
-                        </a>
-                        {% set towns = userCountry.getCountry().getTowns() %}
-                        {% if towns %}
-                            <ul>
-                                {% for town in towns %}
-                                    <li>
-                                        <a href="{{ url('game.towns.detail', { id: town.getId() }) }}">
-                                            {{ town.getName() }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <div class="alert alert-info">
-                {{ 'You do not have a country yet!' | trans }}
-            </div>
-        {% endif %}
     </div>
 </div>

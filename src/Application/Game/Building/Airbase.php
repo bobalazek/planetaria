@@ -21,7 +21,7 @@ class Airbase extends AbstractBuilding
             ->setSlug('airbase')
             ->setDescription('With a airbase you can produce air units.')
             ->setType(BuildingTypes::MILITARY)
-            ->setSize('1x1')
+            ->setSize('4x2')
             ->setMaximumLevel(2)
             ->setHealthPoints(array(
                 0 => 10000,

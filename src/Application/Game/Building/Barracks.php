@@ -60,13 +60,13 @@ class Barracks extends AbstractBuilding
             ))
             ->setUnitsProduction(array(
                 0 => array(
-                    Units::SOLDIER => 120,
+                    Units::RIFLEMAN => 120,
                 ),
                 1 => array(
-                    Units::SOLDIER => 90,
+                    Units::RIFLEMAN => 90,
                 ),
                 2 => array(
-                    Units::SOLDIER => 60,
+                    Units::RIFLEMAN => 60,
                 ),
             ))
         ;

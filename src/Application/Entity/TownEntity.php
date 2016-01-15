@@ -61,6 +61,12 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="time_updated", type="datetime")
      */
     protected $timeUpdated;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="PlanetEntity", inversedBy="towns")
+     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     */
+    protected $planet;
 
     /**
      * @ORM\ManyToOne(targetEntity="CountryEntity", inversedBy="towns")
@@ -115,6 +121,27 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $this->townResources = new ArrayCollection();
         $this->townBuildings = new ArrayCollection();
+    }
+    
+    /*** Planet ***/
+    /**
+     * @return PlanetEntity
+     */
+    public function getPlanet()
+    {
+        return $this->planet;
+    }
+
+    /**
+     * @param PlanetEntity $planet
+     *
+     * @return TownEntity
+     */
+    public function setPlanet(PlanetEntity $planet)
+    {
+        $this->planet = $planet;
+
+        return $this;
     }
 
     /*** Country ***/

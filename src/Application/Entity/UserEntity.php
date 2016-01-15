@@ -986,6 +986,29 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return 0;
     }
+    
+    /*** Towns ***/
+    /**
+     * @return array
+     */
+    public function getTowns()
+    {
+        $towns = array();
+        $userCountries = $this->getUserCountries();
+        
+        if (!empty($userCountries)) {
+            foreach ($userCountries as $userCountry) {
+                $userCountryTowns = $userCountry->getCountry()->getTowns();
+                if (!empty($userCountryTowns)) {
+                    foreach ($userCountryTowns as $userCountryTown) {
+                        $towns[] = $userCountryTown;
+                    }
+                }
+            }
+        }
+        
+        return $towns;
+    }
 
     /**
      * @param AdvancedUserInterface $user

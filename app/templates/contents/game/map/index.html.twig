@@ -3,27 +3,20 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
-    <h1>{{ 'Map' | trans }}</h1>
+    <h1>
+        {{ 'Map' | trans }}
+    </h1>
     <div id="main-content">
-        <div id="map-wrapper">
-            <div id="map">
-                <div id="map-inner">
-                    {% for y in coordinatesRangeY | reverse %}
-                        <div class="map-row clearfix">
-                            {% for x in coordinatesRangeX %}
-                                {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
-                                {% if tile %}
-                                    {% include 'contents/game/map/_tile.html.twig' %}
-                                {% else %}
-                                    <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"></div>
-                                {% endif %}
-                            {% endfor %}
-                        </div> <!-- /.map-row -->
-                    {% endfor %}
-                </div> <!-- #map-inner -->
-            </div> <!-- /#map -->
-            <hr />
-            {% include 'contents/game/map/_controls.html.twig' %}
-        </div> <!-- /#map-wrapper -->
+        <h3>{{ 'Select the planet' | trans }}:</h3>
+        <div class="row">
+            {% for planet in planets %}
+                <div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block"
+                        href="{{ url('game.map.detail', { id: planet.getId() }) }}">
+                        {{ planet }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

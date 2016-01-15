@@ -1,0 +1,75 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>
+        {{ 'Map' | trans }}
+        <a class="btn btn-default"
+            href="{{ url('game.map.detail', { id: planet.getId(), x: x, y: y }) }}">
+            {{ 'Back to the Map' | trans }}
+        </a>
+    </h1>
+    <h2>
+        {{ planet }}
+        <small>({{ tile.getCoordinates() }})</small>
+    </h2>
+    <div id="main-content">
+        {% if town %}
+            <h3>
+                {{ town }}
+                <a class="btn btn-default btn-xs"
+                    href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y }) }}">
+                    {{ 'Change selected town' | trans }}
+                </a>
+            </h3>
+            <h4>{{ 'Select the building' | trans }}:</h4>
+            <div class="row">
+                {% for buildingKey, building in buildings %}
+                    <div class="col-md-3">
+                        <div class="media"
+                            style="margin-bottom: 20px;">
+                            <div class="media-left">
+                                <img class="media-object" 
+                                    src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getKey() }}/constructed/full.png"
+                                    style="max-width: 48px; margin-right: 20px;" />
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    {{ building.getName() }}
+                                </h4>
+                                <p>{{ building.getDescription() }}</p>
+                                <a class="btn btn-block btn-success btn-xs"
+                                    href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId(), building: buildingKey }) }}">
+                                    {{ 'Build now' | trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h4>{{ 'Select the town' | trans }}:</h4>
+            <div class="row">
+                {% for town in app.user.getTowns() %}
+                    <div class="col-md-4">
+                        <a class="btn btn-lg btn-default btn-block"
+                            href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId() }) }}">
+                            {{ town }}
+                            {% if town.getDescription() %}
+                                <br />
+                                <small>{{ town.getDescription() }}</small>
+                            {% endif %}
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="col-md-12">
+                        <div class="alert alert-info">
+                            {{ 'You do not have any towns yet' | trans }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

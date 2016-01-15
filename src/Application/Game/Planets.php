@@ -9,6 +9,7 @@ use Application\Entity\TileResourceEntity;
 use Application\Entity\CountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\UserCountryEntity;
+use Application\Game\BuildingStatuses;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -136,6 +137,7 @@ class Planets
             ->setName('Panonia')
             ->setSlug('panonia')
             ->setDescription('The capital of Panem')
+            ->setPlanet($planetEntity)
             ->setCountry($countryEntity)
         ;
         $app['orm.em']->persist($townEntity);
@@ -158,9 +160,11 @@ class Planets
 
         // Town building - Capitol
         $app['game.buildings']->build(
+            $planetEntity,
             $townEntity,
+            array(-1, -1), // Start (bottom left) coordinates
             Buildings::CAPITOL,
-            array(-1, -1) // Start (bottom left) coordinates
+            BuildingStatuses::CONSTRUCTED
         );
 
         // Town building - Farms

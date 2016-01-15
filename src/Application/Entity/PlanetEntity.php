@@ -66,6 +66,13 @@ class PlanetEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TileEntity", mappedBy="planet")
      */
     protected $tiles;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="town")
+     */
+    protected $towns;
 
     /**
      * The constructor
@@ -92,6 +99,27 @@ class PlanetEntity extends AbstractAdvancedEntity
     public function setTiles($tiles)
     {
         $this->tiles = $tiles;
+
+        return $this;
+    }
+    
+    /*** Towns ***/
+    /**
+     * @return ArrayCollection
+     */
+    public function getTowns()
+    {
+        return $this->towns->toArray();
+    }
+
+    /**
+     * @param ArrayCollection $towns
+     *
+     * @return CountryEntity
+     */
+    public function setTowns($towns)
+    {
+        $this->towns = $towns;
 
         return $this;
     }

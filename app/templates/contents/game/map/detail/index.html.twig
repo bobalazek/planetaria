@@ -1,0 +1,33 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% set isContainerFluid = true %}
+
+{% block main %}
+    <h1>{{ 'Map' | trans }}</h1>
+    <h2>
+        {{ planet }}
+        <small>({{ centerX ~ ',' ~ centerY }})</small>
+    </h2>
+    <div id="main-content">
+        <div id="map-wrapper">
+            <div id="map">
+                <div id="map-inner">
+                    {% for y in coordinatesRangeY | reverse %}
+                        <div class="map-row clearfix">
+                            {% for x in coordinatesRangeX %}
+                                {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
+                                {% if tile %}
+                                    {% include 'contents/game/map/detail/_tile.html.twig' %}
+                                {% else %}
+                                    <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"></div>
+                                {% endif %}
+                            {% endfor %}
+                        </div> <!-- /.map-row -->
+                    {% endfor %}
+                </div> <!-- #map-inner -->
+            </div> <!-- /#map -->
+            <hr />
+            {% include 'contents/game/map/detail/_controls.html.twig' %}
+        </div> <!-- /#map-wrapper -->
+    </div>
+{% endblock %}

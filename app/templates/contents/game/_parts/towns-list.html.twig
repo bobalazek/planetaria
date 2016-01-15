@@ -10,6 +10,9 @@
                     {{ town.getDescription() }}
                     <br /> <br />
                 {% endif %}
+                <b>{{ 'Planet' | trans }}:</b>
+                {{ town.getPlanet() }}
+                <br />
                 <b>{{ 'Country' | trans }}:</b>
                 {{ town.getCountry() }}
                 <br />

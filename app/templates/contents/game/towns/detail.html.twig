@@ -3,7 +3,10 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
-    <h1>{{ town.getName() }}</h1>
+    <h1>
+        {{ town.getName() }}
+        <small>{{ town.getCountry() }}</small>
+    </h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-6">

@@ -5,9 +5,9 @@
     data-y="{{ y }}"
     data-buildable="{{ tile.isBuildable() ? 'true' : 'false' }}"
     data-buildable-currently="{{ tile.isBuildableCurrently() ? 'true' : 'false' }}"
-    data-tooltip="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_tooltip-content.html.twig' %}{% endspaceless %}{% endfilter %}"
+    data-tooltip="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_tooltip-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     data-popover-title="{{ tile.getCoordinates() }}"
-    data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
+    data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
     <div class="map-tile-hover-overlay"></div>
     {% if tile.getTownBuilding() %}

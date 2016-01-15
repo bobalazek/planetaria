@@ -1,0 +1,36 @@
+<p>
+    <b>{{ 'Terrain type' | trans }}:</b>
+    {{ tile.getTerrainType() | humanize | trans }}
+</p>
+{% if tile.getTownBuilding() %}
+    <p>
+        <b>{{ 'Town' | trans }}:</b>
+        <a href="{{ url('game.towns.detail', { id: tile.getTownBuilding().getTown().getId() }) }}">
+            {{ tile.getTownBuilding().getTown() }}
+        </a>
+    </p>
+    <p>
+        <b>{{ 'Country' | trans }}:</b>
+        <a href="{{ url('game.countries.detail', { id: tile.getTownBuilding().getTown().getCountry().getId() }) }}">
+            {{ tile.getTownBuilding().getTown().getCountry() }}
+        </a>
+    </p>
+    <p>
+        <b>{{ 'Building' | trans }}:</b>
+        {{ tile.getTownBuilding().getBuilding() | humanize | trans }}
+    </p>
+{% endif %}
+<p>
+    <a class="btn btn-xs btn-default btn-block"
+        href="{{ url('game.map.detail', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">
+        {{ 'Center map' | trans }}
+    </a>
+</p>
+{% if tile.getTownBuilding() is null %}
+    <p>
+        <a class="btn btn-xs btn-default btn-block"
+            href="{{ url('game.map.build', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">
+            {{ 'Build here' | trans }}
+        </a>
+    </p>
+{% endif %}
