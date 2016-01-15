@@ -16,7 +16,7 @@
     </ol>
     <div id="main-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3 col-xs-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         {{ 'Users' | trans }}
@@ -30,22 +30,87 @@
                         </li>
                     </ul>
                 </div> <!-- /.panel -->
-            </div> <!-- /.col-md-6 -->
-            <div class="col-md-6">
+            </div> <!-- /.col-md-3 -->
+            <div class="col-md-3 col-xs-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        {{ 'Posts' | trans }}
+                        {{ 'Planets' | trans }}
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item">
                             {{ 'Total' | trans }}
                             <span class="badge">
-                                {{ app['orm.em'].getRepository('Application\\Entity\\PostEntity').countAll() }}
+                                {{ app['orm.em'].getRepository('Application\\Entity\\PlanetEntity').countAll() }}
                             </span>
                         </li>
                     </ul>
                 </div> <!-- /.panel -->
-            </div> <!-- /.col-md-6 -->
+            </div> <!-- /.col-md-3 -->
+            <div class="col-md-3 col-xs-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {{ 'Countries' | trans }}
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            {{ 'Total' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\CountryEntity').countAll() }}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            {{ 'Units' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\CountryUnitEntity').countAll() }}
+                            </span>
+                        </li>
+                    </ul>
+                </div> <!-- /.panel -->
+            </div> <!-- /.col-md-3 -->
+            <div class="col-md-3 col-xs-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {{ 'Towns' | trans }}
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            {{ 'Total' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\TownEntity').countAll() }}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            {{ 'Resources' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\TownResourceEntity').countAll() }}
+                            </span>
+                        </li>
+                    </ul>
+                </div> <!-- /.panel -->
+            </div> <!-- /.col-md-3 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-3 col-xs-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {{ 'Tiles' | trans }}
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            {{ 'Total' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\TileEntity').countAll() }}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            {{ 'Resources' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\TileResourceEntity').countAll() }}
+                            </span>
+                        </li>
+                    </ul>
+                </div> <!-- /.panel -->
+            </div> <!-- /.col-md-3 -->
         </div> <!-- /.row -->
     </div>
 {% endblock %}

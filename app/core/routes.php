@@ -57,6 +57,36 @@ $app->mount(
     new Application\ControllerProvider\MembersArea\TownsControllerProvider()
 );
 
+/******** Resources ********/
+$app->mount(
+    '/members-area/resources',
+    new Application\ControllerProvider\MembersArea\ResourcesControllerProvider()
+);
+
+/******** Buildings ********/
+$app->mount(
+    '/members-area/buildings',
+    new Application\ControllerProvider\MembersArea\BuildingsControllerProvider()
+);
+
+/******** Units ********/
+$app->mount(
+    '/members-area/units',
+    new Application\ControllerProvider\MembersArea\UnitsControllerProvider()
+);
+
+/******** Items ********/
+$app->mount(
+    '/members-area/items',
+    new Application\ControllerProvider\MembersArea\ItemsControllerProvider()
+);
+
+/******** Skills ********/
+$app->mount(
+    '/members-area/skills',
+    new Application\ControllerProvider\MembersArea\SkillsControllerProvider()
+);
+
 /******** Statistics ********/
 $app->mount(
     '/members-area/statistics',

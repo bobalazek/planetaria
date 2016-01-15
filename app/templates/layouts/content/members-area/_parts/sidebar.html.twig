@@ -39,13 +39,43 @@
         </li>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.resources') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.resources') }}">
+                <i class="fa fa-fw fa-recycle"></i>
+                {{ 'Resources' | trans }}
+            </a>
+        </li>
+        <li class="{{ path('members-area.buildings') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.buildings') }}">
+                <i class="fa fa-fw fa-building"></i>
+                {{ 'Buildings' | trans }}
+            </a>
+        </li>
+        <li class="{{ path('members-area.units') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.units') }}">
+                <i class="fa fa-fw fa-tags"></i>
+                {{ 'Units' | trans }}
+            </a>
+        </li>
+        <li class="{{ path('members-area.items') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.items') }}">
+                <i class="fa fa-fw fa-archive"></i>
+                {{ 'Items' | trans }}
+            </a>
+        </li>
+        <li class="{{ path('members-area.skills') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.skills') }}">
+                <i class="fa fa-fw fa-bolt"></i>
+                {{ 'Skills' | trans }}
+            </a>
+        </li>
         <li class="{{ path('members-area.statistics') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.statistics') }}">
                 <i class="fa fa-fw fa-bar-chart"></i>
                 {{ 'Statistics' | trans }}
             </a>
         </li>
-        <li class="{{ path('members-area.settings') in app.currentUri ? 'active' : '' }}" role="presentation">
+        <li class="{{ path('members-area.settings') in app.currentUri ? 'active' : '' }} hidden" role="presentation">
             <a href="{{ url('members-area.settings') }}">
                 <i class="fa fa-fw fa-cog"></i>
                 {{ 'Settings' | trans }}
