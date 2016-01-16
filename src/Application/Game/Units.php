@@ -70,9 +70,9 @@ class Units
     /**
      * @return array
      */
-    public static function getAll()
+    public static function getAll($key = null)
     {
-        return array(
+        $all = array(
             self::RIFLEMAN => 'Rifleman',
             self::GRENADIER => 'Grenadier',
             self::BAZOOKA_SOLDIER => 'Bazooka soldier',
@@ -86,5 +86,10 @@ class Units
             self::SUBMARINE => 'Submarine',
             self::AIRCRAFT_CARRIER => 'Aircraft carrier',
         );
+        
+        return $key === null
+            ? $all
+            : $all[$key]
+        ;
     }
 }

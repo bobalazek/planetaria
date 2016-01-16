@@ -29,7 +29,7 @@ class Market extends AbstractBuilding
             ->setPopulationCapacity(array(
                 0 => 10,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 1000,
             ))
             ->setBuildTime(array(

@@ -45,9 +45,9 @@ class Resources
     /**
      * @return array
      */
-    public static function getAll()
+    public static function getAll($key = null)
     {
-        return array(
+        $all = array(
             self::FOOD => 'Food',
             self::WOOD => 'Wood',
             self::COAL => 'Coal',
@@ -56,6 +56,11 @@ class Resources
             self::CRUDE_OIL => 'Crude oil',
             self::MONEY => 'Money',
         );
+        
+        return $key === null
+            ? $all
+            : $all[$key]
+        ;
     }
     
     /**

@@ -29,7 +29,7 @@ class MissileLaunchFacility extends AbstractBuilding
             ->setPopulationCapacity(array(
                 0 => 50,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 100,
             ))
             ->setBuildTime(array(

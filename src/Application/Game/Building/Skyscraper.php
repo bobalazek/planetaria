@@ -33,7 +33,7 @@ class Skyscraper extends AbstractBuilding
                 1 => 400,
                 2 => 800,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 100,
                 1 => 200,
                 2 => 400,

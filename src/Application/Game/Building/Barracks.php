@@ -34,7 +34,7 @@ class Barracks extends AbstractBuilding
                 1 => 200,
                 2 => 400,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 1000,
                 1 => 2000,
                 2 => 4000,

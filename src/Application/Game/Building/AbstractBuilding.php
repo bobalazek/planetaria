@@ -85,7 +85,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var array
      */
-    protected $storageCapacity;
+    protected $resourcesCapacity;
 
     /**
      * What's the build time of that building in seconds (per level)?
@@ -336,24 +336,24 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
-    /***** Storage capacity *****/
+    /***** Resources capacity *****/
     /**
      * @return array|integer
      */
-    public function getStorageCapacity($level = null)
+    public function getResourcesCapacity($level = null)
     {
         return $level === null
-            ? $this->storageCapacity
-            : $this->storageCapacity[$level]
+            ? $this->resourcesCapacity
+            : $this->resourcesCapacity[$level]
         ;
     }
 
     /**
-     * @param array $storageCapacity
+     * @param array $resourcesCapacity
      */
-    public function setStorageCapacity(array $storageCapacity = array())
+    public function setResourcesCapacity(array $resourcesCapacity = array())
     {
-        $this->storageCapacity = $storageCapacity;
+        $this->resourcesCapacity = $resourcesCapacity;
 
         return $this;
     }

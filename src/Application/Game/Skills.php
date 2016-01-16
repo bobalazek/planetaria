@@ -25,12 +25,17 @@ class Skills
     /**
      * @return array
      */
-    public static function getAll()
+    public static function getAll($key = null)
     {
-        return array(
+        $all = array(
             self::STRENGTH => 'Strength',
             self::INTELLIGENCE => 'Intelligence',
             self::LEADERSHIP => 'Leadership',
         );
+        
+        return $key === null
+            ? $all
+            : $all[$key]
+        ;
     }
 }

@@ -33,7 +33,7 @@ class House extends AbstractBuilding
                 1 => 40,
                 2 => 80,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 10,
                 1 => 20,
                 2 => 40,

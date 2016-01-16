@@ -15,10 +15,15 @@ class Items
     /**
      * @return array
      */
-    public static function getAll()
+    public static function getAll($key = null)
     {
-        return array(
+        $all = array(
             self::ION_CANNON_SATELITE => 'Ion cannon satelite',
         );
+        
+        return $key === null
+            ? $all
+            : $all[$key]
+        ;
     }
 }

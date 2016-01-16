@@ -33,7 +33,7 @@ class Warehouse extends AbstractBuilding
                 1 => 20,
                 2 => 40,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 1000,
                 1 => 2000,
                 2 => 4000,

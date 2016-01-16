@@ -35,7 +35,7 @@ class Capitol extends AbstractBuilding
                 2 => 200,
                 3 => 400,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 100,
                 1 => 200,
                 2 => 400,

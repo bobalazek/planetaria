@@ -37,17 +37,17 @@
                             <thead>
                                 <tr>
                                     <th>Resource</th>
-                                    <th>Amount available</th>
-                                    <th>Storage capacity</th>
-                                    <th>Production per minute</th>
+                                    <th>Available</th>
+                                    <th>Capacity</th>
+                                    <th>Production <small>per minute</small></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for resourceKey, resourceData in town.getResources() %}
                                     <tr>
                                         <td>{{ resourceKey | humanize | trans }}</td>
-                                        <td>{{ resourceData.amount }}</td>
-                                        <td>{{ resourceData.storage }}</td>
+                                        <td>{{ resourceData.available }}</td>
+                                        <td>{{ resourceData.capacity }}</td>
                                         <td>{{ resourceData.production }}</td>
                                     </tr>
                                 {% endfor %}

@@ -39,7 +39,7 @@ class IronMine extends AbstractBuilding
                 4 => 50,
                 5 => 60,
             ))
-            ->setStorageCapacity(array(
+            ->setResourcesCapacity(array(
                 0 => 1000,
                 1 => 2000,
                 2 => 3000,

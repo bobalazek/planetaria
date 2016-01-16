@@ -31,7 +31,8 @@ class Towns
      */
     public static function hasEnoughResourcesForBuilding(TownEntity $town, $building)
     {
-        // To-Do: check!
+        $requiredResources = array();
+        $availableResources = array();
 
         return true;
     }

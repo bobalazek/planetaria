@@ -106,16 +106,16 @@ interface BuildingInterface
      */
     public function setPopulationCapacity(array $populationCapacity);
 
-    /***** Storage capacity *****/
+    /***** Resources capacity *****/
     /**
      * @return array|integer
      */
-    public function getStorageCapacity($level);
+    public function getResourcesCapacity($level);
 
     /**
-     * @param array $storageCapacity
+     * @param array $resourcesCapacity
      */
-    public function setStorageCapacity(array $storageCapacity);
+    public function setResourcesCapacity(array $resourcesCapacity);
 
     /***** Build time *****/
     /**

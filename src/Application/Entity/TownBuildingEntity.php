@@ -272,18 +272,18 @@ class TownBuildingEntity extends AbstractBasicEntity
      *
      * @return array
      */
-    public function getStorageCapacity()
+    public function getResourcesCapacity()
     {
         $level = $this->getLevel();
-        $storageCapacity = array();
+        $resourcesCapacity = array();
 
-        $buildingStorageCapacity = $this->getBuildingObject()->getStorageCapacity();
+        $buildingResourcesCapacity = $this->getBuildingObject()->getResourcesCapacity();
 
-        if (isset($buildingStorageCapacity[$level])) {
-            $storageCapacity = $buildingStorageCapacity[$level];
+        if (isset($buildingResourcesCapacity[$level])) {
+            $resourcesCapacity = $buildingResourcesCapacity[$level];
         }
 
-        return $storageCapacity;
+        return $resourcesCapacity;
     }
 
     /**

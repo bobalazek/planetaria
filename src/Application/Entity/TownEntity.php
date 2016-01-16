@@ -75,6 +75,8 @@ class TownEntity extends AbstractAdvancedEntity
     protected $country;
 
     /**
+     * Also known as the town resources storage.
+     *
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Application\Entity\TownResourceEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
@@ -101,18 +103,25 @@ class TownEntity extends AbstractAdvancedEntity
     protected $population;
 
     /**
-     * What's the limit for the resources?
+     * What's the limit for the resources (for each resource separatly)?
      *
      * @var array
      */
-    protected $storageCapacity;
+    protected $resourcesCapacity;
 
     /**
-     * How much resources does this town produces?
+     * How much resources does this town produces (for each resource separatly)?
      *
      * @var array
      */
     protected $resourcesProduction;
+    
+    /**
+     * How much resources do we currently have available (for each resource separatly)?
+     *
+     * @var array
+     */
+    protected $resourcesAvailable;
 
     /**
      * The constructor
@@ -236,6 +245,25 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
+    
+    /*** Resources available ***/
+    /**
+     * @return array
+     */
+    public function getResourcesAvailable()
+    {
+        return $this->resourcesAvailable;
+    }
+
+    /**
+     * @return array $resourcesAvailable
+     */
+    public function setResourcesAvailable($resourcesAvailable)
+    {
+        $this->resourcesAvailable = $resourcesAvailable;
+
+        return $this;
+    }
 
     /*** Population capacity ***/
     /**
@@ -275,31 +303,31 @@ class TownEntity extends AbstractAdvancedEntity
         return $this;
     }
 
-    /*** Storage capacity ***/
+    /*** Resources capacity ***/
     /**
-     * @return integer
+     * @return array
      */
-    public function getStorageCapacity()
+    public function getResourcesCapacity()
     {
-        return $this->storageCapacity;
+        return $this->resourcesCapacity;
     }
 
     /**
-     * @return integer $storageCapacity
+     * @return array $resourcesCapacity
      */
-    public function setStorageCapacity(array $storageCapacity = array())
+    public function setResourcesCapacity(array $resourcesCapacity = array())
     {
-        $this->storageCapacity = $storageCapacity;
+        $this->resourcesCapacity = $resourcesCapacity;
 
         return $this;
     }
 
     /*** Resources ***/
     /**
-     * The combiened version of resources:
-     *   - amount
-     *   - storage
-     *   - production
+     * The combined version of resources:
+     *   - available (currently)
+     *   - capacity (total)
+     *   - production (per minute)
      *
      * @return array
      */
@@ -308,20 +336,15 @@ class TownEntity extends AbstractAdvancedEntity
         $resources = array();
         $allResources = Resources::getAll();
         $resourcesProduction = $this->getResourcesProduction();
-        $storageCapacity = $this->getStorageCapacity();
-        $townResources = $this->getTownResources();
+        $resourcesCapacity = $this->getResourcesCapacity();
+        $resourcesAvailable = $this->getResourcesAvailable();
 
         foreach ($allResources as $resourceKey => $resourceName) {
             $resources[$resourceKey] = array(
-                'amount' => 0,
-                'storage' => $storageCapacity[$resourceKey],
+                'available' => $resourcesAvailable[$resourceKey],
+                'capacity' => $resourcesCapacity[$resourceKey],
                 'production' => $resourcesProduction[$resourceKey],
             );
-        }
-
-        foreach ($townResources as $townResource) {
-            $resourceKey = $townResource->getResource();
-            $resources[$resourceKey]['amount'] = $townResource->getAmount();
         }
 
         return $resources;
@@ -386,15 +409,19 @@ class TownEntity extends AbstractAdvancedEntity
     public function initialize()
     {
         $resourcesProduction = array();
-        $storageCapacity = array();
+        $resourcesCapacity = array();
+        $resourcesAvailable = array();
         $populationCapacity = 0;
         $population = 0;
+        
         $allResources = Resources::getAll();
         $townBuildings = $this->getTownBuildings();
+        $townResources = $this->getTownResources();
 
         foreach ($allResources as $resourceKey => $resourceName) {
             $resourcesProduction[$resourceKey] = 0;
-            $storageCapacity[$resourceKey] = 0;
+            $resourcesCapacity[$resourceKey] = 0;
+            $resourcesAvailable[$resourceKey] = 0;
         }
 
         if (!empty($townBuildings)) {
@@ -408,10 +435,10 @@ class TownEntity extends AbstractAdvancedEntity
                 }
 
                 // Storage capacity
-                $buildingStorageCapacity = $townBuilding->getStorageCapacity();
-                if (!empty($buildingStorageCapacity)) {
+                $buildingResourcesCapacity = $townBuilding->getResourcesCapacity();
+                if (!empty($buildingResourcesCapacity)) {
                     foreach ($allResources as $resource => $resourceName) {
-                        $storageCapacity[$resource] += $buildingStorageCapacity;
+                        $resourcesCapacity[$resource] += $buildingResourcesCapacity;
                     }
                 }
 
@@ -422,9 +449,18 @@ class TownEntity extends AbstractAdvancedEntity
                 }
             }
         }
+        
+        if (!empty($townResources)) {
+            foreach ($townResources as $townResource) {
+                $resourceKey = $townResource->getResource();
+                $resourcesAvailable[$resourceKey] = $townResource->getAmount();
+            }
+        }
+        
 
         $this->setResourcesProduction($resourcesProduction);
-        $this->setStorageCapacity($storageCapacity);
+        $this->setResourcesCapacity($resourcesCapacity);
+        $this->setResourcesAvailable($resourcesAvailable);
         $this->setPopulationCapacity($populationCapacity);
         $this->setPopulation($population);
     }
