@@ -66,7 +66,7 @@ class PlanetEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TileEntity", mappedBy="planet")
      */
     protected $tiles;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -102,7 +102,7 @@ class PlanetEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Towns ***/
     /**
      * @return ArrayCollection

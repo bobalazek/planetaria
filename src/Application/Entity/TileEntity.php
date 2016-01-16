@@ -25,13 +25,16 @@ class TileEntity extends AbstractBasicEntity
     protected $id;
 
     /**
-     * water, land, ... ?
-     *
      * @var string
      *
      * @ORM\Column(name="terrain_type", type="string", length=16)
      */
     protected $terrainType;
+
+    /**
+     * @ORM\Column(name="status", type="string", length=32)
+     */
+    protected $status;
 
     /**
      * @var string
@@ -152,6 +155,27 @@ class TileEntity extends AbstractBasicEntity
     public function setTerrainType($terrainType)
     {
         $this->terrainType = $terrainType;
+
+        return $this;
+    }
+
+    /*** Status ***/
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return TileEntity
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -26,7 +26,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *
@@ -38,7 +38,7 @@ class GameController
             ->getRepository('Application\Entity\PlanetEntity')
             ->findAll()
         ;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/map/index.html.twig',
@@ -57,14 +57,14 @@ class GameController
     public function mapDetailAction($id, Application $app, Request $request)
     {
         $planet = $app['orm.em']->find(
-            'Application\Entity\PlanetEntity', 
+            'Application\Entity\PlanetEntity',
             $id
         );
-        
+
         if (!$planet) {
             $app->abort(404);
         }
-        
+
         $radius = 16;
         $centerX = (int) $request->query->get('x', 0);
         $centerY = (int) $request->query->get('y', 0);
@@ -96,7 +96,7 @@ class GameController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *
@@ -105,17 +105,17 @@ class GameController
     public function mapBuildAction($id, Application $app, Request $request)
     {
         $planet = $app['orm.em']->find(
-            'Application\Entity\PlanetEntity', 
+            'Application\Entity\PlanetEntity',
             $id
         );
-        
+
         if (!$planet) {
             $app->abort(404);
         }
-        
+
         $x = (int) $request->query->get('x', 0);
         $y = (int) $request->query->get('y', 0);
-        
+
         $tile = $app['orm.em']
             ->getRepository('Application\Entity\TileEntity')
             ->findOneBy(array(
@@ -124,28 +124,28 @@ class GameController
                 'coordinatesY' => $y,
             ))
         ;
-        
+
         if (!$tile) {
             $app->abort(404);
         }
-        
+
         if (!$tile->isBuildableCurrently()) {
             $app->abort(404);
         }
-        
+
         $townId = (int) $request->query->get('town_id', 0);
         $town = $app['orm.em']->find(
             'Application\Entity\TownEntity',
             $townId
         );
-        
+
         $buildings = Buildings::getAllWithData();
-        
+
         $building = $request->query->get('building');
         if ($building) {
             if (array_key_exists($building, $buildings)) {
                 // @to-do: Check if enough resources in this town
-                
+
                 try {
                     $app['game.buildings']->build(
                         $planet,
@@ -154,7 +154,7 @@ class GameController
                         $building,
                         BuildingStatuses::CONSTRUCTING
                     );
-                    
+
                     $app['flashbag']->add(
                         'success',
                         $app['translator']->trans(
@@ -164,7 +164,7 @@ class GameController
                             )
                         )
                     );
-                    
+
                     return $app->redirect(
                         $app['url_generator']->generate(
                             'game.map.detail',
@@ -193,7 +193,7 @@ class GameController
                 );
             }
         }
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/map/build.html.twig',

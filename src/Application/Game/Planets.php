@@ -9,7 +9,6 @@ use Application\Entity\TileResourceEntity;
 use Application\Entity\CountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\UserCountryEntity;
-use Application\Game\BuildingStatuses;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -82,6 +81,7 @@ class Planets
                 $tileEntity
                     ->setPlanet($planetEntity)
                     ->setTerrainType($terrain['type'])
+                    ->setStatus(TileStatuses::ORIGINAL)
                     ->setBackgroundImage($terrain['backgroundImage'])
                     ->setCoordinatesX($x)
                     ->setCoordinatesY($y)
@@ -176,9 +176,11 @@ class Planets
         );
         foreach ($farmsCoordinates as $farmCoordinates) {
             $app['game.buildings']->build(
+                $planetEntity,
                 $townEntity,
+                $farmCoordinates,
                 Buildings::FARM,
-                $farmCoordinates
+                BuildingStatuses::CONSTRUCTED
             );
         }
 
@@ -191,9 +193,11 @@ class Planets
         );
         foreach ($housesCoordinates as $houseCoordinates) {
             $app['game.buildings']->build(
+                $planetEntity,
                 $townEntity,
+                $houseCoordinates,
                 Buildings::HOUSE,
-                $houseCoordinates
+                BuildingStatuses::CONSTRUCTED
             );
         }
     }

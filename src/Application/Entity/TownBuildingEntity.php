@@ -32,15 +32,9 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $building;
 
     /**
-     * Statuses:
-     *   - constructing
-     *   - constructed
-     *   - damaged
-     *   - destroyed
-     *
      * @ORM\Column(name="status", type="string", length=32)
      */
-    protected $status = 'constructing';
+    protected $status;
 
     /**
      * At which level is the building?
@@ -310,7 +304,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $populationCapacity;
     }
-    
+
     /*** Coordinates ***/
     /**
      * @return integer
@@ -319,7 +313,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         return $this->getCoordinatesX().','.$this->getCoordinatesY();
     }
-    
+
     /**
      * @return integer
      */
@@ -329,7 +323,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $tiles[0]->getCoordinatesX();
     }
-    
+
     /**
      * @return integer
      */

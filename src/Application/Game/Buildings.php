@@ -113,7 +113,7 @@ class Buildings
      *
      * @param PlanetEntity $planet
      * @param TownEntity   $town
-     * @param array        $coordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
      * @param string       $building
      * @param string       $buildingStatus
      *
@@ -151,19 +151,19 @@ class Buildings
                 // Tiles
                 $tileEntity = $app['orm.em']
                     ->getRepository('Application\Entity\TileEntity')
-                    ->findOneBy(array( 
-                        'coordinatesX' => $x, 
+                    ->findOneBy(array(
+                        'coordinatesX' => $x,
                         'coordinatesY' => $y,
                         'planet' => $planet,
                     ))
                 ;
-                
+
                 if (!$tileEntity->isBuildableCurrently()) {
                     throw new \Exception(
                         'This building has not enough space to be constructed (building size: '.$size.').'
                     );
                 }
-                
+
                 $tileEntity
                     ->setTownBuilding($townBuildingEntity)
                     ->setBuildingSection($sizeXSingle.'x'.$sizeYSingle)
@@ -177,7 +177,7 @@ class Buildings
         }
 
         $app['orm.em']->flush();
-        
+
         return $townBuildingEntity;
     }
 
@@ -204,7 +204,7 @@ class Buildings
             self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
             self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
         );
-        
+
         return $key === null
             ? $all
             : $all[$key]
@@ -217,27 +217,27 @@ class Buildings
     public static function getClassName($key)
     {
         $buildings = self::getAll();
-        
+
         if (!array_key_exists($key, $buildings)) {
             throw new \Exception('This building does not exists!');
         }
-        
+
         return Inflector::classify($key);
     }
-    
+
     /**
      * @return array
      */
     public static function getAllWithData()
     {
         $buildings = self::getAll();
-        
+
         foreach ($buildings as $building => $buildingName) {
             $className = 'Application\\Game\\Building\\'.self::getClassName($building);
             $buildingObject = new $className();
             $buildings[$building] = $buildingObject;
         }
-        
+
         return $buildings;
     }
 }
