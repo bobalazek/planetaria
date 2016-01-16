@@ -20,7 +20,7 @@ class Items
         $all = array(
             self::ION_CANNON_SATELITE => 'Ion cannon satelite',
         );
-        
+
         return $key === null
             ? $all
             : $all[$key]

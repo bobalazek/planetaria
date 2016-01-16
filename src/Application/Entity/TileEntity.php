@@ -291,7 +291,7 @@ class TileEntity extends AbstractBasicEntity
             $this->getTownBuilding() === null
         ;
     }
-    
+
     /**
      * Just a alias for the method above
      *

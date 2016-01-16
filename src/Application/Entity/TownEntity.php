@@ -115,7 +115,7 @@ class TownEntity extends AbstractAdvancedEntity
      * @var array
      */
     protected $resourcesProduction;
-    
+
     /**
      * How much resources do we currently have available (for each resource separatly)?
      *
@@ -245,7 +245,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Resources available ***/
     /**
      * @return array
@@ -413,7 +413,7 @@ class TownEntity extends AbstractAdvancedEntity
         $resourcesAvailable = array();
         $populationCapacity = 0;
         $population = 0;
-        
+
         $allResources = Resources::getAll();
         $townBuildings = $this->getTownBuildings();
         $townResources = $this->getTownResources();
@@ -449,14 +449,13 @@ class TownEntity extends AbstractAdvancedEntity
                 }
             }
         }
-        
+
         if (!empty($townResources)) {
             foreach ($townResources as $townResource) {
                 $resourceKey = $townResource->getResource();
                 $resourcesAvailable[$resourceKey] = $townResource->getAmount();
             }
         }
-        
 
         $this->setResourcesProduction($resourcesProduction);
         $this->setResourcesCapacity($resourcesCapacity);

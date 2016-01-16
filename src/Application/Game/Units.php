@@ -86,7 +86,7 @@ class Units
             self::SUBMARINE => 'Submarine',
             self::AIRCRAFT_CARRIER => 'Aircraft carrier',
         );
-        
+
         return $key === null
             ? $all
             : $all[$key]

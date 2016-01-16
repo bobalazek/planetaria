@@ -3,10 +3,7 @@
 namespace Application\Game;
 
 use Silex\Application;
-use Doctrine\Common\Util\Inflector;
 use Application\Entity\TownEntity;
-use Application\Entity\PlanetEntity;
-use Application\Entity\TownBuildingEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -25,7 +22,7 @@ class Towns
     {
         $this->app = $app;
     }
-    
+
     /**
      * @return boolean
      */
@@ -36,7 +33,7 @@ class Towns
 
         return true;
     }
-    
+
     /**
      * @return void
      */

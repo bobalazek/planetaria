@@ -56,22 +56,22 @@ class Resources
             self::CRUDE_OIL => 'Crude oil',
             self::MONEY => 'Money',
         );
-        
+
         return $key === null
             ? $all
             : $all[$key]
         ;
     }
-    
+
     /**
      * @return array
      */
     public static function getAllForTiles()
     {
         $all = self::getAll();
-        
+
         unset($all[Resources::MONEY]); // We do not want money to be a "natural" resource
-        
+
         return $all;
     }
 }

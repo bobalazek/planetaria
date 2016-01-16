@@ -32,7 +32,7 @@ class Skills
             self::INTELLIGENCE => 'Intelligence',
             self::LEADERSHIP => 'Leadership',
         );
-        
+
         return $key === null
             ? $all
             : $all[$key]
