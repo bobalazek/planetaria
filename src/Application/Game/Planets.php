@@ -91,7 +91,7 @@ class Planets
 
                 // Tile resources
                 $randomNumberOfResources = rand(1, 4);
-                $resources = Resources::getAll();
+                $resources = Resources::getAllForTiles();
                 $randomResourceKeys = array_rand(
                     $resources,
                     $randomNumberOfResources

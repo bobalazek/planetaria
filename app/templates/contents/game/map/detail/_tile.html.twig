@@ -4,7 +4,7 @@
     data-x="{{ x }}"
     data-y="{{ y }}"
     data-buildable="{{ tile.isBuildable() ? 'true' : 'false' }}"
-    data-buildable-currently="{{ tile.isBuildableCurrently() ? 'true' : 'false' }}"
+    data-currently-buildable="{{ tile.isCurrentlyBuildable() ? 'true' : 'false' }}"
     data-tooltip="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_tooltip-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     data-popover-title="{{ tile.getCoordinates() }}"
     data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"

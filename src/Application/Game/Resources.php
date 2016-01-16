@@ -57,4 +57,16 @@ class Resources
             self::MONEY => 'Money',
         );
     }
+    
+    /**
+     * @return array
+     */
+    public static function getAllForTiles()
+    {
+        $all = self::getAll();
+        
+        unset($all[Resources::MONEY]); // We do not want money to be a "natural" resource
+        
+        return $all;
+    }
 }

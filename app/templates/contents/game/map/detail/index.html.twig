@@ -13,7 +13,8 @@
             <div id="map">
                 <div id="map-inner">
                     {% for y in coordinatesRangeY | reverse %}
-                        <div class="map-row clearfix">
+                        <div class="map-row clearfix"
+                            data-y="{{ y }}">
                             {% for x in coordinatesRangeX %}
                                 {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
                                 {% if tile %}

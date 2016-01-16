@@ -281,7 +281,7 @@ class TileEntity extends AbstractBasicEntity
         return $this;
     }
 
-    /*** Buildable ***/
+    /*** Buildable currently ***/
     /**
      * @return boolean
      */
@@ -290,6 +290,16 @@ class TileEntity extends AbstractBasicEntity
         return $this->isBuildable() &&
             $this->getTownBuilding() === null
         ;
+    }
+    
+    /**
+     * Just a alias for the method above
+     *
+     * @return boolean
+     */
+    public function isCurrentlyBuildable()
+    {
+        return $this->isBuildableCurrently();
     }
 
     /*** Building section ***/
