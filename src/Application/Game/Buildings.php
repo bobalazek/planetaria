@@ -141,16 +141,16 @@ class Buildings
         list($sizeX, $sizeY) = explode('x', $size);
         $x = $startX;
         $y = $startY;
-        
+
         $townBuildingsCount = count($town->getTownBuildings());
         $townBuildingsLimit = $town->getBuildingsLimit();
-        
+
         if ($townBuildingsCount >= $townBuildingsLimit) {
             throw new TownBuildingsLimitReachedException(
                 'You have reached the buildings limit for this town!'
             );
         }
-        
+
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForBuilding = $app['game.towns']
             ->hasEnoughResourcesForBuilding($town, $building)
@@ -160,7 +160,7 @@ class Buildings
                 'You do not have enough resources to construct this building!'
             );
         }
-        
+
         $buildTimeSeconds = $buildingObject->getBuildTime(0);
         $timeConstructed = new \Datetime();
         $timeConstructed->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
@@ -184,7 +184,7 @@ class Buildings
                         'planet' => $planet,
                     ))
                 ;
-                
+
                 if (!$tileEntity) {
                     throw new TileNotExistsException(
                         'This tile ('.$x.','.$y.') does not exists!'
@@ -208,7 +208,7 @@ class Buildings
 
             $y++;
         }
-        
+
         // Substract the resources in the town for the building
         $buildingResourcesCost = $buildingObject->getResourcesCost(0);
         $town->useResources($buildingResourcesCost);
@@ -273,14 +273,14 @@ class Buildings
         foreach ($buildings as $building => $buildingName) {
             $className = 'Application\\Game\\Building\\'.self::getClassName($building);
             $buildingObject = new $className();
-            
+
             if (
                 $key !== null &&
                 $key === $building
             ) {
                 return $buildingObject;
             }
-            
+
             $buildings[$building] = $buildingObject;
         }
 

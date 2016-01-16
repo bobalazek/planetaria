@@ -6,8 +6,6 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Application\Game\Buildings;
-use Application\Game\BuildingStatuses;
-use Application\Game\Exception\InsufficientResourcesException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>

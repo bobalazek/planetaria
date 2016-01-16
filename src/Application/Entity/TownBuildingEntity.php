@@ -58,7 +58,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\Column(name="health_points_left", type="integer")
      */
     protected $healthPointsLeft = 1000;
-    
+
     /**
      * @var \DateTime
      *
@@ -241,7 +241,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         if (!$this->isOperational()) {
             return array();
         }
-        
+
         $level = $this->getLevel();
         $resourcesProduction = array();
 
@@ -264,7 +264,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         if (!$this->isOperational()) {
             return array();
         }
-        
+
         $level = $this->getLevel();
         $resourcesCapacity = array();
 
@@ -287,7 +287,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         if (!$this->isOperational()) {
             return array();
         }
-        
+
         $level = $this->getLevel();
         $populationCapacity = array();
 
@@ -328,7 +328,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $tiles[0]->getCoordinatesY();
     }
-    
+
     /*** Time constructed ***/
     /**
      * @return \DateTime
@@ -349,7 +349,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Operational ***/
     /**
      * @return boolean
@@ -358,7 +358,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         return $this->getStatus() === BuildingStatuses::OPERATIONAL;
     }
-    
+
     /*** Status ***/
     /**
      * @return string
@@ -368,16 +368,16 @@ class TownBuildingEntity extends AbstractBasicEntity
         $currentDatetime = new \Datetime();
         $timeConstructed = $this->getTimeConstructed();
         $healthPointsLeft = $this->getHealthPointsLeft();
-        
+
         // Building isn't yet build, so it can not produce anything.
         if ($timeConstructed > $currentDatetime) {
             return BuildingStatuses::CONSTRUCTING;
         }
-        
+
         if ($healthPointsLeft === 0) {
             return BuildingStatuses::DESTROYED;
         }
-        
+
         return BuildingStatuses::OPERATIONAL;
     }
 

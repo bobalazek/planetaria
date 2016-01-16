@@ -47,14 +47,14 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="buildings_limit", type="integer")
      */
     protected $buildingsLimit = 10;
-    
+
     /**
      * @var \DateTime
      *
@@ -145,7 +145,7 @@ class TownEntity extends AbstractAdvancedEntity
         $this->townResources = new ArrayCollection();
         $this->townBuildings = new ArrayCollection();
     }
-    
+
     /*** Buildings limit ***/
     /**
      * @return integer
@@ -261,22 +261,22 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /**
      * @return TownEntity
      */
     public function prepareTownResources($amount = 0)
     {
         $resources = Resources::getAll();
-        
+
         foreach ($resources as $resouce => $resourceName) {
             $townResource = new TownResourceEntity();
-            
+
             $townResource
                 ->setResource($resouce)
                 ->setAmount($amount)
             ;
-            
+
             $this->addTownResource($townResource);
         }
     }
@@ -456,7 +456,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Use Resource ***/
     /**
      * @param array $resources
@@ -466,7 +466,7 @@ class TownEntity extends AbstractAdvancedEntity
     public function useResources($resources)
     {
         $townResources = $this->getTownResources();
-        
+
         if (!empty($resources)) {
             // Loop thought all the resources, that need to be substracted
             foreach ($resources as $resource => $amount) {
@@ -541,10 +541,10 @@ class TownEntity extends AbstractAdvancedEntity
         $this->setResourcesAvailable($resourcesAvailable);
         $this->setPopulationCapacity($populationCapacity);
         $this->setPopulation($population);
-        
+
         return $this;
     }
-    
+
     /*** Time last updated resources ***/
     /**
      * @return \DateTime
@@ -573,7 +573,7 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $this->reloadData();
     }
-    
+
     /**
      * @ORM\PostPersist
      */
