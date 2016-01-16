@@ -139,6 +139,7 @@ class Planets
             ->setDescription('The capital of Panem')
             ->setPlanet($planetEntity)
             ->setCountry($countryEntity)
+            ->prepareTownResources(100000)
         ;
         $app['orm.em']->persist($townEntity);
 
@@ -163,8 +164,7 @@ class Planets
             $planetEntity,
             $townEntity,
             array(-1, -1), // Start (bottom left) coordinates
-            Buildings::CAPITOL,
-            BuildingStatuses::CONSTRUCTED
+            Buildings::CAPITOL
         );
 
         // Town building - Farms
@@ -179,8 +179,7 @@ class Planets
                 $planetEntity,
                 $townEntity,
                 $farmCoordinates,
-                Buildings::FARM,
-                BuildingStatuses::CONSTRUCTED
+                Buildings::FARM
             );
         }
 
@@ -196,8 +195,7 @@ class Planets
                 $planetEntity,
                 $townEntity,
                 $houseCoordinates,
-                Buildings::HOUSE,
-                BuildingStatuses::CONSTRUCTED
+                Buildings::HOUSE
             );
         }
     }

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Application\Game\Buildings;
 use Application\Game\BuildingStatuses;
+use Application\Game\Exception\InsufficientResourcesException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -144,15 +145,12 @@ class GameController
         $building = $request->query->get('building');
         if ($building) {
             if (array_key_exists($building, $buildings)) {
-                // @to-do: Check if enough resources in this town
-
                 try {
                     $app['game.buildings']->build(
                         $planet,
                         $town,
                         array($x, $y), // Start (bottom left) coordinates
-                        $building,
-                        BuildingStatuses::CONSTRUCTING
+                        $building
                     );
 
                     $app['flashbag']->add(

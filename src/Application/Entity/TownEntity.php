@@ -47,6 +47,20 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="buildings_limit", type="integer")
+     */
+    protected $buildingsLimit = 10;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_last_updated_resources", type="datetime", nullable=true)
+     */
+    protected $timeLastUpdatedResources;
 
     /**
      * @var \DateTime
@@ -93,35 +107,35 @@ class TownEntity extends AbstractAdvancedEntity
      *
      * @var integer
      */
-    protected $populationCapacity;
+    protected $populationCapacity = 0;
 
     /**
      * How much is the current population of that town?
      *
      * @var integer
      */
-    protected $population;
+    protected $population = 0;
 
     /**
      * What's the limit for the resources (for each resource separatly)?
      *
      * @var array
      */
-    protected $resourcesCapacity;
+    protected $resourcesCapacity = array();
 
     /**
      * How much resources does this town produces (for each resource separatly)?
      *
      * @var array
      */
-    protected $resourcesProduction;
+    protected $resourcesProduction = array();
 
     /**
      * How much resources do we currently have available (for each resource separatly)?
      *
      * @var array
      */
-    protected $resourcesAvailable;
+    protected $resourcesAvailable = array();
 
     /**
      * The constructor
@@ -130,6 +144,27 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $this->townResources = new ArrayCollection();
         $this->townBuildings = new ArrayCollection();
+    }
+    
+    /*** Buildings limit ***/
+    /**
+     * @return integer
+     */
+    public function getBuildingsLimit()
+    {
+        return $this->buildingsLimit;
+    }
+
+    /**
+     * @param integer $buildingsLimit
+     *
+     * @return TownEntity
+     */
+    public function setBuildingsLimit($buildingsLimit)
+    {
+        $this->buildingsLimit = $buildingsLimit;
+
+        return $this;
     }
 
     /*** Planet ***/
@@ -225,6 +260,25 @@ class TownEntity extends AbstractAdvancedEntity
         $this->townResources->removeElement($townResource);
 
         return $this;
+    }
+    
+    /**
+     * @return TownEntity
+     */
+    public function prepareTownResources($amount = 0)
+    {
+        $resources = Resources::getAll();
+        
+        foreach ($resources as $resouce => $resourceName) {
+            $townResource = new TownResourceEntity();
+            
+            $townResource
+                ->setResource($resouce)
+                ->setAmount($amount)
+            ;
+            
+            $this->addTownResource($townResource);
+        }
     }
 
     /*** Resources production ***/
@@ -402,11 +456,36 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
+    
+    /*** Use Resource ***/
+    /**
+     * @param array $resources
+     *
+     * @return TownEntity
+     */
+    public function useResources($resources)
+    {
+        $townResources = $this->getTownResources();
+        
+        if (!empty($resources)) {
+            // Loop thought all the resources, that need to be substracted
+            foreach ($resources as $resource => $amount) {
+                // Go thought all the town resources, until you find the right one to substract it
+                foreach ($townResources as $townResource) {
+                    if ($townResource->getResource() == $resource) {
+                        $townResourceAmount = $townResource->getAmount();
+                        $townResource->setAmount($townResourceAmount - $amount);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     /**
-     * @return void
+     * @return TownEntity
      */
-    public function initialize()
+    public function reloadData()
     {
         $resourcesProduction = array();
         $resourcesCapacity = array();
@@ -462,6 +541,29 @@ class TownEntity extends AbstractAdvancedEntity
         $this->setResourcesAvailable($resourcesAvailable);
         $this->setPopulationCapacity($populationCapacity);
         $this->setPopulation($population);
+        
+        return $this;
+    }
+    
+    /*** Time last updated resources ***/
+    /**
+     * @return \DateTime
+     */
+    public function getTimeLastUpdatedResources()
+    {
+        return $this->timeLastUpdatedResources;
+    }
+
+    /**
+     * @param \DateTime $timeLastUpdatedResources
+     *
+     * @return TownEntity
+     */
+    public function setTimeLastUpdatedResources(\DateTime $timeLastUpdatedResources = null)
+    {
+        $this->timeLastUpdatedResources = $timeLastUpdatedResources;
+
+        return $this;
     }
 
     /**
@@ -469,7 +571,15 @@ class TownEntity extends AbstractAdvancedEntity
      */
     public function postLoad()
     {
-        $this->initialize();
+        $this->reloadData();
+    }
+    
+    /**
+     * @ORM\PostPersist
+     */
+    public function postPersist()
+    {
+        $this->reloadData();
     }
 
     /**

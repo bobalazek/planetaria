@@ -15,12 +15,7 @@ class BuildingStatuses
     /**
      * @var string
      */
-    const CONSTRUCTED = 'constructed';
-
-    /**
-     * @var string
-     */
-    const DAMAGED = 'damaged';
+    const OPERATIONAL = 'operational';
 
     /**
      * @var string
@@ -34,8 +29,7 @@ class BuildingStatuses
     {
         return array(
             self::CONSTRUCTING => 'Constructing',
-            self::CONSTRUCTED => 'Constructed',
-            self::DAMAGED => 'Damaged',
+            self::OPERATIONAL => 'Operational',
             self::DESTROYED => 'Destroyed',
         );
     }

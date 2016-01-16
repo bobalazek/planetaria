@@ -7,6 +7,10 @@ use Doctrine\Common\Util\Inflector;
 use Application\Entity\TownEntity;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TownBuildingEntity;
+use Application\Game\Exception\TileNotBuildableException;
+use Application\Game\Exception\TileNotExistsException;
+use Application\Game\Exception\InsufficientResourcesException;
+use Application\Game\Exception\TownBuildingsLimitReachedException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -109,8 +113,6 @@ class Buildings
     /**
      * With this method we'll create the town building.
      *
-     * @to-do: Throw exception if it's not buildable (is overlapping an extisting building on a tile).
-     *
      * @param PlanetEntity $planet
      * @param TownEntity   $town
      * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
@@ -119,31 +121,56 @@ class Buildings
      *
      * @return TownBuildingEntity
      */
-    public function build(PlanetEntity $planet, TownEntity $town, array $startingCoordinates = array(), $building, $buildingStatus)
+    public function build(PlanetEntity $planet, TownEntity $town, array $startingCoordinates = array(), $building)
     {
         $app = $this->app;
 
-        // @to-do: Check is startingCoordinates is a array with 2 values (x, y)
-        $startX = $startingCoordinates[0];
-        $startY = $startingCoordinates[1];
-
-        $townBuildingEntity = new TownBuildingEntity();
-
-        $townBuildingEntity
-            ->setBuilding($building)
-            ->setStatus($buildingStatus)
-            ->setTown($town)
+        $startX = isset($startingCoordinates[0])
+            ? $startingCoordinates[0]
+            : 0
+        ;
+        $startY = isset($startingCoordinates[1])
+            ? $startingCoordinates[1]
+            : 0
         ;
 
-        $app['orm.em']->persist($townBuildingEntity);
-
         $buildingClassName = 'Application\\Game\\Building\\'.$this->getClassName($building);
-        $buildingClass = new $buildingClassName();
+        $buildingObject = new $buildingClassName();
 
-        $size = $buildingClass->getSize();
+        $size = $buildingObject->getSize();
         list($sizeX, $sizeY) = explode('x', $size);
         $x = $startX;
         $y = $startY;
+        
+        $townBuildingsCount = count($town->getTownBuildings());
+        $townBuildingsLimit = $town->getBuildingsLimit();
+        
+        if ($townBuildingsCount >= $townBuildingsLimit) {
+            throw new TownBuildingsLimitReachedException(
+                'You have reached the buildings limit for this town!'
+            );
+        }
+        
+        // Check if that town has enough resources to build that building
+        $hasEnoughResourcesForBuilding = $app['game.towns']
+            ->hasEnoughResourcesForBuilding($town, $building)
+        ;
+        if (!$hasEnoughResourcesForBuilding) {
+            throw new InsufficientResourcesException(
+                'You do not have enough resources to construct this building!'
+            );
+        }
+        
+        $buildTimeSeconds = $buildingObject->getBuildTime(0);
+        $timeConstructed = new \Datetime();
+        $timeConstructed->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
+        $townBuildingEntity = new TownBuildingEntity();
+        $townBuildingEntity
+            ->setBuilding($building)
+            ->setTown($town)
+            ->setTimeConstructed($timeConstructed)
+        ;
+        $app['orm.em']->persist($townBuildingEntity);
 
         foreach (range(1, (int) $sizeY) as $sizeYSingle) {
             $x = $startX;
@@ -157,9 +184,15 @@ class Buildings
                         'planet' => $planet,
                     ))
                 ;
+                
+                if (!$tileEntity) {
+                    throw new TileNotExistsException(
+                        'This tile ('.$x.','.$y.') does not exists!'
+                    );
+                }
 
                 if (!$tileEntity->isBuildableCurrently()) {
-                    throw new \Exception(
+                    throw new TileNotBuildableException(
                         'This building has not enough space to be constructed (building size: '.$size.').'
                     );
                 }
@@ -175,6 +208,11 @@ class Buildings
 
             $y++;
         }
+        
+        // Substract the resources in the town for the building
+        $buildingResourcesCost = $buildingObject->getResourcesCost(0);
+        $town->useResources($buildingResourcesCost);
+        $app['orm.em']->persist($town);
 
         $app['orm.em']->flush();
 
@@ -228,13 +266,21 @@ class Buildings
     /**
      * @return array
      */
-    public static function getAllWithData()
+    public static function getAllWithData($key = null)
     {
         $buildings = self::getAll();
 
         foreach ($buildings as $building => $buildingName) {
             $className = 'Application\\Game\\Building\\'.self::getClassName($building);
             $buildingObject = new $className();
+            
+            if (
+                $key !== null &&
+                $key === $building
+            ) {
+                return $buildingObject;
+            }
+            
             $buildings[$building] = $buildingObject;
         }
 

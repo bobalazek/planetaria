@@ -5,6 +5,7 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Game\Buildings\AbstractBuilding;
 use Application\Game\Buildings;
+use Application\Game\BuildingStatuses;
 
 /**
  * Town Building Entity
@@ -32,11 +33,6 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $building;
 
     /**
-     * @ORM\Column(name="status", type="string", length=32)
-     */
-    protected $status;
-
-    /**
      * At which level is the building?
      *
      * @var integer
@@ -62,6 +58,13 @@ class TownBuildingEntity extends AbstractBasicEntity
      * @ORM\Column(name="health_points_left", type="integer")
      */
     protected $healthPointsLeft = 1000;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_constructed", type="datetime")
+     */
+    protected $timeConstructed;
 
     /**
      * @var \DateTime
@@ -109,35 +112,14 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $this;
     }
 
-    /*** Status ***/
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     *
-     * @return TownBuildingEntity
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * @return AbstractBuilding
      */
     public function getBuildingObject()
     {
-        $className = 'Application\\Game\\Building\\'.Buildings::getClassName(
-            $this->getBuilding()
-        );
+        $className = 'Application\\Game\\Building\\'.
+            Buildings::getClassName($this->getBuilding())
+        ;
 
         return new $className();
     }
@@ -250,11 +232,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     /***** Resources production *****/
     /**
      * @todo: Take damages & stuff into consideration
+     * @todo: Do NOT count in production froum buildings, currently in construction (timeConstructed < currentDatetime)
      *
      * @return array
      */
     public function getResourcesProduction()
     {
+        if (!$this->isOperational()) {
+            return array();
+        }
+        
         $level = $this->getLevel();
         $resourcesProduction = array();
 
@@ -274,6 +261,10 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function getResourcesCapacity()
     {
+        if (!$this->isOperational()) {
+            return array();
+        }
+        
         $level = $this->getLevel();
         $resourcesCapacity = array();
 
@@ -293,6 +284,10 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function getPopulationCapacity()
     {
+        if (!$this->isOperational()) {
+            return array();
+        }
+        
         $level = $this->getLevel();
         $populationCapacity = array();
 
@@ -332,6 +327,58 @@ class TownBuildingEntity extends AbstractBasicEntity
         $tiles = $this->getTiles();
 
         return $tiles[0]->getCoordinatesY();
+    }
+    
+    /*** Time constructed ***/
+    /**
+     * @return \DateTime
+     */
+    public function getTimeConstructed()
+    {
+        return $this->timeConstructed;
+    }
+
+    /**
+     * @param \DateTime $timeConstructed
+     *
+     * @return TownBuildingEntity
+     */
+    public function setTimeConstructed(\DateTime $timeConstructed = null)
+    {
+        $this->timeConstructed = $timeConstructed;
+
+        return $this;
+    }
+    
+    /*** Operational ***/
+    /**
+     * @return boolean
+     */
+    public function isOperational()
+    {
+        return $this->getStatus() === BuildingStatuses::OPERATIONAL;
+    }
+    
+    /*** Status ***/
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        $currentDatetime = new \Datetime();
+        $timeConstructed = $this->getTimeConstructed();
+        $healthPointsLeft = $this->getHealthPointsLeft();
+        
+        // Building isn't yet build, so it can not produce anything.
+        if ($timeConstructed > $currentDatetime) {
+            return BuildingStatuses::CONSTRUCTING;
+        }
+        
+        if ($healthPointsLeft === 0) {
+            return BuildingStatuses::DESTROYED;
+        }
+        
+        return BuildingStatuses::OPERATIONAL;
     }
 
     /**
