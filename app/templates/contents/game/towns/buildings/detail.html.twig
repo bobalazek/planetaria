@@ -18,6 +18,12 @@
             href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
             {{ 'View on map' | trans }}
         </a>
+        {% if townBuilding.isUpgradable() %}
+            <a class="btn btn-default btn-xs"
+                href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                {{ 'Upgrade' | trans }}
+            </a>
+        {% endif %}
     </h2>
     <div id="main-content">
         <div class="row">

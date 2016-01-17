@@ -21,116 +21,20 @@
                 <div class="col-md-8">
                     <div class="row">
                         {% for buildingKey, building in buildings %}
-                            <div class="col-md-12">
-                                <div class="building-wrapper">
-                                    {% set preBuildChecks = app['game.buildings'].doPreBuildChecksResponse(
-                                        planet,
-                                        town,
-                                        [ x, y ],
-                                        buildingKey
-                                    ) %}
-                                    {% if preBuildChecks is not same as (true) %}
-                                        <div class="building-overlay">
-                                            {{ preBuildChecks }}
-                                        </div>
-                                    {% endif %}
-                                    <div class="building media">
-                                        <div class="media-left">
-                                            <img class="media-object"
-                                                src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getKey() }}/operational/full.png" />
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">
-                                                {{ building.getName() }}
-                                                <span class="badge">0</span>
-                                            </h4>
-                                            <p>{{ building.getDescription() }}</p>
-                                            <div class="row">
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Type' | trans }}:</b>
-                                                        {{ building.getType() | humanize | trans }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Size' | trans }}:</b>
-                                                        {{ building.getSize() }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Maximum level' | trans }}:</b>
-                                                        {{ building.getMaximumLevel() }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Health points' | trans }}:</b>
-                                                        {{ building.getHealthPoints(0) }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Resources capacity' | trans }}:</b>
-                                                        {{ building.getResourcesCapacity(0) }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-6">
-                                                    <p>
-                                                        <b>{{ 'Build time' | trans }}:</b>
-                                                        {{ building.getBuildTime(0) }}
-                                                        {{ 'seconds' | trans }}
-                                                    </p>
-                                                </div> <!-- /.col-md-4 -->
-                                            </div> <!-- /.row -->
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <h4>{{ 'Cost' | trans }}</h4>
-                                                    <ul class="list-group">
-                                                        {% for resource, resourceAmount in building.getResourcesCost(0) %}
-                                                            <li class="list-group-item">
-                                                                <span class="badge">
-                                                                    {{ resourceAmount }}
-                                                                </span>
-                                                                {{ resource | humanize | trans }}
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div> <!-- /.col-md-6 -->
-                                                {% if building.getResourcesProduction(0) %}
-                                                    <div class="col-md-6">
-                                                        <h4>
-                                                            {{ 'Production' | trans }}
-                                                            <small>{{ 'per minute' | trans }}</small>
-                                                        </h4>
-                                                        <ul class="list-group">
-                                                            {% for resource, resourceAmount in building.getResourcesProduction(0) %}
-                                                                <li class="list-group-item">
-                                                                    <span class="badge">
-                                                                        {{ resourceAmount }}
-                                                                    </span>
-                                                                    {{ resource | humanize | trans }}
-                                                                </li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div> <!-- /.col-md-6 -->
-                                                {% endif %}
-                                            </div> <!-- /.row -->
-                                            <a class="btn btn-block btn-success"
-                                                href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId(), building: buildingKey }) }}">
-                                                {{ 'Build now' | trans }}
-                                            </a>
-                                        </div>
-                                    </div> <!-- /.media -->
-                                </div> <!-- /.building-wrapper -->
-                            </div>
+                            {% include 'contents/game/map/build/_building.html.twig' %}
                         {% endfor %}
                     </div> <!-- /.row -->
                 </div> <!-- /.col-md-8 -->
                 <div class="col-md-4">
                     <div id="town-sidebar">
                         <h3>{{ town }}</h3>
+                        {% if town.getDescription() %}
+                            <p>{{ town.getDescription() }}</p>
+                        {% endif %}
+                        <h4>
+                            {{ 'Buildings' | trans }}:
+                            {{ town.getTownBuildings() | length }}
+                        </h4>
                         {% include 'contents/game/_parts/town-resources-table.html.twig' %}
                     </div>
                 </div> <!-- /.col-md-4 -->
