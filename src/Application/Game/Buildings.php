@@ -349,7 +349,7 @@ class Buildings
                 'The building is currently upgrading!'
             );
         }
-        
+
         $isUpgradable = $townBuilding->isUpgradable();
         if (!$isUpgradable) {
             throw new TownBuildingNotUpgradableException(

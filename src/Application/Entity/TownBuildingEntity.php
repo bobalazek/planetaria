@@ -459,7 +459,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $timeNextLevelStarted !== null && $timeNextLevelEnded !== null;
     }
-    
+
     /*** Badge text ***/
     /**
      * @return string
