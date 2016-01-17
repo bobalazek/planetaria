@@ -47,7 +47,7 @@ class Towns
 
         return $result;
     }
-    
+
     /**
      * @param TownBuildingEntity $townBuildinguilding
      *
@@ -141,7 +141,7 @@ class Towns
         // Reload the town entity, so we have the newest information available!
         $app['orm.em']->refresh($town);
     }
-    
+
     /**
      * @param TownEntity $town
      *
@@ -151,16 +151,16 @@ class Towns
     {
         $app = $this->app;
         $townBuildings = $town->getTownBuildings();
-        
+
         if (!empty($townBuildings)) {
             $currentDatetime = new \Datetime();
-            
+
             foreach ($townBuildings as $townBuilding) {
                 $townBuildingTimeNextLevelStarted = $townBuilding->getTimeNextLevelStarted();
                 $townBuildingTimeNextLevelEnded = $townBuilding->getTimeNextLevelEnded();
-                
-                if(
-                    $townBuildingTimeNextLevelStarted !== null && 
+
+                if (
+                    $townBuildingTimeNextLevelStarted !== null &&
                     $townBuildingTimeNextLevelEnded !== null &&
                     $currentDatetime > $townBuildingTimeNextLevelEnded
                 ) {
@@ -169,11 +169,11 @@ class Towns
                         ->setTimeNextLevelStarted(null)
                         ->setTimeNextLevelEnded(null)
                     ;
-                    
+
                     $app['orm.em']->persist($townBuilding);
-                    
+
                     $app['orm.em']->flush();
-                    
+
                     $app['orm.em']->refresh($townBuilding);
                 }
             }

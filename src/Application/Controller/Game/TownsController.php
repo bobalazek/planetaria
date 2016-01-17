@@ -89,7 +89,7 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404);
         }
-        
+
         // Update town stuff
         $app['game.towns']->checkForFinishedBuildingUpgrades($town);
         $app['game.towns']->updateTownResources($town);
@@ -131,7 +131,7 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404);
         }
-        
+
         if (!$townBuilding->isUpgradable()) {
             $app['flashbag']->add(
                 'danger',
@@ -143,12 +143,12 @@ class TownsController
             // Update town stuff
             $app['game.towns']->checkForFinishedBuildingUpgrades($town);
             $app['game.towns']->updateTownResources($town);
-            
+
             try {
                 $app['game.buildings']
                     ->upgrade($townBuilding)
                 ;
-                
+
                 $app['flashbag']->add(
                     'success',
                     $app['translator']->trans(
@@ -160,7 +160,7 @@ class TownsController
                     'danger',
                     $e->getMessage()
                 );
-            }    
+            }
         }
 
         return $app->redirect(

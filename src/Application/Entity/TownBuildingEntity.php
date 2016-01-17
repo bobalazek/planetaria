@@ -427,7 +427,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return BuildingStatuses::OPERATIONAL;
     }
-    
+
     /*** Operational ***/
     /**
      * @return boolean
@@ -447,7 +447,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this->getLevel() < $buildingObject->getMaximumLevel();
     }
-    
+
     /*** Upgrading ***/
     /**
      * @return boolean
@@ -456,8 +456,19 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $timeNextLevelStarted = $this->getTimeNextLevelStarted();
         $timeNextLevelEnded = $this->getTimeNextLevelEnded();
-        
+
         return $timeNextLevelStarted !== null && $timeNextLevelEnded !== null;
+    }
+    
+    /*** Badge text ***/
+    /**
+     * @return string
+     */
+    public function getBadgeText()
+    {
+        return $this->getLevel().
+            ($this->isUpgrading() ? ' => '.($this->getLevel()+1) : '')
+        ;
     }
 
     /**
