@@ -81,7 +81,7 @@ class Towns
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
                     $amount = $townResourceAmount + $resourcesProduced;
 
-                    // Nothing done - skipp it, instead of updating it!
+                    // Nothing done - skip it, instead of updating it!
                     if ($resourcesProduced === 0) {
                         break;
                     }
