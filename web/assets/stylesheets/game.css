@@ -90,6 +90,36 @@ h1 {
         .map-tile:hover .map-tile-hover-overlay {
             display: block;   
         }
+        
+/*** Building ***/
+.building-wrapper {
+    position: relative;
+}
+
+.building-overlay {
+    opacity: 0.8;
+    padding: 30px 10px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    font-size: 18px;
+}
+
+.building {
+    margin: 0 0 20px;
+    padding: 10px;
+}
+
+.building.media .media-object {
+    max-width: 48px;
+    margin-right: 20px;
+}
 
 /********** Fixes **********/
 /*** Popover fix ***/

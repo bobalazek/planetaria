@@ -37,6 +37,15 @@ class GameController
             ->getRepository('Application\Entity\PlanetEntity')
             ->findAll()
         ;
+        
+        if (count($planets) === 1) {
+            return $app->redirect($app['url_generator']->generate(
+                'game.map.detail',
+                array(
+                    'id' => $planets[0]->getId(),
+                )
+            ));
+        }
 
         return new Response(
             $app['twig']->render(
@@ -181,6 +190,18 @@ class GameController
                     $app['flashbag']->add(
                         'danger',
                         $e->getMessage()
+                    );
+                    
+                    return $app->redirect(
+                        $app['url_generator']->generate(
+                            'game.map.build',
+                            array(
+                                'id' => $planet->getId(),
+                                'x' => $x,
+                                'y' => $y,
+                                'town_id' => $townId,
+                            )
+                        )
                     );
                 }
             } else {

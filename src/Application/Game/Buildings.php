@@ -134,7 +134,7 @@ class Buildings
         $app['game.towns']->updateTownResources($town, $ignoreCapacityLimit);
 
         /***** Checks *****/
-        $this->preBuildChecks(
+        $this->doPreBuildChecks(
             $planet,
             $town,
             $startingCoordinates,
@@ -203,7 +203,7 @@ class Buildings
      *
      * @return TownBuildingEntity
      */
-    public function preBuildChecks(
+    public function doPreBuildChecks(
         PlanetEntity $planet,
         TownEntity $town,
         array $startingCoordinates = array(),
@@ -237,6 +237,38 @@ class Buildings
             throw new InsufficientAreaSpaceException(
                 'You do not have enough space to construct this building!'
             );
+        }
+    }
+    
+    /**
+     * Same as the method above BUT a more frontend friendly version. Outputs text instead of exceptions.
+     *
+     *
+     * @param PlanetEntity $planet
+     * @param TownEntity   $town
+     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
+     * @param string       $building
+     * @param string       $buildingStatus
+     *
+     * @return TownBuildingEntity
+     */
+    public function doPreBuildChecksResponse(
+        PlanetEntity $planet,
+        TownEntity $town,
+        array $startingCoordinates = array(),
+        $building
+    ) {
+        try {
+            $this->doPreBuildChecks(
+                $planet,
+                $town,
+                $startingCoordinates,
+                $building
+            );
+            
+            return true;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 
