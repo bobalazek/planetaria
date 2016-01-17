@@ -56,9 +56,12 @@ class Towns
     }
 
     /**
+     * @param TownEntity $town
+     * @param boolean    $ignoreCapacityLimit Should it ignore  the capacity imit (and skipp the setter to capacity, if it's more)? Usefull when creating a new town, that does not have any storage yet (because it doesn't have any buildings that would increase it)
+     *
      * @return void
      */
-    public function updateTownResources(TownEntity $town)
+    public function updateTownResources(TownEntity $town, $ignoreCapacityLimit = false)
     {
         $app = $this->app;
         $resources = $town->getResources();
@@ -78,7 +81,10 @@ class Towns
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
                     $amount = $townResourceAmount + $resourcesProduced;
 
-                    if ($amount > $resourceData['capacity']) {
+                    if (
+                        !$ignoreCapacityLimit &&
+                        $amount > $resourceData['capacity']
+                    ) {
                         $amount = $resourceData['capacity'];
                     }
 

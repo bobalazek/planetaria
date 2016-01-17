@@ -164,7 +164,8 @@ class Planets
             $planetEntity,
             $townEntity,
             array(-1, -1), // Start (bottom left) coordinates
-            Buildings::CAPITOL
+            Buildings::CAPITOL,
+            true // $ignoreCapacityLimit
         );
 
         // Town building - Farms
@@ -179,7 +180,8 @@ class Planets
                 $planetEntity,
                 $townEntity,
                 $farmCoordinates,
-                Buildings::FARM
+                Buildings::FARM,
+                true // $ignoreCapacityLimit
             );
         }
 
@@ -195,7 +197,8 @@ class Planets
                 $planetEntity,
                 $townEntity,
                 $houseCoordinates,
-                Buildings::HOUSE
+                Buildings::HOUSE,
+                true // $ignoreCapacityLimit
             );
         }
     }

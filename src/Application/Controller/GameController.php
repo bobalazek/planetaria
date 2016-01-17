@@ -138,18 +138,16 @@ class GameController
             $townId
         );
 
-        if (!$town) {
-            $app->abort(404);
+        if ($town) {
+            // Update the town resources!
+            $app['game.towns']->updateTownResources($town);
         }
-
-        // Update the town resources!
-        $app['game.towns']->updateTownResources($town);
 
         // Get all available buildings
         $buildings = Buildings::getAllWithData();
 
         $building = $request->query->get('building');
-        if ($building) {
+        if ($building && $town) {
             if (array_key_exists($building, $buildings)) {
                 try {
                     $app['game.buildings']->build(

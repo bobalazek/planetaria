@@ -117,6 +117,7 @@ class Buildings
      * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
      * @param string       $building
      * @param string       $buildingStatus
+     * @param boolean      $ignoreCapacityLimit Useful when creating a new town, so the town resources amount is NOT set to 0 (because at that point, you do not have any buildings, that gives you storage capacity)
      *
      * @return TownBuildingEntity
      */
@@ -124,12 +125,13 @@ class Buildings
         PlanetEntity $planet,
         TownEntity $town,
         array $startingCoordinates = array(),
-        $building
+        $building,
+        $ignoreCapacityLimit = false
     ) {
         $app = $this->app;
 
         // Before the buy, update the town resources (storage) to the current state.
-        $app['game.towns']->updateTownResources($town);
+        $app['game.towns']->updateTownResources($town, $ignoreCapacityLimit);
 
         /***** Checks *****/
         $this->preBuildChecks(
