@@ -43,7 +43,7 @@ class Towns
 
         return $result;
     }
-    
+
     /**
      * @return boolean
      */
@@ -51,7 +51,7 @@ class Towns
     {
         $townBuildingsCount = count($town->getTownBuildings());
         $townBuildingsLimit = $town->getBuildingsLimit();
-        
+
         return $townBuildingsCount >= $townBuildingsLimit;
     }
 

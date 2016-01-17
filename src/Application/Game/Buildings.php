@@ -7,7 +7,6 @@ use Doctrine\Common\Util\Inflector;
 use Application\Entity\TownEntity;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TownBuildingEntity;
-use Application\Game\Exception\TileNotBuildableException;
 use Application\Game\Exception\InsufficientResourcesException;
 use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
@@ -121,14 +120,95 @@ class Buildings
      *
      * @return TownBuildingEntity
      */
-    public function build(PlanetEntity $planet, TownEntity $town, array $startingCoordinates = array(), $building)
-    {
+    public function build(
+        PlanetEntity $planet,
+        TownEntity $town,
+        array $startingCoordinates = array(),
+        $building
+    ) {
         $app = $this->app;
 
         // Before the buy, update the town resources (storage) to the current state.
         $app['game.towns']->updateTownResources($town);
-        
+
         /***** Checks *****/
+        $this->preBuildChecks(
+            $planet,
+            $town,
+            $startingCoordinates,
+            $building
+        );
+
+        // Save the town building
+        $buildingObject = $this->getAllWithData($building);
+        $buildTimeSeconds = $buildingObject->getBuildTime(0); // How long does the initial level take to build?
+        $timeConstructed = new \Datetime();
+        $timeConstructed->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
+        $townBuildingEntity = new TownBuildingEntity();
+        $townBuildingEntity
+            ->setBuilding($building)
+            ->setTown($town)
+            ->setTimeConstructed($timeConstructed)
+        ;
+        $app['orm.em']->persist($townBuildingEntity);
+
+        // Save the building on that tiles
+        $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
+        foreach ($requiredTiles as $requiredTile) {
+            $buildingSectionCoordinates = $this->getBuildingSectionCoordinates(
+                array(
+                    $requiredTile->getCoordinatesX(),
+                    $requiredTile->getCoordinatesY(),
+                ),
+                $startingCoordinates,
+                $building
+            );
+
+            if ($buildingSectionCoordinates === false) {
+                throw new \Exception(
+                    'Could not get building section coordinates!'
+                );
+            }
+            $buildingSectionX = $buildingSectionCoordinates[0];
+            $buildingSectionY = $buildingSectionCoordinates[1];
+
+            $requiredTile
+                ->setTownBuilding($townBuildingEntity)
+                ->setBuildingSection($buildingSectionX.'x'.$buildingSectionY)
+            ;
+            $app['orm.em']->persist($requiredTile);
+        }
+
+        // Substract the resources in the town for that building
+        $buildingResourcesCost = $buildingObject->getResourcesCost(0);
+        $town->useResources($buildingResourcesCost);
+        $app['orm.em']->persist($town);
+
+        // Save everything
+        $app['orm.em']->flush();
+
+        return $townBuildingEntity;
+    }
+
+    /**
+     * With this method we'll do checks if everyting fits before the building is being build.
+     *
+     * @param PlanetEntity $planet
+     * @param TownEntity   $town
+     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
+     * @param string       $building
+     * @param string       $buildingStatus
+     *
+     * @return TownBuildingEntity
+     */
+    public function preBuildChecks(
+        PlanetEntity $planet,
+        TownEntity $town,
+        array $startingCoordinates = array(),
+        $building
+    ) {
+        $app = $this->app;
+
         // Check if we have reached the buildings limit
         $hasReachedBuildingsLimit = $app['game.towns']
             ->hasReachedBuildingsLimit($town)
@@ -148,7 +228,7 @@ class Buildings
                 'You do not have enough resources to construct this building!'
             );
         }
-        
+
         // Check if we have enough space to build this building
         $hasEnoughAreaSpace = $this->hasEnoughAreaSpace($planet, $startingCoordinates, $building);
         if (!$hasEnoughAreaSpace) {
@@ -156,68 +236,21 @@ class Buildings
                 'You do not have enough space to construct this building!'
             );
         }
-        
-        // Save the town building
-        $buildingObject = $this->getAllWithData($building);
-        $buildTimeSeconds = $buildingObject->getBuildTime(0); // How long does the initial level take to build?
-        $timeConstructed = new \Datetime();
-        $timeConstructed->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
-        $townBuildingEntity = new TownBuildingEntity();
-        $townBuildingEntity
-            ->setBuilding($building)
-            ->setTown($town)
-            ->setTimeConstructed($timeConstructed)
-        ;
-        $app['orm.em']->persist($townBuildingEntity);
-        
-        // Save the building on that tiles
-        $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
-        foreach ($requiredTiles as $requiredTile) {
-            $buildingSectionCoordinates = $this->getBuildingSectionCoordinates(
-                array(
-                    $requiredTile->getCoordinatesX(),
-                    $requiredTile->getCoordinatesY(),
-                ),
-                $startingCoordinates, 
-                $building
-            );
-            
-            if ($buildingSectionCoordinates === false) {
-                throw new \Exception(
-                    'Could not get building section coordinates!'
-                );
-            }
-            $buildingSectionX = $buildingSectionCoordinates[0];
-            $buildingSectionY = $buildingSectionCoordinates[1];
-            
-            $requiredTile
-                ->setTownBuilding($townBuildingEntity)
-                ->setBuildingSection($buildingSectionX.'x'.$buildingSectionY)
-            ;
-            $app['orm.em']->persist($requiredTile);
-        }
-
-        // Substract the resources in the town for that building
-        $buildingResourcesCost = $buildingObject->getResourcesCost(0);
-        $town->useResources($buildingResourcesCost);
-        $app['orm.em']->persist($town);
-
-        // Save everything
-        $app['orm.em']->flush();
-
-        return $townBuildingEntity;
     }
-    
+
     /**
      * @return boolean
      */
-    public function hasEnoughAreaSpace(PlanetEntity $planet, array $startingCoordinates = array(), $building)
-    {
+    public function hasEnoughAreaSpace(
+        PlanetEntity $planet,
+        array $startingCoordinates = array(),
+        $building
+    ) {
         $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
         if ($requiredTiles === false) {
             return false;
         }
-        
+
         foreach ($requiredTiles as $requiredTile) {
             if (!$requiredTile->isCurrentlyBuildable()) {
                 return false;
@@ -226,20 +259,23 @@ class Buildings
 
         return true;
     }
-    
+
     /**
      * @return array|boolean If false is returned, that means, that not ALL required tiles could be fetched
      */
-    public function getRequiredTiles(PlanetEntity $planet, array $startingCoordinates = array(), $building)
-    {
+    public function getRequiredTiles(
+        PlanetEntity $planet,
+        array $startingCoordinates = array(),
+        $building
+    ) {
         $app = $this->app;
         $tiles = array();
-        
+
         $coordinatesForBuilding = $this->getCoordinatesForBuilding(
-            $startingCoordinates, 
+            $startingCoordinates,
             $building
         );
-        
+
         foreach ($coordinatesForBuilding as $coordinate) {
             $tileEntity = $app['orm.em']
                 ->getRepository('Application\Entity\TileEntity')
@@ -249,24 +285,24 @@ class Buildings
                     'planet' => $planet,
                 ))
             ;
-            
+
             if (!$tileEntity) {
                 return false;
             }
-            
+
             $tiles[] = $tileEntity;
         }
-        
+
         return $tiles;
     }
-    
+
     /**
      * @return array|boolean
      */
     public function getCoordinatesForBuilding(array $startingCoordinates = array(), $building)
     {
         $coordinates = array();
-        
+
         $startX = $startingCoordinates[0];
         $startY = $startingCoordinates[1];
         $buildingObject = $this->getAllWithData($building);
@@ -274,7 +310,7 @@ class Buildings
         list($sizeX, $sizeY) = explode('x', $size);
         $x = $startX;
         $y = $startY;
-        
+
         // Go thought the required tiles and set the current building to it
         foreach (range(1, (int) $sizeY) as $sizeYSingle) {
             $x = $startX;
@@ -291,22 +327,25 @@ class Buildings
 
             $y++;
         }
-        
+
         return $coordinates;
     }
-    
+
     /**
      * @return array
      */
-    public function getBuildingSectionCoordinates(array $coordinates = array(), array $startingCoordinates = array(), $building)
-    {
+    public function getBuildingSectionCoordinates(
+        array $coordinates = array(),
+        array $startingCoordinates = array(),
+        $building
+    ) {
         $x = $coordinates[0];
         $y = $coordinates[1];
         $coordinatesForBuilding = $this->getCoordinatesForBuilding(
             $startingCoordinates,
             $building
         );
-        
+
         foreach ($coordinatesForBuilding as $coordinate) {
             if (
                 $coordinate['x'] == $x &&
@@ -318,7 +357,7 @@ class Buildings
                 );
             }
         }
-        
+
         return false;
     }
 
