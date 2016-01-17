@@ -77,7 +77,7 @@ class Towns
                     $townResourceAmount = $townResource->getAmount();
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
                     $amount = $townResourceAmount + $resourcesProduced;
-                    
+
                     if ($amount > $resourceData['capacity']) {
                         $amount = $resourceData['capacity'];
                     }

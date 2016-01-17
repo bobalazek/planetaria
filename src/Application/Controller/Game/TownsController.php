@@ -48,7 +48,7 @@ class TownsController
         if (!$town) {
             $app->abort(404);
         }
-        
+
         // Update the town resources!
         $app['game.towns']->updateTownResources($town);
 
