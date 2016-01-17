@@ -1,5 +1,6 @@
 <table id="town-resources-table"
-    class="table">
+    class="table"
+    data-time-last-updated="{{ town.getTimeLastUpdatedResources() | date('Y-m-d H:i:s') }}">
     <thead>
         <tr>
             <th>Resource</th>
@@ -14,13 +15,16 @@
                 <td data-type="resource">
                     {{ resourceKey | humanize | trans }}
                 </td>
-                <td data-type="available">
+                <td data-type="available"
+                    data-value="{{ resourceData.available }}">
                     {{ resourceData.available | round }}
                 </td>
-                <td data-type="capacity">
-                    {{ resourceData.capacity }}
+                <td data-type="capacity"
+                    data-value="{{ resourceData.capacity }}">
+                    {{ (resourceData.capacity == -1 ? '&infin;' : resourceData.capacity) | raw }}
                 </td>
-                <td data-type="production">
+                <td data-type="production"
+                    data-value="{{ resourceData.production }}">
                     {{ resourceData.production }}
                 </td>
             </tr>

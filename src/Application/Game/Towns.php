@@ -81,11 +81,23 @@ class Towns
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
                     $amount = $townResourceAmount + $resourcesProduced;
 
+                    // Nothing done - skipp it, instead of updating it!
+                    if ($resourcesProduced === 0) {
+                        break;
+                    }
+
                     if (
                         !$ignoreCapacityLimit &&
-                        $amount > $resourceData['capacity']
+                        $amount > $resourceData['capacity'] &&
+                        $resourceData['capacity'] !== -1 // -1 capacity means inifinitve, so ignore it!
                     ) {
                         $amount = $resourceData['capacity'];
+                    }
+                    
+                    // If nothing has changed, not NOT update it!
+                    // Note: Do NOT exactly compare (===) because capacity is an integer and the amount is a float (that would make this statement always invalid, if the amount is set by the capacity)!
+                    if ($amount == $townResourceAmount) {
+                        break;
                     }
 
                     $townResource
@@ -93,7 +105,7 @@ class Towns
                     ;
 
                     $app['orm.em']->persist($townResource);
-                    continue;
+                    break;
                 }
             }
         }

@@ -535,6 +535,9 @@ class TownEntity extends AbstractAdvancedEntity
                 $resourcesAvailable[$resourceKey] = $townResource->getAmount();
             }
         }
+        
+        // Money shouldn't depend on the storage, so just set the capacity to -1 ("unlimited" in other words)
+        $resourcesCapacity[Resources::MONEY] = -1;
 
         $this->setResourcesProduction($resourcesProduction);
         $this->setResourcesCapacity($resourcesCapacity);
