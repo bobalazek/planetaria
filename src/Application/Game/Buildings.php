@@ -25,6 +25,11 @@ class Buildings
      * @var string
      */
     const HOUSE = 'house';
+    
+    /**
+     * @var string
+     */
+    const FARM = 'farm';
 
     /**
      * @var string
@@ -35,11 +40,6 @@ class Buildings
      * @var string
      */
     const WAREHOUSE = 'warehouse';
-
-    /**
-     * @var string
-     */
-    const FARM = 'farm';
 
     /**
      * @var string
@@ -403,9 +403,9 @@ class Buildings
         $all = array(
             self::CAPITOL => 'Capitol',
             self::HOUSE => 'House',
+            self::FARM => 'Farm',
             self::SKYSCRAPER => 'Skyscraper',
             self::WAREHOUSE => 'Warehouse',
-            self::FARM => 'Farm',
             self::MARKET => 'Market',
             self::AIRBASE => 'Airbase',
             self::BARRACKS => 'Barracks',
