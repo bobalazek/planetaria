@@ -25,7 +25,7 @@ class Buildings
      * @var string
      */
     const HOUSE = 'house';
-    
+
     /**
      * @var string
      */
@@ -239,7 +239,7 @@ class Buildings
             );
         }
     }
-    
+
     /**
      * Same as the method above BUT a more frontend friendly version. Outputs text instead of exceptions.
      *
@@ -265,7 +265,7 @@ class Buildings
                 $startingCoordinates,
                 $building
             );
-            
+
             return true;
         } catch (\Exception $e) {
             return $e->getMessage();

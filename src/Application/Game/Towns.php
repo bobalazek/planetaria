@@ -93,7 +93,7 @@ class Towns
                     ) {
                         $amount = $resourceData['capacity'];
                     }
-                    
+
                     // If nothing has changed, not NOT update it!
                     // Note: Do NOT exactly compare (===) because capacity is an integer and the amount is a float (that would make this statement always invalid, if the amount is set by the capacity)!
                     if ($amount == $townResourceAmount) {

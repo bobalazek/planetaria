@@ -37,7 +37,7 @@ class GameController
             ->getRepository('Application\Entity\PlanetEntity')
             ->findAll()
         ;
-        
+
         if (count($planets) === 1) {
             return $app->redirect($app['url_generator']->generate(
                 'game.map.detail',
@@ -191,7 +191,7 @@ class GameController
                         'danger',
                         $e->getMessage()
                     );
-                    
+
                     return $app->redirect(
                         $app['url_generator']->generate(
                             'game.map.build',
