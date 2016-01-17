@@ -69,32 +69,32 @@ class Towns
             $townLastUpdatedResources = new \Datetime();
         }
         $differenceSeconds = strtotime($currentDatetime->format(DATE_ATOM)) - strtotime($townLastUpdatedResources->format(DATE_ATOM));
-        
+
         foreach ($resources as $resourceKey => $resourceData) {
             foreach ($townResources as $townResource) {
                 if ($townResource->getResource() === $resourceKey) {
                     $resourceProduction = $resourceData['production'];
                     $townResourceAmount = $townResource->getAmount();
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
-                    
+
                     $townResource
                         ->setAmount($townResourceAmount + $resourcesProduced)
                     ;
-                    
+
                     $app['orm.em']->persist($townResource);
                     continue;
                 }
             }
         }
-        
+
         $town
             ->setTimeLastUpdatedResources($currentDatetime)
         ;
-        
+
         $app['orm.em']->persist($town);
-        
+
         $app['orm.em']->flush();
-        
+
         // Reload the town entity, so we have the newest information available!
         $app['orm.em']->refresh($town);
     }

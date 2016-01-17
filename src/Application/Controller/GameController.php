@@ -137,11 +137,11 @@ class GameController
             'Application\Entity\TownEntity',
             $townId
         );
-        
+
         if (!$town) {
             $app->abort(404);
         }
-        
+
         // Update the town resources!
         $app['game.towns']->updateTownResources($town);
 
