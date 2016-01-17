@@ -8,6 +8,7 @@ var Game = function () {
             jQuery(document).ready( function() {
                 Game.headerInitialize();
                 Game.mapInitialize();
+                Game.townResourcesTableInitialize();
 
                 initialized = true;
                 console.log('Game Initialized');
@@ -15,13 +16,13 @@ var Game = function () {
         },
         headerInitialize: function()
         {
-            function tikTak() {
+            function clock() {
                 var time = moment().format('HH:mm:ss');
                 jQuery('#header-time span').text(time);
             }
-            tikTak();
+            clock();
             
-            setInterval(tikTak, 1000);
+            setInterval(clock, 1000);
         },
         mapInitialize: function()
         {
@@ -51,6 +52,33 @@ var Game = function () {
                     jQuery('.popover-click').popover('hide');
                 }
             });
+        },
+        townResourcesTableInitialize: function()
+        {
+            var townResourcesTableElement = jQuery('#town-resources-table');
+            
+            if (townResourcesTableElement.length) {
+                function interval() {
+                    townResourcesTableElement.find('tbody tr').each(function() {
+                        var resource = jQuery(this).attr('data-resource');
+                        var resourceAvailable = parseFloat(jQuery(this).attr('data-resource-available'));
+                        var resourceCapacity = parseInt(jQuery(this).attr('data-resource-capacity'));
+                        var resourceProduction = parseInt(jQuery(this).attr('data-resource-production'));
+
+                        if (
+                            resourceCapacity != -1 &&
+                            resourceProduction > 0 &&
+                            resourceAvailable < resourceCapacity 
+                        ) {
+                            resourceAvailable = resourceAvailable + (resourceProduction / 60);
+                            jQuery(this).attr('data-resource-available', resourceAvailable);
+                            jQuery(this).find('.resource-available').text(parseInt(resourceAvailable));
+                        }
+                    });
+                }
+                
+                setInterval(interval, 1000);
+            }
         },
     }
 }();

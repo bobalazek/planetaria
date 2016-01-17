@@ -11,20 +11,21 @@
     </thead>
     <tbody>
         {% for resourceKey, resourceData in town.getResources() %}
-            <tr data-resource="{{ resourceKey }}">
-                <td data-type="resource">
+            <tr class="resource-row"
+                data-resource="{{ resourceKey }}"
+                data-resource-available="{{ resourceData.available }}"
+                data-resource-capacity="{{ resourceData.capacity }}"
+                data-resource-production="{{ resourceData.production }}">
+                <td class="resource-name">
                     {{ resourceKey | humanize | trans }}
                 </td>
-                <td data-type="available"
-                    data-value="{{ resourceData.available }}">
+                <td class="resource-available">
                     {{ resourceData.available | round }}
                 </td>
-                <td data-type="capacity"
-                    data-value="{{ resourceData.capacity }}">
+                <td class="resource-capacity">
                     {{ (resourceData.capacity == -1 ? '&infin;' : resourceData.capacity) | raw }}
                 </td>
-                <td data-type="production"
-                    data-value="{{ resourceData.production }}">
+                <td class="resource-production">
                     {{ resourceData.production }}
                 </td>
             </tr>
