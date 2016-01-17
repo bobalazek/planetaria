@@ -66,7 +66,6 @@ var Game = function () {
                         var resourceProduction = parseInt(jQuery(this).attr('data-resource-production'));
 
                         if (
-                            resourceCapacity != -1 &&
                             resourceProduction > 0 &&
                             resourceAvailable < resourceCapacity 
                         ) {
