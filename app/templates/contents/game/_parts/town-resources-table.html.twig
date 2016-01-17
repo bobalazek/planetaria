@@ -15,7 +15,7 @@
                     {{ resourceKey | humanize | trans }}
                 </td>
                 <td data-type="available">
-                    {{ resourceData.available }}
+                    {{ resourceData.available | round }}
                 </td>
                 <td data-type="capacity">
                     {{ resourceData.capacity }}

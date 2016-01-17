@@ -34,7 +34,7 @@ class TownResourceEntity extends AbstractBasicEntity
      *
      * @var integer
      *
-     * @ORM\Column(name="amount", type="integer")
+     * @ORM\Column(name="amount", type="decimal", scale=3)
      */
     protected $amount = 0;
 
