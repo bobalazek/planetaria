@@ -8,8 +8,8 @@ use Application\Entity\TownEntity;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TownBuildingEntity;
 use Application\Game\Exception\TileNotBuildableException;
-use Application\Game\Exception\TileNotExistsException;
 use Application\Game\Exception\InsufficientResourcesException;
+use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
 
 /**
@@ -125,27 +125,15 @@ class Buildings
     {
         $app = $this->app;
 
-        $startX = isset($startingCoordinates[0])
-            ? $startingCoordinates[0]
-            : 0
+        // Before the buy, update the town resources (storage) to the current state.
+        $app['game.towns']->updateTownResources($town);
+        
+        /***** Checks *****/
+        // Check if we have reached the buildings limit
+        $hasReachedBuildingsLimit = $app['game.towns']
+            ->hasReachedBuildingsLimit($town)
         ;
-        $startY = isset($startingCoordinates[1])
-            ? $startingCoordinates[1]
-            : 0
-        ;
-
-        $buildingClassName = 'Application\\Game\\Building\\'.$this->getClassName($building);
-        $buildingObject = new $buildingClassName();
-
-        $size = $buildingObject->getSize();
-        list($sizeX, $sizeY) = explode('x', $size);
-        $x = $startX;
-        $y = $startY;
-
-        $townBuildingsCount = count($town->getTownBuildings());
-        $townBuildingsLimit = $town->getBuildingsLimit();
-
-        if ($townBuildingsCount >= $townBuildingsLimit) {
+        if ($hasReachedBuildingsLimit) {
             throw new TownBuildingsLimitReachedException(
                 'You have reached the buildings limit for this town!'
             );
@@ -160,8 +148,18 @@ class Buildings
                 'You do not have enough resources to construct this building!'
             );
         }
-
-        $buildTimeSeconds = $buildingObject->getBuildTime(0);
+        
+        // Check if we have enough space to build this building
+        $hasEnoughAreaSpace = $this->hasEnoughAreaSpace($planet, $startingCoordinates, $building);
+        if (!$hasEnoughAreaSpace) {
+            throw new InsufficientAreaSpaceException(
+                'You do not have enough space to construct this building!'
+            );
+        }
+        
+        // Save the town building
+        $buildingObject = $this->getAllWithData($building);
+        $buildTimeSeconds = $buildingObject->getBuildTime(0); // How long does the initial level take to build?
         $timeConstructed = new \Datetime();
         $timeConstructed->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
         $townBuildingEntity = new TownBuildingEntity();
@@ -171,52 +169,157 @@ class Buildings
             ->setTimeConstructed($timeConstructed)
         ;
         $app['orm.em']->persist($townBuildingEntity);
+        
+        // Save the building on that tiles
+        $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
+        foreach ($requiredTiles as $requiredTile) {
+            $buildingSectionCoordinates = $this->getBuildingSectionCoordinates(
+                array(
+                    $requiredTile->getCoordinatesX(),
+                    $requiredTile->getCoordinatesY(),
+                ),
+                $startingCoordinates, 
+                $building
+            );
+            
+            if ($buildingSectionCoordinates === false) {
+                throw new \Exception(
+                    'Could not get building section coordinates!'
+                );
+            }
+            $buildingSectionX = $buildingSectionCoordinates[0];
+            $buildingSectionY = $buildingSectionCoordinates[1];
+            
+            $requiredTile
+                ->setTownBuilding($townBuildingEntity)
+                ->setBuildingSection($buildingSectionX.'x'.$buildingSectionY)
+            ;
+            $app['orm.em']->persist($requiredTile);
+        }
 
+        // Substract the resources in the town for that building
+        $buildingResourcesCost = $buildingObject->getResourcesCost(0);
+        $town->useResources($buildingResourcesCost);
+        $app['orm.em']->persist($town);
+
+        // Save everything
+        $app['orm.em']->flush();
+
+        return $townBuildingEntity;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function hasEnoughAreaSpace(PlanetEntity $planet, array $startingCoordinates = array(), $building)
+    {
+        $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
+        if ($requiredTiles === false) {
+            return false;
+        }
+        
+        foreach ($requiredTiles as $requiredTile) {
+            if (!$requiredTile->isCurrentlyBuildable()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    /**
+     * @return array|boolean If false is returned, that means, that not ALL required tiles could be fetched
+     */
+    public function getRequiredTiles(PlanetEntity $planet, array $startingCoordinates = array(), $building)
+    {
+        $app = $this->app;
+        $tiles = array();
+        
+        $coordinatesForBuilding = $this->getCoordinatesForBuilding(
+            $startingCoordinates, 
+            $building
+        );
+        
+        foreach ($coordinatesForBuilding as $coordinate) {
+            $tileEntity = $app['orm.em']
+                ->getRepository('Application\Entity\TileEntity')
+                ->findOneBy(array(
+                    'coordinatesX' => $coordinate['x'],
+                    'coordinatesY' => $coordinate['y'],
+                    'planet' => $planet,
+                ))
+            ;
+            
+            if (!$tileEntity) {
+                return false;
+            }
+            
+            $tiles[] = $tileEntity;
+        }
+        
+        return $tiles;
+    }
+    
+    /**
+     * @return array|boolean
+     */
+    public function getCoordinatesForBuilding(array $startingCoordinates = array(), $building)
+    {
+        $coordinates = array();
+        
+        $startX = $startingCoordinates[0];
+        $startY = $startingCoordinates[1];
+        $buildingObject = $this->getAllWithData($building);
+        $size = $buildingObject->getSize();
+        list($sizeX, $sizeY) = explode('x', $size);
+        $x = $startX;
+        $y = $startY;
+        
+        // Go thought the required tiles and set the current building to it
         foreach (range(1, (int) $sizeY) as $sizeYSingle) {
             $x = $startX;
             foreach (range(1, (int) $sizeX) as $sizeXSingle) {
-                // Tiles
-                $tileEntity = $app['orm.em']
-                    ->getRepository('Application\Entity\TileEntity')
-                    ->findOneBy(array(
-                        'coordinatesX' => $x,
-                        'coordinatesY' => $y,
-                        'planet' => $planet,
-                    ))
-                ;
-
-                if (!$tileEntity) {
-                    throw new TileNotExistsException(
-                        'This tile ('.$x.','.$y.') does not exists!'
-                    );
-                }
-
-                if (!$tileEntity->isBuildableCurrently()) {
-                    throw new TileNotBuildableException(
-                        'This building has not enough space to be constructed (building size: '.$size.').'
-                    );
-                }
-
-                $tileEntity
-                    ->setTownBuilding($townBuildingEntity)
-                    ->setBuildingSection($sizeXSingle.'x'.$sizeYSingle)
-                ;
-                $app['orm.em']->persist($tileEntity);
+                $coordinates[] = array(
+                    'x' => $x,
+                    'y' => $y,
+                    'buildingSectionX' => $sizeXSingle,
+                    'buildingSectionY' => $sizeYSingle,
+                );
 
                 $x++;
             }
 
             $y++;
         }
-
-        // Substract the resources in the town for the building
-        $buildingResourcesCost = $buildingObject->getResourcesCost(0);
-        $town->useResources($buildingResourcesCost);
-        $app['orm.em']->persist($town);
-
-        $app['orm.em']->flush();
-
-        return $townBuildingEntity;
+        
+        return $coordinates;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getBuildingSectionCoordinates(array $coordinates = array(), array $startingCoordinates = array(), $building)
+    {
+        $x = $coordinates[0];
+        $y = $coordinates[1];
+        $coordinatesForBuilding = $this->getCoordinatesForBuilding(
+            $startingCoordinates,
+            $building
+        );
+        
+        foreach ($coordinatesForBuilding as $coordinate) {
+            if (
+                $coordinate['x'] == $x &&
+                $coordinate['y'] == $y
+            ) {
+                return array(
+                    $coordinate['buildingSectionX'],
+                    $coordinate['buildingSectionY'],
+                );
+            }
+        }
+        
+        return false;
     }
 
     /**

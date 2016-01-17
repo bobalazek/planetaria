@@ -43,6 +43,17 @@ class Towns
 
         return $result;
     }
+    
+    /**
+     * @return boolean
+     */
+    public static function hasReachedBuildingsLimit(TownEntity $town)
+    {
+        $townBuildingsCount = count($town->getTownBuildings());
+        $townBuildingsLimit = $town->getBuildingsLimit();
+        
+        return $townBuildingsCount >= $townBuildingsLimit;
+    }
 
     /**
      * @return void

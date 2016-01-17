@@ -137,7 +137,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var array
      */
-    protected $requiredBuildings;
+    protected $buildingsRequired;
 
     /***** Name *****/
     /**
@@ -476,26 +476,26 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
-    /***** Required buildings *****/
+    /***** Buildings required *****/
     /**
      * @return array
      */
-    public function getRequiredBuildings($level = null, $building = null)
+    public function getBuildingsRequired($level = null, $building = null)
     {
         return $level === null
-            ? $this->requiredBuildings
+            ? $this->buildingsRequired
             : ($item === null
-                ? $this->requiredBuildings[$level]
-                : $this->requiredBuildings[$level][$building])
+                ? $this->buildingsRequired[$level]
+                : $this->buildingsRequired[$level][$building])
         ;
     }
 
     /**
-     * @param array $requiredBuildings
+     * @param array $buildingsRequired
      */
-    public function setRequiredBuildings(array $requiredBuildings = array())
+    public function setBuildingsRequired(array $buildingsRequired = array())
     {
-        $this->requiredBuildings = $requiredBuildings;
+        $this->buildingsRequired = $buildingsRequired;
 
         return $this;
     }

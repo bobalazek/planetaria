@@ -5,6 +5,6 @@ namespace Application\Game\Exception;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class TileNotExistsException extends \Exception
+class InsufficientAreaSpaceException extends \Exception
 {
 }

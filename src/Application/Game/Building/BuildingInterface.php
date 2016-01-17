@@ -172,14 +172,14 @@ interface BuildingInterface
      */
     public function setItemsProduction(array $itemsProduction);
 
-    /***** Required buildings *****/
+    /***** Buildings required *****/
     /**
      * @return array
      */
-    public function getRequiredBuildings($level, $building);
+    public function getBuildingsRequired($level, $building);
 
     /**
-     * @param array $requiredBuildings
+     * @param array $buildingsRequired
      */
-    public function setRequiredBuildings(array $requiredBuildings);
+    public function setBuildingsRequired(array $buildingsRequired);
 }
