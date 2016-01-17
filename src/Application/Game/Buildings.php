@@ -10,6 +10,7 @@ use Application\Entity\TownBuildingEntity;
 use Application\Game\Exception\InsufficientResourcesException;
 use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
+use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -201,7 +202,10 @@ class Buildings
      * @param string       $building
      * @param string       $buildingStatus
      *
-     * @return TownBuildingEntity
+     * @return void
+     * @throws TownBuildingsLimitReachedException
+     * @throws InsufficientResourcesException
+     * @throws InsufficientAreaSpaceException
      */
     public function doPreBuildChecks(
         PlanetEntity $planet,
@@ -250,7 +254,7 @@ class Buildings
      * @param string       $building
      * @param string       $buildingStatus
      *
-     * @return TownBuildingEntity
+     * @return boolean|string
      */
     public function doPreBuildChecksResponse(
         PlanetEntity $planet,
@@ -269,6 +273,80 @@ class Buildings
             return true;
         } catch (\Exception $e) {
             return $e->getMessage();
+        }
+    }
+    
+    /**
+     * With this method we'll update the town building.
+     *
+     * @param TownBuildingEntity $townBuilding
+     *
+     * @return TownBuildingEntity
+     */
+    public function upgrade(TownBuildingEntity $townBuilding)
+    {
+        $app = $this->app;
+        $town = $townBuilding->getTown();
+        $buildingObject = $townBuilding->getBuildingObject();
+        
+        // Before the buy, update the town resources (storage) to the current state.
+        $app['game.towns']->updateTownResources($town);
+        
+        /***** Checks *****/
+        $this->doPreUpgradeChecks(
+            $townBuilding
+        );
+        
+        $buildTimeSeconds = $buildingObject->getBuildTime($townBuilding->getLevel()+1);
+        $timeNextLevelStarted = new \Datetime();
+        $timeNextLevelEnded = new \Datetime();
+        $timeNextLevelEnded->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
+        $townBuilding
+            ->setTimeNextLevelStarted($timeNextLevelStarted)
+            ->setTimeNextLevelEnded($timeNextLevelEnded)
+        ;
+
+        $app['orm.em']->persist($townBuilding);
+        
+        // Substract the resources in the town for that building
+        $buildingResourcesCost = $buildingObject
+            ->getResourcesCost($townBuilding->getLevel()+1)
+        ;
+        $town->useResources($buildingResourcesCost);
+        $app['orm.em']->persist($town);
+        
+        $app['orm.em']->flush();
+        
+        return $townBuilding;
+    }
+    
+    /**
+     * With this method we'll do checks if everyting fits before the building is being build.
+     *
+     * @param TownBuildingEntity $townBuilding
+     *
+     * @return void
+     * @throws InsufficientResourcesException
+     */
+    public function doPreUpgradeChecks(TownBuildingEntity $townBuilding)
+    {
+        $app = $this->app;
+        
+        // Check if that town has enough resources to build that building
+        $hasEnoughResourcesForTownBuilding = $app['game.towns']
+            ->hasEnoughResourcesForTownBuilding($townBuilding)
+        ;
+        if (!$hasEnoughResourcesForTownBuilding) {
+            throw new InsufficientResourcesException(
+                'You do not have enough resources to upgrade this building!'
+            );
+        }
+        
+        $isUpgrading = $townBuilding->isUpgrading();
+        if ($isUpgrading) {
+            throw new TownBuildingAlreadyUpgradingException(
+                'The building is currently upgrading!'
+            );
         }
     }
 

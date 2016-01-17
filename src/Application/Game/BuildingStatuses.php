@@ -20,6 +20,16 @@ class BuildingStatuses
     /**
      * @var string
      */
+    const UPGRADING = 'upgrading';
+
+    /**
+     * @var string
+     */
+    const DAMAGED = 'damaged';
+
+    /**
+     * @var string
+     */
     const DESTROYED = 'destroyed';
 
     /**
@@ -30,6 +40,8 @@ class BuildingStatuses
         return array(
             self::CONSTRUCTING => 'Constructing',
             self::OPERATIONAL => 'Operational',
+            self::UPGRADING => 'Upgrading',
+            self::DAMAGED => 'Damaged',
             self::DESTROYED => 'Destroyed',
         );
     }

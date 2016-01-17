@@ -4,6 +4,7 @@ namespace Application\Game;
 
 use Silex\Application;
 use Application\Entity\TownEntity;
+use Application\Entity\TownBuildingEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -24,6 +25,9 @@ class Towns
     }
 
     /**
+     * @param TownEntity $town
+     * @param string     $building
+     *
      * @return boolean
      */
     public function hasEnoughResourcesForBuilding(TownEntity $town, $building)
@@ -32,6 +36,29 @@ class Towns
         $buildingObject = Buildings::getAllWithData($building);
         $requiredResources = $buildingObject->getResourcesCost(0);
         $availableResources = $town->getResourcesAvailable();
+
+        if (!empty($requiredResources)) {
+            foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
+                if ($requiredResourceValue > $availableResources[$requiredResource]) {
+                    $result = false;
+                }
+            }
+        }
+
+        return $result;
+    }
+    
+    /**
+     * @param TownBuildingEntity $townBuildinguilding
+     *
+     * @return boolean
+     */
+    public function hasEnoughResourcesForTownBuilding(TownBuildingEntity $townBuilding)
+    {
+        $result = true;
+        $buildingObject = $townBuilding->getBuildingObject();
+        $requiredResources = $buildingObject->getResourcesCost($townBuilding->getBuilding() + 1);
+        $availableResources = $townBuilding->getTown()->getResourcesAvailable();
 
         if (!empty($requiredResources)) {
             foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
@@ -81,11 +108,6 @@ class Towns
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
                     $amount = $townResourceAmount + $resourcesProduced;
 
-                    // Nothing done - skip it, instead of updating it!
-                    if ($resourcesProduced === 0) {
-                        break;
-                    }
-
                     if (
                         !$ignoreCapacityLimit &&
                         $amount > $resourceData['capacity'] &&
@@ -110,9 +132,7 @@ class Towns
             }
         }
 
-        $town
-            ->setTimeLastUpdatedResources($currentDatetime)
-        ;
+        $town->setTimeLastUpdatedResources($currentDatetime);
 
         $app['orm.em']->persist($town);
 
@@ -120,5 +140,43 @@ class Towns
 
         // Reload the town entity, so we have the newest information available!
         $app['orm.em']->refresh($town);
+    }
+    
+    /**
+     * @param TownEntity $town
+     *
+     * @return void
+     */
+    public function checkForFinishedBuildingUpgrades(TownEntity $town)
+    {
+        $app = $this->app;
+        $townBuildings = $town->getTownBuildings();
+        
+        if (!empty($townBuildings)) {
+            $currentDatetime = new \Datetime();
+            
+            foreach ($townBuildings as $townBuilding) {
+                $townBuildingTimeNextLevelStarted = $townBuilding->getTimeNextLevelStarted();
+                $townBuildingTimeNextLevelEnded = $townBuilding->getTimeNextLevelEnded();
+                
+                if(
+                    $townBuildingTimeNextLevelStarted !== null && 
+                    $townBuildingTimeNextLevelEnded !== null &&
+                    $currentDatetime > $townBuildingTimeNextLevelEnded
+                ) {
+                    $townBuilding
+                        ->setLevel($townBuilding->getLevel() + 1)
+                        ->setTimeNextLevelStarted(null)
+                        ->setTimeNextLevelEnded(null)
+                    ;
+                    
+                    $app['orm.em']->persist($townBuilding);
+                    
+                    $app['orm.em']->flush();
+                    
+                    $app['orm.em']->refresh($townBuilding);
+                }
+            }
+        }
     }
 }

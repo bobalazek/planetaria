@@ -410,7 +410,7 @@ class TownEntity extends AbstractAdvancedEntity
      */
     public function getTownBuildings()
     {
-        return $this->townBuildings;
+        return $this->townBuildings->toArray();
     }
 
     /**

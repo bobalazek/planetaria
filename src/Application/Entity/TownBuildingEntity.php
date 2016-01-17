@@ -62,6 +62,20 @@ class TownBuildingEntity extends AbstractBasicEntity
     /**
      * @var \DateTime
      *
+     * @ORM\Column(name="time_next_level_started", type="datetime", nullable=true)
+     */
+    protected $timeNextLevelStarted;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_next_level_ended", type="datetime", nullable=true)
+     */
+    protected $timeNextLevelEnded;
+
+    /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="time_constructed", type="datetime")
      */
     protected $timeConstructed;
@@ -329,6 +343,48 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $tiles[0]->getCoordinatesY();
     }
 
+    /*** Time next level started ***/
+    /**
+     * @return \DateTime
+     */
+    public function getTimeNextLevelStarted()
+    {
+        return $this->timeNextLevelStarted;
+    }
+
+    /**
+     * @param \DateTime $timeNextLevelStarted
+     *
+     * @return TownBuildingEntity
+     */
+    public function setTimeNextLevelStarted(\DateTime $timeNextLevelStarted = null)
+    {
+        $this->timeNextLevelStarted = $timeNextLevelStarted;
+
+        return $this;
+    }
+
+    /*** Time next level ended ***/
+    /**
+     * @return \DateTime
+     */
+    public function getTimeNextLevelEnded()
+    {
+        return $this->timeNextLevelEnded;
+    }
+
+    /**
+     * @param \DateTime $timeNextLevelEnded
+     *
+     * @return TownBuildingEntity
+     */
+    public function setTimeNextLevelEnded(\DateTime $timeNextLevelEnded = null)
+    {
+        $this->timeNextLevelEnded = $timeNextLevelEnded;
+
+        return $this;
+    }
+
     /*** Time constructed ***/
     /**
      * @return \DateTime
@@ -343,20 +399,11 @@ class TownBuildingEntity extends AbstractBasicEntity
      *
      * @return TownBuildingEntity
      */
-    public function setTimeConstructed(\DateTime $timeConstructed = null)
+    public function setTimeConstructed(\DateTime $timeConstructed)
     {
         $this->timeConstructed = $timeConstructed;
 
         return $this;
-    }
-
-    /*** Operational ***/
-    /**
-     * @return boolean
-     */
-    public function isOperational()
-    {
-        return $this->getStatus() === BuildingStatuses::OPERATIONAL;
     }
 
     /*** Status ***/
@@ -380,7 +427,17 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return BuildingStatuses::OPERATIONAL;
     }
+    
+    /*** Operational ***/
+    /**
+     * @return boolean
+     */
+    public function isOperational()
+    {
+        return $this->getStatus() === BuildingStatuses::OPERATIONAL;
+    }
 
+    /*** Upgradable ***/
     /**
      * @return boolean
      */
@@ -389,6 +446,18 @@ class TownBuildingEntity extends AbstractBasicEntity
         $buildingObject = $this->getBuildingObject();
 
         return $this->getLevel() < $buildingObject->getMaximumLevel();
+    }
+    
+    /*** Upgrading ***/
+    /**
+     * @return boolean
+     */
+    public function isUpgrading()
+    {
+        $timeNextLevelStarted = $this->getTimeNextLevelStarted();
+        $timeNextLevelEnded = $this->getTimeNextLevelEnded();
+        
+        return $timeNextLevelStarted !== null && $timeNextLevelEnded !== null;
     }
 
     /**

@@ -148,7 +148,8 @@ class GameController
         );
 
         if ($town) {
-            // Update the town resources!
+            // Update town stuff
+            $app['game.towns']->checkForFinishedBuildingUpgrades($town);
             $app['game.towns']->updateTownResources($town);
         }
 
