@@ -380,14 +380,14 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return BuildingStatuses::OPERATIONAL;
     }
-    
+
     /**
      * @return boolean
      */
     public function isUpgradable()
     {
         $buildingObject = $this->getBuildingObject();
-        
+
         return $this->getLevel() < $buildingObject->getMaximumLevel();
     }
 

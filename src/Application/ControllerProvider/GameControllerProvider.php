@@ -87,7 +87,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::buildingsDetailAction'
         )
         ->bind('game.towns.buildings.detail');
-        
+
         $controllers->match(
             '/towns/{id}/buildings/{buildingId}/upgrade',
             'Application\Controller\Game\TownsController::buildingsUpgradeAction'
