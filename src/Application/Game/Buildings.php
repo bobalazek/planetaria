@@ -114,7 +114,7 @@ class Buildings
      *
      * @param PlanetEntity $planet
      * @param TownEntity   $town
-     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
+     * @param array        $coordinates         The start coordinates (bottom left) of the location that building is going to be build
      * @param string       $building
      * @param string       $buildingStatus
      * @param boolean      $ignoreCapacityLimit Useful when creating a new town, so the town resources amount is NOT set to 0 (because at that point, you do not have any buildings, that gives you storage capacity)
