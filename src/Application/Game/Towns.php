@@ -76,9 +76,14 @@ class Towns
                     $resourceProduction = $resourceData['production'];
                     $townResourceAmount = $townResource->getAmount();
                     $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
+                    $amount = $townResourceAmount + $resourcesProduced;
+                    
+                    if ($amount > $resourceData['capacity']) {
+                        $amount = $resourceData['capacity'];
+                    }
 
                     $townResource
-                        ->setAmount($townResourceAmount + $resourcesProduced)
+                        ->setAmount($amount)
                     ;
 
                     $app['orm.em']->persist($townResource);
