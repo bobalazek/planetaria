@@ -137,7 +137,15 @@ class GameController
             'Application\Entity\TownEntity',
             $townId
         );
+        
+        if (!$town) {
+            $app->abort(404);
+        }
+        
+        // Update the town resources!
+        $app['game.towns']->updateTownResources($town);
 
+        // Get all available buildings
         $buildings = Buildings::getAllWithData();
 
         $building = $request->query->get('building');

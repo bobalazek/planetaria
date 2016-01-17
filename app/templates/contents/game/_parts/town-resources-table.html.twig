@@ -1,0 +1,29 @@
+<table id="town-resources-table"
+    class="table">
+    <thead>
+        <tr>
+            <th>Resource</th>
+            <th>Available</th>
+            <th>Capacity</th>
+            <th>Production <small>per minute</small></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for resourceKey, resourceData in town.getResources() %}
+            <tr data-resource="{{ resourceKey }}">
+                <td data-type="resource">
+                    {{ resourceKey | humanize | trans }}
+                </td>
+                <td data-type="available">
+                    {{ resourceData.available }}
+                </td>
+                <td data-type="capacity">
+                    {{ resourceData.capacity }}
+                </td>
+                <td data-type="production">
+                    {{ resourceData.production }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

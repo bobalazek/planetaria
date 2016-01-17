@@ -39,15 +39,6 @@ class TownResourceEntity extends AbstractBasicEntity
     protected $amount = 0;
 
     /**
-     * How much capacity / limit do we have for this resource?
-     *
-     * @var integer
-     *
-     * @ORM\Column(name="capacity", type="integer")
-     */
-    protected $capacity = 1000;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time_created", type="datetime")
@@ -105,27 +96,6 @@ class TownResourceEntity extends AbstractBasicEntity
     public function setAmount($amount)
     {
         $this->amount = $amount;
-
-        return $this;
-    }
-
-    /*** Capacity ***/
-    /**
-     * @return integer
-     */
-    public function getCapacity()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * @param integer $capacity
-     *
-     * @return TownResourceEntity
-     */
-    public function setCapacity($capacity)
-    {
-        $this->capacity = $capacity;
 
         return $this;
     }

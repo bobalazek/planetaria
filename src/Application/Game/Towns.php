@@ -26,7 +26,7 @@ class Towns
     /**
      * @return boolean
      */
-    public static function hasEnoughResourcesForBuilding(TownEntity $town, $building)
+    public function hasEnoughResourcesForBuilding(TownEntity $town, $building)
     {
         $result = true;
         $buildingObject = Buildings::getAllWithData($building);
@@ -47,7 +47,7 @@ class Towns
     /**
      * @return boolean
      */
-    public static function hasReachedBuildingsLimit(TownEntity $town)
+    public function hasReachedBuildingsLimit(TownEntity $town)
     {
         $townBuildingsCount = count($town->getTownBuildings());
         $townBuildingsLimit = $town->getBuildingsLimit();
@@ -58,8 +58,29 @@ class Towns
     /**
      * @return void
      */
-    public static function updateTownResources(TownEntity $town)
+    public function updateTownResources(TownEntity $town)
     {
-        // To-Do
+        $app = $this->app;
+        $resources = $town->getResources();
+        $townResources = $town->getTownResources();
+        
+        foreach ($resources as $resourceKey => $resourceData) {
+            foreach ($townResources as $townResource) {
+                if ($townResource->getResource() === $resourceKey) {
+                    $resourceProduction = $resourceData['production'];
+                    $townResourceAmount = $townResource->getAmount();
+                    $resourcesProduced = 0;
+                    
+                    $townResource
+                        ->setAmount($townResourceAmount + $resourcesProduced)
+                    ;
+                    
+                    $app['orm.em']->persist($townResource);
+                    continue;
+                }
+            }
+        }
+        
+        $app['orm.em']->flush();
     }
 }
