@@ -12,6 +12,7 @@ use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
 use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
+use Application\Game\Exception\TownBuildingInConstructionException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -334,6 +335,14 @@ class Buildings
     public function doPreUpgradeChecks(TownBuildingEntity $townBuilding)
     {
         $app = $this->app;
+        
+        // Check if the building is currently being constructed
+        $isConstructing = $townBuilding->isConstructing();
+        if ($isConstructing) {
+            throw new TownBuildingInConstructionException(
+                'This building is currently being constructed!'
+            );
+        }
 
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForTownBuilding = $app['game.towns']

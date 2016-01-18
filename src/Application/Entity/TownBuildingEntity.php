@@ -459,6 +459,15 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
+    
+    /*** Constructing ***/
+    /**
+     * @return boolean
+     */
+    public function isConstructing()
+    {
+        return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
+    }
 
     /*** Badge text ***/
     /**

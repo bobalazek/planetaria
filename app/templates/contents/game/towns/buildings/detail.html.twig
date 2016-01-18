@@ -61,6 +61,16 @@
                             {{ townBuilding.getTimeNextLevelUpgradeEnds() | date(app.dateTimeFormat) }}
                         </li>
                     {% endif %}
+                    {% if townBuilding.isConstructing() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Construction started' | trans }}:</b>
+                            {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{ 'Construction finishes' | trans }}:</b>
+                            {{ townBuilding.getTimeConstructed() | date(app.dateTimeFormat) }}
+                        </li>
+                    {% endif %}
                     <li class="list-group-item">
                         <b>{{ 'Created' | trans }}:</b>
                         {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
