@@ -21,7 +21,7 @@ class Capitol extends AbstractBuilding
             ->setSlug('capitol')
             ->setDescription('The main town building.')
             ->setType(BuildingTypes::CIVIL)
-            ->setSize('3x3')
+            ->setSize('2x2')
             ->setMaximumLevel(3)
             ->setHealthPoints(array(
                 0 => 10000,

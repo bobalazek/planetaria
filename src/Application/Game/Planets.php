@@ -163,17 +163,17 @@ class Planets
         $app['game.buildings']->build(
             $planetEntity,
             $townEntity,
-            array(-1, -1), // Start (bottom left) coordinates
+            array(5, 5), // Start (bottom left) coordinates
             Buildings::CAPITOL,
             true // $ignoreCapacityLimit
         );
 
         // Town building - Farms
         $farmsCoordinates = array(
-            array(2, 2),
-            array(2, -2),
-            array(-2, -2),
-            array(-2, 2),
+            array(4, 4),
+            array(7, 4),
+            array(4, 7),
+            array(7, 7),
         );
         foreach ($farmsCoordinates as $farmCoordinates) {
             $app['game.buildings']->build(
@@ -181,23 +181,6 @@ class Planets
                 $townEntity,
                 $farmCoordinates,
                 Buildings::FARM,
-                true // $ignoreCapacityLimit
-            );
-        }
-
-        // Town building - Houses
-        $housesCoordinates = array(
-            array(0, 3),
-            array(3, 0),
-            array(0, -3),
-            array(-3, 0),
-        );
-        foreach ($housesCoordinates as $houseCoordinates) {
-            $app['game.buildings']->build(
-                $planetEntity,
-                $townEntity,
-                $houseCoordinates,
-                Buildings::HOUSE,
                 true // $ignoreCapacityLimit
             );
         }
