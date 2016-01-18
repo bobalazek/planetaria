@@ -1,0 +1,142 @@
+{% set level = level is defined ? level : 0 %}
+<div class="building media">
+    <div class="media-left">
+        <img class="media-object"
+            src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{ building.getName() }}
+            <span class="badge">{{ level }}</span>
+        </h4>
+        <p>{{ building.getDescription() }}</p>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Type' | trans }}:</b>
+                    {{ building.getType() | humanize | trans }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Size' | trans }}:</b>
+                    {{ building.getSize() }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Maximum level' | trans }}:</b>
+                    {{ building.getMaximumLevel() }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Health points' | trans }}:</b>
+                    {{ building.getHealthPoints(level) }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Population capacity' | trans }}:</b>
+                    {{ building.getPopulationCapacity(level) }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b>{{ 'Build time' | trans }}:</b>
+                    {{ building.getBuildTime(level) }}
+                    {{ 'seconds' | trans }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
+                <h4>{{ 'Cost' | trans }}</h4>
+                <ul class="list-group">
+                    {% for resource, resourceAmount in building.getResourcesCost(level) %}
+                        <li class="list-group-item">
+                            <span class="badge">
+                                {{ resourceAmount }}
+                            </span>
+                            {{ resource | humanize | trans }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div> <!-- /.col-md-6 -->
+            {% if building.getResourcesProduction(level) %}
+                <div class="col-md-6">
+                    <h4>
+                        {{ 'Resources production' | trans }}
+                        <small>{{ 'per minute' | trans }}</small>
+                    </h4>
+                    <ul class="list-group">
+                        {% for resource, resourceAmount in building.getResourcesProduction(level) %}
+                            <li class="list-group-item">
+                                <span class="badge">
+                                    {{ resourceAmount }}
+                                </span>
+                                {{ resource | humanize | trans }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div> <!-- /.col-md-6 -->
+            {% endif %}
+            {% if building.getUnitsProduction(level) %}
+                <div class="col-md-6">
+                    <h4>{{ 'Units production' | trans }}</h4>
+                    <ul class="list-group">
+                        {% for unit, unitProductionTime in building.getUnitsProduction(level) %}
+                            <li class="list-group-item">
+                                <span class="badge">
+                                    {{ unitProductionTime }}
+                                    {{ 'seconds' | trans }}
+                                </span>
+                                {{ unit | humanize | trans }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div> <!-- /.col-md-6 -->
+            {% endif %}
+            {% if building.getItemsProduction(level) %}
+                <div class="col-md-6">
+                    <h4>{{ 'Items production' | trans }}</h4>
+                    <ul class="list-group">
+                        {% for item, itemProductionTime in building.getItemsProduction(level) %}
+                            <li class="list-group-item">
+                                <span class="badge">
+                                    {{ itemProductionTime }}
+                                    {{ 'seconds' | trans }}
+                                </span>
+                                {{ item | humanize | trans }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div> <!-- /.col-md-6 -->
+            {% endif %}
+            {% if building.getResourcesCapacity(level) %}
+                <div class="col-md-6">
+                    <h4>{{ 'Resources capacity' | trans }}</h4>
+                    <ul class="list-group">
+                        {% if building.getResourcesCapacity(level) is iterable %}
+                            {% for resource, resourceAmount in building.getResourcesCapacity(level) %}
+                                <li class="list-group-item">
+                                    <span class="badge">
+                                        {{ resourceAmount }}
+                                    </span>
+                                    {{ resource | humanize | trans }}
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item">
+                                <span class="badge">
+                                    {{ building.getResourcesCapacity(level) }}
+                                </span>
+                                {{ 'All' | trans }}
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div> <!-- /.col-md-6 -->
+            {% endif %}
+        </div> <!-- /.row -->
+    </div>
+</div> <!-- /.media -->

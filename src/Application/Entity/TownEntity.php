@@ -516,8 +516,16 @@ class TownEntity extends AbstractAdvancedEntity
                 // Storage capacity
                 $buildingResourcesCapacity = $townBuilding->getResourcesCapacity();
                 if (!empty($buildingResourcesCapacity)) {
-                    foreach ($allResources as $resource => $resourceName) {
-                        $resourcesCapacity[$resource] += $buildingResourcesCapacity;
+                    if (is_numeric($buildingResourcesCapacity)) {
+                        // Goes for ALL resources
+                        foreach ($allResources as $resource => $resourceName) {
+                            $resourcesCapacity[$resource] += $buildingResourcesCapacity;
+                        }
+                    } elseif (is_array($buildingResourcesCapacity)) {
+                        // Only this defined resources
+                        foreach ($buildingResourcesCapacity as $resource => $resourceAmount) {
+                            $resourcesCapacity[$resource] += $resourceAmount;
+                        }
                     }
                 }
 

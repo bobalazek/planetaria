@@ -328,6 +328,8 @@ class Buildings
      *
      * @return void
      * @throws InsufficientResourcesException
+     * @throws TownBuildingAlreadyUpgradingException
+     * @throws TownBuildingNotUpgradableException
      */
     public function doPreUpgradeChecks(TownBuildingEntity $townBuilding)
     {
@@ -356,6 +358,26 @@ class Buildings
                 'This building is no more upgradable!'
             );
         }
+    }
+    
+    /**
+     * Same as the method above BUT a more frontend friendly version. Outputs text instead of exceptions.
+     *
+     * @param TownBuildingEntity $townBuilding
+     *
+     * @return boolean|string
+     */
+    public function doPreUpgradeChecksResponse(TownBuildingEntity $townBuilding)
+    {
+        try {
+            $this->doPreUpgradeChecks(
+                $townBuilding
+            );
+
+            return true;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }    
     }
 
     /**

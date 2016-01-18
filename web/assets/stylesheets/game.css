@@ -94,6 +94,8 @@ h1 {
 /*** Building ***/
 .building-wrapper {
     position: relative;
+    margin: 0 0 20px;
+    padding: 10px;
 }
 
 .building-overlay {
@@ -109,11 +111,6 @@ h1 {
     height: 100%;
     z-index: 1;
     font-size: 18px;
-}
-
-.building {
-    margin: 0 0 20px;
-    padding: 10px;
 }
 
 .building.media .media-object {

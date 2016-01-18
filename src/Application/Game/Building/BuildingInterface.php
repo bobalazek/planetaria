@@ -149,6 +149,17 @@ interface BuildingInterface
      * @param array $resourcesProduction
      */
     public function setResourcesProduction(array $resourcesProduction);
+    
+    /***** Resources use *****/
+    /**
+     * @return array
+     */
+    public function getResourcesUse($level, $resource);
+
+    /**
+     * @param array $resourcesUse
+     */
+    public function setResourcesUse(array $resourcesUse);
 
     /***** Units production *****/
     /**

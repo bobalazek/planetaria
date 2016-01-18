@@ -9,7 +9,8 @@ class AbstractBuilding implements BuildingInterface
 {
     /**
      * What's the name of that building?
-     * Example: 'Iron mine'
+     * Example: 
+     *   'Iron mine'
      *
      * @var string
      */
@@ -17,7 +18,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the key of that building?
-     * Example: 'iron_mine'
+     * Example: 
+     *   'iron_mine'
      *
      * @var string
      */
@@ -25,7 +27,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the slug of that building?
-     * Example: 'iron-ime'
+     * Example: 
+     *   'iron-ime'
      *
      * @var string
      */
@@ -33,7 +36,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the description of that building?
-     * Example: 'A building which is used to produce iron.''
+     * Example: 
+     *   'A building which is used to produce iron.''
      *
      * @var string
      */
@@ -41,7 +45,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the type of that building?
-     * Example: 'civil'
+     * Example: 
+     *   'civil'
      *
      * @var string
      */
@@ -49,7 +54,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the size of that building?
-     * Example: '1x1'
+     * Example: 
+     *   '1x1'
      *
      * @var string
      */
@@ -57,7 +63,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the maximum level of that building?
-     * Example: 2
+     * Example: 
+     *   2
      *
      * @var integer
      */
@@ -65,7 +72,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much health points does that building have (per level)?
-     * Example: array( 0 => 400, 1 => 800, 2 => 1200 )
+     * Example: 
+     *   array( 0 => 400, 1 => 800, 2 => 1200 )
      *
      * @var array
      */
@@ -73,7 +81,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the size of that building (per level)?
-     * Example: array( 0 => 100, 1 => 200, 2 => 300 )
+     * Example: 
+     *   array( 0 => 100, 1 => 200, 2 => 300 )
      *
      * @var array
      */
@@ -81,7 +90,10 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the storage capacity of that building (per level)?
-     * Example: array( 0 => 50, 1 => 100, 2 => 200 )
+     * Example (increases capacity for ALL resources): 
+     *   array( 0 => 50, 1 => 100, 2 => 200 )
+     * or if you only want to add storage for certain resources
+     *   array( 0 => array( 'rock' => 200 ), 1 => array( 'rock' => 400 ), 2 => array( 'rock' => 800 ) )
      *
      * @var array
      */
@@ -89,7 +101,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the build time of that building in seconds (per level)?
-     * Example: array( 0 => 30, 1 => 60, 2 => 120 )
+     * Example: 
+     *   array( 0 => 30, 1 => 60, 2 => 120 )
      *
      * @var array
      */
@@ -97,7 +110,8 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much of what does that building cost (per level)?
-     * Example: array( 0 => array( 'wood' => 200 ), 1 => array( 'wood' => 200 ), 2 => array( 'wood' => 200 ) )
+     * Example: 
+     *   array( 0 => array( 'wood' => 200 ), 1 => array( 'wood' => 200 ), 2 => array( 'wood' => 200 ) )
      *
      * @var array
      */
@@ -106,16 +120,25 @@ class AbstractBuilding implements BuildingInterface
     /**
      * How much of what does that building produce per minute (per level)?
      * Example ( level => array( resource => amountPerMinute ) ):
-     * array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
+     *   array( 0 => array( 'iron_ore' => 20 ), 1 => array( 'iron_ore' => 20 ), 2 => array( 'iron_ore' => 20 ) )
      *
      * @var array
      */
     protected $resourcesProduction;
+    
+    /**
+     * How much of what does that building use per minute (per level)?
+     * Example ( level => array( resource => amountPerMinute ) ):
+     *   array( 0 => array( 'iron_ore' => 1 ), 1 => array( 'iron_ore' => 1 ), 2 => array( 'iron_ore' => 1 ) )
+     *
+     * @var array
+     */
+    protected $resourcesUse;
 
     /**
      * How much of what does that building produce per minute (per level)?
      * Example ( level => array( unit => buildingTimeInSeconds ) ):
-     * array( 0 => array( 'soldier' => 600 )), 1 => array( 'soldier' => 300 ) )
+     *   array( 0 => array( 'soldier' => 600 )), 1 => array( 'soldier' => 300 ) )
      *
      * @var array
      */
@@ -124,7 +147,7 @@ class AbstractBuilding implements BuildingInterface
     /**
      * How much of what does that building produce per minute (per level)?
      * Example ( level => array( unit => buildingTimeInSeconds ) ):
-     * array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'ion_cannon_satelite' => 3000 ) )
+     *   array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'ion_cannon_satelite' => 3000 ) )
      *
      * @var array
      */
@@ -133,7 +156,7 @@ class AbstractBuilding implements BuildingInterface
     /**
      * Which buildings do we need before we can build this one?
      * Example ( level => array( building => minimumLevel ) ):
-     * array( 0 => array( 'farm' => 0 )) )
+     *   array( 0 => array( 'farm' => 0 )) )
      *
      * @var array
      */
@@ -427,6 +450,31 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
+    
+    /***** Resources use *****/
+    /**
+     * @return array
+     */
+    public function getResourcesUse($level = null, $resource = null)
+    {
+        return $level === null
+            ? $this->resourcesUse
+            : ($resource === null
+                ? $this->resourcesUse[$level]
+                : $this->resourcesUse[$level][$resource])
+        ;
+    }
+
+    /**
+     * @param array $resourcesUse
+     */
+    public function setResourcesUse(array $resourcesUse = array())
+    {
+        $this->resourcesUse = $resourcesUse;
+
+        return $this;
+    }
+
 
     /***** Units production *****/
     /**

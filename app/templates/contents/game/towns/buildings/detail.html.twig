@@ -22,12 +22,6 @@
             href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
             {{ 'View on map' | trans }}
         </a>
-        {% if townBuilding.isUpgradable() %}
-            <a class="btn btn-default btn-xs"
-                href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
-                {{ 'Upgrade' | trans }}
-            </a>
-        {% endif %}
     </h2>
     <div id="main-content">
         <div class="row">
@@ -73,9 +67,29 @@
                     </li>
                 </ul>
             </div> <!-- /.col-md-6 -->
-            <div class="col-md-6">
-                {# To-Do #}
-            </div> <!-- /.col-md-6 -->
         </div> <!-- /.row -->
+        {% if townBuilding.isUpgradable() %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr />
+                    <h3>{{ 'Upgrade' | trans }}</h3>
+                    <div class="building-wrapper">
+                        {% set preUpgradeChecks = app['game.buildings'].doPreUpgradeChecksResponse(
+                            townBuilding
+                        ) %}
+                        {% if preUpgradeChecks is not same as (true) %}
+                            <div class="building-overlay">
+                                {{ preUpgradeChecks }}
+                            </div>
+                        {% endif %}
+                        {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel() + 1, building: townBuilding.getBuildingObject() } %}
+                        <a class="btn btn-success btn-block"
+                            href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                            {{ 'Upgrade' | trans }}
+                        </a>
+                    </div> <!-- /.building-wrapper -->
+                </div> <!-- /.col-md-12 -->
+            </div> <!-- /.row -->
+        {% endif %}
     </div>
 {% endblock %}
