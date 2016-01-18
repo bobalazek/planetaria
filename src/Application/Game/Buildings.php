@@ -299,12 +299,12 @@ class Buildings
         );
 
         $buildTimeSeconds = $buildingObject->getBuildTime($townBuilding->getLevel()+1);
-        $timeNextLevelStarted = new \Datetime();
-        $timeNextLevelEnded = new \Datetime();
-        $timeNextLevelEnded->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
+        $timeNextLevelUpgradeStarted = new \Datetime();
+        $timeNextLevelUpgradeEnds = new \Datetime();
+        $timeNextLevelUpgradeEnds->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
         $townBuilding
-            ->setTimeNextLevelStarted($timeNextLevelStarted)
-            ->setTimeNextLevelEnded($timeNextLevelEnded)
+            ->setTimeNextLevelUpgradeStarted($timeNextLevelUpgradeStarted)
+            ->setTimeNextLevelUpgradeEnds($timeNextLevelUpgradeEnds)
         ;
 
         $app['orm.em']->persist($townBuilding);

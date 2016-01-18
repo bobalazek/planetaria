@@ -76,7 +76,9 @@ class Resources
     {
         $all = self::getAll();
 
-        unset($all[Resources::MONEY]); // We do not want money to be a "natural" resource
+        // Remove the non-natural resources
+        unset($all[Resources::ELECTRICITY]);
+        unset($all[Resources::MONEY]);
 
         return $all;
     }

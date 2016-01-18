@@ -62,16 +62,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="time_next_level_started", type="datetime", nullable=true)
+     * @ORM\Column(name="time_next_level_upgrade_started", type="datetime", nullable=true)
      */
-    protected $timeNextLevelStarted;
+    protected $timeNextLevelUpgradeStarted;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="time_next_level_ended", type="datetime", nullable=true)
+     * @ORM\Column(name="time_next_level_upgrade_ends", type="datetime", nullable=true)
      */
-    protected $timeNextLevelEnded;
+    protected $timeNextLevelUpgradeEnds;
 
     /**
      * @var \DateTime
@@ -343,44 +343,44 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $tiles[0]->getCoordinatesY();
     }
 
-    /*** Time next level started ***/
+    /*** Time next level upgrade started ***/
     /**
      * @return \DateTime
      */
-    public function getTimeNextLevelStarted()
+    public function getTimeNextLevelUpgradeStarted()
     {
-        return $this->timeNextLevelStarted;
+        return $this->timeNextLevelUpgradeStarted;
     }
 
     /**
-     * @param \DateTime $timeNextLevelStarted
+     * @param \DateTime $timeNextLevelUpgradeStarted
      *
      * @return TownBuildingEntity
      */
-    public function setTimeNextLevelStarted(\DateTime $timeNextLevelStarted = null)
+    public function setTimeNextLevelUpgradeStarted(\DateTime $timeNextLevelUpgradeStarted = null)
     {
-        $this->timeNextLevelStarted = $timeNextLevelStarted;
+        $this->timeNextLevelUpgradeStarted = $timeNextLevelUpgradeStarted;
 
         return $this;
     }
 
-    /*** Time next level ended ***/
+    /*** Time next level upgrade ends ***/
     /**
      * @return \DateTime
      */
-    public function getTimeNextLevelEnded()
+    public function getTimeNextLevelUpgradeEnds()
     {
-        return $this->timeNextLevelEnded;
+        return $this->timeNextLevelUpgradeEnds;
     }
 
     /**
-     * @param \DateTime $timeNextLevelEnded
+     * @param \DateTime $timeNextLevelUpgradeEnds
      *
      * @return TownBuildingEntity
      */
-    public function setTimeNextLevelEnded(\DateTime $timeNextLevelEnded = null)
+    public function setTimeNextLevelUpgradeEnds(\DateTime $timeNextLevelUpgradeEnds = null)
     {
-        $this->timeNextLevelEnded = $timeNextLevelEnded;
+        $this->timeNextLevelUpgradeEnds = $timeNextLevelUpgradeEnds;
 
         return $this;
     }
@@ -454,10 +454,10 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function isUpgrading()
     {
-        $timeNextLevelStarted = $this->getTimeNextLevelStarted();
-        $timeNextLevelEnded = $this->getTimeNextLevelEnded();
+        $timeNextLevelUpgradeStarted = $this->getTimeNextLevelUpgradeStarted();
+        $timeNextLevelUpgradeEnds = $this->getTimeNextLevelUpgradeEnds();
 
-        return $timeNextLevelStarted !== null && $timeNextLevelEnded !== null;
+        return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
 
     /*** Badge text ***/
@@ -466,8 +466,14 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function getBadgeText()
     {
+        $status = $this->getStatus();
+        
+        if ($status === BuildingStatuses::CONSTRUCTING) {
+            return '(constructing)';
+        }
+        
         return $this->getLevel().
-            ($this->isUpgrading() ? ' => '.($this->getLevel()+1) : '')
+            ($this->isUpgrading() ? ' => '.($this->getLevel()+1).' (upgrading)' : '')
         ;
     }
     

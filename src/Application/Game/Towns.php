@@ -156,18 +156,18 @@ class Towns
             $currentDatetime = new \Datetime();
 
             foreach ($townBuildings as $townBuilding) {
-                $townBuildingTimeNextLevelStarted = $townBuilding->getTimeNextLevelStarted();
-                $townBuildingTimeNextLevelEnded = $townBuilding->getTimeNextLevelEnded();
+                $townBuildingTimeNextLevelUpgradeStarted = $townBuilding->getTimeNextLevelUpgradeStarted();
+                $townBuildingTimeNextLevelUpgradeEnds = $townBuilding->getTimeNextLevelUpgradeEnds();
 
                 if (
-                    $townBuildingTimeNextLevelStarted !== null &&
-                    $townBuildingTimeNextLevelEnded !== null &&
-                    $currentDatetime > $townBuildingTimeNextLevelEnded
+                    $townBuildingTimeNextLevelUpgradeStarted !== null &&
+                    $townBuildingTimeNextLevelUpgradeEnds !== null &&
+                    $currentDatetime > $townBuildingTimeNextLevelUpgradeEnds
                 ) {
                     $townBuilding
                         ->setLevel($townBuilding->getLevel() + 1)
-                        ->setTimeNextLevelStarted(null)
-                        ->setTimeNextLevelEnded(null)
+                        ->setTimeNextLevelUpgradeStarted(null)
+                        ->setTimeNextLevelUpgradeEnds(null)
                     ;
 
                     $app['orm.em']->persist($townBuilding);

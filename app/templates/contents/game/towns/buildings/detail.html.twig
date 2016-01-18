@@ -57,6 +57,16 @@
                             {{ town.getCountry() }}
                         </a>
                     </li>
+                    {% if townBuilding.isUpgrading() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Upgrade started' | trans }}:</b>
+                            {{ townBuilding.getTimeNextLevelUpgradeStarted() | date(app.dateTimeFormat) }}
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{ 'Upgrade ends' | trans }}:</b>
+                            {{ townBuilding.getTimeNextLevelUpgradeEnds() | date(app.dateTimeFormat) }}
+                        </li>
+                    {% endif %}
                     <li class="list-group-item">
                         <b>{{ 'Created' | trans }}:</b>
                         {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
