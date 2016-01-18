@@ -16,7 +16,7 @@
     </h2>
     <div id="main-content">
         {% if town %}
-            <h4>{{ 'Select the building' | trans }}:</h4>
+            <h4>{{ 'Select the building you want to build' | trans }}:</h4>
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">
@@ -26,17 +26,7 @@
                     </div> <!-- /.row -->
                 </div> <!-- /.col-md-8 -->
                 <div class="col-md-4">
-                    <div id="town-sidebar">
-                        <h3>{{ town }}</h3>
-                        {% if town.getDescription() %}
-                            <p>{{ town.getDescription() }}</p>
-                        {% endif %}
-                        <h4>
-                            {{ 'Buildings' | trans }}:
-                            {{ town.getTownBuildings() | length }}
-                        </h4>
-                        {% include 'contents/game/_parts/town-resources-table.html.twig' %}
-                    </div>
+                    {% include 'contents/game/_parts/town-sidebar.html.twig' %}
                 </div> <!-- /.col-md-4 -->
             </div> <!-- /.row -->
         {% else %}

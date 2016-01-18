@@ -1,0 +1,14 @@
+<div id="town-sidebar">
+    <h3>
+        {{ town }}
+        <span class="badge"
+            data-toggle="tooltip"
+            title="{{ 'Buildings' | trans }}">
+            {{ town.getTownBuildings() | length }}
+        </span>
+    </h3>
+    {% if town.getDescription() %}
+        <p>{{ town.getDescription() }}</p>
+    {% endif %}
+    {% include 'contents/game/_parts/town-resources-table.html.twig' %}
+</div>

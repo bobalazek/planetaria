@@ -118,6 +118,20 @@ h1 {
     margin-right: 20px;
 }
 
+/*** Town Sidebar ***/
+#town-sidebar {
+    padding: 10px;
+    background-color: #eee;
+}
+
+    #town-sidebar h3 {
+        margin-top: 0;
+    }
+    
+    #town-sidebar table {
+        margin-bottom: 0;
+    }
+
 /********** Fixes **********/
 /*** Popover fix ***/
 .popover {
