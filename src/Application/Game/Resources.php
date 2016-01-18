@@ -36,6 +36,11 @@ class Resources
      * @var string
      */
     const CRUDE_OIL = 'crude_oil';
+    
+    /**
+     * @var string
+     */
+    const ELECTRICITY = 'electricity';
 
     /**
      * @var string
@@ -54,6 +59,7 @@ class Resources
             self::ROCK => 'Rock',
             self::IRON_ORE => 'Iron ore',
             self::CRUDE_OIL => 'Crude oil',
+            self::ELECTRICITY => 'Electricity',
             self::MONEY => 'Money',
         );
 

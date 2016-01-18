@@ -470,6 +470,23 @@ class TownBuildingEntity extends AbstractBasicEntity
             ($this->isUpgrading() ? ' => '.($this->getLevel()+1) : '')
         ;
     }
+    
+    /*** Image ***/
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        $status = $this->getStatus();
+        $building = $this->getBuilding();
+        $buildingObject = $this->getBuildingObject();
+        
+        if ($status === BuildingStatuses::CONSTRUCTING) {
+            return '_constructing/full.png';
+        }
+
+        return $buildingObject->getSlug().'/'.$status.'/full.png';
+    }
 
     /**
      * @ORM\PreUpdate

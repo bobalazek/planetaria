@@ -3,6 +3,7 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Application\Game\BuildingStatuses;
 
 /**
  * Tile Entity
@@ -424,10 +425,18 @@ class TileEntity extends AbstractBasicEntity
      */
     public function getTownBuildingImage()
     {
-        return $this->getTownBuilding()->getBuilding().'/'.
-            $this->getTownBuilding()->getStatus().'/'.
-            $this->getBuildingSection().'.png'
-        ;
+        $townBuilding = $this->getTownBuilding();
+        $buildingObject = $townBuilding->getBuildingObject();
+        $buildingObjectSlug = $buildingObject->getSlug();
+        $buildingObjectSize = $buildingObject->getSize();
+        $townBuildingStatus = $townBuilding->getStatus();
+        $buildingSection = $this->getBuildingSection();
+        
+        if ($townBuildingStatus === BuildingStatuses::CONSTRUCTING) {
+            return '_constructing/'.$buildingObjectSize.'/'.$buildingSection.'.png';
+        }
+         
+        return $buildingObjectSlug.'/'.$townBuildingStatus.'/'.$buildingSection.'.png';
     }
 
     /**

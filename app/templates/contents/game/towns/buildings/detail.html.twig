@@ -39,6 +39,13 @@
                         {{ townBuilding.getBuildingObject().getDescription() }}
                     </li>
                     <li class="list-group-item">
+                        <b>{{ 'Image' | trans }}:</b> 
+                        <br />
+                        <img class="img-responsive"
+                            src="{{ app.baseUrl }}/assets/images/buildings/{{ townBuilding.getImage() }}"
+                            style="max-width: 128px;" />
+                    </li>
+                    <li class="list-group-item">
                         <b>{{ 'Town' | trans }}:</b>
                         <a href="{{ url('game.towns.detail', { id: town.getId() }) }}">
                             {{ town }}
