@@ -116,3 +116,15 @@
         {% endif %}
     </div>
 {% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    {% if townBuilding.getSecondsUntilUpgradeDone() is not sameas(false) %}
+        <script>
+            var timeoutSeconds = {{ townBuilding.getSecondsUntilUpgradeDone() }};
+            setTimeout(function() {
+                window.location.reload();
+            }, timeoutSeconds * 1000);
+        </script>
+    {% endif %}
+{% endblock %}

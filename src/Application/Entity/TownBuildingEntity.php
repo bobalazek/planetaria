@@ -468,6 +468,22 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
     }
+    
+    /*** Seconds until upgrade done ***/
+    /**
+     * @return integer|boolean
+     */
+    public function getSecondsUntilUpgradeDone()
+    {
+        if ($this->isUpgrading()) {
+            $currentDatetime = new \Datetime();
+            $timeNextLevelUpgradeEnds = $this->getTimeNextLevelUpgradeEnds();
+            
+            return strtotime($timeNextLevelUpgradeEnds->format(DATE_ATOM)) - strtotime($currentDatetime->format(DATE_ATOM));
+        }
+
+        return false;
+    }
 
     /*** Badge text ***/
     /**
