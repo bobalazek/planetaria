@@ -335,7 +335,7 @@ class Buildings
     public function doPreUpgradeChecks(TownBuildingEntity $townBuilding)
     {
         $app = $this->app;
-        
+
         // Check if the building is currently being constructed
         $isConstructing = $townBuilding->isConstructing();
         if ($isConstructing) {
@@ -368,7 +368,7 @@ class Buildings
             );
         }
     }
-    
+
     /**
      * Same as the method above BUT a more frontend friendly version. Outputs text instead of exceptions.
      *
@@ -386,7 +386,7 @@ class Buildings
             return true;
         } catch (\Exception $e) {
             return $e->getMessage();
-        }    
+        }
     }
 
     /**

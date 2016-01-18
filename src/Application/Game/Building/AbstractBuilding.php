@@ -9,7 +9,7 @@ class AbstractBuilding implements BuildingInterface
 {
     /**
      * What's the name of that building?
-     * Example: 
+     * Example:
      *   'Iron mine'
      *
      * @var string
@@ -18,7 +18,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the key of that building?
-     * Example: 
+     * Example:
      *   'iron_mine'
      *
      * @var string
@@ -27,7 +27,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the slug of that building?
-     * Example: 
+     * Example:
      *   'iron-ime'
      *
      * @var string
@@ -36,7 +36,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the description of that building?
-     * Example: 
+     * Example:
      *   'A building which is used to produce iron.''
      *
      * @var string
@@ -45,7 +45,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the type of that building?
-     * Example: 
+     * Example:
      *   'civil'
      *
      * @var string
@@ -54,7 +54,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the size of that building?
-     * Example: 
+     * Example:
      *   '1x1'
      *
      * @var string
@@ -63,7 +63,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the maximum level of that building?
-     * Example: 
+     * Example:
      *   2
      *
      * @var integer
@@ -72,7 +72,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much health points does that building have (per level)?
-     * Example: 
+     * Example:
      *   array( 0 => 400, 1 => 800, 2 => 1200 )
      *
      * @var array
@@ -81,7 +81,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the size of that building (per level)?
-     * Example: 
+     * Example:
      *   array( 0 => 100, 1 => 200, 2 => 300 )
      *
      * @var array
@@ -90,7 +90,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the storage capacity of that building (per level)?
-     * Example (increases capacity for ALL resources): 
+     * Example (increases capacity for ALL resources):
      *   array( 0 => 50, 1 => 100, 2 => 200 )
      * or if you only want to add storage for certain resources
      *   array( 0 => array( 'rock' => 200 ), 1 => array( 'rock' => 400 ), 2 => array( 'rock' => 800 ) )
@@ -101,7 +101,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What's the build time of that building in seconds (per level)?
-     * Example: 
+     * Example:
      *   array( 0 => 30, 1 => 60, 2 => 120 )
      *
      * @var array
@@ -110,7 +110,7 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * How much of what does that building cost (per level)?
-     * Example: 
+     * Example:
      *   array( 0 => array( 'wood' => 200 ), 1 => array( 'wood' => 200 ), 2 => array( 'wood' => 200 ) )
      *
      * @var array
@@ -125,7 +125,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $resourcesProduction;
-    
+
     /**
      * How much of what does that building use per minute (per level)?
      * Example ( level => array( resource => amountPerMinute ) ):
@@ -450,7 +450,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Resources use *****/
     /**
      * @return array
@@ -474,7 +474,6 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-
 
     /***** Units production *****/
     /**

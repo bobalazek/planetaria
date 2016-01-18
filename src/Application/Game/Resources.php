@@ -36,7 +36,7 @@ class Resources
      * @var string
      */
     const CRUDE_OIL = 'crude_oil';
-    
+
     /**
      * @var string
      */

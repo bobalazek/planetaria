@@ -149,7 +149,7 @@ interface BuildingInterface
      * @param array $resourcesProduction
      */
     public function setResourcesProduction(array $resourcesProduction);
-    
+
     /***** Resources use *****/
     /**
      * @return array

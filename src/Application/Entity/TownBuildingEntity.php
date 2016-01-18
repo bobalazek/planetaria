@@ -459,7 +459,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
-    
+
     /*** Constructing ***/
     /**
      * @return boolean
@@ -468,7 +468,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
     }
-    
+
     /*** Seconds until upgrade done ***/
     /**
      * @return integer|boolean
@@ -478,7 +478,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         if ($this->isUpgrading()) {
             $currentDatetime = new \Datetime();
             $timeNextLevelUpgradeEnds = $this->getTimeNextLevelUpgradeEnds();
-            
+
             return strtotime($timeNextLevelUpgradeEnds->format(DATE_ATOM)) - strtotime($currentDatetime->format(DATE_ATOM));
         }
 
@@ -492,16 +492,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function getBadgeText()
     {
         $status = $this->getStatus();
-        
+
         if ($status === BuildingStatuses::CONSTRUCTING) {
             return '(constructing)';
         }
-        
+
         return $this->getLevel().
             ($this->isUpgrading() ? ' => '.($this->getLevel()+1).' (upgrading)' : '')
         ;
     }
-    
+
     /*** Image ***/
     /**
      * @return string
@@ -511,7 +511,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         $status = $this->getStatus();
         $building = $this->getBuilding();
         $buildingObject = $this->getBuildingObject();
-        
+
         if ($status === BuildingStatuses::CONSTRUCTING) {
             return '_constructing/full.png';
         }
