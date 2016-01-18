@@ -25,7 +25,7 @@
     </h2>
     <div id="main-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h3>{{ 'Information' | trans }}</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -76,7 +76,20 @@
                         {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
-            </div> <!-- /.col-md-6 -->
+            </div> <!-- /.col-md-8 -->
+            <div class="col-md-4">
+                <div id="town-sidebar">
+                    <h3>{{ town }}</h3>
+                    {% if town.getDescription() %}
+                        <p>{{ town.getDescription() }}</p>
+                    {% endif %}
+                    <h4>
+                        {{ 'Buildings' | trans }}:
+                        {{ town.getTownBuildings() | length }}
+                    </h4>
+                    {% include 'contents/game/_parts/town-resources-table.html.twig' %}
+                </div>
+            </div> <!-- /.col-md-4 -->
         </div> <!-- /.row -->
         {% if townBuilding.isUpgradable() %}
             <div class="row">
