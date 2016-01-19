@@ -139,7 +139,8 @@ class Planets
             ->setDescription('The capital of Panem')
             ->setPlanet($planetEntity)
             ->setCountry($countryEntity)
-            ->prepareTownResources(100000)
+            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
+            ->prepareTownResources(10000)
         ;
         $app['orm.em']->persist($townEntity);
 

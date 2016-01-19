@@ -87,6 +87,11 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     protected $country;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="towns")
+     */
+    protected $user;
 
     /**
      * Also known as the town resources storage.
@@ -205,6 +210,27 @@ class TownEntity extends AbstractAdvancedEntity
     public function setCountry(CountryEntity $country)
     {
         $this->country = $country;
+
+        return $this;
+    }
+    
+    /*** User ***/
+    /**
+     * @return UserEntity
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param UserEntity $user
+     *
+     * @return TownEntity
+     */
+    public function setUser(UserEntity $user = null)
+    {
+        $this->user = $user;
 
         return $this;
     }

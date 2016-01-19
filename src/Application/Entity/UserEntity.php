@@ -185,6 +185,13 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Application\Entity\PostEntity", mappedBy="user", cascade={"all"})
      */
     protected $posts;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="user", cascade={"all"})
+     */
+    protected $towns;
 
     /**
      * @var ArrayCollection
@@ -238,6 +245,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         );
 
         $this->posts = new ArrayCollection();
+        $this->towns = new ArrayCollection();
         $this->userCountries = new ArrayCollection();
     }
 
@@ -926,6 +934,27 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
+    
+    /*** Towns ***/
+    /**
+     * @return array
+     */
+    public function getTowns()
+    {
+        return $this->towns->toArray();
+    }
+
+    /**
+     * @param ArrayCollection $towns
+     *
+     * @return UserEntity
+     */
+    public function setTowns($towns)
+    {
+        $this->towns = $towns;
+
+        return $this;
+    }
 
     /*** User countries ***/
     /**
@@ -985,29 +1014,6 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         }
 
         return 0;
-    }
-
-    /*** Towns ***/
-    /**
-     * @return array
-     */
-    public function getTowns()
-    {
-        $towns = array();
-        $userCountries = $this->getUserCountries();
-
-        if (!empty($userCountries)) {
-            foreach ($userCountries as $userCountry) {
-                $userCountryTowns = $userCountry->getCountry()->getTowns();
-                if (!empty($userCountryTowns)) {
-                    foreach ($userCountryTowns as $userCountryTown) {
-                        $towns[] = $userCountryTown;
-                    }
-                }
-            }
-        }
-
-        return $towns;
     }
 
     /**
