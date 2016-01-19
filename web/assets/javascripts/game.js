@@ -88,14 +88,19 @@ var Game = function () {
                 liveProgress.each(function() {
                     var percentage = parseFloat(jQuery(this).attr('data-percentage'));
                     var percentagePerSecond = parseFloat(jQuery(this).attr('data-percentage-per-second'));
+                    var secondsUntilDone = parseInt(jQuery(this).attr('data-seconds-until-done'));
                     
                     percentage = percentage + percentagePerSecond;
+                    secondsUntilDone--;
 
                     if (percentage > 100) {
                         percentage = 100;
                     }
                     
-                    jQuery(this).attr('data-percentage', percentage);
+                    jQuery(this)
+                        .attr('data-percentage', percentage)
+                        .attr('data-seconds-until-done', secondsUntilDone)
+                    ;
                     
                     jQuery(this)
                         .find('.progress-bar')
@@ -103,6 +108,10 @@ var Game = function () {
                         .css({ width: percentage+'%' })
                         .text(parseInt(percentage)+'%')
                     ;
+                    
+                    if (secondsUntilDone <= 0) {
+                        window.location.reload();
+                    }
                 });
             }
             

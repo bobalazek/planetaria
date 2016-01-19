@@ -32,16 +32,3 @@
         </div>
     </div>
 {% endif %}
-{% if townBuilding.isUpgrading() or townBuilding.isConstructing() %}
-    <script>
-        var upgradingSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }};
-        var constructingSeconds = {{ townBuilding.getSecondsUntilConstructingDone() | json_encode }};
-
-        if (upgradingSeconds !== false || constructingSeconds !== false) {
-            var timeoutSeconds = upgradingSeconds !== false ? upgradingSeconds : constructingSeconds;
-            setTimeout(function() {
-                window.location.reload();
-            }, timeoutSeconds * 1000);
-        }
-    </script>
-{% endif %}
