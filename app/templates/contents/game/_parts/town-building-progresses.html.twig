@@ -1,0 +1,47 @@
+{% if townBuilding.isUpgrading() %}
+    <h5>{{ 'Upgrading progress' | trans }}</h5>
+    <div class="progress live-progress"
+        data-percentage="{{ townBuilding.getUpgradingProgressPercentage() }}"
+        data-percentage-per-second="{{ townBuilding.getUpgradingProgressPercentagePerSecond() }}"
+        data-seconds-until-done="{{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }}"
+        data-toggle="tooltip"
+        title="{{ 'Start' | trans }}: {{ townBuilding.getTimeNextLevelUpgradeStarted() | date(app.dateTimeFormat) }}; {{ 'End' | trans }}: {{ townBuilding.getTimeNextLevelUpgradeEnds() | date(app.dateTimeFormat) }}">
+        <div class="progress-bar"
+            aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}" 
+            aria-valuemin="0" 
+            aria-valuemax="100" 
+            style="width: {{ townBuilding.getUpgradingProgressPercentage() }}%; min-width: 2em;">
+            {{ townBuilding.getUpgradingProgressPercentage() | round }}%
+        </div>
+    </div>
+{% elseif townBuilding.isConstructing() %}
+    <h5>{{ 'Constructing progress' | trans }}</h5>
+    <div class="progress live-progress"
+        data-percentage="{{ townBuilding.getConstructingProgressPercentage() }}"
+        data-percentage-per-second="{{ townBuilding.getConstructingProgressPercentagePerSecond() }}"
+        data-seconds-until-done="{{ townBuilding.getSecondsUntilConstructingDone() | json_encode }}"
+        data-toggle="tooltip"
+        title="{{ 'Start' | trans }}: {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}; {{ 'End' | trans }}: {{ townBuilding.getTimeConstructed() | date(app.dateTimeFormat) }}">
+        <div class="progress-bar" 
+            role="progressbar" 
+            aria-valuenow="{{ townBuilding.getConstructingProgressPercentage() }}" 
+            aria-valuemin="0" 
+            aria-valuemax="100" 
+            style="width: {{ townBuilding.getConstructingProgressPercentage() }}%; min-width: 2em;">
+            {{ townBuilding.getConstructingProgressPercentage() | round }}%
+        </div>
+    </div>
+{% endif %}
+{% if townBuilding.isUpgrading() or townBuilding.isConstructing() %}
+    <script>
+        var upgradingSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }};
+        var constructingSeconds = {{ townBuilding.getSecondsUntilConstructingDone() | json_encode }};
+
+        if (upgradingSeconds !== false || constructingSeconds !== false) {
+            var timeoutSeconds = upgradingSeconds !== false ? upgradingSeconds : constructingSeconds;
+            setTimeout(function() {
+                window.location.reload();
+            }, timeoutSeconds * 1000);
+        }
+    </script>
+{% endif %}

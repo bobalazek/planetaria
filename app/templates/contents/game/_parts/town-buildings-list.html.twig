@@ -14,10 +14,10 @@
                     {{ townBuilding.getBadgeText() | raw }}
                 </span>
             </h4>
-            <p>
-                <b>{{ 'Created' | trans }}:</b>
-                {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
-            </p>
+            {% if townBuilding.getBuildingObject().getDescription() %}
+                <p>{{ townBuilding.getBuildingObject().getDescription() }}</p>
+            {% endif %}
+            {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
         </a>
     {% endfor %}
 </ul>

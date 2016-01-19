@@ -15,73 +15,7 @@
         <div class="row">
             <div class="col-md-8">
                 {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject() } %}
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <b>{{ 'Town' | trans }}:</b>
-                        <a href="{{ url('game.towns.detail', { id: town.getId() }) }}">
-                            {{ town }}
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>{{ 'Country' | trans }}:</b>
-                        <a href="{{ url('game.countries.detail', { id: town.getCountry().getId() }) }}">
-                            {{ town.getCountry() }}
-                        </a>
-                    </li>
-                    {% if townBuilding.isUpgrading() %}
-                        <li class="list-group-item">
-                            <b>{{ 'Upgrade started' | trans }}:</b>
-                            {{ townBuilding.getTimeNextLevelUpgradeStarted() | date(app.dateTimeFormat) }}
-                        </li>
-                        <li class="list-group-item">
-                            <b>{{ 'Upgrade ends' | trans }}:</b>
-                            {{ townBuilding.getTimeNextLevelUpgradeEnds() | date(app.dateTimeFormat) }}
-                        </li>
-                    {% endif %}
-                    {% if townBuilding.isConstructing() %}
-                        <li class="list-group-item">
-                            <b>{{ 'Construction started' | trans }}:</b>
-                            {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
-                        </li>
-                        <li class="list-group-item">
-                            <b>{{ 'Construction finishes' | trans }}:</b>
-                            {{ townBuilding.getTimeConstructed() | date(app.dateTimeFormat) }}
-                        </li>
-                    {% endif %}
-                    <li class="list-group-item">
-                        <b>{{ 'Created' | trans }}:</b>
-                        {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
-                    </li>
-                </ul>
-                {% if townBuilding.isUpgrading() %}
-                    <h4>{{ 'Upgrading progress' | trans }}</h4>
-                    <div class="progress live-progress"
-                        data-percentage="{{ townBuilding.getUpgradingProgressPercentage() }}"
-                        data-percentage-per-second="{{ townBuilding.getUpgradingProgressPercentagePerSecond() }}">
-                        <div class="progress-bar"
-                            aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}" 
-                            aria-valuemin="0" 
-                            aria-valuemax="100" 
-                            style="width: {{ townBuilding.getUpgradingProgressPercentage() }}%; min-width: 2em;">
-                            {{ townBuilding.getUpgradingProgressPercentage() | round }}%
-                        </div>
-                    </div>
-                {% endif %}
-                {% if townBuilding.isConstructing() %}
-                    <h4>{{ 'Constructing progress' | trans }}</h4>
-                    <div class="progress live-progress"
-                        data-percentage="{{ townBuilding.getConstructingProgressPercentage() }}"
-                        data-percentage-per-second="{{ townBuilding.getConstructingProgressPercentagePerSecond() }}">
-                        <div class="progress-bar" 
-                            role="progressbar" 
-                            aria-valuenow="{{ townBuilding.getConstructingProgressPercentage() }}" 
-                            aria-valuemin="0" 
-                            aria-valuemax="100" 
-                            style="width: {{ townBuilding.getConstructingProgressPercentage() }}%; min-width: 2em;">
-                            {{ townBuilding.getConstructingProgressPercentage() | round }}%
-                        </div>
-                    </div>
-                {% endif %}
+                {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
                 <a class="btn btn-default btn-block btn-lg"
                     href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
                     {{ 'View on map' | trans }}
@@ -127,19 +61,4 @@
             </div> <!-- /.row -->
         {% endif %}
     </div>
-{% endblock %}
-
-{% block body_javascripts %}
-    {{ parent() }}
-        <script>
-            var upgradingSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }};
-            var constructingSeconds = {{ townBuilding.getSecondsUntilConstructingDone() | json_encode }};
-
-            if (upgradingSeconds !== false || constructingSeconds !== false) {
-                var timeoutSeconds = upgradingSeconds !== false ? upgradingSeconds : constructingSeconds;
-                setTimeout(function() {
-                    window.location.reload();
-                }, timeoutSeconds * 1000);
-            }
-        </script>
 {% endblock %}
