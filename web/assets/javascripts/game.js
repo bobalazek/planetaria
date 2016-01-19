@@ -9,6 +9,7 @@ var Game = function () {
                 Game.headerInitialize();
                 Game.mapInitialize();
                 Game.townResourcesTableInitialize();
+                Game.liveProgressInitialize();
 
                 initialized = true;
                 console.log('Game Initialized');
@@ -79,5 +80,33 @@ var Game = function () {
                 setInterval(interval, 1000);
             }
         },
+        liveProgressInitialize: function()
+        {
+            var liveProgress = jQuery('.live-progress');
+            
+            function interval() {
+                liveProgress.each(function() {
+                    var percentage = parseFloat(jQuery(this).attr('data-percentage'));
+                    var percentagePerSecond = parseFloat(jQuery(this).attr('data-percentage-per-second'));
+                    
+                    percentage = percentage + percentagePerSecond;
+
+                    if (percentage > 100) {
+                        percentage = 100;
+                    }
+                    
+                    jQuery(this).attr('data-percentage', percentage);
+                    
+                    jQuery(this)
+                        .find('.progress-bar')
+                        .attr('aria-valuenow', percentage)
+                        .css({ width: percentage+'%' })
+                        .text(parseInt(percentage)+'%')
+                    ;
+                });
+            }
+            
+            setInterval(interval, 1000);
+        }
     }
 }();

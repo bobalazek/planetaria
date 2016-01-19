@@ -473,11 +473,11 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
     
-    /*** Upgrade progress percentage ***/
+    /*** Upgrading progress percentage ***/
     /**
-     * @return integer
+     * @return float
      */
-    public function getUpgradeProgressPercentage()
+    public function getUpgradingProgressPercentage()
     {
         if ($this->isUpgrading()) {
             $now = strtotime((new \Datetime())->format(DATE_ATOM));
@@ -489,6 +489,40 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return 0;
     }
+    
+    /**
+     * @return float
+     */
+    public function getUpgradingProgressPercentagePerSecond()
+    {
+        if ($this->isUpgrading()) {
+            $now = strtotime((new \Datetime())->format(DATE_ATOM));
+            $start = strtotime($this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM));
+            $end = strtotime($this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM));
+            $secondsLeft = $end - $now;
+            $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
+            
+            return $percentageLeft / $secondsLeft;
+        }
+
+        return 0;
+    }
+    
+    /*** Seconds until upgrading done ***/
+    /**
+     * @return integer|boolean
+     */
+    public function getSecondsUntilUpgradingDone()
+    {
+        if ($this->isUpgrading()) {
+            $now = new \Datetime();
+            $end = $this->getTimeNextLevelUpgradeEnds();
+
+            return strtotime($end->format(DATE_ATOM)) - strtotime($now->format(DATE_ATOM));
+        }
+
+        return false;
+    }
 
     /*** Constructing ***/
     /**
@@ -499,11 +533,11 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
     }
     
-    /*** Construction progress percentage ***/
+    /*** Constructing progress percentage ***/
     /**
-     * @return integer
+     * @return float
      */
-    public function getConstructionProgressPercentage()
+    public function getConstructingProgressPercentage()
     {
         if ($this->isConstructing()) {
             $now = strtotime((new \Datetime())->format(DATE_ATOM));
@@ -515,21 +549,38 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return 0;
     }
-
-    /*** Seconds until upgrade done ***/
+    
     /**
      * @return integer|boolean
      */
-    public function getSecondsUntilUpgradeDone()
+    public function getSecondsUntilConstructingDone()
     {
         if ($this->isUpgrading()) {
-            $currentDatetime = new \Datetime();
-            $timeNextLevelUpgradeEnds = $this->getTimeNextLevelUpgradeEnds();
+            $now = new \Datetime();
+            $end = $this->getTimeConstructed();
 
-            return strtotime($timeNextLevelUpgradeEnds->format(DATE_ATOM)) - strtotime($currentDatetime->format(DATE_ATOM));
+            return strtotime($end->format(DATE_ATOM)) - strtotime($now->format(DATE_ATOM));
         }
 
         return false;
+    }
+    
+    /**
+     * @return float
+     */
+    public function getConstructingProgressPercentagePerSecond()
+    {
+        if ($this->isConstructing()) {
+            $now = strtotime((new \Datetime())->format(DATE_ATOM));
+            $start = strtotime($this->getTimeCreated()->format(DATE_ATOM));
+            $end = strtotime($this->getTimeConstructed()->format(DATE_ATOM));
+            $secondsLeft = $end - $now;
+            $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
+            
+            return $percentageLeft / $secondsLeft;
+        }
+
+        return 0;
     }
 
     /*** Badge text ***/

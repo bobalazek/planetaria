@@ -54,28 +54,31 @@
                     </li>
                 </ul>
                 {% if townBuilding.isUpgrading() %}
-                    <h4>{{ 'Upgrade progess' | trans }}</h4>
-                    <div class="progress">
-                        <div class="progress-bar" 
-                            role="progressbar" 
-                            aria-valuenow="{{ townBuilding.getUpgradeProgressPercentage() }}" 
+                    <h4>{{ 'Upgrading progess' | trans }}</h4>
+                    <div class="progress live-progress"
+                        data-percentage="{{ townBuilding.getUpgradingProgressPercentage() }}"
+                        data-percentage-per-second="{{ townBuilding.getUpgradingProgressPercentagePerSecond() }}">
+                        <div class="progress-bar
+                            aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}" 
                             aria-valuemin="0" 
                             aria-valuemax="100" 
-                            style="width: {{ townBuilding.getUpgradeProgressPercentage() }}%; min-width: 2em;">
-                            {{ townBuilding.getUpgradeProgressPercentage() | round }}%
+                            style="width: {{ townBuilding.getUpgradingProgressPercentage() }}%; min-width: 2em;">
+                            {{ townBuilding.getUpgradingProgressPercentage() | round }}%
                         </div>
                     </div>
                 {% endif %}
                 {% if townBuilding.isConstructing() %}
-                    <h4>{{ 'Construction progess' | trans }}</h4>
-                    <div class="progress">
+                    <h4>{{ 'Constructing progess' | trans }}</h4>
+                    <div class="progress live-progress"
+                        data-percentage="{{ townBuilding.getConstructingProgressPercentage() }}"
+                        data-percentage-per-second="{{ townBuilding.getConstructingProgressPercentagePerSecond() }}">
                         <div class="progress-bar" 
                             role="progressbar" 
-                            aria-valuenow="{{ townBuilding.getConstructionProgressPercentage() }}" 
+                            aria-valuenow="{{ townBuilding.getConstructingProgressPercentage() }}" 
                             aria-valuemin="0" 
                             aria-valuemax="100" 
-                            style="width: {{ townBuilding.getConstructionProgressPercentage() }}%; min-width: 2em;">
-                            {{ townBuilding.getConstructionProgressPercentage() | round }}%
+                            style="width: {{ townBuilding.getConstructingProgressPercentage() }}%; min-width: 2em;">
+                            {{ townBuilding.getConstructingProgressPercentage() | round }}%
                         </div>
                     </div>
                 {% endif %}
@@ -128,9 +131,9 @@
 
 {% block body_javascripts %}
     {{ parent() }}
-    {% if townBuilding.getSecondsUntilUpgradeDone() is not sameas(false) %}
+    {% if townBuilding.getSecondsUntilUpgradingDone() is not sameas(false) or townBuilding.getSecondsUntilConstructingDone() is not sameas(false)  %}
         <script>
-            var timeoutSeconds = {{ townBuilding.getSecondsUntilUpgradeDone() }};
+            var timeoutSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() is not sameas(false) ? townBuilding.getSecondsUntilUpgradingDone() : townBuilding.getSecondsUntilConstructingDone() }};
             setTimeout(function() {
                 window.location.reload();
             }, timeoutSeconds * 1000);
