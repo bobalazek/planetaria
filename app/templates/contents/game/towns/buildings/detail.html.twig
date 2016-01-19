@@ -131,12 +131,15 @@
 
 {% block body_javascripts %}
     {{ parent() }}
-    {% if townBuilding.getSecondsUntilUpgradingDone() is not sameas(false) or townBuilding.getSecondsUntilConstructingDone() is not sameas(false)  %}
         <script>
-            var timeoutSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() is not sameas(false) ? townBuilding.getSecondsUntilUpgradingDone() : townBuilding.getSecondsUntilConstructingDone() }};
-            setTimeout(function() {
-                window.location.reload();
-            }, timeoutSeconds * 1000);
+            var upgradingSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }};
+            var constructingSeconds = {{ townBuilding.getSecondsUntilConstructingDone() | json_encode }};
+
+            if (upgradingSeconds !== false && constructingSeconds !== false) {
+                var timeoutSeconds = upgradingSeconds !== false ? upgradingSeconds : constructingSeconds;
+                setTimeout(function() {
+                    window.location.reload();
+                }, timeoutSeconds * 1000);
+            }
         </script>
-    {% endif %}
 {% endblock %}

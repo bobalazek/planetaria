@@ -555,7 +555,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function getSecondsUntilConstructingDone()
     {
-        if ($this->isUpgrading()) {
+        if ($this->isConstructing()) {
             $now = new \Datetime();
             $end = $this->getTimeConstructed();
 
