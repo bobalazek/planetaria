@@ -32,12 +32,7 @@
                         {{ 'used' | trans }}
                     </li>
                     <li class="list-group-item">
-                        <b>{{ 'Resources' | trans }}:</b>
                         {% include 'contents/game/_parts/town-resources-table.html.twig' %}
-                    </li>
-                    <li class="list-group-item">
-                        <b>{{ 'Created' | trans }}:</b>
-                        {{ town.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
             </div> <!-- /.col-md-6 -->
