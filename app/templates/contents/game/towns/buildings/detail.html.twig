@@ -135,7 +135,7 @@
             var upgradingSeconds = {{ townBuilding.getSecondsUntilUpgradingDone() | json_encode }};
             var constructingSeconds = {{ townBuilding.getSecondsUntilConstructingDone() | json_encode }};
 
-            if (upgradingSeconds !== false && constructingSeconds !== false) {
+            if (upgradingSeconds !== false || constructingSeconds !== false) {
                 var timeoutSeconds = upgradingSeconds !== false ? upgradingSeconds : constructingSeconds;
                 setTimeout(function() {
                     window.location.reload();
