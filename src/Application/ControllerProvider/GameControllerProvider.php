@@ -93,6 +93,12 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::buildingsUpgradeAction'
         )
         ->bind('game.towns.buildings.upgrade');
+        
+        $controllers->match(
+            '/towns/{id}/buildings/{buildingId}/remove',
+            'Application\Controller\Game\TownsController::buildingsRemoveAction'
+        )
+        ->bind('game.towns.buildings.remove');
 
         /***** Users *****/
         $controllers->match(

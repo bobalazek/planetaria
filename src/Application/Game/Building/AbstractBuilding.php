@@ -577,7 +577,7 @@ class AbstractBuilding implements BuildingInterface
     {
         return $level === null
             ? $this->buildingsRequired
-            : ($item === null
+            : ($building === null
                 ? $this->buildingsRequired[$level]
                 : $this->buildingsRequired[$level][$building])
         ;

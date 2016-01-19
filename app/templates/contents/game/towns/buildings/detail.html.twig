@@ -83,6 +83,13 @@
                         </a>
                     </div> <!-- /.building-wrapper -->
                 </div> <!-- /.col-md-12 -->
+                <div class="col-md-12">
+                    <hr />
+                    <a class="btn btn-danger btn-block btn-lg"
+                        href="{{ url('game.towns.buildings.remove', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                        {{ 'Remove' | trans }}
+                    </a>
+                </div>
             </div> <!-- /.row -->
         {% endif %}
     </div>

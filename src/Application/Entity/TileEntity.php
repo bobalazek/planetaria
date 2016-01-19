@@ -338,7 +338,7 @@ class TileEntity extends AbstractBasicEntity
      *
      * @return TileEntity
      */
-    public function setTownBuilding(TownBuildingEntity $townBuilding)
+    public function setTownBuilding(TownBuildingEntity $townBuilding = null)
     {
         $this->townBuilding = $townBuilding;
 

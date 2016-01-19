@@ -2,6 +2,7 @@
 
 namespace Application\Game\Building;
 
+use Application\Game\Buildings;
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
 
@@ -37,8 +38,13 @@ class MissileLaunchFacility extends AbstractBuilding
             ))
             ->setResourcesCost(array(
                 0 => array(
-                    Resources::WOOD => 200000,
-                    Resources::ROCK => 200000,
+                    Resources::WOOD => 20000,
+                    Resources::ROCK => 20000,
+                ),
+            ))
+            ->setBuildingsRequired(array(
+                0 => array(
+                    Buildings::AIRBASE => 0,
                 ),
             ))
         ;

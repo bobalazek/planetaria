@@ -14,6 +14,7 @@ use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
 use Application\Game\Exception\TownBuildingInConstructionException;
+use Application\Game\Exception\MissingRequiredBuildingsException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -237,6 +238,19 @@ class Buildings
                 'You have reached the buildings limit for this town!'
             );
         }
+        
+        // Check if we have the required buildings to construct this building
+        $hasRequiredBuildingsForBuilding = $app['game.towns']
+            ->hasRequiredBuildingsForBuilding(
+                $town, 
+                $building
+            )
+        ;
+        if (!$hasRequiredBuildingsForBuilding) {
+            throw new MissingRequiredBuildingsException(
+                'You do not have the required buildings to construct this building!'
+            );
+        }
 
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForBuilding = $app['game.towns']
@@ -359,6 +373,20 @@ class Buildings
         if ($isConstructing) {
             throw new TownBuildingInConstructionException(
                 'This building is currently being constructed!'
+            );
+        }
+        
+        // Check if we have the required buildings to upgrade this building
+        $hasRequiredBuildingsForBuilding = $app['game.towns']
+            ->hasRequiredBuildingsForBuilding(
+                $townBuilding->getTown(),
+                $townBuilding->getBuilding(),
+                $townBuilding->getLevel() + 1
+            )
+        ;
+        if (!$hasRequiredBuildingsForBuilding) {
+            throw new MissingRequiredBuildingsException(
+                'You do not have the required buildings to upgrade this building!'
             );
         }
 

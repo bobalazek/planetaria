@@ -37,9 +37,9 @@ class Capitol extends AbstractBuilding
                 3 => 400,
             ))
             ->setResourcesCapacity(array(
-                0 => 2000,
-                1 => 4000,
-                2 => 8000,
+                0 => 4000,
+                1 => 8000,
+                2 => 12000,
                 3 => 16000,
             ))
             ->setBuildTime(array(

@@ -25,8 +25,11 @@ class Towns
     }
 
     /**
+     * Check if the town has enough resources to construct this building.
+     *
      * @param TownEntity $town
      * @param string     $building
+     * @param integer    $level
      *
      * @return boolean
      */
@@ -34,13 +37,67 @@ class Towns
     {
         $result = true;
         $buildingObject = Buildings::getAllWithData($building);
-        $requiredResources = $buildingObject->getResourcesCost(0);
+        $requiredResources = $buildingObject->getResourcesCost($level);
         $availableResources = $town->getResourcesAvailable();
 
         if (!empty($requiredResources)) {
             foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
                 if ($requiredResourceValue > $availableResources[$requiredResource]) {
                     $result = false;
+                    break;
+                }
+            }
+        }
+
+        return $result;
+    }
+    
+    /**
+     * Check if the town hat the required buildings to construct this building.
+     *
+     * @param TownEntity $town
+     * @param string     $building
+     * @param integer    $level
+     *
+     * @return boolean
+     */
+    public function hasRequiredBuildingsForBuilding(TownEntity $town, $building, $level = 0)
+    {
+        $result = true;
+        $buildingObject = Buildings::getAllWithData($building);
+        $requiredBuildings = $buildingObject->getBuildingsRequired($level);
+        $townBuildings = $town->getTownBuildings();
+        $townBuildingsArray = array();
+        
+        // Find all the building (and it's max level)
+        if (!empty($townBuildings)) {
+            foreach ($townBuildings as $townBuilding) {
+                $key = $townBuilding->getBuilding();
+                $level = $townBuilding->getLevel();
+                
+                if (!isset($townBuildingsArray[$key])) {
+                    $townBuildingsArray[$key] = $level;
+                }
+                
+                if ($townBuildingsArray[$key] > $level) {
+                    $townBuildingsArray[$key] = $level;
+                }
+            }
+        }
+
+        if (!empty($requiredBuildings)) {
+            foreach ($requiredBuildings as $requiredBuilding => $requiredBuildingLevel) {
+                // If we don't have that required building
+                if (!isset($townBuildingsArray[$requiredBuilding])) {
+                    $result = false;
+                    break;
+                }
+                
+                // If the building we have, has the required level
+                $buildingMaximumLevel = $townBuildingsArray[$requiredBuilding];
+                if ($buildingMaximumLevel < $requiredBuildingLevel) {
+                    $result = false;
+                    break;
                 }
             }
         }

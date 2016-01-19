@@ -101,7 +101,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $town;
 
     /**
-     * @ORM\OneToMany(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Application\Entity\TileEntity", mappedBy="townBuilding")
      **/
     protected $tiles;
 
