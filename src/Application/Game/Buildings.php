@@ -88,11 +88,6 @@ class Buildings
     /**
      * @var string
      */
-    const DOCK = 'dock';
-
-    /**
-     * @var string
-     */
     const ION_CANNON_CONTROL_CENTER = 'ion_cannon_control_center';
 
     /**
@@ -558,7 +553,6 @@ class Buildings
             self::LOGGING_CAMP => 'Logging camp',
             self::COLLIERY => 'Colliery',
             self::IRON_MINE => 'Iron mine',
-            self::DOCK => 'Dock',
             self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
             self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
         );
