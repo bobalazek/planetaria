@@ -54,11 +54,11 @@
                     </li>
                 </ul>
                 {% if townBuilding.isUpgrading() %}
-                    <h4>{{ 'Upgrading progess' | trans }}</h4>
+                    <h4>{{ 'Upgrading progress' | trans }}</h4>
                     <div class="progress live-progress"
                         data-percentage="{{ townBuilding.getUpgradingProgressPercentage() }}"
                         data-percentage-per-second="{{ townBuilding.getUpgradingProgressPercentagePerSecond() }}">
-                        <div class="progress-bar
+                        <div class="progress-bar"
                             aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}" 
                             aria-valuemin="0" 
                             aria-valuemax="100" 
@@ -68,7 +68,7 @@
                     </div>
                 {% endif %}
                 {% if townBuilding.isConstructing() %}
-                    <h4>{{ 'Constructing progess' | trans }}</h4>
+                    <h4>{{ 'Constructing progress' | trans }}</h4>
                     <div class="progress live-progress"
                         data-percentage="{{ townBuilding.getConstructingProgressPercentage() }}"
                         data-percentage-per-second="{{ townBuilding.getConstructingProgressPercentagePerSecond() }}">
