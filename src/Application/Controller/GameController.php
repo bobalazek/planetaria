@@ -190,7 +190,9 @@ class GameController
                 } catch (\Exception $e) {
                     $app['flashbag']->add(
                         'danger',
-                        $e->getMessage()
+                        $app['translator']->trans(
+                            $e->getMessage()
+                        )
                     );
 
                     return $app->redirect(

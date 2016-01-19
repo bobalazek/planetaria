@@ -83,9 +83,14 @@
                         </a>
                     </div> <!-- /.building-wrapper -->
                 </div> <!-- /.col-md-12 -->
+            </div>
+        {% endif %}
+        {% if townBuilding.isRemovable() is sameas(true) %}
+            <div class="row">
                 <div class="col-md-12">
                     <hr />
-                    <a class="btn btn-danger btn-block btn-lg"
+                    <a class="btn btn-danger btn-block btn-lg confirm-alert"
+                        data-confirm-text="{{ 'Are you really sure you want to do this? This action is ireversible!' | trans }}"
                         href="{{ url('game.towns.buildings.remove', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
                         {{ 'Remove' | trans }}
                     </a>

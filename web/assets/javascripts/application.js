@@ -17,6 +17,7 @@ var Application = function () {
                 Application.itemResourcesInitialize();
                 Application.listActionsInitialize();
                 Application.slugsInitialize();
+                Application.confirmInitialize();
 
                 jQuery('#preloader').fadeOut(); // Hide preloader, when everything is ready...
 
@@ -379,6 +380,18 @@ var Application = function () {
                 .replace(/\-\-+/g, '-')         // Replace multiple - with single -
                 .replace(/^-+/, '')             // Trim - from start of text
                 .replace(/-+$/, '');            // Trim - from end of text
-        }
+        },
+        confirmInitialize: function() {
+            jQuery('.confirm-alert').on('click', function() {
+                var href = jQuery(this).attr('href');
+                var text = jQuery(this).attr('data-confirm-text');
+                
+                if (confirm(text)) {
+                    window.location.href = href;
+                }
+                
+                return false;
+            });
+        },
     }
 }();

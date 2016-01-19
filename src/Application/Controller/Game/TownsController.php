@@ -4,6 +4,7 @@ namespace Application\Controller\Game;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
+use Application\Game\Buildings;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -158,7 +159,9 @@ class TownsController
             } catch (\Exception $e) {
                 $app['flashbag']->add(
                     'danger',
-                    $e->getMessage()
+                    $app['translator']->trans(
+                        $e->getMessage()
+                    )
                 );
             }
         }
@@ -216,6 +219,10 @@ class TownsController
         $app['orm.em']->remove($townBuilding);
 
         try {
+            if (!$townBuilding->isRemovable()) {
+                throw new \Exception('This building is not removable!');
+            }
+            
             $app['orm.em']->flush();
             
             $app['flashbag']->add(

@@ -447,6 +447,19 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this->getLevel() < $buildingObject->getMaximumLevel();
     }
+    
+    /*** Removable ***/
+    /**
+     * @return boolean
+     */
+    public function isRemovable()
+    {
+        if ($this->getBuilding() === Buildings::CAPITOL) {
+            return false;
+        }
+
+        return true;
+    }
 
     /*** Upgrading ***/
     /**
