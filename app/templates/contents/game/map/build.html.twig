@@ -34,7 +34,7 @@
             <div class="row">
                 {% for town in app.user.getTowns() %}
                     <div class="col-md-4">
-                        <a class="btn btn-lg btn-default btn-block"
+                        <a class="btn btn-lg btn-default btn-block btn-lg"
                             href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId() }) }}">
                             {{ town }}
                             {% if town.getDescription() %}

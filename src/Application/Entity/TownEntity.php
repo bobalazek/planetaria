@@ -53,7 +53,7 @@ class TownEntity extends AbstractAdvancedEntity
      *
      * @ORM\Column(name="buildings_limit", type="integer")
      */
-    protected $buildingsLimit = 10;
+    protected $buildingsLimit = 16;
 
     /**
      * @var \DateTime

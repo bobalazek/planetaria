@@ -2,6 +2,9 @@
 
 namespace Application\Game;
 
+use Silex\Application;
+use Doctrine\Common\Util\Inflector;
+
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
@@ -46,6 +49,19 @@ class Resources
      * @var string
      */
     const MONEY = 'money';
+    
+    /**
+     * @var Application
+     */
+    protected $app;
+
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @return array
@@ -68,6 +84,20 @@ class Resources
             : $all[$key]
         ;
     }
+    
+    /**
+     * @return string
+     */
+    public static function getClassName($key)
+    {
+        $buildings = self::getAll();
+
+        if (!array_key_exists($key, $buildings)) {
+            throw new \Exception('This resource does not exists!');
+        }
+
+        return Inflector::classify($key);
+    }
 
     /**
      * @return array
@@ -81,5 +111,29 @@ class Resources
         unset($all[Resources::MONEY]);
 
         return $all;
+    }
+    
+    /**
+     * @return array
+     */
+    public static function getAllWithData($key = null)
+    {
+        $resources = self::getAll();
+
+        foreach ($resources as $resource => $resourceName) {
+            $className = 'Application\\Game\\Resource\\'.self::getClassName($resource);
+            $resourceObject = new $className();
+
+            if (
+                $key !== null &&
+                $key === $resource
+            ) {
+                return $resourceObject;
+            }
+
+            $resources[$resource] = $resourceObject;
+        }
+
+        return $resources;
     }
 }

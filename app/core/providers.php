@@ -172,6 +172,10 @@ $app['game.towns'] = $app->share(function () use ($app) {
     return new Application\Game\Towns($app);
 });
 
+$app['game.resources'] = $app->share(function () use ($app) {
+    return new Application\Game\Resources($app);
+});
+
 /***** Form *****/
 $app->register(new Silex\Provider\FormServiceProvider());
 

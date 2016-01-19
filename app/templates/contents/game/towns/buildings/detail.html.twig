@@ -11,34 +11,11 @@
             {{ 'Back to the Town' | trans }}
         </a>
     </h1>
-    <h2>
-        {{ townBuilding.getBuilding() | humanize | trans }}
-        <span class="badge"
-            data-toggle="tooltip"
-            title="{{ 'Level' | trans }}">
-            {{ townBuilding.getBadgeText() | raw }}
-        </span>
-        <a class="btn btn-default btn-xs"
-            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
-            {{ 'View on map' | trans }}
-        </a>
-    </h2>
     <div id="main-content">
         <div class="row">
             <div class="col-md-8">
-                <h3>{{ 'Information' | trans }}</h3>
+                {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject() } %}
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <b>{{ 'Description' | trans }}:</b>
-                        {{ townBuilding.getBuildingObject().getDescription() }}
-                    </li>
-                    <li class="list-group-item">
-                        <b>{{ 'Image' | trans }}:</b>
-                        <br />
-                        <img class="img-responsive"
-                            src="{{ app.baseUrl }}/assets/images/buildings/{{ townBuilding.getImage() }}"
-                            style="max-width: 128px;" />
-                    </li>
                     <li class="list-group-item">
                         <b>{{ 'Town' | trans }}:</b>
                         <a href="{{ url('game.towns.detail', { id: town.getId() }) }}">
@@ -76,6 +53,10 @@
                         {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
+                <a class="btn btn-default btn-block"
+                    href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
+                    {{ 'View on map' | trans }}
+                </a>
             </div> <!-- /.col-md-8 -->
             <div class="col-md-4">
                 {% include 'contents/game/_parts/town-sidebar.html.twig' %}
@@ -96,7 +77,7 @@
                             </div>
                         {% endif %}
                         {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel() + 1, building: townBuilding.getBuildingObject() } %}
-                        <a class="btn btn-success btn-block"
+                        <a class="btn btn-success btn-block btn-lg"
                             href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
                             {{ 'Upgrade' | trans }}
                         </a>

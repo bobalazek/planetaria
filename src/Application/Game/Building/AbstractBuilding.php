@@ -28,7 +28,7 @@ class AbstractBuilding implements BuildingInterface
     /**
      * What's the slug of that building?
      * Example:
-     *   'iron-ime'
+     *   'iron-mine'
      *
      * @var string
      */
@@ -37,7 +37,7 @@ class AbstractBuilding implements BuildingInterface
     /**
      * What's the description of that building?
      * Example:
-     *   'A building which is used to produce iron.''
+     *   'A building which is used to produce iron.'
      *
      * @var string
      */

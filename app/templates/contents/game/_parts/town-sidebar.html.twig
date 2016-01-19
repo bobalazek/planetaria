@@ -1,15 +1,19 @@
 <div id="town-sidebar">
-    <h3>
-        {{ town }}
-        <span class="badge"
-            data-toggle="tooltip"
-            title="{{ 'Buildings limit' | trans }}">
-            {{ town.getTownBuildings() | length }} /
-            {{ town.getBuildingsLimit() }}
-        </span>
-    </h3>
+    <h3>{{ town }}</h3>
     {% if town.getDescription() %}
         <p>{{ town.getDescription() }}</p>
     {% endif %}
+    <h5>
+        <b>{{ 'Buildings' | trans }}:</b>
+        {{ town.getTownBuildings() | length }} /
+        {{ town.getBuildingsLimit() }}
+    </h5>
+    <h5>
+        <b>{{ 'Population' | trans }}:</b>
+        {{ town.getPopulation() }} /
+        {{ town.getPopulationCapacity() }}
+    </h5>
+    <hr />
+    <h4>{{ 'Resources' | trans }}</h4>
     {% include 'contents/game/_parts/town-resources-table.html.twig' %}
 </div>
