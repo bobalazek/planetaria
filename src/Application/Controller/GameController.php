@@ -160,7 +160,7 @@ class GameController
         if ($building && $town) {
             if (array_key_exists($building, $buildings)) {
                 try {
-                    $app['game.buildings']->build(
+                    $townBuilding = $app['game.buildings']->build(
                         $planet,
                         $town,
                         array($x, $y), // Start (bottom left) coordinates
@@ -179,11 +179,10 @@ class GameController
 
                     return $app->redirect(
                         $app['url_generator']->generate(
-                            'game.map.detail',
+                            'game.towns.buildings.detail',
                             array(
-                                'id' => $planet->getId(),
-                                'x' => $x,
-                                'y' => $y,
+                                'id' => $townBuilding->getTown()->getId(),
+                                'buildingId' => $townBuilding->getId(),
                             )
                         )
                     );

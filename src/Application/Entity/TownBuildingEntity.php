@@ -472,6 +472,23 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
+    
+    /*** Upgrade progress percentage ***/
+    /**
+     * @return integer
+     */
+    public function getUpgradeProgressPercentage()
+    {
+        if ($this->isUpgrading()) {
+            $now = strtotime((new \Datetime())->format(DATE_ATOM));
+            $start = strtotime($this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM));
+            $end = strtotime($this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM));
+            
+            return ($now - $start) / ($end - $start) * 100;
+        }
+
+        return 0;
+    }
 
     /*** Constructing ***/
     /**
@@ -480,6 +497,23 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function isConstructing()
     {
         return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
+    }
+    
+    /*** Construction progress percentage ***/
+    /**
+     * @return integer
+     */
+    public function getConstructionProgressPercentage()
+    {
+        if ($this->isConstructing()) {
+            $now = strtotime((new \Datetime())->format(DATE_ATOM));
+            $start = strtotime($this->getTimeCreated()->format(DATE_ATOM));
+            $end = strtotime($this->getTimeConstructed()->format(DATE_ATOM));
+            
+            return ($now - $start) / ($end - $start) * 100;
+        }
+
+        return 0;
     }
 
     /*** Seconds until upgrade done ***/

@@ -53,7 +53,33 @@
                         {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
-                <a class="btn btn-default btn-block"
+                {% if townBuilding.isUpgrading() %}
+                    <h4>{{ 'Upgrade progess' | trans }}</h4>
+                    <div class="progress">
+                        <div class="progress-bar" 
+                            role="progressbar" 
+                            aria-valuenow="{{ townBuilding.getUpgradeProgressPercentage() }}" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100" 
+                            style="width: {{ townBuilding.getUpgradeProgressPercentage() }}%; min-width: 2em;">
+                            {{ townBuilding.getUpgradeProgressPercentage() | round }}%
+                        </div>
+                    </div>
+                {% endif %}
+                {% if townBuilding.isConstructing() %}
+                    <h4>{{ 'Construction progess' | trans }}</h4>
+                    <div class="progress">
+                        <div class="progress-bar" 
+                            role="progressbar" 
+                            aria-valuenow="{{ townBuilding.getConstructionProgressPercentage() }}" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100" 
+                            style="width: {{ townBuilding.getConstructionProgressPercentage() }}%; min-width: 2em;">
+                            {{ townBuilding.getConstructionProgressPercentage() | round }}%
+                        </div>
+                    </div>
+                {% endif %}
+                <a class="btn btn-default btn-block btn-lg"
                     href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
                     {{ 'View on map' | trans }}
                 </a>
