@@ -116,6 +116,17 @@ interface BuildingInterface
      * @param array $resourcesCapacity
      */
     public function setResourcesCapacity(array $resourcesCapacity);
+    
+    /***** Buildings capacity *****/
+    /**
+     * @return array|integer
+     */
+    public function getBuildingsCapacity();
+
+    /**
+     * @param array $buildingsCapacity
+     */
+    public function setBuildingsCapacity($buildingsCapacity);
 
     /***** Build time *****/
     /**
@@ -193,4 +204,26 @@ interface BuildingInterface
      * @param array $buildingsRequired
      */
     public function setBuildingsRequired(array $buildingsRequired);
+    
+    /***** Per town limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerTownLimit();
+
+    /**
+     * @param integer $perTownLimit
+     */
+    public function setPerTownLimit($perTownLimit);
+    
+    /***** Per country limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerCountryLimit();
+
+    /**
+     * @param integer $perCountryLimit
+     */
+    public function setPerCountryLimit($perCountryLimit);
 }

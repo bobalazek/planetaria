@@ -10,6 +10,7 @@ use Application\Entity\TownBuildingEntity;
 use Application\Game\Exception\InsufficientResourcesException;
 use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
+use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
 use Application\Game\Exception\TownBuildingInConstructionException;
@@ -216,6 +217,21 @@ class Buildings
         $building
     ) {
         $app = $this->app;
+        
+        // Check if we have reached the buildings limit
+        $hasReachedBuildingsLimit = $app['game.towns']
+            ->hasReachedBuildingLimit(
+                $town,
+                $building
+            )
+        ;
+        if ($hasReachedBuildingsLimit) {
+            throw new BuildingPerTownLimitReachedException(
+                'You have reached the limit per town for this building!'
+            );
+        }
+        
+        // @To-Do: Check for limit per country!
 
         // Check if we have reached the buildings limit
         $hasReachedBuildingsLimit = $app['game.towns']
@@ -229,7 +245,10 @@ class Buildings
 
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForBuilding = $app['game.towns']
-            ->hasEnoughResourcesForBuilding($town, $building)
+            ->hasEnoughResourcesForBuilding(
+                $town, 
+                $building
+            )
         ;
         if (!$hasEnoughResourcesForBuilding) {
             throw new InsufficientResourcesException(
@@ -238,7 +257,11 @@ class Buildings
         }
 
         // Check if we have enough space to build this building
-        $hasEnoughAreaSpace = $this->hasEnoughAreaSpace($planet, $startingCoordinates, $building);
+        $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
+            $planet, 
+            $startingCoordinates, 
+            $building
+        );
         if (!$hasEnoughAreaSpace) {
             throw new InsufficientAreaSpaceException(
                 'You do not have enough space to construct this building!'
@@ -345,10 +368,14 @@ class Buildings
         }
 
         // Check if that town has enough resources to build that building
-        $hasEnoughResourcesForTownBuilding = $app['game.towns']
-            ->hasEnoughResourcesForTownBuilding($townBuilding)
+        $hasEnoughResourcesForBuilding = $app['game.towns']
+            ->hasEnoughResourcesForBuilding(
+                $townBuilding->getTown(),
+                $townBuilding->getBuilding(),
+                $townBuilding->getLevel() + 1
+            )
         ;
-        if (!$hasEnoughResourcesForTownBuilding) {
+        if (!$hasEnoughResourcesForBuilding) {
             throw new InsufficientResourcesException(
                 'You do not have enough resources to upgrade this building!'
             );

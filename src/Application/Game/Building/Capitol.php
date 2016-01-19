@@ -23,6 +23,7 @@ class Capitol extends AbstractBuilding
             ->setType(BuildingTypes::CIVIL)
             ->setSize('2x2')
             ->setMaximumLevel(3)
+            ->setPerTownLimit(1)
             ->setHealthPoints(array(
                 0 => 10000,
                 1 => 20000,

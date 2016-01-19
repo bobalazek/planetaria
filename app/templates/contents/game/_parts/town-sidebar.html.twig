@@ -3,8 +3,9 @@
         {{ town }}
         <span class="badge"
             data-toggle="tooltip"
-            title="{{ 'Buildings' | trans }}">
-            {{ town.getTownBuildings() | length }}
+            title="{{ 'Buildings limit' | trans }}">
+            {{ town.getTownBuildings() | length }} /
+            {{ town.getBuildingsLimit() }}
         </span>
     </h3>
     {% if town.getDescription() %}

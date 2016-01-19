@@ -19,13 +19,21 @@
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4 col-sm-6">
                 <p>
-                    <b>{{ 'Size' | trans }}:</b>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'How much tiles does it take on the map to build this building?' | trans }}">
+                        {{ 'Size' | trans }}:
+                    </b>
                     {{ building.getSize() }}
                 </p>
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4 col-sm-6">
                 <p>
-                    <b>{{ 'Maximum level' | trans }}:</b>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'To which level can the building be upgraded (starting from 0)?' | trans }}">
+                        {{ 'Maximum level' | trans }}:
+                    </b>
                     {{ building.getMaximumLevel() }}
                 </p>
             </div> <!-- /.col-md-4 -->
@@ -37,15 +45,43 @@
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4 col-sm-6">
                 <p>
-                    <b>{{ 'Population capacity' | trans }}:</b>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'How much will the capacity for units will be increased after this building is build?' | trans }}">
+                        {{ 'Population capacity' | trans }}:
+                    </b>
                     {{ building.getPopulationCapacity(level) }}
                 </p>
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4 col-sm-6">
                 <p>
-                    <b>{{ 'Build time' | trans }}:</b>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'How long does it take for this building to be constructed?' | trans }}">
+                        {{ 'Build time' | trans }}:
+                    </b>
                     {{ building.getBuildTime(level) }}
                     {{ 'seconds' | trans }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'How much of this buildings can you make per town?' | trans }}">
+                        {{ 'Per town limit' | trans }}:
+                    </b>
+                    {{ (building.getPerTownLimit() == -1 ? '&infin;' : building.getPerTownLimit()) | raw }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b data-toggle="tooltip" 
+                        data-placement="right"
+                        title="{{ 'How much of this buildings can you make per country?' | trans }}">
+                        {{ 'Per country limit' | trans }}:
+                    </b>
+                    {{ (building.getPerCountryLimit() == -1 ? '&infin;' : building.getPerCountryLimit()) | raw }}
                 </p>
             </div> <!-- /.col-md-4 -->
         </div> <!-- /.row -->

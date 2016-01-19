@@ -30,7 +30,7 @@ class Towns
      *
      * @return boolean
      */
-    public function hasEnoughResourcesForBuilding(TownEntity $town, $building)
+    public function hasEnoughResourcesForBuilding(TownEntity $town, $building, $level = 0)
     {
         $result = true;
         $buildingObject = Buildings::getAllWithData($building);
@@ -49,29 +49,10 @@ class Towns
     }
 
     /**
-     * @param TownBuildingEntity $townBuildinguilding
+     * Has the town reached the total buildings limit?
      *
-     * @return boolean
-     */
-    public function hasEnoughResourcesForTownBuilding(TownBuildingEntity $townBuilding)
-    {
-        $result = true;
-        $buildingObject = $townBuilding->getBuildingObject();
-        $requiredResources = $buildingObject->getResourcesCost($townBuilding->getBuilding() + 1);
-        $availableResources = $townBuilding->getTown()->getResourcesAvailable();
-
-        if (!empty($requiredResources)) {
-            foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
-                if ($requiredResourceValue > $availableResources[$requiredResource]) {
-                    $result = false;
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
+     * @param TownEntity $town
+     *
      * @return boolean
      */
     public function hasReachedBuildingsLimit(TownEntity $town)
@@ -80,6 +61,35 @@ class Towns
         $townBuildingsLimit = $town->getBuildingsLimit();
 
         return $townBuildingsCount >= $townBuildingsLimit;
+    }
+    
+    /**
+     * Has the town reached the total limit for that one specific building?
+     *
+     * @param TownEntity $town
+     * @param string $building
+     *
+     * @return boolean
+     */
+    public function hasReachedBuildingLimit(TownEntity $town, $building)
+    {
+        $buildingObject = Buildings::getAllWithData($building);
+        $buildingObjectPerTownLimit = $buildingObject->getPerTownLimit();
+        
+        if ($buildingObjectPerTownLimit === -1) {
+            return false;
+        }
+        
+        $thisBuildingCount = 0;
+        $townBuildings = $town->getTownBuildings();
+        
+        foreach ($townBuildings as $townBuilding) {
+            if ($townBuilding->getBuilding() === $building) {
+                $thisBuildingCount++;
+            }
+        }
+
+        return $thisBuildingCount >= $buildingObjectPerTownLimit;
     }
 
     /**

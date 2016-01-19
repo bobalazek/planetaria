@@ -59,7 +59,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var string
      */
-    protected $size;
+    protected $size = '1x1';
 
     /**
      * What's the maximum level of that building?
@@ -68,7 +68,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var integer
      */
-    protected $maximumLevel;
+    protected $maximumLevel = 0;
 
     /**
      * How much health points does that building have (per level)?
@@ -80,7 +80,7 @@ class AbstractBuilding implements BuildingInterface
     protected $healthPoints;
 
     /**
-     * What's the size of that building (per level)?
+     * What's the capacity this building gives (per level)?
      * Example:
      *   array( 0 => 100, 1 => 200, 2 => 300 )
      *
@@ -98,6 +98,15 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $resourcesCapacity;
+    
+    /**
+     * How much capacity does that building use (town buildings limit)?
+     * Example:
+     *   1
+     *
+     * @var array
+     */
+    protected $buildingsCapacity = 1;
 
     /**
      * What's the build time of that building in seconds (per level)?
@@ -161,6 +170,24 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $buildingsRequired;
+    
+    /**
+     * What's the maximum number of this buildings in one town?
+     * Example:
+     *   -1 (infinitive)
+     *
+     * @var integer
+     */
+    protected $perTownLimit = -1;
+    
+    /**
+     * What's the maximum number of this buildings in one country?
+     * Example:
+     *   -1 (infinitive)
+     *
+     * @var integer
+     */
+    protected $perCountryLimit = -1;
 
     /***** Name *****/
     /**
@@ -380,6 +407,25 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
+    
+    /***** Buildings capacity *****/
+    /**
+     * @return integer
+     */
+    public function getBuildingsCapacity()
+    {
+        return $this->buildingsCapacity;
+    }
+
+    /**
+     * @param integer $buildingsCapacity
+     */
+    public function setBuildingsCapacity($buildingsCapacity)
+    {
+        $this->buildingsCapacity = $buildingsCapacity;
+
+        return $this;
+    }
 
     /***** Build time *****/
     /**
@@ -543,6 +589,44 @@ class AbstractBuilding implements BuildingInterface
     public function setBuildingsRequired(array $buildingsRequired = array())
     {
         $this->buildingsRequired = $buildingsRequired;
+
+        return $this;
+    }
+    
+    /***** Per town limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerTownLimit()
+    {
+        return $this->perTownLimit;
+    }
+
+    /**
+     * @param integer $perTownLimit
+     */
+    public function setPerTownLimit($perTownLimit)
+    {
+        $this->perTownLimit = $perTownLimit;
+
+        return $this;
+    }
+    
+    /***** Per country limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerCountryLimit()
+    {
+        return $this->perCountryLimit;
+    }
+
+    /**
+     * @param integer $perCountryLimit
+     */
+    public function setPerCountryLimit($perCountryLimit)
+    {
+        $this->perCountryLimit = $perCountryLimit;
 
         return $this;
     }
