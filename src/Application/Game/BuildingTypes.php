@@ -11,12 +11,12 @@ class BuildingTypes
      * @var string
      */
     const GOVERNMENT = 'government';
-    
+
     /**
      * @var string
      */
     const RESIDENTIAL = 'residential';
-    
+
     /**
      * @var string
      */
@@ -26,12 +26,12 @@ class BuildingTypes
      * @var string
      */
     const COMMERCIAL = 'commercial';
-    
+
     /**
      * @var string
      */
     const MILITARY = 'military';
-    
+
     /**
      * @var string
      */

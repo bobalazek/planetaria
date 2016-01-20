@@ -149,7 +149,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Next level ***/
     /**
      * @return integer
@@ -183,7 +183,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /*** Health points total ***/
     /**
      * @return integer
@@ -194,7 +194,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $buildingObject->getHealthPoints($this->getLevel());
     }
-    
+
     /*** Health points percentage ***/
     /**
      * @return integer
@@ -203,16 +203,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $total = $this->getHealthPointsTotal();
         $current = $this->getHealthPoints();
-        
+
         if ($total === 0) {
             return 100;
         } elseif ($current === 0) {
             return 0;
         }
-        
+
         return ceil(($current / $total) * 100);
     }
-    
+
     /*** Health points percentage color type ***/
     /**
      * @return string
@@ -226,7 +226,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         } elseif ($percentage <= 40) {
             return 'warning';
         }
-        
+
         return 'success';
     }
 

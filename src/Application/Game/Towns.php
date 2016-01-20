@@ -140,7 +140,7 @@ class Towns
 
         return $thisBuildingCount >= $buildingObjectPerTownLimit;
     }
-    
+
     /**
      * How many of this buildings are there in this town?
      *

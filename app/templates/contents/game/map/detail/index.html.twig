@@ -32,22 +32,22 @@
 
             function loadMap() {
                 jQuery('#map-overlay').fadeIn();
-                
+
                 currentUrl = currentUrl.replace(/&amp;/g, '&');
-                
+
                 jQuery('#map').load(currentUrl + ' #map-inner', function() {
                     Application.initialize();
                     Game.initialize();
-                    
+
                     jQuery('.map-tile').on('shown.bs.popover', function() {
                         jQuery('.btn-center-map').on('click', function() {
                             currentUrl = jQuery(this).attr('href');
                             loadMap();
-                            
+
                             return false;
                         });
                     });
-                    
+
                     jQuery('#map-overlay').fadeOut();
                 });
             }
