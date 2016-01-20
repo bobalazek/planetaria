@@ -201,6 +201,7 @@ $app['twig'] = $app->share($app->extend('twig', function (\Twig_Environment $twi
     $twig->addExtension(new Application\Twig\FormExtension());
     $twig->addExtension(new Application\Twig\FileExtension());
     $twig->addExtension(new Application\Twig\UiExtension());
+    $twig->addExtension(new Application\Twig\UrlExtension());
     $twig->addExtension(
         new Cocur\Slugify\Bridge\Twig\SlugifyExtension(
             Cocur\Slugify\Slugify::create()

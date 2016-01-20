@@ -10,25 +10,47 @@
     </h2>
     <div id="main-content">
         <div id="map-wrapper">
+            <div id="map-overlay">
+                {{ 'Loading' | trans }} ...
+            </div>
             <div id="map">
-                <div id="map-inner">
-                    {% for y in coordinatesRangeY | reverse %}
-                        <div class="map-row clearfix"
-                            data-y="{{ y }}">
-                            {% for x in coordinatesRangeX %}
-                                {% set tile = tiles[x~','~y] is defined ? tiles[x~','~y] : null %}
-                                {% if tile %}
-                                    {% include 'contents/game/map/detail/_tile.html.twig' %}
-                                {% else %}
-                                    <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"></div>
-                                {% endif %}
-                            {% endfor %}
-                        </div> <!-- /.map-row -->
-                    {% endfor %}
-                </div> <!-- #map-inner -->
+                {% if app.request.isXmlHttpRequest() %}
+                    {% include 'contents/game/map/detail/_inner.html.twig' %}
+                {% endif %}
             </div> <!-- /#map -->
             <hr />
             {% include 'contents/game/map/detail/_controls.html.twig' %}
         </div> <!-- /#map-wrapper -->
     </div>
+{% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function() {
+            loadMap();
+
+            function loadMap() {
+                jQuery('#map-overlay').fadeIn();
+                
+                currentUrl = currentUrl.replace(/&amp;/g, '&');
+                
+                jQuery('#map').load(currentUrl + ' #map-inner', function() {
+                    Application.initialize();
+                    Game.initialize();
+                    
+                    jQuery('.map-tile').on('shown.bs.popover', function() {
+                        jQuery('.btn-center-map').on('click', function() {
+                            currentUrl = jQuery(this).attr('href');
+                            loadMap();
+                            
+                            return false;
+                        });
+                    });
+                    
+                    jQuery('#map-overlay').fadeOut();
+                });
+            }
+        });
+    </script>
 {% endblock %}
