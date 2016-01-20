@@ -8,7 +8,7 @@ use Application\Game\BuildingTypes;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class Skyscraper extends AbstractBuilding
+class ApartmentBlock extends AbstractBuilding
 {
     /**
      * The constructor
@@ -16,10 +16,10 @@ class Skyscraper extends AbstractBuilding
     public function __construct()
     {
         $this
-            ->setName('Skyscraper')
-            ->setKey('skyscraper')
-            ->setSlug('skyscraper')
-            ->setDescription('A skyscraper will increase your population capacity.')
+            ->setName('Apartment block')
+            ->setKey('apartment_block')
+            ->setSlug('apartment-block')
+            ->setDescription('A apartment block will increase your population capacity.')
             ->setType(BuildingTypes::CIVIL)
             ->setSize('1x1')
             ->setMaximumLevel(2)

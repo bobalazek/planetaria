@@ -39,7 +39,7 @@ class Buildings
     /**
      * @var string
      */
-    const SKYSCRAPER = 'skyscraper';
+    const APARTMENT_BLOCK = 'apartment_block';
 
     /**
      * @var string
@@ -571,7 +571,7 @@ class Buildings
             self::CAPITOL => 'Capitol',
             self::HOUSE => 'House',
             self::FARM => 'Farm',
-            self::SKYSCRAPER => 'Skyscraper',
+            self::APARTMENT_BLOCK => 'Apartment block',
             self::WAREHOUSE => 'Warehouse',
             self::MARKET => 'Market',
             self::AIRBASE => 'Airbase',
