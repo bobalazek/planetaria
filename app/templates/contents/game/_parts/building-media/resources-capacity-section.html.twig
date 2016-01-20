@@ -1,0 +1,22 @@
+<section class="building-resources-capacity-section">
+    <h4>{{ 'Resources capacity' | trans }}</h4>
+    <ul class="list-group">
+        {% if building.getResourcesCapacity(level) is iterable %}
+            {% for resource, resourceAmount in building.getResourcesCapacity(level) %}
+                <li class="list-group-item">
+                    <span class="badge">
+                        {{ resourceAmount }}
+                    </span>
+                    {{ resource | humanize | trans }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li class="list-group-item">
+                <span class="badge">
+                    {{ building.getResourcesCapacity(level) }}
+                </span>
+                {{ 'All' | trans }}
+            </li>
+        {% endif %}
+    </ul>
+</section> <!-- /.building-resources-capacity-section -->

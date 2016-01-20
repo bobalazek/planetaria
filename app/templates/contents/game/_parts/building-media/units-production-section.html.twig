@@ -1,0 +1,14 @@
+<section class="building-units-production-section">
+    <h4>{{ 'Units production' | trans }}</h4>
+    <ul class="list-group">
+        {% for unit, unitProductionTime in building.getUnitsProduction(level) %}
+            <li class="list-group-item">
+                <span class="badge">
+                    {{ unitProductionTime }}
+                    {{ 'seconds' | trans }}
+                </span>
+                {{ unit | humanize | trans }}
+            </li>
+        {% endfor %}
+    </ul>
+</section> <!-- /.building-units-production-section -->

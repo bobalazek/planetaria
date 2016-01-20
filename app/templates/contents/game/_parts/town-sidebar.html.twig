@@ -1,5 +1,11 @@
 <div id="town-sidebar">
-    <h3>{{ town }}</h3>
+    <h3>
+        {{ town }}
+        <a class="btn btn-default btn-xs"
+            href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            {{ 'Go to Town' | trans }}
+        </a>
+    </h3>
     {% if town.getDescription() %}
         <p>{{ town.getDescription() }}</p>
     {% endif %}

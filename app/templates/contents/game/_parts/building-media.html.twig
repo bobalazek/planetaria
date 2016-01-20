@@ -95,91 +95,36 @@
             </div> <!-- /.col-md-4 -->
         </div> <!-- /.row -->
         <div class="row">
+            {% set i = 0 %}
             <div class="col-md-6">
-                <h4>{{ 'Cost' | trans }}</h4>
-                <ul class="list-group">
-                    {% for resource, resourceAmount in building.getResourcesCost(level) %}
-                        <li class="list-group-item">
-                            <span class="badge">
-                                {{ resourceAmount }}
-                            </span>
-                            {{ resource | humanize | trans }}
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% include 'contents/game/_parts/building-media/resources-cost-section.html.twig' %}
+                {% set i = i + 1 %}
             </div> <!-- /.col-md-6 -->
             {% if building.getResourcesProduction(level) %}
                 <div class="col-md-6">
-                    <h4>
-                        {{ 'Resources production' | trans }}
-                        <small>{{ 'per minute' | trans }}</small>
-                    </h4>
-                    <ul class="list-group">
-                        {% for resource, resourceAmount in building.getResourcesProduction(level) %}
-                            <li class="list-group-item">
-                                <span class="badge">
-                                    {{ resourceAmount }}
-                                </span>
-                                {{ resource | humanize | trans }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {% include 'contents/game/_parts/building-media/resources-production-section.html.twig' %}
+                    {% set i = i + 1 %}
                 </div> <!-- /.col-md-6 -->
             {% endif %}
+            {% if i is divisible by(2) %}</div><div class="row">{% endif %}
             {% if building.getUnitsProduction(level) %}
                 <div class="col-md-6">
-                    <h4>{{ 'Units production' | trans }}</h4>
-                    <ul class="list-group">
-                        {% for unit, unitProductionTime in building.getUnitsProduction(level) %}
-                            <li class="list-group-item">
-                                <span class="badge">
-                                    {{ unitProductionTime }}
-                                    {{ 'seconds' | trans }}
-                                </span>
-                                {{ unit | humanize | trans }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {% include 'contents/game/_parts/building-media/units-production-section.html.twig' %}
+                    {% set i = i + 1 %}
                 </div> <!-- /.col-md-6 -->
             {% endif %}
+            {% if i is divisible by(2) %}</div><div class="row">{% endif %}
             {% if building.getItemsProduction(level) %}
                 <div class="col-md-6">
-                    <h4>{{ 'Items production' | trans }}</h4>
-                    <ul class="list-group">
-                        {% for item, itemProductionTime in building.getItemsProduction(level) %}
-                            <li class="list-group-item">
-                                <span class="badge">
-                                    {{ itemProductionTime }}
-                                    {{ 'seconds' | trans }}
-                                </span>
-                                {{ item | humanize | trans }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {% include 'contents/game/_parts/building-media/items-production-section.html.twig' %}
+                    {% set i = i + 1 %}
                 </div> <!-- /.col-md-6 -->
             {% endif %}
+            {% if i is divisible by(2) %}</div><div class="row">{% endif %}
             {% if building.getResourcesCapacity(level) %}
                 <div class="col-md-6">
-                    <h4>{{ 'Resources capacity' | trans }}</h4>
-                    <ul class="list-group">
-                        {% if building.getResourcesCapacity(level) is iterable %}
-                            {% for resource, resourceAmount in building.getResourcesCapacity(level) %}
-                                <li class="list-group-item">
-                                    <span class="badge">
-                                        {{ resourceAmount }}
-                                    </span>
-                                    {{ resource | humanize | trans }}
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li class="list-group-item">
-                                <span class="badge">
-                                    {{ building.getResourcesCapacity(level) }}
-                                </span>
-                                {{ 'All' | trans }}
-                            </li>
-                        {% endif %}
-                    </ul>
+                    {% include 'contents/game/_parts/building-media/resources-capacity-section.html.twig' %}
+                    {% set i = i + 1 %}
                 </div> <!-- /.col-md-6 -->
             {% endif %}
         </div> <!-- /.row -->

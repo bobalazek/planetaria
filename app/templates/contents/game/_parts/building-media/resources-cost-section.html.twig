@@ -1,0 +1,13 @@
+<section class="building-resources-cost-section">
+    <h4>{{ 'Cost' | trans }}</h4>
+    <ul class="list-group">
+        {% for resource, resourceAmount in building.getResourcesCost(level) %}
+            <li class="list-group-item">
+                <span class="badge">
+                    {{ resourceAmount }}
+                </span>
+                {{ resource | humanize | trans }}
+            </li>
+        {% endfor %}
+    </ul>
+</section> <!-- /.building-resources-cost-section -->
