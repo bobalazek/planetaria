@@ -4,7 +4,6 @@ namespace Application\Game;
 
 use Silex\Application;
 use Application\Entity\TownEntity;
-use Application\Entity\TownBuildingEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -51,7 +50,7 @@ class Towns
 
         return $result;
     }
-    
+
     /**
      * Check if the town hat the required buildings to construct this building.
      *
@@ -68,17 +67,17 @@ class Towns
         $requiredBuildings = $buildingObject->getBuildingsRequired($level);
         $townBuildings = $town->getTownBuildings();
         $townBuildingsArray = array();
-        
+
         // Find all the building (and it's max level)
         if (!empty($townBuildings)) {
             foreach ($townBuildings as $townBuilding) {
                 $key = $townBuilding->getBuilding();
                 $level = $townBuilding->getLevel();
-                
+
                 if (!isset($townBuildingsArray[$key])) {
                     $townBuildingsArray[$key] = $level;
                 }
-                
+
                 if ($townBuildingsArray[$key] > $level) {
                     $townBuildingsArray[$key] = $level;
                 }
@@ -92,7 +91,7 @@ class Towns
                     $result = false;
                     break;
                 }
-                
+
                 // If the building we have, has the required level
                 $buildingMaximumLevel = $townBuildingsArray[$requiredBuilding];
                 if ($buildingMaximumLevel < $requiredBuildingLevel) {
@@ -119,12 +118,12 @@ class Towns
 
         return $townBuildingsCount >= $townBuildingsLimit;
     }
-    
+
     /**
      * Has the town reached the total limit for that one specific building?
      *
      * @param TownEntity $town
-     * @param string $building
+     * @param string     $building
      *
      * @return boolean
      */
@@ -132,14 +131,14 @@ class Towns
     {
         $buildingObject = Buildings::getAllWithData($building);
         $buildingObjectPerTownLimit = $buildingObject->getPerTownLimit();
-        
+
         if ($buildingObjectPerTownLimit === -1) {
             return false;
         }
-        
+
         $thisBuildingCount = 0;
         $townBuildings = $town->getTownBuildings();
-        
+
         foreach ($townBuildings as $townBuilding) {
             if ($townBuilding->getBuilding() === $building) {
                 $thisBuildingCount++;

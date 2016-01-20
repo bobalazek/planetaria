@@ -33,7 +33,7 @@ class AbstractResource implements ResourceInterface
      * @var string
      */
     protected $slug;
-    
+
     /**
      * What's the description of that resource?
      * Example:
@@ -42,7 +42,7 @@ class AbstractResource implements ResourceInterface
      * @var string
      */
     protected $description;
-    
+
     /***** Name *****/
     /**
      * @return string

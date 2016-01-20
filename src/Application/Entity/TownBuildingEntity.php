@@ -158,6 +158,15 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
+    
+    /*** Next level ***/
+    /**
+     * @return integer
+     */
+    public function getNextLevel()
+    {
+        return $this->getLevel() + 1;
+    }
 
     /*** Health Points ***/
     /**
@@ -447,7 +456,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this->getLevel() < $buildingObject->getMaximumLevel();
     }
-    
+
     /*** Removable ***/
     /**
      * @return boolean
@@ -472,7 +481,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $timeNextLevelUpgradeStarted !== null && $timeNextLevelUpgradeEnds !== null;
     }
-    
+
     /*** Upgrading progress percentage ***/
     /**
      * @return float
@@ -483,13 +492,13 @@ class TownBuildingEntity extends AbstractBasicEntity
             $now = strtotime((new \Datetime())->format(DATE_ATOM));
             $start = strtotime($this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM));
             $end = strtotime($this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM));
-            
+
             return ($now - $start) / ($end - $start) * 100;
         }
 
         return 0;
     }
-    
+
     /**
      * @return float
      */
@@ -501,13 +510,13 @@ class TownBuildingEntity extends AbstractBasicEntity
             $end = strtotime($this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM));
             $secondsLeft = $end - $now;
             $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
-            
+
             return $percentageLeft / $secondsLeft;
         }
 
         return 0;
     }
-    
+
     /*** Seconds until upgrading done ***/
     /**
      * @return integer|boolean
@@ -532,7 +541,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         return $this->getStatus() === BuildingStatuses::CONSTRUCTING;
     }
-    
+
     /*** Constructing progress percentage ***/
     /**
      * @return float
@@ -543,13 +552,13 @@ class TownBuildingEntity extends AbstractBasicEntity
             $now = strtotime((new \Datetime())->format(DATE_ATOM));
             $start = strtotime($this->getTimeCreated()->format(DATE_ATOM));
             $end = strtotime($this->getTimeConstructed()->format(DATE_ATOM));
-            
+
             return ($now - $start) / ($end - $start) * 100;
         }
 
         return 0;
     }
-    
+
     /**
      * @return integer|boolean
      */
@@ -564,7 +573,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return false;
     }
-    
+
     /**
      * @return float
      */
@@ -576,7 +585,7 @@ class TownBuildingEntity extends AbstractBasicEntity
             $end = strtotime($this->getTimeConstructed()->format(DATE_ATOM));
             $secondsLeft = $end - $now;
             $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
-            
+
             return $percentageLeft / $secondsLeft;
         }
 
@@ -596,7 +605,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         }
 
         return $this->getLevel().
-            ($this->isUpgrading() ? ' => '.($this->getLevel()+1).' (upgrading)' : '')
+            ($this->isUpgrading() ? ' => '.($this->getNextLevel()).' (upgrading)' : '')
         ;
     }
 

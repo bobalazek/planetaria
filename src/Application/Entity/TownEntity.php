@@ -87,7 +87,7 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     protected $country;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="towns")
      */
@@ -213,7 +213,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** User ***/
     /**
      * @return UserEntity

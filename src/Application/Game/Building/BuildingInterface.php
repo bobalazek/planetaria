@@ -116,7 +116,7 @@ interface BuildingInterface
      * @param array $resourcesCapacity
      */
     public function setResourcesCapacity(array $resourcesCapacity);
-    
+
     /***** Buildings capacity *****/
     /**
      * @return array|integer
@@ -204,7 +204,7 @@ interface BuildingInterface
      * @param array $buildingsRequired
      */
     public function setBuildingsRequired(array $buildingsRequired);
-    
+
     /***** Per town limit *****/
     /**
      * @return integer
@@ -215,7 +215,7 @@ interface BuildingInterface
      * @param integer $perTownLimit
      */
     public function setPerTownLimit($perTownLimit);
-    
+
     /***** Per country limit *****/
     /**
      * @return integer

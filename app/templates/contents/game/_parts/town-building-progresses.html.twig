@@ -7,9 +7,9 @@
         data-toggle="tooltip"
         title="{{ 'Start' | trans }}: {{ townBuilding.getTimeNextLevelUpgradeStarted() | date(app.dateTimeFormat) }}; {{ 'End' | trans }}: {{ townBuilding.getTimeNextLevelUpgradeEnds() | date(app.dateTimeFormat) }}">
         <div class="progress-bar"
-            aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}" 
-            aria-valuemin="0" 
-            aria-valuemax="100" 
+            aria-valuenow="{{ townBuilding.getUpgradingProgressPercentage() }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
             style="width: {{ townBuilding.getUpgradingProgressPercentage() }}%; min-width: 2em;">
             {{ townBuilding.getUpgradingProgressPercentage() | round }}%
         </div>
@@ -22,11 +22,11 @@
         data-seconds-until-done="{{ townBuilding.getSecondsUntilConstructingDone() | json_encode }}"
         data-toggle="tooltip"
         title="{{ 'Start' | trans }}: {{ townBuilding.getTimeCreated() | date(app.dateTimeFormat) }}; {{ 'End' | trans }}: {{ townBuilding.getTimeConstructed() | date(app.dateTimeFormat) }}">
-        <div class="progress-bar" 
-            role="progressbar" 
-            aria-valuenow="{{ townBuilding.getConstructingProgressPercentage() }}" 
-            aria-valuemin="0" 
-            aria-valuemax="100" 
+        <div class="progress-bar"
+            role="progressbar"
+            aria-valuenow="{{ townBuilding.getConstructingProgressPercentage() }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
             style="width: {{ townBuilding.getConstructingProgressPercentage() }}%; min-width: 2em;">
             {{ townBuilding.getConstructingProgressPercentage() | round }}%
         </div>

@@ -98,7 +98,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $resourcesCapacity;
-    
+
     /**
      * How much capacity does that building use (town buildings limit)?
      * Example:
@@ -170,7 +170,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $buildingsRequired;
-    
+
     /**
      * What's the maximum number of this buildings in one town?
      * Example:
@@ -179,7 +179,7 @@ class AbstractBuilding implements BuildingInterface
      * @var integer
      */
     protected $perTownLimit = -1;
-    
+
     /**
      * What's the maximum number of this buildings in one country?
      * Example:
@@ -407,7 +407,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Buildings capacity *****/
     /**
      * @return integer
@@ -592,7 +592,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Per town limit *****/
     /**
      * @return integer
@@ -611,7 +611,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Per country limit *****/
     /**
      * @return integer

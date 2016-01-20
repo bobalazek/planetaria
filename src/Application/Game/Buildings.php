@@ -213,7 +213,7 @@ class Buildings
         $building
     ) {
         $app = $this->app;
-        
+
         // Check if we have reached the buildings limit
         $hasReachedBuildingsLimit = $app['game.towns']
             ->hasReachedBuildingLimit(
@@ -226,7 +226,7 @@ class Buildings
                 'You have reached the limit per town for this building!'
             );
         }
-        
+
         // @To-Do: Check for limit per country!
 
         // Check if we have reached the buildings limit
@@ -238,11 +238,11 @@ class Buildings
                 'You have reached the buildings limit for this town!'
             );
         }
-        
+
         // Check if we have the required buildings to construct this building
         $hasRequiredBuildingsForBuilding = $app['game.towns']
             ->hasRequiredBuildingsForBuilding(
-                $town, 
+                $town,
                 $building
             )
         ;
@@ -255,7 +255,7 @@ class Buildings
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForBuilding = $app['game.towns']
             ->hasEnoughResourcesForBuilding(
-                $town, 
+                $town,
                 $building
             )
         ;
@@ -267,8 +267,8 @@ class Buildings
 
         // Check if we have enough space to build this building
         $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
-            $planet, 
-            $startingCoordinates, 
+            $planet,
+            $startingCoordinates,
             $building
         );
         if (!$hasEnoughAreaSpace) {
@@ -331,7 +331,7 @@ class Buildings
             $townBuilding
         );
 
-        $buildTimeSeconds = $buildingObject->getBuildTime($townBuilding->getLevel()+1);
+        $buildTimeSeconds = $buildingObject->getBuildTime($townBuilding->getNextLevel());
         $timeNextLevelUpgradeStarted = new \Datetime();
         $timeNextLevelUpgradeEnds = new \Datetime();
         $timeNextLevelUpgradeEnds->add(new \DateInterval('PT'.$buildTimeSeconds.'S'));
@@ -344,7 +344,7 @@ class Buildings
 
         // Substract the resources in the town for that building
         $buildingResourcesCost = $buildingObject
-            ->getResourcesCost($townBuilding->getLevel()+1)
+            ->getResourcesCost($townBuilding->getNextLevel())
         ;
         $town->useResources($buildingResourcesCost);
         $app['orm.em']->persist($town);
@@ -375,13 +375,13 @@ class Buildings
                 'This building is currently being constructed!'
             );
         }
-        
+
         // Check if we have the required buildings to upgrade this building
         $hasRequiredBuildingsForBuilding = $app['game.towns']
             ->hasRequiredBuildingsForBuilding(
                 $townBuilding->getTown(),
                 $townBuilding->getBuilding(),
-                $townBuilding->getLevel() + 1
+                $townBuilding->getNextLevel()
             )
         ;
         if (!$hasRequiredBuildingsForBuilding) {
@@ -395,7 +395,7 @@ class Buildings
             ->hasEnoughResourcesForBuilding(
                 $townBuilding->getTown(),
                 $townBuilding->getBuilding(),
-                $townBuilding->getLevel() + 1
+                $townBuilding->getNextLevel()
             )
         ;
         if (!$hasEnoughResourcesForBuilding) {
@@ -498,7 +498,7 @@ class Buildings
     }
 
     /**
-     * @return array|boolean
+     * @return array
      */
     public function getCoordinatesForBuilding(array $startingCoordinates = array(), $building)
     {

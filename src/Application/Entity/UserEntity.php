@@ -185,7 +185,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Application\Entity\PostEntity", mappedBy="user", cascade={"all"})
      */
     protected $posts;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -934,7 +934,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /*** Towns ***/
     /**
      * @return array

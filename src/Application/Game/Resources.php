@@ -49,7 +49,7 @@ class Resources
      * @var string
      */
     const MONEY = 'money';
-    
+
     /**
      * @var Application
      */
@@ -84,7 +84,7 @@ class Resources
             : $all[$key]
         ;
     }
-    
+
     /**
      * @return string
      */
@@ -112,7 +112,7 @@ class Resources
 
         return $all;
     }
-    
+
     /**
      * @return array
      */

@@ -176,7 +176,7 @@ class TownsController
             )
         );
     }
-    
+
     /**
      * @param integer     $id
      * @param integer     $buildingId
@@ -203,9 +203,9 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404);
         }
-        
+
         $townBuildingTiles = $townBuilding->getTiles();
-        
+
         if (!empty($townBuildingTiles)) {
             foreach ($townBuildingTiles as $townBuildingTile) {
                 $townBuildingTile
@@ -215,16 +215,16 @@ class TownsController
                 $app['orm.em']->persist($townBuildingTile);
             }
         }
-        
+
         $app['orm.em']->remove($townBuilding);
 
         try {
             if (!$townBuilding->isRemovable()) {
                 throw new \Exception('This building is not removable!');
             }
-            
+
             $app['orm.em']->flush();
-            
+
             $app['flashbag']->add(
                 'success',
                 $app['translator']->trans(
@@ -236,7 +236,7 @@ class TownsController
                 'danger',
                 $e->getMessage()
             );
-            
+
             return $app->redirect(
                 $app['url_generator']->generate(
                     'game.towns.buildings.detail',
