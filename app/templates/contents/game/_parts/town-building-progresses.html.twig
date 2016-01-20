@@ -1,3 +1,15 @@
+<h5>{{ 'Health' | trans }}</h5>
+<div class="progress"
+    data-toggle="tooltip"
+    title="{{ townBuilding.getHealthPoints() }} {{ 'out of' | trans }} {{ townBuilding.getHealthPointsTotal() }} {{ 'health points' | trans }}">
+    <div class="progress-bar progress-bar-{{ townBuilding.getHealthPointsPercentageColorType() }}"
+        aria-valuenow="{{ townBuilding.getHealthPointsPercentage() }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: {{ townBuilding.getHealthPointsPercentage() }}%; min-width: 2em;">
+        {{ townBuilding.getHealthPointsPercentage() | round }}%
+    </div>
+</div>
 {% if townBuilding.isUpgrading() %}
     <h5>{{ 'Upgrading progress' | trans }}</h5>
     <div class="progress live-progress"

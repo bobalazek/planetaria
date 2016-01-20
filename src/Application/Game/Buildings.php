@@ -150,6 +150,7 @@ class Buildings
         $townBuildingEntity
             ->setBuilding($building)
             ->setTown($town)
+            ->setHealthPoints($buildingObject->getHealthPoints(0))
             ->setTimeConstructed($timeConstructed)
         ;
         $app['orm.em']->persist($townBuildingEntity);

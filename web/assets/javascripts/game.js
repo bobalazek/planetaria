@@ -109,7 +109,10 @@ var Game = function () {
                         .text(parseInt(percentage)+'%')
                     ;
                     
-                    if (secondsUntilDone <= 0) {
+                    if (
+                        jQuery.isNumeric(secondsUntilDone) &&
+                        secondsUntilDone <= 0
+                    ) {
                         window.location.reload();
                     }
                 });

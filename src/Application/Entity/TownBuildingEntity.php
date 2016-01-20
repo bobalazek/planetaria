@@ -51,15 +51,6 @@ class TownBuildingEntity extends AbstractBasicEntity
     protected $healthPoints = 1000;
 
     /**
-     * If damage, how much is it left?
-     *
-     * @var integer
-     *
-     * @ORM\Column(name="health_points_left", type="integer")
-     */
-    protected $healthPointsLeft = 1000;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time_next_level_upgrade_started", type="datetime", nullable=true)
@@ -168,7 +159,7 @@ class TownBuildingEntity extends AbstractBasicEntity
         return $this->getLevel() + 1;
     }
 
-    /*** Health Points ***/
+    /*** Health points ***/
     /**
      * @return integer
      */
@@ -184,30 +175,61 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function setHealthPoints($healthPoints)
     {
+        if ($healthPoints > $this->getHealthPointsTotal()) {
+            $healthPoints = $this->getHealthPointsTotal();
+        } elseif ($healthPoints < 0) {
+            $healthPoints = 0;
+        }
+
         $this->healthPoints = $healthPoints;
 
         return $this;
     }
-
-    /*** Health Points Left ***/
+    
+    /*** Health points total ***/
     /**
      * @return integer
      */
-    public function getHealthPointsLeft()
+    public function getHealthPointsTotal()
     {
-        return $this->healthPointsLeft;
+        $buildingObject = $this->getBuildingObject();
+
+        return $buildingObject->getHealthPoints($this->getLevel());
     }
-
+    
+    /*** Health points percentage ***/
     /**
-     * @param integer $healthPointsLeft
-     *
-     * @return TownBuildingEntity
+     * @return integer
      */
-    public function setHealthPointsLeft($healthPointsLeft)
+    public function getHealthPointsPercentage()
     {
-        $this->healthPointsLeft = $healthPointsLeft;
+        $total = $this->getHealthPointsTotal();
+        $current = $this->getHealthPoints();
+        
+        if ($total === 0) {
+            return 100;
+        } elseif ($current === 0) {
+            return 0;
+        }
+        
+        return ceil(($current / $total) * 100);
+    }
+    
+    /*** Health points percentage color type ***/
+    /**
+     * @return string
+     */
+    public function getHealthPointsPercentageColorType()
+    {
+        $percentage = $this->getHealthPointsPercentage();
 
-        return $this;
+        if ($percentage <= 20) {
+            return 'danger';
+        } elseif ($percentage <= 40) {
+            return 'warning';
+        }
+        
+        return 'success';
     }
 
     /*** Town ***/
@@ -423,14 +445,14 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $currentDatetime = new \Datetime();
         $timeConstructed = $this->getTimeConstructed();
-        $healthPointsLeft = $this->getHealthPointsLeft();
+        $healthPoints = $this->getHealthPoints();
 
         // Building isn't yet build, so it can not produce anything.
         if ($timeConstructed > $currentDatetime) {
             return BuildingStatuses::CONSTRUCTING;
         }
 
-        if ($healthPointsLeft === 0) {
+        if ($healthPoints === 0) {
             return BuildingStatuses::DESTROYED;
         }
 
@@ -511,6 +533,10 @@ class TownBuildingEntity extends AbstractBasicEntity
             $secondsLeft = $end - $now;
             $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
 
+            if ($percentageLeft === 0 || $secondsLeft === 0) {
+                return 0;
+            }
+
             return $percentageLeft / $secondsLeft;
         }
 
@@ -585,6 +611,10 @@ class TownBuildingEntity extends AbstractBasicEntity
             $end = strtotime($this->getTimeConstructed()->format(DATE_ATOM));
             $secondsLeft = $end - $now;
             $percentageLeft = 100 - (($now - $start) / ($end - $start) * 100);
+
+            if ($percentageLeft === 0 || $secondsLeft === 0) {
+                return 0;
+            }
 
             return $percentageLeft / $secondsLeft;
         }
