@@ -10,16 +10,16 @@
             href="{{ url('game.towns.detail', { id: town.getId() }) }}">
             {{ 'Back to the Town' | trans }}
         </a>
+        <a class="btn btn-default"
+            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
+            {{ 'View on map' | trans }}
+        </a>
     </h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-8">
                 {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject() } %}
                 {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
-                <a class="btn btn-default btn-block btn-lg"
-                    href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
-                    {{ 'View on map' | trans }}
-                </a>
             </div> <!-- /.col-md-8 -->
             <div class="col-md-4">
                 {% include 'contents/game/_parts/town-sidebar.html.twig' %}

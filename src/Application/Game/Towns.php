@@ -136,6 +136,21 @@ class Towns
             return false;
         }
 
+        $thisBuildingCount = $this->getBuildingCount($town, $building);
+
+        return $thisBuildingCount >= $buildingObjectPerTownLimit;
+    }
+    
+    /**
+     * How many of this buildings are there in this town?
+     *
+     * @param TownEntity $town
+     * @param string     $building
+     *
+     * @return boolean
+     */
+    public function getBuildingCount(TownEntity $town, $building)
+    {
         $thisBuildingCount = 0;
         $townBuildings = $town->getTownBuildings();
 
@@ -145,7 +160,7 @@ class Towns
             }
         }
 
-        return $thisBuildingCount >= $buildingObjectPerTownLimit;
+        return $thisBuildingCount;
     }
 
     /**
