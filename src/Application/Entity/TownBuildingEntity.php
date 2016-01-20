@@ -175,9 +175,7 @@ class TownBuildingEntity extends AbstractBasicEntity
      */
     public function setHealthPoints($healthPoints)
     {
-        if ($healthPoints > $this->getHealthPointsTotal()) {
-            $healthPoints = $this->getHealthPointsTotal();
-        } elseif ($healthPoints < 0) {
+        if ($healthPoints < 0) {
             $healthPoints = 0;
         }
 

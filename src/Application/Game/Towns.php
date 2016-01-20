@@ -230,9 +230,10 @@ class Towns
                     $townBuildingTimeNextLevelUpgradeEnds !== null &&
                     $currentDatetime > $townBuildingTimeNextLevelUpgradeEnds
                 ) {
+                    $buildingObject = $townBuilding->getBuildingObject();
                     $nextLevel = $townBuilding->getNextLevel();
-                    $healthPoints = $townBuilding->getBuildingObject()->getHealthPoints($nextLevel) * ($townBuilding->getHealthPointsPercentage() / 100);
-                    
+                    $healthPoints = $buildingObject->getHealthPoints($nextLevel) * ($townBuilding->getHealthPointsPercentage() / 100);
+
                     $townBuilding
                         ->setHealthPoints($healthPoints)
                         ->setLevel($nextLevel)
