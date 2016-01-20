@@ -20,7 +20,7 @@ class House extends AbstractBuilding
             ->setKey('house')
             ->setSlug('house')
             ->setDescription('A house will increase your population capacity.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::RESIDENTIAL)
             ->setSize('1x1')
             ->setMaximumLevel(2)
             ->setHealthPoints(array(

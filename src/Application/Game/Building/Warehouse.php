@@ -20,7 +20,7 @@ class Warehouse extends AbstractBuilding
             ->setKey('warehouse')
             ->setSlug('warehouse')
             ->setDescription('A warehouse will increase your storage capacity.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')
             ->setMaximumLevel(2)
             ->setHealthPoints(array(

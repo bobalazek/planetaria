@@ -20,7 +20,7 @@ class LoggingCamp extends AbstractBuilding
             ->setKey('logging_camp')
             ->setSlug('logging-camp')
             ->setDescription('With a loggin camp you can produce wood.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

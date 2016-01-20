@@ -20,7 +20,7 @@ class Market extends AbstractBuilding
             ->setKey('market')
             ->setSlug('market')
             ->setDescription('With a market, you will be able to exchange resources and items.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')
             ->setMaximumLevel(0)
             ->setHealthPoints(array(

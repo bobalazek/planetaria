@@ -20,7 +20,7 @@ class IronMine extends AbstractBuilding
             ->setKey('iron_mine')
             ->setSlug('iron-mine')
             ->setDescription('With a iron mine you can produce iron ore.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

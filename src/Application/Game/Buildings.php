@@ -110,6 +110,73 @@ class Buildings
     }
 
     /**
+     * @return array
+     */
+    public static function getAll($key = null)
+    {
+        $all = array(
+            self::CAPITOL => 'Capitol',
+            self::HOUSE => 'House',
+            self::APARTMENT_BLOCK => 'Apartment block',
+            self::MARKET => 'Market',
+            self::WAREHOUSE => 'Warehouse',
+            self::FARM => 'Farm',
+            self::PUMPJACK => 'Pumpjack',
+            self::QUARRY => 'Quarry',
+            self::LOGGING_CAMP => 'Logging camp',
+            self::COLLIERY => 'Colliery',
+            self::IRON_MINE => 'Iron mine',
+            self::BARRACKS => 'Barracks',
+            self::AIRBASE => 'Airbase',
+            self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
+            self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
+        );
+
+        return $key === null
+            ? $all
+            : $all[$key]
+        ;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getClassName($key)
+    {
+        $buildings = self::getAll();
+
+        if (!array_key_exists($key, $buildings)) {
+            throw new \Exception('This building does not exists!');
+        }
+
+        return Inflector::classify($key);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllWithData($key = null)
+    {
+        $buildings = self::getAll();
+
+        foreach ($buildings as $building => $buildingName) {
+            $className = 'Application\\Game\\Building\\'.self::getClassName($building);
+            $buildingObject = new $className();
+
+            if (
+                $key !== null &&
+                $key === $building
+            ) {
+                return $buildingObject;
+            }
+
+            $buildings[$building] = $buildingObject;
+        }
+
+        return $buildings;
+    }
+
+    /**
      * With this method we'll create the town building.
      *
      * @param PlanetEntity $planet
@@ -561,72 +628,5 @@ class Buildings
         }
 
         return false;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAll($key = null)
-    {
-        $all = array(
-            self::CAPITOL => 'Capitol',
-            self::HOUSE => 'House',
-            self::FARM => 'Farm',
-            self::APARTMENT_BLOCK => 'Apartment block',
-            self::WAREHOUSE => 'Warehouse',
-            self::MARKET => 'Market',
-            self::AIRBASE => 'Airbase',
-            self::BARRACKS => 'Barracks',
-            self::PUMPJACK => 'Pumpjack',
-            self::QUARRY => 'Quarry',
-            self::LOGGING_CAMP => 'Logging camp',
-            self::COLLIERY => 'Colliery',
-            self::IRON_MINE => 'Iron mine',
-            self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
-            self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
-        );
-
-        return $key === null
-            ? $all
-            : $all[$key]
-        ;
-    }
-
-    /**
-     * @return string
-     */
-    public static function getClassName($key)
-    {
-        $buildings = self::getAll();
-
-        if (!array_key_exists($key, $buildings)) {
-            throw new \Exception('This building does not exists!');
-        }
-
-        return Inflector::classify($key);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAllWithData($key = null)
-    {
-        $buildings = self::getAll();
-
-        foreach ($buildings as $building => $buildingName) {
-            $className = 'Application\\Game\\Building\\'.self::getClassName($building);
-            $buildingObject = new $className();
-
-            if (
-                $key !== null &&
-                $key === $building
-            ) {
-                return $buildingObject;
-            }
-
-            $buildings[$building] = $buildingObject;
-        }
-
-        return $buildings;
     }
 }

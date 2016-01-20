@@ -6,6 +6,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Application\Game\Buildings;
+use Application\Game\BuildingTypes;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -153,8 +154,9 @@ class GameController
             $app['game.towns']->updateTownResources($town);
         }
 
-        // Get all available buildings
+        // Get all available buildings and building types
         $buildings = Buildings::getAllWithData();
+        $buildingTypes = BuildingTypes::getAll();
 
         $building = $request->query->get('building');
         if ($building && $town) {
@@ -224,6 +226,7 @@ class GameController
                 'contents/game/map/build.html.twig',
                 array(
                     'buildings' => $buildings,
+                    'buildingTypes' => $buildingTypes,
                     'planet' => $planet,
                     'tile' => $tile,
                     'town' => $town,

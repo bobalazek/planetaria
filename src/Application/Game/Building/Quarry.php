@@ -20,7 +20,7 @@ class Quarry extends AbstractBuilding
             ->setKey('quarry')
             ->setSlug('quarry')
             ->setDescription('With a quarry you can produce rock.')
-            ->setType(BuildingTypes::CIVIL)
+            ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

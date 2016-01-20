@@ -1,5 +1,10 @@
 {% set level = level is defined ? level : 0 %}
-<div class="building media">
+<div class="building media"
+    data-name="{{ building.getName() }}"
+    data-key="{{ building.getKey() }}"
+    data-slug="{{ building.getSlug() }}"
+    data-description="{{ building.getDescription() }}"
+    data-type="{{ building.getType() }}">
     <div class="media-left">
         <img class="media-object"
             src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />

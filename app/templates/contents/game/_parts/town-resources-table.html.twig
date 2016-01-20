@@ -1,34 +1,36 @@
-<table id="town-resources-table"
-    class="table"
-    data-time-last-updated="{{ town.getTimeLastUpdatedResources() | date('Y-m-d H:i:s') }}">
-    <thead>
-        <tr>
-            <th>Resource</th>
-            <th>Available</th>
-            <th>Capacity</th>
-            <th>Production <small>per minute</small></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for resourceKey, resourceData in town.getResources() %}
-            <tr class="resource-row"
-                data-resource="{{ resourceKey }}"
-                data-resource-available="{{ resourceData.available }}"
-                data-resource-capacity="{{ resourceData.capacity }}"
-                data-resource-production="{{ resourceData.production }}">
-                <td class="resource-name">
-                    {{ resourceKey | humanize | trans }}
-                </td>
-                <td class="resource-available">
-                    {{ resourceData.available | round }}
-                </td>
-                <td class="resource-capacity">
-                    {{ (resourceData.capacity == -1 ? '&infin;' : resourceData.capacity) | raw }}
-                </td>
-                <td class="resource-production">
-                    {{ resourceData.production }}
-                </td>
+<div class="table-responsive">
+    <table id="town-resources-table"
+        class="table"
+        data-time-last-updated="{{ town.getTimeLastUpdatedResources() | date('Y-m-d H:i:s') }}">
+        <thead>
+            <tr>
+                <th>Resource</th>
+                <th>Available</th>
+                <th>Capacity</th>
+                <th>Production <small>per minute</small></th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for resourceKey, resourceData in town.getResources() %}
+                <tr class="resource-row"
+                    data-resource="{{ resourceKey }}"
+                    data-resource-available="{{ resourceData.available }}"
+                    data-resource-capacity="{{ resourceData.capacity }}"
+                    data-resource-production="{{ resourceData.production }}">
+                    <td class="resource-name">
+                        {{ resourceKey | humanize | trans }}
+                    </td>
+                    <td class="resource-available">
+                        {{ resourceData.available | round }}
+                    </td>
+                    <td class="resource-capacity">
+                        {{ (resourceData.capacity == -1 ? '&infin;' : resourceData.capacity) | raw }}
+                    </td>
+                    <td class="resource-production">
+                        {{ resourceData.production }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
