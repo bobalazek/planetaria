@@ -4,6 +4,12 @@
 </p>
 {% if tile.getTownBuilding() %}
     <p>
+        <b>{{ 'Building' | trans }}:</b>
+        <a href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
+            {{ tile.getTownBuilding().getBuilding() | humanize | trans }}
+        </a>
+    </p>
+    <p>
         <b>{{ 'Town' | trans }}:</b>
         <a href="{{ url('game.towns.detail', { id: tile.getTownBuilding().getTown().getId() }) }}">
             {{ tile.getTownBuilding().getTown() }}
@@ -13,12 +19,6 @@
         <b>{{ 'Country' | trans }}:</b>
         <a href="{{ url('game.countries.detail', { id: tile.getTownBuilding().getTown().getCountry().getId() }) }}">
             {{ tile.getTownBuilding().getTown().getCountry() }}
-        </a>
-    </p>
-    <p>
-        <b>{{ 'Building' | trans }}:</b>
-        <a href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
-            {{ tile.getTownBuilding().getBuilding() | humanize | trans }}
         </a>
     </p>
 {% endif %}

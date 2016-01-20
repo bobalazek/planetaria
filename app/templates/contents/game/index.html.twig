@@ -4,12 +4,14 @@
 
 {% block main %}
     <h1>{{ 'Dashboard' | trans }}</h1>
-    <h2>
-        {{ 'Hello' | trans }}
-        {{ app.user.getUsername() }}!
-    </h2>
-    <h3>{{ 'How are you today?' | trans }}</h3>
     <div id="main-content">
-        ...
+        <h2>{{ 'My towns' | trans }}</h2>
+        {% if app.user.getTowns()  %}
+            {% include 'contents/game/_parts/towns-list.html.twig' with { towns: app.user.getTowns() } %}
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'You do not have any towns yet!' | trans }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
