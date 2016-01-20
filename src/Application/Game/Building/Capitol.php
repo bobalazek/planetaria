@@ -43,7 +43,7 @@ class Capitol extends AbstractBuilding
                 3 => 16000,
             ))
             ->setBuildTime(array(
-                0 => 0,
+                0 => 10,
                 1 => 30,
                 2 => 60,
                 3 => 120,

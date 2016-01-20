@@ -39,9 +39,9 @@ class House extends AbstractBuilding
                 2 => 40,
             ))
             ->setBuildTime(array(
-                0 => 0,
-                1 => 10,
-                2 => 20,
+                0 => 10,
+                1 => 20,
+                2 => 30,
             ))
             ->setResourcesCost(array(
                 0 => array(
