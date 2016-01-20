@@ -12,13 +12,16 @@
         </thead>
         <tbody>
             {% for resourceKey, resourceData in town.getResources() %}
+                {% set resourceObject = app['game.resources'].getAllWithData(resourceKey) %}
                 <tr class="resource-row"
                     data-resource="{{ resourceKey }}"
                     data-resource-available="{{ resourceData.available }}"
                     data-resource-capacity="{{ resourceData.capacity }}"
                     data-resource-production="{{ resourceData.production }}">
                     <td class="resource-name">
-                        {{ resourceKey | humanize | trans }}
+                        <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getSlug() }}.png"
+                            style="max-width: 16px;" />
+                        {{ resourceObject.getName() | trans }}
                     </td>
                     <td class="resource-available">
                         {{ resourceData.available | round }}

@@ -3,11 +3,14 @@
     <ul class="list-group">
         {% if building.getResourcesCapacity(level) is iterable %}
             {% for resource, resourceAmount in building.getResourcesCapacity(level) %}
+                {% set resourceObject = app['game.resources'].getAllWithData(resource) %}
                 <li class="list-group-item">
                     <span class="badge">
                         {{ resourceAmount }}
                     </span>
-                    {{ resource | humanize | trans }}
+                    <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getSlug() }}.png"
+                        style="max-width: 16px;" />
+                    {{ resourceObject.getName() | trans }}
                 </li>
             {% endfor %}
         {% else %}
