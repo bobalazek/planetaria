@@ -1,0 +1,32 @@
+<div id="users-panel"
+    class="panel panel-default">
+    <div class="panel-heading">
+        {{ 'Users' | trans }}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {{ 'Total' | trans }}
+            <span class="badge badge-primary">
+                {{ app['orm.em'].getRepository('Application\\Entity\\UserEntity').countAll() }}
+            </span>
+        </li>
+        <li class="list-group-item">
+            {{ 'Active the last 5 minutes' | trans }}
+            <span class="badge badge-primary">
+                {{ app['orm.em'].getRepository('Application\\Entity\\UserEntity').getActiveTheLast5MinutesCount() }}
+            </span>
+        </li>
+        <li class="list-group-item">
+            {{ 'Active the last 60 minutes' | trans }}
+            <span class="badge badge-primary">
+                {{ app['orm.em'].getRepository('Application\\Entity\\UserEntity').getActiveTheLast60MinutesCount() }}
+            </span>
+        </li>
+        <li class="list-group-item">
+            {{ 'Active the last 24 hours' | trans }}
+            <span class="badge badge-primary">
+                {{ app['orm.em'].getRepository('Application\\Entity\\UserEntity').getActiveTheLast24HoursCount() }}
+            </span>
+        </li>
+    </ul>
+</div> <!-- /#users-panel -->

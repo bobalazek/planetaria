@@ -1,0 +1,14 @@
+<div id="countries-panel"
+    class="panel panel-default">
+    <div class="panel-heading">
+        {{ 'Countries' | trans }}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {{ 'Total' | trans }}
+            <span class="badge">
+                {{ app['orm.em'].getRepository('Application\\Entity\\CountryEntity').countAll() }}
+            </span>
+        </li>
+    </ul>
+</div> <!-- /#countries-panel -->
