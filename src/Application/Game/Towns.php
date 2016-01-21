@@ -105,13 +105,13 @@ class Towns
     }
 
     /**
-     * Has the town reached the total buildings limit?
+     * Has the town reached the total buildings limit for that town?
      *
      * @param TownEntity $town
      *
      * @return boolean
      */
-    public function hasReachedBuildingsLimit(TownEntity $town)
+    public function hasReachedTownBuildingsLimit(TownEntity $town)
     {
         $townBuildingsCount = count($town->getTownBuildings());
         $townBuildingsLimit = $town->getBuildingsLimit();
@@ -127,7 +127,7 @@ class Towns
      *
      * @return boolean
      */
-    public function hasReachedBuildingLimit(TownEntity $town, $building)
+    public function hasReachedBuildingPerTownLimit(TownEntity $town, $building)
     {
         $buildingObject = Buildings::getAllWithData($building);
         $buildingObjectPerTownLimit = $buildingObject->getPerTownLimit();
@@ -136,7 +136,7 @@ class Towns
             return false;
         }
 
-        $thisBuildingCount = $this->getBuildingCount($town, $building);
+        $thisBuildingCount = $this->getBuildingsCount($town, $building);
 
         return $thisBuildingCount >= $buildingObjectPerTownLimit;
     }
@@ -149,7 +149,7 @@ class Towns
      *
      * @return boolean
      */
-    public function getBuildingCount(TownEntity $town, $building)
+    public function getBuildingsCount(TownEntity $town, $building)
     {
         $thisBuildingCount = 0;
         $townBuildings = $town->getTownBuildings();

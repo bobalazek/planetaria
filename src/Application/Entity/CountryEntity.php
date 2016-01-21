@@ -80,6 +80,11 @@ class CountryEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\CountryUnitEntity", mappedBy="country", cascade={"all"})
      */
     protected $countryUnits;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="towns")
+     */
+    protected $user;
 
     /**
      * The constructor
@@ -152,6 +157,35 @@ class CountryEntity extends AbstractAdvancedEntity
         $this->countryUnits = $countryUnits;
 
         return $this;
+    }
+    
+    /*** User ***/
+    /**
+     * @return UserEntity
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param UserEntity $user
+     *
+     * @return CountryEntity
+     */
+    public function setUser(UserEntity $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**

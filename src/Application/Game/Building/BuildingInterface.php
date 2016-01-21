@@ -161,16 +161,16 @@ interface BuildingInterface
      */
     public function setResourcesProduction(array $resourcesProduction);
 
-    /***** Resources use *****/
+    /***** Resources usage *****/
     /**
      * @return array
      */
-    public function getResourcesUse($level, $resource);
+    public function getResourcesUsage($level, $resource);
 
     /**
-     * @param array $resourcesUse
+     * @param array $resourcesUsage
      */
-    public function setResourcesUse(array $resourcesUse);
+    public function setResourcesUsage(array $resourcesUsage);
 
     /***** Units production *****/
     /**
@@ -182,6 +182,28 @@ interface BuildingInterface
      * @param array $unitsProduction
      */
     public function setUnitsProduction(array $unitsProduction);
+    
+    /***** Units resources cost bonus *****/
+    /**
+     * @return array
+     */
+    public function getUnitsResourcesCostBonus($level);
+
+    /**
+     * @param array $unitsResourcesCostBonus
+     */
+    public function setUnitsResourcesCostBonus(array $unitsResourcesCostBonus);
+    
+    /***** Units build time bonus *****/
+    /**
+     * @return array
+     */
+    public function getUnitsBuildTimeBonus($level);
+
+    /**
+     * @param array $unitsBuildTimeBonus
+     */
+    public function setUnitsBuildTimeBonus(array $unitsBuildTimeBonus);
 
     /***** Items production *****/
     /**
@@ -193,6 +215,28 @@ interface BuildingInterface
      * @param array $itemsProduction
      */
     public function setItemsProduction(array $itemsProduction);
+    
+    /***** Items resources cost bonus *****/
+    /**
+     * @return array
+     */
+    public function getItemsResourcesCostBonus($level);
+
+    /**
+     * @param array $itemsResourcesCostBonus
+     */
+    public function setItemsResourcesCostBonus(array $itemsResourcesCostBonus);
+    
+    /***** Items build time bonus *****/
+    /**
+     * @return array
+     */
+    public function getItemsBuildTimeBonus($level);
+
+    /**
+     * @param array $itemsBuildTimeBonus
+     */
+    public function setItemsBuildTimeBonus(array $itemsBuildTimeBonus);
 
     /***** Buildings required *****/
     /**
@@ -226,4 +270,26 @@ interface BuildingInterface
      * @param integer $perCountryLimit
      */
     public function setPerCountryLimit($perCountryLimit);
+    
+    /***** Per planet limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerPlanetLimit();
+
+    /**
+     * @param integer $perPlanetLimit
+     */
+    public function setPerPlanetLimit($perPlanetLimit);
+    
+    /***** Limit *****/
+    /**
+     * @return integer
+     */
+    public function getLimit();
+
+    /**
+     * @param integer $limit
+     */
+    public function setLimit($limit);
 }

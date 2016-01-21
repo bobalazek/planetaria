@@ -10,7 +10,6 @@ use Application\Entity\TownBuildingEntity;
 use Application\Game\Exception\InsufficientResourcesException;
 use Application\Game\Exception\InsufficientAreaSpaceException;
 use Application\Game\Exception\TownBuildingsLimitReachedException;
-use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
 use Application\Game\Exception\TownBuildingInConstructionException;
@@ -300,31 +299,48 @@ class Buildings
     ) {
         $app = $this->app;
 
-        // Check if we have reached the buildings limit
-        $hasReachedBuildingsLimit = $app['game.towns']
-            ->hasReachedBuildingLimit(
+        /***** Town - checks *****/
+        // Check if we have reached the buildings limit (for that town)
+        $hasReachedTownBuildingsLimit = $app['game.towns']
+            ->hasReachedTownBuildingsLimit(
                 $town,
                 $building
             )
         ;
-        if ($hasReachedBuildingsLimit) {
+        if ($hasReachedTownBuildingsLimit) {
+            throw new TownBuildingsLimitReachedException(
+                'You have reached the limit per town for this building!'
+            );
+        }
+
+        /***** Building - Limits checks *****/
+        /*** Per Town ***/
+        // Check if we have reached the buildings limit (for that building)
+        $hasReachedBuildingPerTownLimit = $app['game.towns']
+            ->hasReachedBuildingPerTownLimit($town)
+        ;
+        if ($hasReachedBuildingPerTownLimit) {
+            throw new TownBuildingsLimitReachedException(
+                'You have reached the buildings limit for this town!'
+            );
+        }
+        
+        /*** Per Country ***/
+        // Check if we have reached the buildings limit (for that country)
+        $hasReachedBuildingPerCountryLimit = $app['game.countries']
+            ->hasReachedBuildingPerCountryLimit(
+                $town,
+                $building
+            )
+        ;
+        if ($hasReachedBuildingPerCountryLimit) {
             throw new BuildingPerTownLimitReachedException(
                 'You have reached the limit per town for this building!'
             );
         }
 
-        // @To-Do: Check for limit per country!
-
-        // Check if we have reached the buildings limit
-        $hasReachedBuildingsLimit = $app['game.towns']
-            ->hasReachedBuildingsLimit($town)
-        ;
-        if ($hasReachedBuildingsLimit) {
-            throw new TownBuildingsLimitReachedException(
-                'You have reached the buildings limit for this town!'
-            );
-        }
-
+        /***** Building - Requirements (required buildings, resources and area space) checks *****/
+        /*** Required buildings ****/
         // Check if we have the required buildings to construct this building
         $hasRequiredBuildingsForBuilding = $app['game.towns']
             ->hasRequiredBuildingsForBuilding(
@@ -338,6 +354,7 @@ class Buildings
             );
         }
 
+        /*** Required resources ***/
         // Check if that town has enough resources to build that building
         $hasEnoughResourcesForBuilding = $app['game.towns']
             ->hasEnoughResourcesForBuilding(
@@ -351,6 +368,7 @@ class Buildings
             );
         }
 
+        /*** Required area space ***/
         // Check if we have enough space to build this building
         $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
             $planet,

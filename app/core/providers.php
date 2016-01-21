@@ -168,6 +168,10 @@ $app['game.planets'] = $app->share(function () use ($app) {
     return new Application\Game\Planets($app);
 });
 
+$app['game.countries'] = $app->share(function () use ($app) {
+    return new Application\Game\Countries($app);
+});
+
 $app['game.towns'] = $app->share(function () use ($app) {
     return new Application\Game\Towns($app);
 });

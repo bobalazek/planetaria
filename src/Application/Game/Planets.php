@@ -127,6 +127,7 @@ class Planets
             ->setName('Panem')
             ->setSlug('panem')
             ->setDescription('The country of all countries')
+            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
         ;
         $app['orm.em']->persist($countryEntity);
 

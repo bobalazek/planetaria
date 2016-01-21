@@ -93,6 +93,26 @@
                     {{ (building.getPerCountryLimit() == -1 ? '&infin;' : building.getPerCountryLimit()) | raw }}
                 </p>
             </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b data-toggle="tooltip"
+                        data-placement="right"
+                        title="{{ 'How much of this buildings can you make per planet?' | trans }}">
+                        {{ 'Per planet limit' | trans }}:
+                    </b>
+                    {{ (building.getPerPlanetLimit() == -1 ? '&infin;' : building.getPerPlanetLimit()) | raw }}
+                </p>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4 col-sm-6">
+                <p>
+                    <b data-toggle="tooltip"
+                        data-placement="right"
+                        title="{{ 'How much of this buildings can you make in overall?' | trans }}">
+                        {{ 'Limit' | trans }}:
+                    </b>
+                    {{ (building.getLimit() == -1 ? '&infin;' : building.getLimit()) | raw }}
+                </p>
+            </div> <!-- /.col-md-4 -->
         </div> <!-- /.row -->
         <div class="row">
             {% set i = 0 %}

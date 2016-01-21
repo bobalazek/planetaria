@@ -142,21 +142,39 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var array
      */
-    protected $resourcesUse;
+    protected $resourcesUsage;
 
     /**
-     * How much of what does that building produce per minute (per level)?
-     * Example ( level => array( unit => buildingTimeInSeconds ) ):
-     *   array( 0 => array( 'soldier' => 600 )), 1 => array( 'soldier' => 300 ) )
+     * What does that building produce (per level)?
+     * Example ( level => array( unit, unit2 ) ):
+     *   array( 0 => array( 'soldier', 'rifleman' )), 1 => array( 'soldier', 'rifleman', 'rocketman' ) )
      *
      * @var array
      */
     protected $unitsProduction;
+    
+    /**
+     * How much bonus for resources cost (in percents) do we get (per level)?
+     * Example ( level => bonusPercents ):
+     *   array( 0 => 0, 1 => 5, 2 => 10 )
+     *
+     * @var array
+     */
+    protected $unitsResourcesCostBonus;
+    
+    /**
+     * How much bonus for build time (in percents) do we get (per level)?
+     * Example ( level => bonusPercents ):
+     *   array( 0 => 0, 1 => 5, 2 => 10 )
+     *
+     * @var array
+     */
+    protected $unitsBuildTimeBonus;
 
     /**
-     * How much of what does that building produce per minute (per level)?
-     * Example ( level => array( unit => buildingTimeInSeconds ) ):
-     *   array( 0 => array( 'ion_cannon_satelite' => 3600 )), 1 => array( 'ion_cannon_satelite' => 3000 ) )
+     * What does that building produce (per level)?
+     * Example ( level => array( item, item2 ) ):
+     *   array( 0 => array( 'ion_cannon_satelite' )), 1 => array( 'ion_cannon_satelite', 'nuclear_bomb' ) )
      *
      * @var array
      */
@@ -188,6 +206,24 @@ class AbstractBuilding implements BuildingInterface
      * @var integer
      */
     protected $perCountryLimit = -1;
+    
+    /**
+     * What's the maximum number of this buildings on one planet?
+     * Example:
+     *   -1 (infinitive)
+     *
+     * @var integer
+     */
+    protected $perPlanetLimit = -1;
+    
+    /**
+     * What's the maximum number of this buildings overall?
+     * Example:
+     *   -1 (infinitive)
+     *
+     * @var integer
+     */
+    protected $limit = -1;
 
     /***** Name *****/
     /**
@@ -497,26 +533,26 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
-    /***** Resources use *****/
+    /***** Resources usage *****/
     /**
      * @return array
      */
-    public function getResourcesUse($level = null, $resource = null)
+    public function getResourcesUsage($level = null, $resource = null)
     {
         return $level === null
-            ? $this->resourcesUse
+            ? $this->resourcesUsage
             : ($resource === null
-                ? $this->resourcesUse[$level]
-                : $this->resourcesUse[$level][$resource])
+                ? $this->resourcesUsage[$level]
+                : $this->resourcesUsage[$level][$resource])
         ;
     }
 
     /**
-     * @param array $resourcesUse
+     * @param array $resourcesUsage
      */
-    public function setResourcesUse(array $resourcesUse = array())
+    public function setResourcesUsage(array $resourcesUsage = array())
     {
-        $this->resourcesUse = $resourcesUse;
+        $this->resourcesUsage = $resourcesUsage;
 
         return $this;
     }
@@ -544,6 +580,50 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
+    
+    /***** Units resources cost bonus *****/
+    /**
+     * @return array|integer
+     */
+    public function getUnitsResourcesCostBonus($level = null)
+    {
+        return $level === null
+            ? $this->unitsResourcesCostBonus
+            : $this->unitsResourcesCostBonus[$level]
+        ;
+    }
+
+    /**
+     * @param array $unitsResourcesCostBonus
+     */
+    public function setUnitsResourcesCostBonus(array $unitsResourcesCostBonus = array())
+    {
+        $this->unitsResourcesCostBonus = $unitsResourcesCostBonus;
+
+        return $this;
+    }
+    
+    /***** Units build time bonus *****/
+    /**
+     * @return array|integer
+     */
+    public function getUnitsBuildTimeBonus($level = null)
+    {
+        return $level === null
+            ? $this->unitsBuildTimeBonus
+            : $this->unitsBuildTimeBonus[$level]
+        ;
+    }
+
+    /**
+     * @param array $unitsBuildTimeBonus
+     */
+    public function setUnitsBuildTimeBonus(array $unitsBuildTimeBonus = array())
+    {
+        $this->unitsBuildTimeBonus = $unitsBuildTimeBonus;
+
+        return $this;
+    }
 
     /***** Items production *****/
     /**
@@ -565,6 +645,50 @@ class AbstractBuilding implements BuildingInterface
     public function setItemsProduction(array $itemsProduction = array())
     {
         $this->itemsProduction = $itemsProduction;
+
+        return $this;
+    }
+
+    /***** Items resources cost bonus *****/
+    /**
+     * @return array|integer
+     */
+    public function getItemsResourcesCostBonus($level = null)
+    {
+        return $level === null
+            ? $this->itemsResourcesCostBonus
+            : $this->itemsResourcesCostBonus[$level]
+        ;
+    }
+
+    /**
+     * @param array $itemsResourcesCostBonus
+     */
+    public function setItemsResourcesCostBonus(array $itemsResourcesCostBonus = array())
+    {
+        $this->itemsResourcesCostBonus = $itemsResourcesCostBonus;
+
+        return $this;
+    }
+    
+    /***** Items build time bonus *****/
+    /**
+     * @return array|integer
+     */
+    public function getItemsBuildTimeBonus($level = null)
+    {
+        return $level === null
+            ? $this->itemsBuildTimeBonus
+            : $this->itemsBuildTimeBonus[$level]
+        ;
+    }
+
+    /**
+     * @param array $itemsBuildTimeBonus
+     */
+    public function setItemsBuildTimeBonus(array $itemsBuildTimeBonus = array())
+    {
+        $this->itemsBuildTimeBonus = $itemsBuildTimeBonus;
 
         return $this;
     }
@@ -627,6 +751,44 @@ class AbstractBuilding implements BuildingInterface
     public function setPerCountryLimit($perCountryLimit)
     {
         $this->perCountryLimit = $perCountryLimit;
+
+        return $this;
+    }
+    
+    /***** Per planet limit *****/
+    /**
+     * @return integer
+     */
+    public function getPerPlanetLimit()
+    {
+        return $this->perPlanetLimit;
+    }
+
+    /**
+     * @param integer $perPlanetLimit
+     */
+    public function setPerPlanetLimit($perPlanetLimit)
+    {
+        $this->perPlanetLimit = $perPlanetLimit;
+
+        return $this;
+    }
+    
+    /***** Limit *****/
+    /**
+     * @return integer
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @param integer $limit
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
 
         return $this;
     }
