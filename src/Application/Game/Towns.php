@@ -228,7 +228,6 @@ class Towns
             }
 
             $townResource->setAmount($amount);
-
             $app['orm.em']->persist($townResource);
         }
 
