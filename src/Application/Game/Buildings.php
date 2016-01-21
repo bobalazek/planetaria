@@ -35,7 +35,7 @@ class Buildings
      * @var string
      */
     const FARM = 'farm';
-    
+
     /**
      * @var string
      */
@@ -50,7 +50,7 @@ class Buildings
      * @var string
      */
     const MARKET = 'market';
-    
+
     /**
      * @var string
      */
@@ -95,7 +95,7 @@ class Buildings
      * @var string
      */
     const IRON_MINE = 'iron_mine';
-    
+
     /**
      * @var string
      */
