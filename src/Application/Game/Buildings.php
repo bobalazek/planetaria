@@ -195,6 +195,7 @@ class Buildings
         return $buildings;
     }
 
+    /******************** Build ********************/
     /**
      * With this method we'll create the town building.
      *
@@ -425,6 +426,7 @@ class Buildings
         }
     }
 
+    /******************** Upgrade ********************/
     /**
      * With this method we'll update the town building.
      *
@@ -554,6 +556,7 @@ class Buildings
         }
     }
 
+    /******************** Checks ********************/
     /**
      * @return boolean
      */
