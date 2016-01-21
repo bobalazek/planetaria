@@ -28,14 +28,15 @@
         {{ 'Center map' | trans }}
     </a>
 </p>
-{% if tile.getTownBuilding() %}
+{% if tile.getTownBuilding() and app.user.hasTownBuilding(tile.getTownBuilding()) %}
     <p>
         <a class="btn btn-xs btn-default btn-block"
             href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
             {{ 'Visit' | trans }}
         </a>
     </p>
-{% else %}
+{% endif %}
+{% if tile.isCurrentlyBuildable() %}
     <p>
         <a class="btn btn-xs btn-default btn-block"
             href="{{ url('game.map.build', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">

@@ -975,6 +975,29 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param TownEntty $town
+     *
+     * @return boolean
+     */
+    public function hasTown(TownEntity $town)
+    {
+        return $this->towns->contains($town);
+    }
+    
+    /*** Town building ***/
+    /**
+     * @param TownBuildingEntty $townBuilding
+     *
+     * @return boolean
+     */
+    public function hasTownBuilding(TownBuildingEntity $townBuilding)
+    {
+        return $this->hasTown(
+            $townBuilding->getTown()
+        );
+    }
+
     /*** Countries ***/
     /**
      * @return array

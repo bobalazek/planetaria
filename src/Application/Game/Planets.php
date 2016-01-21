@@ -26,21 +26,23 @@ class Planets
     }
 
     /**
+     * @param string $name
+     * @param string $slug
+     * @param string $description
+     *
      * @return void
      */
-    public function generateNew()
+    public function generateNew($name, $slug, $description)
     {
         $app = $this->app;
-        $user = $app['orm.em']->find('Application\Entity\UserEntity', 1);
-        $app['user'] = $user;
 
         // Planet
         $planetEntity = new PlanetEntity();
         $planetEntity
             ->setId(1)
-            ->setName('Earth')
-            ->setSlug('earth')
-            ->setDescription('The planet earth.')
+            ->setName($name)
+            ->setSlug($slug)
+            ->setDescription($description)
         ;
         $app['orm.em']->persist($planetEntity);
 
@@ -121,72 +123,7 @@ class Planets
                 }
             }
         }
-
-        // Country
-        $countryEntity = new CountryEntity();
-        $countryEntity
-            ->setId(1)
-            ->setName('Panem')
-            ->setSlug('panem')
-            ->setDescription('The country of all countries')
-            ->setUser($user)
-        ;
-        $app['orm.em']->persist($countryEntity);
-
-        // Town
-        $townEntity = new TownEntity();
-        $townEntity
-            ->setId(1)
-            ->setName('Panonia')
-            ->setSlug('panonia')
-            ->setDescription('The capital of Panem')
-            ->setPlanet($planetEntity)
-            ->setCountry($countryEntity)
-            ->setUser($user)
-            ->prepareTownResources(10000)
-        ;
-        $app['orm.em']->persist($townEntity);
-
-        // User country
-        $userCountryEntity = new UserCountryEntity();
-        $userCountryEntity
-            ->setId(1)
-            ->setRoles(array(
-                CountryRoles::CREATOR,
-                CountryRoles::OWNER,
-            ))
-            ->setCountry($countryEntity)
-            ->setUser($user)
-        ;
-        $app['orm.em']->persist($userCountryEntity);
-
-        // Save them, because we'll need them soon!
+        
         $app['orm.em']->flush();
-
-        // Town building - Capitol
-        $app['game.buildings']->build(
-            $planetEntity,
-            $townEntity,
-            array(5, 5), // Start (bottom left) coordinates
-            Buildings::CAPITOL,
-            true // $ignoreCapacityLimit
-        );
-
-        // Town building - Farms
-        $farmsCoordinates = array(
-            array(4, 4),
-            array(7, 4),
-            array(4, 7),
-            array(7, 7),
-        );
-        foreach ($farmsCoordinates as $farmCoordinates) {
-            $app['game.buildings']->build(
-                $planetEntity,
-                $townEntity,
-                $farmCoordinates,
-                Buildings::FARM,
-                true // $ignoreCapacityLimit
-            );
-        }
     }
 }

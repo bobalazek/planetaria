@@ -71,7 +71,7 @@ class GameController
         );
 
         if (!$planet) {
-            $app->abort(404);
+            $app->abort(404, 'This planet does not exist!');
         }
 
         $radius = 16;
@@ -119,7 +119,7 @@ class GameController
         );
 
         if (!$planet) {
-            $app->abort(404);
+            $app->abort(404, 'This planet does not exist!');
         }
 
         $x = (int) $request->query->get('x', 0);
@@ -135,11 +135,11 @@ class GameController
         ;
 
         if (!$tile) {
-            $app->abort(404);
+            $app->abort(404, 'This tile does not exist!');
         }
 
         if (!$tile->isBuildableCurrently()) {
-            $app->abort(404);
+            $app->abort(404, 'This tile is not buildable!');
         }
 
         $townId = (int) $request->query->get('town_id', 0);

@@ -3,7 +3,7 @@
 return array(
     array(
         'id' => 1,
-        'username' => 'bobalazek',
+        'username' => 'borut',
         'email' => 'bobalazek124@gmail.com',
         'plainPassword' => 'test',
         'profile' => array(

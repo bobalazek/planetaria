@@ -46,7 +46,7 @@ class UsersController
         );
 
         if (!$user) {
-            $app->abort(404);
+            $app->abort(404, 'This user does not exist!');
         }
 
         return new Response(

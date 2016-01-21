@@ -19,7 +19,9 @@
                 </span>
             </h4>
             <p>{{ townBuilding.getBuildingObject().getDescription() }}</p>
-            {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
+            {% if app.user.hasTownBuilding(townBuilding) %}
+                {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
+            {% endif %}
         </a>
     {% endfor %}
 </ul>

@@ -24,16 +24,18 @@
                             {{ town.getCountry() }}
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <b>{{ 'Population' | trans }}:</b>
-                        {{ town.getPopulation() }}
-                        {{ 'out of' | trans }}
-                        {{ town.getPopulationCapacity() }}
-                        {{ 'used' | trans }}
-                    </li>
-                    <li class="list-group-item">
-                        {% include 'contents/game/_parts/town-resources-table.html.twig' %}
-                    </li>
+                    {% if app.user.hasTown(town) %}
+                        <li class="list-group-item">
+                            <b>{{ 'Population' | trans }}:</b>
+                            {{ town.getPopulation() }}
+                            {{ 'out of' | trans }}
+                            {{ town.getPopulationCapacity() }}
+                            {{ 'used' | trans }}
+                        </li>
+                        <li class="list-group-item">
+                            {% include 'contents/game/_parts/town-resources-table.html.twig' %}
+                        </li>
+                    {% endif %}
                 </ul>
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">

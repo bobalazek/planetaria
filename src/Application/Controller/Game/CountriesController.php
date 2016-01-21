@@ -46,7 +46,7 @@ class CountriesController
         );
 
         if (!$country) {
-            $app->abort(404);
+            $app->abort(404, 'This country does not exist!');
         }
 
         return new Response(

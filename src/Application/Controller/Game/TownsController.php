@@ -47,7 +47,7 @@ class TownsController
         );
 
         if (!$town) {
-            $app->abort(404);
+            $app->abort(404, 'This town does not exist!');
         }
 
         // Update town stuff
@@ -79,7 +79,7 @@ class TownsController
         );
 
         if (!$town) {
-            $app->abort(404);
+            $app->abort(404, 'This town does not exist!');
         }
 
         $townBuilding = $app['orm.em']->find(
@@ -88,7 +88,11 @@ class TownsController
         );
 
         if (!$townBuilding) {
-            $app->abort(404);
+            $app->abort(404, 'This town building does not exist!');
+        }
+        
+        if (!$app['user']->hasTownBuilding($townBuilding)) {
+            $app->abort(403, 'This is not your town building!');
         }
 
         // Update town stuff
@@ -121,7 +125,7 @@ class TownsController
         );
 
         if (!$town) {
-            $app->abort(404);
+            $app->abort(404, 'This town does not exist!');
         }
 
         $townBuilding = $app['orm.em']->find(
@@ -130,7 +134,11 @@ class TownsController
         );
 
         if (!$townBuilding) {
-            $app->abort(404);
+            $app->abort(404, 'This town building does not exist!');
+        }
+        
+        if (!$app['user']->hasTownBuilding($townBuilding)) {
+            $app->abort(403, 'This is not your town building!');
         }
 
         if (!$townBuilding->isUpgradable()) {
@@ -192,7 +200,7 @@ class TownsController
         );
 
         if (!$town) {
-            $app->abort(404);
+            $app->abort(404, 'This town does not exist!');
         }
 
         $townBuilding = $app['orm.em']->find(
@@ -201,7 +209,11 @@ class TownsController
         );
 
         if (!$townBuilding) {
-            $app->abort(404);
+            $app->abort(404, 'This town building does not exist!');
+        }
+        
+        if (!$app['user']->hasTownBuilding($townBuilding)) {
+            $app->abort(403, 'This is not your town building!');
         }
 
         $townBuildingTiles = $townBuilding->getTiles();
