@@ -308,7 +308,7 @@ class Buildings
         ;
         if ($hasReachedTownBuildingsLimit) {
             throw new TownBuildingsLimitReachedException(
-                'You have reached the limit per town for this building!'
+                'You have reached the buildings limit for this town!'
             );
         }
 
@@ -323,7 +323,7 @@ class Buildings
         ;
         if ($hasReachedBuildingPerTownLimit) {
             throw new BuildingPerTownLimitReachedException(
-                'You have reached the buildings limit for this town!'
+                'You have reached this building limit for this town!'
             );
         }
 
@@ -337,7 +337,7 @@ class Buildings
         ;
         if ($hasReachedBuildingPerCountryLimit) {
             throw new BuildingPerCountryLimitReachedException(
-                'You have reached the limit per town for this building!'
+                'You have reached this building limit for this country!'
             );
         }
 
