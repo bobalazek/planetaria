@@ -290,6 +290,9 @@ class Buildings
      *
      * @return void
      * @throws TownBuildingsLimitReachedException
+     * @throws BuildingPerTownLimitReachedException
+     * @throws BuildingPerCountryLimitReachedException
+     * @throws MissingRequiredBuildingsException
      * @throws InsufficientResourcesException
      * @throws InsufficientAreaSpaceException
      */
