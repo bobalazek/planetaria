@@ -191,7 +191,6 @@ class Towns
 
         foreach ($townResources as $i => $townResource) {
             $resourceKey = $townResource->getResource();
-
             $townResources[$resourceKey] = $townResource;
             unset($townResources[$i]);
         }
@@ -200,12 +199,10 @@ class Towns
             // If a resource does not exist, create it!
             if (!isset($townResources[$resourceKey])) {
                 $townResource = new TownResourceEntity();
-
                 $townResource
                     ->setResource($resourceKey)
                     ->setTown($town)
                 ;
-
                 $app['orm.em']->persist($townResource);
             } else {
                 $townResource = $townResources[$resourceKey];
