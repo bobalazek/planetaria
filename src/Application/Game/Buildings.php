@@ -35,6 +35,11 @@ class Buildings
      * @var string
      */
     const FARM = 'farm';
+    
+    /**
+     * @var string
+     */
+    const SILOS = 'silos';
 
     /**
      * @var string
@@ -44,12 +49,17 @@ class Buildings
     /**
      * @var string
      */
+    const MARKET = 'market';
+    
+    /**
+     * @var string
+     */
     const WAREHOUSE = 'warehouse';
 
     /**
      * @var string
      */
-    const MARKET = 'market';
+    const BANK = 'bank';
 
     /**
      * @var string
@@ -85,6 +95,11 @@ class Buildings
      * @var string
      */
     const IRON_MINE = 'iron_mine';
+    
+    /**
+     * @var string
+     */
+    const NUCLEAR_POWER_PLANT = 'nuclear_power_plant';
 
     /**
      * @var string
@@ -120,12 +135,15 @@ class Buildings
             self::APARTMENT_BLOCK => 'Apartment block',
             self::MARKET => 'Market',
             self::WAREHOUSE => 'Warehouse',
+            self::BANK => 'Bank',
             self::FARM => 'Farm',
+            self::SILOS => 'Silos',
             self::PUMPJACK => 'Pumpjack',
             self::QUARRY => 'Quarry',
             self::LOGGING_CAMP => 'Logging camp',
             self::COLLIERY => 'Colliery',
             self::IRON_MINE => 'Iron mine',
+            self::NUCLEAR_POWER_PLANT => 'Nuclear power plant',
             self::BARRACKS => 'Barracks',
             self::AIRBASE => 'Airbase',
             self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
