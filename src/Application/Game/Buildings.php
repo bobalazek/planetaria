@@ -298,7 +298,8 @@ class Buildings
         TownEntity $town,
         array $startingCoordinates = array(),
         $building
-    ) {
+    )
+    {
         $app = $this->app;
 
         /***** Town checks *****/
@@ -407,7 +408,8 @@ class Buildings
         TownEntity $town,
         array $startingCoordinates = array(),
         $building
-    ) {
+    )
+    {
         try {
             $this->doPreBuildChecks(
                 $planet,
@@ -574,13 +576,20 @@ class Buildings
     }
 
     /**
+     * Gets all the required tiles for that building on that planet
+     *
+     * @param PlanetEntity $planet
+     * @param array        $startingCoordinates
+     * @param string       $building
+     *
      * @return array|boolean If false is returned, that means, that not ALL required tiles could be fetched
      */
     public function getRequiredTiles(
         PlanetEntity $planet,
         array $startingCoordinates = array(),
         $building
-    ) {
+    )
+    {
         $app = $this->app;
         $tiles = array();
 
@@ -610,9 +619,17 @@ class Buildings
     }
 
     /**
+     * Gets all the coordinates (including building section coordinates) for that building.
+     *
+     * @param array  $startingCoordinates
+     * @param string $building
+     *
      * @return array
      */
-    public function getCoordinatesForBuilding(array $startingCoordinates = array(), $building)
+    public function getCoordinatesForBuilding(
+        array $startingCoordinates = array(), 
+        $building
+    )
     {
         $coordinates = array();
 
@@ -645,13 +662,20 @@ class Buildings
     }
 
     /**
-     * @return array
+     * Gets the building section coordinates by the tile coordinates
+     *
+     * @param array  $coordinates
+     * @param array  $startingCoordinates
+     * @param string $building
+     *
+     * @return array|boolean
      */
     public function getBuildingSectionCoordinates(
         array $coordinates = array(),
         array $startingCoordinates = array(),
         $building
-    ) {
+    )
+    {
         $x = $coordinates[0];
         $y = $coordinates[1];
         $coordinatesForBuilding = $this->getCoordinatesForBuilding(
