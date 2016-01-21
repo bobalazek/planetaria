@@ -298,8 +298,7 @@ class Buildings
         TownEntity $town,
         array $startingCoordinates = array(),
         $building
-    )
-    {
+    ) {
         $app = $this->app;
 
         /***** Town checks *****/
@@ -408,8 +407,7 @@ class Buildings
         TownEntity $town,
         array $startingCoordinates = array(),
         $building
-    )
-    {
+    ) {
         try {
             $this->doPreBuildChecks(
                 $planet,
@@ -588,8 +586,7 @@ class Buildings
         PlanetEntity $planet,
         array $startingCoordinates = array(),
         $building
-    )
-    {
+    ) {
         $app = $this->app;
         $tiles = array();
 
@@ -627,10 +624,9 @@ class Buildings
      * @return array
      */
     public function getCoordinatesForBuilding(
-        array $startingCoordinates = array(), 
+        array $startingCoordinates = array(),
         $building
-    )
-    {
+    ) {
         $coordinates = array();
 
         $startX = $startingCoordinates[0];
@@ -674,8 +670,7 @@ class Buildings
         array $coordinates = array(),
         array $startingCoordinates = array(),
         $building
-    )
-    {
+    ) {
         $x = $coordinates[0];
         $y = $coordinates[1];
         $coordinatesForBuilding = $this->getCoordinatesForBuilding(
