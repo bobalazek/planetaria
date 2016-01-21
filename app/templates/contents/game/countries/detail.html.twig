@@ -1,9 +1,9 @@
 {% extends 'layouts/content/game.html.twig' %}
 
-{% set isContainerFluid = true %}
+{% block title %}{{ country }} | {{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ country.getName() }}</h1>
+    <h1>{{ country }}</h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-4">
@@ -15,6 +15,12 @@
                             {{ country.getDescription() }}
                         </li>
                     {% endif %}
+                    <li class="list-group-item">
+                        <b>{{ 'User' | trans }}:</b>
+                        <a href="{{ url('game.users.detail', { id: country.getUser().getId() }) }}">
+                            {{ country.getUser() }}
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <b>{{ 'Created' | trans }}:</b>
                         {{ country.getTimeCreated() | date(app.dateTimeFormat) }}

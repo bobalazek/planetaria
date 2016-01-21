@@ -1,6 +1,6 @@
 {% extends 'layouts/content/game.html.twig' %}
 
-{% set isContainerFluid = true %}
+{% block title %}{{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
     <h1>{{ 'Countries' | trans }}</h1>

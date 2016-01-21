@@ -3,7 +3,7 @@
         <a class="list-group-item"
             href="{{ url('game.users.detail', { id: user.getId() }) }}">
             <h4 class="list-group-item-heading">
-                {{ user.getUsername() }}
+                {{ user }}
             </h4>
             <p>
                 {% if user.getProfile().getDescription() %}

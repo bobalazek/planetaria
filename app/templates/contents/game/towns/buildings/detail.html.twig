@@ -1,6 +1,6 @@
 {% extends 'layouts/content/game.html.twig' %}
 
-{% set isContainerFluid = true %}
+{% block title %}{{ townBuilding.getBuilding() | humanize | trans }} | {{ town }} | {{ 'Towns' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
     <h1>

@@ -1,6 +1,6 @@
 {% extends 'layouts/content/game.html.twig' %}
 
-{% set isContainerFluid = true %}
+{% block title %}{{ 'Dashboard' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
     <h1>{{ 'Dashboard' | trans }}</h1>

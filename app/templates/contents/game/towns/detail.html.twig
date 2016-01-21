@@ -1,10 +1,10 @@
 {% extends 'layouts/content/game.html.twig' %}
 
-{% set isContainerFluid = true %}
+{% block title %}{{ town }} | {{ 'Towns' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
     <h1>
-        {{ town.getName() }}
+        {{ town }}
         <small>{{ town.getCountry() }}</small>
     </h1>
     <div id="main-content">
@@ -22,6 +22,12 @@
                         <b>{{ 'Country' | trans }}:</b>
                         <a href="{{ url('game.countries.detail', { id: town.getCountry().getId() }) }}">
                             {{ town.getCountry() }}
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'User' | trans }}:</b>
+                        <a href="{{ url('game.users.detail', { id: town.getUser().getId() }) }}">
+                            {{ town.getUser() }}
                         </a>
                     </li>
                     {% if app.user.hasTown(town) %}
