@@ -70,7 +70,7 @@ class PlanetEntity extends AbstractAdvancedEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="town")
+     * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="planet")
      */
     protected $towns;
 

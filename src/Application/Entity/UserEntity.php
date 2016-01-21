@@ -192,6 +192,13 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="user", cascade={"all"})
      */
     protected $towns;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\CountryEntity", mappedBy="user", cascade={"all"})
+     */
+    protected $countries;
 
     /**
      * @var ArrayCollection
@@ -964,6 +971,27 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     public function setTowns($towns)
     {
         $this->towns = $towns;
+
+        return $this;
+    }
+    
+    /*** Countries ***/
+    /**
+     * @return array
+     */
+    public function getCountries()
+    {
+        return $this->countries->toArray();
+    }
+
+    /**
+     * @param ArrayCollection $countries
+     *
+     * @return UserEntity
+     */
+    public function setCountries($countries)
+    {
+        $this->countries = $countries;
 
         return $this;
     }

@@ -82,7 +82,7 @@ class CountryEntity extends AbstractAdvancedEntity
     protected $countryUnits;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="towns")
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="countries")
      */
     protected $user;
 
