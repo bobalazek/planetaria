@@ -304,10 +304,7 @@ class Buildings
         /***** Town checks *****/
         // Check if we have reached the buildings limit (for that town)
         $hasReachedTownBuildingsLimit = $app['game.towns']
-            ->hasReachedTownBuildingsLimit(
-                $town,
-                $building
-            )
+            ->hasReachedTownBuildingsLimit($town)
         ;
         if ($hasReachedTownBuildingsLimit) {
             throw new TownBuildingsLimitReachedException(
@@ -319,7 +316,10 @@ class Buildings
         /*** Per Town ***/
         // Check if we have reached the buildings limit (for that building)
         $hasReachedBuildingPerTownLimit = $app['game.towns']
-            ->hasReachedBuildingPerTownLimit($town)
+            ->hasReachedBuildingPerTownLimit(
+                $town,
+                $building
+            )
         ;
         if ($hasReachedBuildingPerTownLimit) {
             throw new BuildingPerTownLimitReachedException(
@@ -331,7 +331,7 @@ class Buildings
         // Check if we have reached the buildings limit (for that country)
         $hasReachedBuildingPerCountryLimit = $app['game.countries']
             ->hasReachedBuildingPerCountryLimit(
-                $town,
+                $town->getCountry(),
                 $building
             )
         ;
