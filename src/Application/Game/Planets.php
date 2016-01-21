@@ -6,9 +6,6 @@ use Silex\Application;
 use Application\Entity\PlanetEntity;
 use Application\Entity\TileEntity;
 use Application\Entity\TileResourceEntity;
-use Application\Entity\CountryEntity;
-use Application\Entity\TownEntity;
-use Application\Entity\UserCountryEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -123,7 +120,7 @@ class Planets
                 }
             }
         }
-        
+
         $app['orm.em']->flush();
     }
 }

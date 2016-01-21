@@ -984,7 +984,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return $this->towns->contains($town);
     }
-    
+
     /*** Town building ***/
     /**
      * @param TownBuildingEntty $townBuilding

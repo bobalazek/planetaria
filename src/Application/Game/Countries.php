@@ -8,8 +8,6 @@ use Application\Entity\CountryEntity;
 use Application\Entity\UserCountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\PlanetEntity;
-use Application\Game\CountryRoles;
-use Application\Game\Buildings;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -71,7 +69,7 @@ class Countries
 
         return $thisBuildingCount >= $buildingObjectPerCountryLimit;
     }
-    
+
     /**
      * @param UserEntity   $user
      * @param array        $country
@@ -86,7 +84,7 @@ class Countries
         $app = $this->app;
         $startCoordinatesX = $startCoordinates[0];
         $startCoordinatesY = $startCoordinates[0];
-        
+
         $user = $app['orm.em']->find('Application\Entity\UserEntity', 1);
         $app['user'] = $user;
 

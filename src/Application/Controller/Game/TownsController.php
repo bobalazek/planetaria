@@ -90,7 +90,7 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404, 'This town building does not exist!');
         }
-        
+
         if (!$app['user']->hasTownBuilding($townBuilding)) {
             $app->abort(403, 'This is not your town building!');
         }
@@ -136,7 +136,7 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404, 'This town building does not exist!');
         }
-        
+
         if (!$app['user']->hasTownBuilding($townBuilding)) {
             $app->abort(403, 'This is not your town building!');
         }
@@ -211,7 +211,7 @@ class TownsController
         if (!$townBuilding) {
             $app->abort(404, 'This town building does not exist!');
         }
-        
+
         if (!$app['user']->hasTownBuilding($townBuilding)) {
             $app->abort(403, 'This is not your town building!');
         }
