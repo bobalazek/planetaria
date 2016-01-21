@@ -19,7 +19,7 @@ class Countries
     {
         $this->app = $app;
     }
-    
+
     /**
      * How many of this buildings are there in this country?
      *
@@ -31,10 +31,10 @@ class Countries
     public function getBuildingsCount(CountryEntity $country, $building)
     {
         $app = $this->app;
-        
+
         $thisBuildingCount = 0;
         $towns = $country->getTowns();
-        
+
         if (!empty($towns)) {
             foreach ($towns as $town) {
                 $thisBuildingCount += $app['game.towns']->getBuildingsCount($town, $building);
@@ -43,7 +43,7 @@ class Countries
 
         return $thisBuildingCount;
     }
-    
+
     /**
      * Has the country reached the total limit for that one specific building?
      *

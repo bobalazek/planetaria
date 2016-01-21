@@ -602,7 +602,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /**
      * @return string
      */

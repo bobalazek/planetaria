@@ -152,7 +152,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $unitsProduction;
-    
+
     /**
      * How much bonus for resources cost (in percents) do we get (per level)?
      * Example ( level => bonusPercents ):
@@ -161,7 +161,7 @@ class AbstractBuilding implements BuildingInterface
      * @var array
      */
     protected $unitsResourcesCostBonus;
-    
+
     /**
      * How much bonus for build time (in percents) do we get (per level)?
      * Example ( level => bonusPercents ):
@@ -206,7 +206,7 @@ class AbstractBuilding implements BuildingInterface
      * @var integer
      */
     protected $perCountryLimit = -1;
-    
+
     /**
      * What's the maximum number of this buildings on one planet?
      * Example:
@@ -215,7 +215,7 @@ class AbstractBuilding implements BuildingInterface
      * @var integer
      */
     protected $perPlanetLimit = -1;
-    
+
     /**
      * What's the maximum number of this buildings overall?
      * Example:
@@ -580,7 +580,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Units resources cost bonus *****/
     /**
      * @return array|integer
@@ -602,7 +602,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Units build time bonus *****/
     /**
      * @return array|integer
@@ -670,7 +670,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Items build time bonus *****/
     /**
      * @return array|integer
@@ -754,7 +754,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Per planet limit *****/
     /**
      * @return integer
@@ -773,7 +773,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /***** Limit *****/
     /**
      * @return integer

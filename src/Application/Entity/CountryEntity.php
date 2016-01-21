@@ -80,7 +80,7 @@ class CountryEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\CountryUnitEntity", mappedBy="country", cascade={"all"})
      */
     protected $countryUnits;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="towns")
      */
@@ -158,7 +158,7 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** User ***/
     /**
      * @return UserEntity
@@ -179,7 +179,7 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /**
      * @return string
      */

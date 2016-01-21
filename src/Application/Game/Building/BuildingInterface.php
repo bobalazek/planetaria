@@ -182,7 +182,7 @@ interface BuildingInterface
      * @param array $unitsProduction
      */
     public function setUnitsProduction(array $unitsProduction);
-    
+
     /***** Units resources cost bonus *****/
     /**
      * @return array
@@ -193,7 +193,7 @@ interface BuildingInterface
      * @param array $unitsResourcesCostBonus
      */
     public function setUnitsResourcesCostBonus(array $unitsResourcesCostBonus);
-    
+
     /***** Units build time bonus *****/
     /**
      * @return array
@@ -215,7 +215,7 @@ interface BuildingInterface
      * @param array $itemsProduction
      */
     public function setItemsProduction(array $itemsProduction);
-    
+
     /***** Items resources cost bonus *****/
     /**
      * @return array
@@ -226,7 +226,7 @@ interface BuildingInterface
      * @param array $itemsResourcesCostBonus
      */
     public function setItemsResourcesCostBonus(array $itemsResourcesCostBonus);
-    
+
     /***** Items build time bonus *****/
     /**
      * @return array
@@ -270,7 +270,7 @@ interface BuildingInterface
      * @param integer $perCountryLimit
      */
     public function setPerCountryLimit($perCountryLimit);
-    
+
     /***** Per planet limit *****/
     /**
      * @return integer
@@ -281,7 +281,7 @@ interface BuildingInterface
      * @param integer $perPlanetLimit
      */
     public function setPerPlanetLimit($perPlanetLimit);
-    
+
     /***** Limit *****/
     /**
      * @return integer

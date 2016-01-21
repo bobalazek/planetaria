@@ -14,6 +14,8 @@ use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
 use Application\Game\Exception\TownBuildingInConstructionException;
 use Application\Game\Exception\MissingRequiredBuildingsException;
+use Application\Game\Exception\BuildingPerTownLimitReachedException;
+use Application\Game\Exception\BuildingPerCountryLimitReachedException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -299,7 +301,7 @@ class Buildings
     ) {
         $app = $this->app;
 
-        /***** Town - checks *****/
+        /***** Town checks *****/
         // Check if we have reached the buildings limit (for that town)
         $hasReachedTownBuildingsLimit = $app['game.towns']
             ->hasReachedTownBuildingsLimit(
@@ -313,18 +315,18 @@ class Buildings
             );
         }
 
-        /***** Building - Limits checks *****/
+        /***** Building - Limit checks *****/
         /*** Per Town ***/
         // Check if we have reached the buildings limit (for that building)
         $hasReachedBuildingPerTownLimit = $app['game.towns']
             ->hasReachedBuildingPerTownLimit($town)
         ;
         if ($hasReachedBuildingPerTownLimit) {
-            throw new TownBuildingsLimitReachedException(
+            throw new BuildingPerTownLimitReachedException(
                 'You have reached the buildings limit for this town!'
             );
         }
-        
+
         /*** Per Country ***/
         // Check if we have reached the buildings limit (for that country)
         $hasReachedBuildingPerCountryLimit = $app['game.countries']
@@ -334,12 +336,18 @@ class Buildings
             )
         ;
         if ($hasReachedBuildingPerCountryLimit) {
-            throw new BuildingPerTownLimitReachedException(
+            throw new BuildingPerCountryLimitReachedException(
                 'You have reached the limit per town for this building!'
             );
         }
 
-        /***** Building - Requirements (required buildings, resources and area space) checks *****/
+        /*** Per planet ***/
+        // To-Do
+
+        /*** Overall ***/
+        // To-Do
+
+        /***** Building - Requirement checks *****/
         /*** Required buildings ****/
         // Check if we have the required buildings to construct this building
         $hasRequiredBuildingsForBuilding = $app['game.towns']
