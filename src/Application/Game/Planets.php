@@ -31,6 +31,8 @@ class Planets
     public function generateNew()
     {
         $app = $this->app;
+        $user = $app['orm.em']->find('Application\Entity\UserEntity', 1);
+        $app['user'] = $user;
 
         // Planet
         $planetEntity = new PlanetEntity();
@@ -127,7 +129,7 @@ class Planets
             ->setName('Panem')
             ->setSlug('panem')
             ->setDescription('The country of all countries')
-            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
+            ->setUser($user)
         ;
         $app['orm.em']->persist($countryEntity);
 
@@ -140,7 +142,7 @@ class Planets
             ->setDescription('The capital of Panem')
             ->setPlanet($planetEntity)
             ->setCountry($countryEntity)
-            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
+            ->setUser($user)
             ->prepareTownResources(10000)
         ;
         $app['orm.em']->persist($townEntity);
@@ -154,7 +156,7 @@ class Planets
                 CountryRoles::OWNER,
             ))
             ->setCountry($countryEntity)
-            ->setUser($app['orm.em']->find('Application\Entity\UserEntity', 1))
+            ->setUser($user)
         ;
         $app['orm.em']->persist($userCountryEntity);
 

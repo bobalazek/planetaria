@@ -20,6 +20,7 @@ class Capitol extends AbstractBuilding
             ->setKey('capitol')
             ->setSlug('capitol')
             ->setDescription('The main town building.')
+            ->setUserExperiencePoints(200)
             ->setType(BuildingTypes::GOVERNMENT)
             ->setSize('2x2')
             ->setMaximumLevel(3)

@@ -20,6 +20,7 @@ class Farm extends AbstractBuilding
             ->setKey('farm')
             ->setSlug('farm')
             ->setDescription('With a farm you can produce food.')
+            ->setUserExperiencePoints(10)
             ->setType(BuildingTypes::AGRICULTURAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)

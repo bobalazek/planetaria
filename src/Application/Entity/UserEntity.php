@@ -630,6 +630,18 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param integer $experiencePoints
+     *
+     * @return UserEntity
+     */
+    public function addExperiencePoints($experiencePoints)
+    {
+        $this->experiencePoints = $this->getExperiencePoints() + abs($experiencePoints);
+
+        return $this;
+    }
+
     /*** Experience Level ***/
     /**
      * @return integer

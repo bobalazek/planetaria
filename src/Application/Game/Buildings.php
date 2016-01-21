@@ -274,6 +274,15 @@ class Buildings
         $town->useResources($buildingResourcesCost);
         $app['orm.em']->persist($town);
 
+        // Add expericence point to the user
+        if ($app['user']) {
+            $experiencePoints = $buildingObject->getUserExperiencePoints(0);
+
+            $app['user']->addExperiencePoints($experiencePoints);
+
+            $app['orm.em']->persist($app['user']);
+        }
+
         // Save everything
         $app['orm.em']->flush();
 

@@ -44,6 +44,17 @@ class AbstractBuilding implements BuildingInterface
     protected $description;
 
     /**
+     * How much experience points does the user earn if he builds / upgrades that building?
+     * Example:
+     *   array( 0 => 100, 1 => 200, 2 => 400 )
+     * or
+     *   100
+     *
+     * @var array|integer
+     */
+    protected $userExperiencePoints;
+
+    /**
      * What's the type of that building?
      * Example:
      *   'civil'
@@ -74,17 +85,21 @@ class AbstractBuilding implements BuildingInterface
      * How much health points does that building have (per level)?
      * Example:
      *   array( 0 => 400, 1 => 800, 2 => 1200 )
+     * or
+     *   100
      *
-     * @var array
+     * @var array|integer
      */
     protected $healthPoints;
 
     /**
      * What's the capacity this building gives (per level)?
      * Example:
-     *   array( 0 => 100, 1 => 200, 2 => 300 )
+     *   array( 0 => 10, 1 => 20, 2 => 30 )
+     * or
+     *   100
      *
-     * @var array
+     * @var array|integer
      */
     protected $populationCapacity;
 
@@ -100,7 +115,7 @@ class AbstractBuilding implements BuildingInterface
     protected $resourcesCapacity;
 
     /**
-     * How much capacity does that building use (town buildings limit)?
+     * How much capacity does that building use?
      * Example:
      *   1
      *
@@ -301,6 +316,36 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
+    /***** User experience pints *****/
+    /**
+     * @return array|integer
+     */
+    public function getUserExperiencePoints($level = null)
+    {
+        $userExperiencePoints = $this->userExperiencePoints;
+
+        if (is_array($userExperiencePoints)) {
+            return $level === null
+                ? $this->userExperiencePoints
+                : $this->userExperiencePoints[$level]
+            ;
+        } elseif (is_numeric($userExperiencePoints)) {
+            return $userExperiencePoints;
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param array|integer $userExperiencePoints
+     */
+    public function setUserExperiencePoints($userExperiencePoints)
+    {
+        $this->userExperiencePoints = $userExperiencePoints;
+
+        return $this;
+    }
+
     /***** Type *****/
     /**
      * @return string
@@ -384,16 +429,24 @@ class AbstractBuilding implements BuildingInterface
      */
     public function getHealthPoints($level = null)
     {
-        return $level === null
-            ? $this->healthPoints
-            : $this->healthPoints[$level]
-        ;
+        $healthPoints = $this->healthPoints;
+
+        if (is_array($healthPoints)) {
+            return $level === null
+                ? $this->healthPoints
+                : $this->healthPoints[$level]
+            ;
+        } elseif (is_numeric($healthPoints)) {
+            return $healthPoints;
+        }
+
+        return 100;
     }
 
     /**
-     * @param array $healthPoints
+     * @param array|integer $healthPoints
      */
-    public function setHealthPoints(array $healthPoints = array())
+    public function setHealthPoints($healthPoints)
     {
         $this->healthPoints = $healthPoints;
 
@@ -406,16 +459,24 @@ class AbstractBuilding implements BuildingInterface
      */
     public function getPopulationCapacity($level = null)
     {
-        return $level === null
-            ? $this->populationCapacity
-            : $this->populationCapacity[$level]
-        ;
+        $populationCapacity = $this->populationCapacity;
+
+        if (is_array($populationCapacity)) {
+            return $level === null
+                ? $this->populationCapacity
+                : $this->populationCapacity[$level]
+            ;
+        } elseif (is_numeric($populationCapacity)) {
+            return $populationCapacity;
+        }
+
+        return 10;
     }
 
     /**
-     * @param array $populationCapacity
+     * @param array|integer $populationCapacity
      */
-    public function setPopulationCapacity(array $populationCapacity = array())
+    public function setPopulationCapacity($populationCapacity)
     {
         $this->populationCapacity = $populationCapacity;
 

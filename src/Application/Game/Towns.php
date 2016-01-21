@@ -4,6 +4,7 @@ namespace Application\Game;
 
 use Silex\Application;
 use Application\Entity\TownEntity;
+use Application\Entity\TownResourceEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -181,36 +182,59 @@ class Towns
         }
         $differenceSeconds = strtotime($currentDatetime->format(DATE_ATOM)) - strtotime($townLastUpdatedResources->format(DATE_ATOM));
 
+        if (empty($townResources)) {
+            $town->prepareTownResources();
+            $app['orm.em']->persist($town);
+            // Once the resources are prepared, fetch them!
+            $townResources = $town->getTownResources();
+        }
+
+        foreach ($townResources as $i => $townResource) {
+            $resourceKey = $townResource->getResource();
+
+            $townResources[$resourceKey] = $townResource;
+            unset($townResources[$i]);
+        }
+
         foreach ($resources as $resourceKey => $resourceData) {
-            foreach ($townResources as $townResource) {
-                if ($townResource->getResource() === $resourceKey) {
-                    $resourceProduction = $resourceData['production'];
-                    $townResourceAmount = $townResource->getAmount();
-                    $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
-                    $amount = $townResourceAmount + $resourcesProduced;
+            // If a resource does not exist, create it!
+            if (!isset($townResources[$resourceKey])) {
+                $townResource = new TownResourceEntity();
 
-                    if (
-                        !$ignoreCapacityLimit &&
-                        $amount > $resourceData['capacity'] &&
-                        $resourceData['capacity'] !== -1 // -1 capacity means inifinitve, so ignore it!
-                    ) {
-                        $amount = $resourceData['capacity'];
-                    }
+                $townResource
+                    ->setResource($resourceKey)
+                    ->setTown($town)
+                ;
 
-                    // If nothing has changed, not NOT update it!
-                    // Note: Do NOT exactly compare (===) because capacity is an integer and the amount is a float (that would make this statement always invalid, if the amount is set by the capacity)!
-                    if ($amount == $townResourceAmount) {
-                        break;
-                    }
-
-                    $townResource
-                        ->setAmount($amount)
-                    ;
-
-                    $app['orm.em']->persist($townResource);
-                    break;
-                }
+                $app['orm.em']->persist($townResource);
+            } else {
+                $townResource = $townResources[$resourceKey];
             }
+
+            $resourceProduction = $resourceData['production'];
+            $townResourceAmount = $townResource->getAmount();
+            $resourcesProduced = ($resourceProduction / 60) * $differenceSeconds;
+            $amount = $townResourceAmount + $resourcesProduced;
+
+            if (
+                !$ignoreCapacityLimit &&
+                $amount > $resourceData['capacity'] &&
+                $resourceData['capacity'] !== -1 // -1 capacity means inifinitve, so ignore it!
+            ) {
+                $amount = $resourceData['capacity'];
+            }
+
+            // If nothing has changed, not NOT update it!
+            // Note: Do NOT exactly compare (===) because capacity is an integer and the amount is a float (that would make this statement always invalid, if the amount is set by the capacity)!
+            if ($amount == $townResourceAmount) {
+                break;
+            }
+
+            $townResource
+                ->setAmount($amount)
+            ;
+
+            $app['orm.em']->persist($townResource);
         }
 
         $town->setTimeLastUpdatedResources($currentDatetime);

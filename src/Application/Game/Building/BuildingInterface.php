@@ -51,6 +51,17 @@ interface BuildingInterface
      */
     public function setDescription($description);
 
+    /***** User experience points *****/
+    /**
+     * @return integer
+     */
+    public function getUserExperiencePoints($level);
+
+    /**
+     * @param integer $userExperiencePoints
+     */
+    public function setUserExperiencePoints($userExperiencePoints);
+
     /***** Type *****/
     /**
      * @return string
@@ -93,7 +104,7 @@ interface BuildingInterface
     /**
      * @param array $healthPoints
      */
-    public function setHealthPoints(array $healthPoints);
+    public function setHealthPoints($healthPoints);
 
     /***** Population capacity *****/
     /**
@@ -104,7 +115,7 @@ interface BuildingInterface
     /**
      * @param array $populationCapacity
      */
-    public function setPopulationCapacity(array $populationCapacity);
+    public function setPopulationCapacity($populationCapacity);
 
     /***** Resources capacity *****/
     /**
