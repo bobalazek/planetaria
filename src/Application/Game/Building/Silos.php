@@ -34,9 +34,15 @@ class Silos extends AbstractBuilding
                 2 => 30,
             ))
             ->setResourcesCapacity(array(
-                0 => 1000,
-                1 => 2000,
-                2 => 3000,
+                0 => array(
+                    Resources::FOOD => 1000,
+                ),
+                1 => array(
+                    Resources::FOOD => 2000,
+                ),
+                2 => array(
+                    Resources::FOOD => 4000,
+                ),
             ))
             ->setBuildTime(array(
                 0 => 60,

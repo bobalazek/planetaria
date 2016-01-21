@@ -250,7 +250,7 @@ class TownsController
 
         return $app->redirect(
             $app['url_generator']->generate(
-                'game.map',
+                'game.map.detail',
                 array(
                     'id' => $townBuilding->getTown()->getCountry()->getId(),
                     'x' => $townBuilding->getCoordinatesX(),
