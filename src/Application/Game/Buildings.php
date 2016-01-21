@@ -401,6 +401,9 @@ class Buildings
                 'You do not have enough space to construct this building!'
             );
         }
+
+        /*** Outside town radius ***/
+        // To-Do: Check if the building is too far away from Capitol (the town center)
     }
 
     /**

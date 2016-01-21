@@ -345,7 +345,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
     /*** Coordinates ***/
     /**
-     * @return integer
+     * @return string
      */
     public function getCoordinates()
     {

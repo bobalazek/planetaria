@@ -34,7 +34,7 @@
                         {% set preUpgradeChecks = app['game.buildings'].doPreUpgradeChecksResponse(
                             townBuilding
                         ) %}
-                        {% if preUpgradeChecks is not same as (true) %}
+                        {% if preUpgradeChecks is not sameas (true) %}
                             <div class="building-overlay">
                                 {{ preUpgradeChecks }}
                             </div>

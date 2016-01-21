@@ -5,6 +5,7 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Game\Resources;
+use Application\Game\Buildings;
 use Application\Game\Building\Building;
 
 /**
@@ -481,6 +482,55 @@ class TownEntity extends AbstractAdvancedEntity
         $this->townBuildings->removeElement($townBuilding);
 
         return $this;
+    }
+
+    /*** Coordinates ***/
+    /**
+     * @return string
+     */
+    public function getCoordinates()
+    {
+        $townBuildings = $this->getTownBuildings();
+
+        foreach ($townBuildings as $townBuilding) {
+            if ($townBuilding->getBuilding() === Buildings::CAPITOL) {
+                return $townBuilding->getCoordinates();
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCoordinatesX()
+    {
+        $townBuildings = $this->getTownBuildings();
+
+        foreach ($townBuildings as $townBuilding) {
+            if ($townBuilding->getBuilding() === Buildings::CAPITOL) {
+                return $townBuilding->getCoordinatesX();
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCoordinatesY()
+    {
+        $townBuildings = $this->getTownBuildings();
+
+        foreach ($townBuildings as $townBuilding) {
+            if ($townBuilding->getBuilding() === Buildings::CAPITOL) {
+                return $townBuilding->getCoordinatesY();
+            }
+        }
+
+        return false;
     }
 
     /*** Use Resource ***/
