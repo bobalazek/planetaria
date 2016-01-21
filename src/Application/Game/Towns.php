@@ -224,12 +224,10 @@ class Towns
             // If nothing has changed, not NOT update it!
             // Note: Do NOT exactly compare (===) because capacity is an integer and the amount is a float (that would make this statement always invalid, if the amount is set by the capacity)!
             if ($amount == $townResourceAmount) {
-                break;
+                continue;
             }
 
-            $townResource
-                ->setAmount($amount)
-            ;
+            $townResource->setAmount($amount);
 
             $app['orm.em']->persist($townResource);
         }
