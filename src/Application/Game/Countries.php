@@ -75,15 +75,15 @@ class Countries
      * @param array        $country
      * @param array        $town
      * @param PlanetEntity $planet
-     * @param array        $startCoordinates
+     * @param array        $startingCoordinates
      *
      * @return boolean
      */
-    public function prepareNew($user, $country, $town, $planet, array $startCoordinates)
+    public function prepareNew($user, $country, $town, $planet, array $startingCoordinates)
     {
         $app = $this->app;
-        $startCoordinatesX = $startCoordinates[0];
-        $startCoordinatesY = $startCoordinates[0];
+        $startCoordinatesX = $startingCoordinates[0];
+        $startCoordinatesY = $startingCoordinates[1];
 
         $user = $app['orm.em']->find('Application\Entity\UserEntity', 1);
         $app['user'] = $user;
@@ -91,7 +91,6 @@ class Countries
         // Country
         $countryEntity = new CountryEntity();
         $countryEntity
-            ->setId(1)
             ->setName($country['name'])
             ->setSlug($country['slug'])
             ->setDescription($country['description'])
@@ -102,7 +101,6 @@ class Countries
         // Town
         $townEntity = new TownEntity();
         $townEntity
-            ->setId(1)
             ->setName($town['name'])
             ->setSlug($town['slug'])
             ->setDescription($town['description'])
@@ -112,20 +110,6 @@ class Countries
             ->prepareTownResources(10000)
         ;
         $app['orm.em']->persist($townEntity);
-
-        // User country
-        // To-Do: Think abut, if we will maybe use this.
-        $userCountryEntity = new UserCountryEntity();
-        $userCountryEntity
-            ->setId(1)
-            ->setRoles(array(
-                CountryRoles::CREATOR,
-                CountryRoles::OWNER,
-            ))
-            ->setCountry($countryEntity)
-            ->setUser($user)
-        ;
-        $app['orm.em']->persist($userCountryEntity);
 
         // Save them, because we'll need them soon!
         $app['orm.em']->flush();

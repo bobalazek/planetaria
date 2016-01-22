@@ -65,6 +65,14 @@ class HydrateDataCommand extends ContainerAwareCommand
                 $output->writeln('<error>'.$e->getMessage().'</error>');
             }
         }
+        
+        /***** Planets *****/
+        $app['game.planets']->generateNew(
+            'Earth',
+            'earth',
+            'The main planet.'
+        );
+        $output->writeln('<info>The new planet was successfully created</info>');
 
         /***** Users *****/
         $users = include APP_DIR.'/fixtures/users.php';
@@ -92,7 +100,6 @@ class HydrateDataCommand extends ContainerAwareCommand
 
             // User
             $userEntity
-                ->setId($user['id'])
                 ->setUsername($user['username'])
                 ->setEmail($user['email'])
                 ->setPlainPassword(
@@ -105,37 +112,16 @@ class HydrateDataCommand extends ContainerAwareCommand
             ;
 
             $app['orm.em']->persist($userEntity);
+            $app['orm.em']->flush();
+            
+            $app['game.countries']->prepareNew(
+                $userEntity,
+                $user['country'],
+                $user['town'],
+                $app['orm.em']->find('Application\Entity\PlanetEntity', 1),
+                $user['startingCoordinates']
+            );
         }
-
-        // Save them, because we'll need them soon!
-        $app['orm.em']->flush();
-
-        // Create a new planet!
-        $app['game.planets']->generateNew(
-            'Earth',
-            'earth',
-            'The main planet.'
-        );
-        $output->writeln('<info>The new planet was successfully created</info>');
-
-        $app['game.countries']->prepareNew(
-            $app['orm.em']->getRepository('Application\Entity\UserEntity')->findOneByUsername('borut'),
-            array(
-                'name' => 'Bananistan',
-                'slug' => 'bananistan',
-                'description' => 'The country of bananas.',
-            ),
-            array(
-                'name' => 'Bananaland',
-                'slug' => 'bananaland',
-                'description' => 'The town of bananas.',
-            ),
-            $app['orm.em']->find('Application\Entity\PlanetEntity', 1),
-            array(5, 5) // Start coordinates
-        );
-        $output->writeln('<info>The new country + town was successfully created</info>');
-
-        // Create a new country
 
         $output->writeln('<info>Data was successfully hydrated!</info>');
     }
