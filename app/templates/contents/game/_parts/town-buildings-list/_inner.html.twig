@@ -1,0 +1,19 @@
+<img class="pull-left"
+    src="{{ app.baseUrl }}/assets/images/buildings/{{ townBuilding.getImage() }}"
+    style="max-width: 48px; margin-right: 20px;" />
+<h4 class="list-group-item-heading">
+    {{ townBuilding.getBuilding() | humanize | trans }}
+    <small data-toggle="tooltip"
+        title="{{ 'Coordinates' | trans }}">
+        ({{ townBuilding.getCoordinates() }})
+    </small>
+    <span class="badge"
+        data-toggle="tooltip"
+        title="{{ 'Level' | trans }}">
+        {{ townBuilding.getBadgeText() | raw }}
+    </span>
+</h4>
+<p>{{ townBuilding.getBuildingObject().getDescription() }}</p>
+{% if app.user.hasTownBuilding(townBuilding) %}
+    {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
+{% endif %}

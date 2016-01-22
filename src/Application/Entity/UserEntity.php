@@ -1102,11 +1102,11 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return 0;
     }
     
-    /***** Avatar *****/
+    /***** Avatar image url *****/
     /**
      * @return string
      */
-    public function getAvatar($baseUrl)
+    public function getAvatarImageUrl($baseUrl)
     {
         $imageUrl = $this->getProfile()->getImageUrl();
         if ($imageUrl) {

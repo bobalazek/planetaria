@@ -3,13 +3,13 @@
         <div class="media">
             <div class="media-left">
                 <img class="media-object"
-                    src="{{ app.user.getAvatar(app.baseUrl) }}"
+                    src="{{ app.user.getAvatarImageUrl(app.baseUrl) }}"
                     alt="Avatar"
                     style="max-width: 80px;" />
             </div>
             <div class="media-body">
                 <h4 class="media-heading">
-                    <b>{{ app.user.getUsername() }}</b>
+                    <b>{{ app.user }}</b>
                 </h4>
                 <div>
                     <a class="btn btn-sm btn-default"
