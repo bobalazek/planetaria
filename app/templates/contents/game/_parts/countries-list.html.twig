@@ -8,13 +8,13 @@
             <p>
                 {% if country.getDescription() %}
                     {{ country.getDescription() }}
-                    <br /> <br />
+                    <br />
                 {% endif %}
                 <b>{{ 'Towns' | trans }}:</b>
                 {{ country.getTowns() | length }}
-                <br />
-                <b>{{ 'Units' | trans }}:</b>
-                {{ country.getCountryUnits() | length }}
+                <br >
+                <b>{{ 'Town buildings' | trans }}:</b>
+                {{ country.getTownBuildings() | length }}
             </p>
         </a>
     {% endfor %}

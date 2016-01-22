@@ -76,7 +76,7 @@ class ProfileEntity extends AbstractImageUpload
      * @ORM\Column(name="image_url", type="text", nullable=true)
      */
     protected $imageUrl;
-    
+
     /**
      * The predefined images (web/assets/images/avatars)
      *
@@ -286,7 +286,7 @@ class ProfileEntity extends AbstractImageUpload
             : null
         ;
     }
-    
+
     /*** Avatar image ***/
     /**
      * @return string
@@ -328,7 +328,7 @@ class ProfileEntity extends AbstractImageUpload
 
         return $this;
     }
-    
+
     /*** Placeholder image uri ***/
     /**
      * @return string
@@ -340,7 +340,7 @@ class ProfileEntity extends AbstractImageUpload
         } elseif ($this->getGender() == 'female') {
             return '/assets/images/avatars/001.png';
         }
-        
+
         return '/assets/images/avatars/000.png';
     }
 

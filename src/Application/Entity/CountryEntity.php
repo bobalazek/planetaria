@@ -179,6 +179,30 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
+    
+    /*** Town buildings ***/
+    /**
+     * @return array
+     */
+    public function getTownBuildings()
+    {
+        $towns = $this->getTowns();
+        $townBuildings = array();
+
+        if (!empty($towns)) {
+            foreach ($towns as $town) {
+                $townTownBuildings = $town->getTownBuildings();
+
+                if (!empty($townTownBuildings)) {
+                    foreach ($townTownBuildings as $townTownBuilding) {
+                        $townBuildings[] = $townTownBuilding;
+                    }
+                }
+            }
+        }
+
+        return $townBuildings;
+    }
 
     /**
      * @return string

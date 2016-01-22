@@ -13,13 +13,12 @@
     </h1>
     <div id="main-content">
         <div class="row">
-            <div class="col-md-4">
-                <h2>{{ 'Information' | trans }}</h2>
+            <div class="col-lg-3 col-xs-6">
                 <img class="img-responsive"
                     src="{{ user.getAvatarImageUrl(app.baseUrl) }}"
-                    alt="{{ 'Profile image' | trans }}"
-                    style="max-width: 128px;" />
-                <br />
+                    alt="{{ 'Profile image' | trans }}" />
+            </div> <!-- /.col-lg-4 -->
+            <div class="col-lg-9 col-xs-6">
                 <ul class="list-group">
                     {% if user.getProfile().getDescription() %}
                         <li class="list-group-item">
@@ -28,12 +27,24 @@
                         </li>
                     {% endif %}
                     <li class="list-group-item">
+                        <b>{{ 'Experience points' | trans }}:</b>
+                        {{ user.getExperiencePoints() }}
+                    </li>
+                    {% if user.getTimeLastActive() %}
+                        <li class="list-group-item">
+                            <b>{{ 'Last active' | trans }}:</b>
+                            {{ user.getTimeCreated() | date(app.dateTimeFormat) }}
+                        </li>
+                    {% endif %}
+                    <li class="list-group-item">
                         <b>{{ 'Joined' | trans }}:</b>
                         {{ user.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
-            </div> <!-- /.col-md-4 -->
-            <div class="col-md-4">
+            </div> <!-- /.col-lg-9 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
                 <h2>
                     {{ 'Countries' | trans }}
                     <span class="badge">{{ user.getCountries() | length }}</span>
@@ -45,8 +56,8 @@
                         {{ 'This user has no countries yet' | trans }}
                     </div>
                 {% endif %}
-            </div> <!-- /.col-md-4 -->
-            <div class="col-md-4">
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
                 <h2>
                     {{ 'Towns' | trans }}
                     <span class="badge">{{ user.getTowns() | length }}</span>
@@ -58,7 +69,7 @@
                         {{ 'This user has no towns yet' | trans }}
                     </div>
                 {% endif %}
-            </div> <!-- /.col-md-4 -->
+            </div> <!-- /.col-md-6 -->
         </div> <!-- /.row -->
     </div>
 {% endblock %}
