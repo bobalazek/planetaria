@@ -5,7 +5,6 @@ namespace Application\Game;
 use Silex\Application;
 use Application\Entity\UserEntity;
 use Application\Entity\CountryEntity;
-use Application\Entity\UserCountryEntity;
 use Application\Entity\TownEntity;
 use Application\Entity\PlanetEntity;
 
@@ -82,11 +81,9 @@ class Countries
     public function prepareNew($user, $country, $town, $planet, array $startingCoordinates)
     {
         $app = $this->app;
+        $app['user'] = $user;
         $startCoordinatesX = $startingCoordinates[0];
         $startCoordinatesY = $startingCoordinates[1];
-
-        $user = $app['orm.em']->find('Application\Entity\UserEntity', 1);
-        $app['user'] = $user;
 
         // Country
         $countryEntity = new CountryEntity();

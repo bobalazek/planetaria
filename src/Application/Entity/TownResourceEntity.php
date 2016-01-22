@@ -32,7 +32,7 @@ class TownResourceEntity extends AbstractBasicEntity
     /**
      * How much of that resource do we have in the storage?
      *
-     * @var integer
+     * @var float
      *
      * @ORM\Column(name="amount", type="decimal", scale=3)
      */
@@ -81,7 +81,7 @@ class TownResourceEntity extends AbstractBasicEntity
 
     /*** Amount ***/
     /**
-     * @return integer
+     * @return float
      */
     public function getAmount()
     {
@@ -89,7 +89,7 @@ class TownResourceEntity extends AbstractBasicEntity
     }
 
     /**
-     * @param integer $amount
+     * @param float $amount
      *
      * @return TownResourceEntity
      */

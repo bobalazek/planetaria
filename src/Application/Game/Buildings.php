@@ -65,16 +65,6 @@ class Buildings
     /**
      * @var string
      */
-    const AIRBASE = 'airbase';
-
-    /**
-     * @var string
-     */
-    const BARRACKS = 'barracks';
-
-    /**
-     * @var string
-     */
     const PUMPJACK = 'pumpjack';
 
     /**
@@ -105,12 +95,42 @@ class Buildings
     /**
      * @var string
      */
-    const ION_CANNON_CONTROL_CENTER = 'ion_cannon_control_center';
+    const SOLAR_PARK = 'solar_park';
+
+    /**
+     * @var string
+     */
+    const WIND_FARM = 'wind_farm';
+
+    /**
+     * @var string
+     */
+    const AIRBASE = 'airbase';
+
+    /**
+     * @var string
+     */
+    const BARRACKS = 'barracks';
 
     /**
      * @var string
      */
     const MISSILE_LAUNCH_FACILITY = 'missile_launch_facility';
+
+    /**
+     * @var string
+     */
+    const MISSILE_DEFENSE_SYSTEM = 'missile_defense_system';
+
+    /**
+     * @var string
+     */
+    const ION_CANNON_CONTROL_CENTER = 'ion_cannon_control_center';
+
+    /**
+     * @var string
+     */
+    const ION_CANNON_DEFENSE_SYSTEM = 'ion_cannon_defense_system';
 
     /**
      * @var Application
@@ -145,10 +165,14 @@ class Buildings
             self::COLLIERY => 'Colliery',
             self::IRON_MINE => 'Iron mine',
             self::NUCLEAR_POWER_PLANT => 'Nuclear power plant',
+            self::SOLAR_PARK => 'Solar park',
+            self::WIND_FARM => 'Wind farm',
             self::BARRACKS => 'Barracks',
             self::AIRBASE => 'Airbase',
-            self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
             self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',
+            self::MISSILE_DEFENSE_SYSTEM => 'Missile defense system',
+            self::ION_CANNON_CONTROL_CENTER => 'Ion cannon control center',
+            self::ION_CANNON_DEFENSE_SYSTEM => 'Ion cannon defense system',
         );
 
         return $key === null

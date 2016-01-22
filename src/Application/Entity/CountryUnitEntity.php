@@ -39,6 +39,15 @@ class CountryUnitEntity extends AbstractBasicEntity
     protected $level = 0;
 
     /**
+     * How much of that units do we have?
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="amount", type="integer")
+     */
+    protected $amount = 0;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time_created", type="datetime")
@@ -117,6 +126,27 @@ class CountryUnitEntity extends AbstractBasicEntity
     public function setLevel($level)
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    /*** Amount ***/
+    /**
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param integer $amount
+     *
+     * @return CountryUnitEntity
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
 
         return $this;
     }

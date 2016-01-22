@@ -65,7 +65,7 @@ class HydrateDataCommand extends ContainerAwareCommand
                 $output->writeln('<error>'.$e->getMessage().'</error>');
             }
         }
-        
+
         /***** Planets *****/
         $app['game.planets']->generateNew(
             'Earth',
@@ -113,7 +113,7 @@ class HydrateDataCommand extends ContainerAwareCommand
 
             $app['orm.em']->persist($userEntity);
             $app['orm.em']->flush();
-            
+
             $app['game.countries']->prepareNew(
                 $userEntity,
                 $user['country'],
