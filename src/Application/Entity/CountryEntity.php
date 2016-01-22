@@ -179,7 +179,7 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Town buildings ***/
     /**
      * @return array
