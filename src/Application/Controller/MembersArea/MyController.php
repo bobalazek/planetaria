@@ -32,9 +32,12 @@ class MyController
      */
     public function profileAction(Application $app)
     {
-        return new Response(
-            $app['twig']->render(
-                'contents/members-area/my/profile/index.html.twig'
+        return $app->redirect(
+            $app['url_generator']->generate(
+                'game.users.detail',
+                array(
+                    'id' => $app['user']->getId(),
+                )
             )
         );
     }

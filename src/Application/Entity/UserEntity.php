@@ -985,7 +985,30 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return $this->towns->contains($town);
     }
 
-    /*** Town building ***/
+    /*** Town buildings ***/
+    /**
+     * @return array
+     */
+    public function getTownBuildings()
+    {
+        $towns = $this->getTowns();
+        $townBuildings = array();
+        
+        if (!empty($towns)) {
+            foreach ($towns as $town) {
+                $townTownBuildings = $town->getTownBuildings();
+                
+                if (!empty($townTownBuildings)) {
+                    foreach ($townTownBuildings as $townTownBuilding) {
+                        $townBuildings[] = $townTownBuilding;
+                    }
+                }
+            }
+        }
+        
+        return $townBuildings;
+    }
+    
     /**
      * @param TownBuildingEntty $townBuilding
      *
@@ -1077,6 +1100,27 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         }
 
         return 0;
+    }
+    
+    /***** Avatar *****/
+    /**
+     * @return string
+     */
+    public function getAvatar($baseUrl)
+    {
+        $imageUrl = $this->getProfile()->getImageUrl();
+        if ($imageUrl) {
+            return $imageUrl;
+        }
+        
+        // To-Do: Throw a warning or something, when no $baseUrl is given
+        
+        $avatarImage = $this->getProfile()->getAvatarImage();
+        if ($avatarImage) {
+            return $baseUrl.'/assets/images/avatars/'.$avatarImage;
+        }
+        
+        return $baseUrl.$this->getProfile()->getPlaceholderImageUri();
     }
 
     /**

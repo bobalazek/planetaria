@@ -76,6 +76,15 @@ class ProfileEntity extends AbstractImageUpload
      * @ORM\Column(name="image_url", type="text", nullable=true)
      */
     protected $imageUrl;
+    
+    /**
+     * The predefined images (web/assets/images/avatars)
+     *
+     * @var string
+     *
+     * @ORM\Column(name="avatar_image", type="text", nullable=true)
+     */
+    protected $avatarImage;
 
     /**
      * @var string
@@ -277,6 +286,27 @@ class ProfileEntity extends AbstractImageUpload
             : null
         ;
     }
+    
+    /*** Avatar image ***/
+    /**
+     * @return string
+     */
+    public function getAvatarImage()
+    {
+        return $this->avatarImage;
+    }
+
+    /**
+     * @param string $avatarImage
+     *
+     * @return ProfileEntity
+     */
+    public function setAvatarImage($avatarImage)
+    {
+        $this->avatarImage = $avatarImage;
+
+        return $this;
+    }
 
     /*** Description ***/
     /**
@@ -297,6 +327,21 @@ class ProfileEntity extends AbstractImageUpload
         $this->description = $description;
 
         return $this;
+    }
+    
+    /*** Placeholder image uri ***/
+    /**
+     * @return string
+     */
+    public function getPlaceholderImageUri()
+    {
+        if ($this->getGender() == 'male') {
+            return '/assets/images/avatars/002.png';
+        } elseif ($this->getGender() == 'female') {
+            return '/assets/images/avatars/001.png';
+        }
+        
+        return '/assets/images/avatars/000.png';
     }
 
     /*** User ***/

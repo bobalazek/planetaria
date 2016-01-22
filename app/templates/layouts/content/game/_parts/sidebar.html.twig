@@ -3,7 +3,7 @@
         <div class="media">
             <div class="media-left">
                 <img class="media-object"
-                    src="{{ app.user.getProfile().getImageUrl() ? user.getProfile().getImageUrl() : app.baseUrl ~ '/assets/images/avatars/002.png' }}"
+                    src="{{ app.user.getAvatar(app.baseUrl) }}"
                     alt="Avatar"
                     style="max-width: 80px;" />
             </div>

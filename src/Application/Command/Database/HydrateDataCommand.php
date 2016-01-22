@@ -97,6 +97,12 @@ class HydrateDataCommand extends ContainerAwareCommand
                     ->setBirthdate($user['profile']['birthdate'])
                 ;
             }
+            
+            if (isset($user['profile']['avatarImage'])) {
+                $profileEntity
+                    ->setAvatarImage($user['profile']['avatarImage'])
+                ;
+            }
 
             // User
             $userEntity

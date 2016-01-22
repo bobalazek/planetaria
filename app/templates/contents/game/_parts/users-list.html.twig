@@ -1,9 +1,21 @@
 <ul class="list-group">
     {% for user in users %}
-        <a class="list-group-item"
+        <a class="list-group-item clearfix"
             href="{{ url('game.users.detail', { id: user.getId() }) }}">
+            <div class="pull-left"
+                style="margin-right: 20px;">
+                <img class="img-responsive"
+                    src="{{ user.getAvatar(app.baseUrl) }}"
+                    alt="{{ 'Profile image' | trans }}"
+                    style="max-width: 128px;" />
+            </div>
             <h4 class="list-group-item-heading">
                 {{ user }}
+                <span class="badge"
+                    data-toggle="tooltip"
+                    title="{{ 'Level' | trans }}">
+                    {{ user.getExperienceLevel() }}
+                </span>
             </h4>
             <p>
                 {% if user.getProfile().getDescription() %}
@@ -14,7 +26,13 @@
                 {{ user.getExperiencePoints() }}
                 <br />
                 <b>{{ 'Countries' | trans }}:</b>
-                {{ user.getUserCountries() | length }}
+                {{ user.getCountries() | length }}
+                <br />
+                <b>{{ 'Towns' | trans }}:</b>
+                {{ user.getTowns() | length }}
+                <br />
+                <b>{{ 'Town buildings' | trans }}:</b>
+                {{ user.getTownBuildings() | length }}
             </p>
         </a>
     {% endfor %}

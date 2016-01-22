@@ -14,9 +14,10 @@
         {{ planet }}
         <small>({{ tile.getCoordinates() }})</small>
     </h2>
+    <h3>{{ 'Construct a new building' | trans }}</h3>
     <div id="main-content">
         {% if town %}
-            <h4>{{ 'Select the building you want to build' | trans }}:</h4>
+            <h4>{{ 'Select the building, which you want to build' | trans }}</h4>
             <div class="row">
                 <div class="col-lg-8">
                     <ul class="nav nav-tabs"
@@ -55,7 +56,7 @@
                 </div> <!-- /.col-lg-4 -->
             </div> <!-- /.row -->
         {% else %}
-            <h4>{{ 'Select the town' | trans }}:</h4>
+            <h4>{{ 'Select the town, in which you want to construct this building' | trans }}:</h4>
             <div class="row">
                 {% for town in app.user.getTowns() %}
                     <div class="col-md-4">

@@ -10,6 +10,7 @@ return array(
             'lastName' => 'Balazek',
             'gender' => 'male',
             'birthdate' => '03-09-1992',
+            'avatarImage' => '007.png',
         ),
         'roles' => array(
             'ROLE_SUPER_ADMIN',

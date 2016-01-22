@@ -3,11 +3,23 @@
 {% set isContainerFluid = true %}
 
 {% block main %}
-    <h1>{{ user }}</h1>
+    <h1>
+        {{ user }}
+        <span class="badge"
+            data-toggle="tooltip"
+            title="{{ 'Level' | trans }}">
+            {{ user.getExperienceLevel() }}
+        </span>
+    </h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-4">
                 <h2>{{ 'Information' | trans }}</h2>
+                <img class="img-responsive"
+                    src="{{ user.getAvatar(app.baseUrl) }}"
+                    alt="{{ 'Profile image' | trans }}"
+                    style="max-width: 128px;" />
+                <br />
                 <ul class="list-group">
                     {% if user.getProfile().getDescription() %}
                         <li class="list-group-item">
@@ -16,13 +28,16 @@
                         </li>
                     {% endif %}
                     <li class="list-group-item">
-                        <b>{{ 'Created' | trans }}:</b>
+                        <b>{{ 'Joined' | trans }}:</b>
                         {{ user.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2>{{ 'Countries' | trans }}</h2>
+                <h2>
+                    {{ 'Countries' | trans }}
+                    <span class="badge">{{ user.getCountries() | length }}</span>
+                </h2>
                 {% if user.getCountries() %}
                     {% include 'contents/game/_parts/countries-list.html.twig' with { countries: user.getCountries() } %}
                 {% else %}
@@ -32,7 +47,10 @@
                 {% endif %}
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2>{{ 'Towns' | trans }}</h2>
+                <h2>
+                    {{ 'Towns' | trans }}
+                    <span class="badge">{{ user.getTowns() | length }}</span>
+                </h2>
                 {% if user.getTowns() %}
                     {% include 'contents/game/_parts/towns-list.html.twig' with { towns: user.getTowns() } %}
                 {% else %}
