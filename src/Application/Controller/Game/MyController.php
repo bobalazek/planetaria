@@ -32,12 +32,9 @@ class MyController
      */
     public function profileAction(Application $app)
     {
-        return $app->redirect(
-            $app['url_generator']->generate(
-                'game.users.detail',
-                array(
-                    'id' => $app['user']->getId(),
-                )
+        return new Response(
+            $app['twig']->render(
+                'contents/game/my/profile.html.twig'
             )
         );
     }
@@ -156,6 +153,7 @@ class MyController
         );
     }
 
+    /********** Messages **********/
     /**
      * @param Application $app
      *
@@ -166,6 +164,21 @@ class MyController
         return new Response(
             $app['twig']->render(
                 'contents/game/my/messages.html.twig'
+            )
+        );
+    }
+    
+    /********** Notifications **********/
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function notificationsAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/my/notifications.html.twig'
             )
         );
     }

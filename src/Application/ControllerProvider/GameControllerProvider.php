@@ -138,11 +138,37 @@ class GameControllerProvider implements ControllerProviderInterface
         )
         ->bind('game.my.password');
 
+        /* Messages */
         $controllers->match(
             '/my/messages',
             'Application\Controller\Game\MyController::messagesAction'
         )
         ->bind('game.my.messages');
+        
+        $controllers->match(
+            '/my/messages/new',
+            'Application\Controller\Game\MyController::messagesNewAction'
+        )
+        ->bind('game.my.messages.new');
+        
+        $controllers->match(
+            '/my/messages/{id}',
+            'Application\Controller\Game\MyController::messagesDetailAction'
+        )
+        ->bind('game.my.messages.detail');
+        
+        /* Notifications */
+        $controllers->match(
+            '/my/notifications',
+            'Application\Controller\Game\MyController::notificationsAction'
+        )
+        ->bind('game.my.notifications');
+        
+        $controllers->match(
+            '/my/notifications/{id}',
+            'Application\Controller\Game\MyController::notificationsDetailAction'
+        )
+        ->bind('game.my.notifications.detail');
 
         return $controllers;
     }
