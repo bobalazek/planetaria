@@ -30,6 +30,7 @@ class SettingsType extends AbstractType
 
         $builder->add('username', 'text', array(
             'label' => 'Username',
+            'read_only' => true,
         ));
         $builder->add('email', 'email', array(
             'read_only' => true,

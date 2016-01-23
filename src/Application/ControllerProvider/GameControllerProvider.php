@@ -112,6 +112,37 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\UsersController::detailAction'
         )
         ->bind('game.users.detail');
+        
+        /***** My *****/
+        $controllers->match(
+            '/my',
+            'Application\Controller\Game\MyController::indexAction'
+        )
+        ->bind('game.my');
+        
+        $controllers->match(
+            '/my/profile',
+            'Application\Controller\Game\MyController::profileAction'
+        )
+        ->bind('game.my.profile');
+
+        $controllers->match(
+            '/my/settings',
+            'Application\Controller\Game\MyController::settingsAction'
+        )
+        ->bind('game.my.settings');
+
+        $controllers->match(
+            '/my/password',
+            'Application\Controller\Game\MyController::passwordAction'
+        )
+        ->bind('game.my.password');
+        
+        $controllers->match(
+            '/my/messages',
+            'Application\Controller\Game\MyController::messagesAction'
+        )
+        ->bind('game.my.messages');
 
         return $controllers;
     }

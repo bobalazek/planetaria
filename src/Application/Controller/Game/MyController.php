@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Controller\MembersArea;
+namespace Application\Controller\Game;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class MyController
     public function indexAction(Application $app)
     {
         return $app->redirect(
-            $app['url_generator']->generate('members-area.my.profile')
+            $app['url_generator']->generate('game.my.profile')
         );
     }
 
@@ -32,9 +32,12 @@ class MyController
      */
     public function profileAction(Application $app)
     {
-        return new Response(
-            $app['twig']->render(
-                'contents/members-area/my/profile/index.html.twig'
+        return $app->redirect(
+            $app['url_generator']->generate(
+                'game.users.detail',
+                array(
+                    'id' => $app['user']->getId(),
+                )
             )
         );
     }
@@ -45,7 +48,7 @@ class MyController
      *
      * @return Response
      */
-    public function profileSettingsAction(Request $request, Application $app)
+    public function settingsAction(Request $request, Application $app)
     {
         $data = array();
 
@@ -87,7 +90,7 @@ class MyController
                 $app['flashbag']->add(
                     'success',
                     $app['translator']->trans(
-                        'members-area.my.profile.settings.successText'
+                        'Your settings were successfully updated!'
                     )
                 );
             }
@@ -97,7 +100,7 @@ class MyController
 
         return new Response(
             $app['twig']->render(
-                'contents/members-area/my/profile/settings.html.twig',
+                'contents/game/my/settings.html.twig',
                 $data
             )
         );
@@ -109,7 +112,7 @@ class MyController
      *
      * @return Response
      */
-    public function profileSettingsPasswordAction(Request $request, Application $app)
+    public function passwordAction(Request $request, Application $app)
     {
         $data = array();
 
@@ -136,7 +139,7 @@ class MyController
                     $app['flashbag']->add(
                         'success',
                         $app['translator']->trans(
-                            'members-area.my.profile.settings.password.successText'
+                            'Your password was successfully changed! '
                         )
                     );
                 }
@@ -147,8 +150,22 @@ class MyController
 
         return new Response(
             $app['twig']->render(
-                'contents/members-area/my/profile/settings/password.html.twig',
+                'contents/game/my/password.html.twig',
                 $data
+            )
+        );
+    }
+    
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function messagesAction(Application $app)
+    {
+        return new Response(
+            $app['twig']->render(
+                'contents/game/my/messages.html.twig'
             )
         );
     }
