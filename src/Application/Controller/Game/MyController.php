@@ -6,7 +6,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Application\Form\Type\User\SettingsType;
-use Application\Form\Type\User\Settings\PasswordType;
+use Application\Form\Type\User\PasswordType;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -155,7 +155,7 @@ class MyController
             )
         );
     }
-    
+
     /**
      * @param Application $app
      *

@@ -29,6 +29,13 @@ class Game
     {
         $app = $this->app;
 
+        if (!$app['user']) {
+            return false;
+        }
+
+        // We need to refresh the user because some user badges may not be saved yet!
+        $app['orm.em']->refresh($app['user']);
+
         $userExperiencePoints = $app['user']->getExperiencePoints();
         $userBadgesCollection = $app['user']->getUserBadges();
         $userBadges = array();

@@ -112,14 +112,14 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\UsersController::detailAction'
         )
         ->bind('game.users.detail');
-        
+
         /***** My *****/
         $controllers->match(
             '/my',
             'Application\Controller\Game\MyController::indexAction'
         )
         ->bind('game.my');
-        
+
         $controllers->match(
             '/my/profile',
             'Application\Controller\Game\MyController::profileAction'
@@ -137,7 +137,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\MyController::passwordAction'
         )
         ->bind('game.my.password');
-        
+
         $controllers->match(
             '/my/messages',
             'Application\Controller\Game\MyController::messagesAction'
