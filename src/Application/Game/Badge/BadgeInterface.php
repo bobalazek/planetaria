@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Game\Building;
+namespace Application\Game\Badge;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -55,7 +55,7 @@ interface BadgeInterface
     /**
      * @return integer
      */
-    public function getMinimumExperiencePoints($level);
+    public function getMinimumExperiencePoints();
 
     /**
      * @param integer $minimumExperiencePoints

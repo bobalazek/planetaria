@@ -15,8 +15,7 @@
         <div class="row">
             <div class="col-lg-3 col-xs-6">
                 <img class="img-responsive"
-                    src="{{ user.getAvatarImageUrl(app.baseUrl) }}"
-                    alt="{{ 'Profile image' | trans }}" />
+                    src="{{ user.getAvatarImageUrl(app.baseUrl) }}" />
             </div> <!-- /.col-lg-4 -->
             <div class="col-lg-9 col-xs-6">
                 <ul class="list-group">
@@ -70,6 +69,33 @@
                     </div>
                 {% endif %}
             </div> <!-- /.col-md-6 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    {{ 'Badges' | trans }}
+                    <span class="badge">{{ user.getUserBadges() | length }}</span>
+                </h2>
+                {% if user.getUserBadges() %}
+                    <div class="row">
+                        {% for userBadge in user.getUserBadges() %}
+                            {% set userBadgeObject = userBadge.getBadgeObject() %}
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <img class="img-responsive"
+                                        src="{{ app.baseUrl }}/assets/images/badges/{{ userBadgeObject.getSlug() }}/original.png" />
+                                    <h4>{{ userBadgeObject.getName() }}</h4>
+                                    <p>{{ userBadgeObject.getDescription() }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'This user has no badges yet' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-12 -->
         </div> <!-- /.row -->
     </div>
 {% endblock %}

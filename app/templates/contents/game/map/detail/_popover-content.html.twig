@@ -5,9 +5,13 @@
 {% if tile.getTownBuilding() %}
     <p>
         <b>{{ 'Building' | trans }}:</b>
-        <a href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
+        {% if app.user.hasTownBuilding(tile.getTownBuilding()) %}
+            <a href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
+                {{ tile.getTownBuilding().getBuilding() | humanize | trans }}
+            </a>
+        {% else %}
             {{ tile.getTownBuilding().getBuilding() | humanize | trans }}
-        </a>
+        {% endif %}
     </p>
     <p>
         <b>{{ 'Town' | trans }}:</b>

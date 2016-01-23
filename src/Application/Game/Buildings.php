@@ -303,6 +303,9 @@ class Buildings
 
         // Save everything
         $app['orm.em']->flush();
+        
+        // Check if the user has earned any new badges
+        $app['game']->badgesCheck();
 
         return $townBuildingEntity;
     }
@@ -496,7 +499,11 @@ class Buildings
         $town->useResources($buildingResourcesCost);
         $app['orm.em']->persist($town);
 
+        // Save enerything
         $app['orm.em']->flush();
+        
+        // Check if the user has earned any new badges
+        $app['game']->badgesCheck();
 
         return $townBuilding;
     }
