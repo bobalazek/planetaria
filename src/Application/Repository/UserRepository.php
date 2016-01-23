@@ -5,7 +5,7 @@ namespace Application\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @author Borut BalaÅ¾ek <bobalazek124@gmail.com>
+ * @author Borut Balažek <bobalazek124@gmail.com>
  */
 class UserRepository extends EntityRepository
 {

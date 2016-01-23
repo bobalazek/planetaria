@@ -63,13 +63,6 @@ class CountryEntity extends AbstractAdvancedEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Application\Entity\UserCountryEntity", mappedBy="country", cascade={"all"})
-     */
-    protected $userCountries;
-
-    /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Application\Entity\TownEntity", mappedBy="country")
      */
     protected $towns;
@@ -91,30 +84,8 @@ class CountryEntity extends AbstractAdvancedEntity
      */
     public function __construct()
     {
-        $this->userCountries = new ArrayCollection();
         $this->towns = new ArrayCollection();
         $this->countryUnits = new ArrayCollection();
-    }
-
-    /*** User Countries ***/
-    /**
-     * @return ArrayCollection
-     */
-    public function getUserCountries()
-    {
-        return $this->userCountries->toArray();
-    }
-
-    /**
-     * @param ArrayCollection $userCountries
-     *
-     * @return CountryEntity
-     */
-    public function setUserCountries($userCountries)
-    {
-        $this->userCountries = $userCountries;
-
-        return $this;
     }
 
     /*** Towns ***/

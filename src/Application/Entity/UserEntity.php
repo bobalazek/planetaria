@@ -203,9 +203,9 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Application\Entity\UserCountryEntity", mappedBy="user", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Application\Entity\UserBadgeEntity", mappedBy="user", cascade={"all"})
      */
-    protected $userCountries;
+    protected $userBadges;
 
     /**
      * @var ArrayCollection
@@ -253,7 +253,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         $this->posts = new ArrayCollection();
         $this->towns = new ArrayCollection();
-        $this->userCountries = new ArrayCollection();
+        $this->userBadges = new ArrayCollection();
     }
 
     /*** Id ***/
@@ -1042,23 +1042,23 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** User countries ***/
+    /*** User badges ***/
     /**
      * @return array
      */
-    public function getUserCountries()
+    public function getUserBadges()
     {
-        return $this->userCountries->toArray();
+        return $this->userBadges->toArray();
     }
 
     /**
-     * @param ArrayCollection $userCountries
+     * @param ArrayCollection $userBadges
      *
      * @return UserEntity
      */
-    public function setUserCountries($userCountries)
+    public function setUserBadges($userBadges)
     {
-        $this->userCountries = $userCountries;
+        $this->userBadges = $userBadges;
 
         return $this;
     }

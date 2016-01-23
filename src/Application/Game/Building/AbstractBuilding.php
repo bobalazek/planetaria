@@ -316,7 +316,7 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
-    /***** User experience pints *****/
+    /***** User experience points *****/
     /**
      * @return array|integer
      */

@@ -186,12 +186,6 @@ class Buildings
      */
     public static function getClassName($key)
     {
-        $buildings = self::getAll();
-
-        if (!array_key_exists($key, $buildings)) {
-            throw new \Exception('This building does not exists!');
-        }
-
         return Inflector::classify($key);
     }
 

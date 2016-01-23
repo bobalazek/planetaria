@@ -3,17 +3,18 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Application\Game\Badges;
 
 /**
- * User Country Entity
+ * User Badge Entity
  *
- * @ORM\Table(name="user_countries")
- * @ORM\Entity(repositoryClass="Application\Repository\UserCountryRepository")
+ * @ORM\Table(name="user_badges")
+ * @ORM\Entity(repositoryClass="Application\Repository\UserBadgeRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class UserCountryEntity extends AbstractBasicEntity
+class UserBadgeEntity extends AbstractBasicEntity
 {
     /**
      * @var integer
@@ -25,11 +26,9 @@ class UserCountryEntity extends AbstractBasicEntity
     protected $id;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="json_array")
+     * @ORM\Column(name="badge", type="string", length=64)
      */
-    protected $roles;
+    protected $badge;
 
     /**
      * @var \DateTime
@@ -46,49 +45,43 @@ class UserCountryEntity extends AbstractBasicEntity
     protected $timeUpdated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="userCountries")
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UserEntity", inversedBy="userBadges")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
+    /*** Badge ***/
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\CountryEntity", inversedBy="userCountries")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @return string
      */
-    protected $country;
-
-    /*** Roles ***/
-    /**
-     * @return array
-     */
-    public function getRoles()
+    public function getBadge()
     {
-        return $this->roles;
+        return $this->badge;
     }
 
     /**
-     * @param array $roles
+     * @param BadgeEntity $badge
      *
-     * @return UserCountryEntity
+     * @return UserBadgeEntity
      */
-    public function setRoles(array $roles)
+    public function setBadge($badge)
     {
-        $this->roles = $roles;
+        $this->badge = $badge;
 
         return $this;
     }
 
+    /*** Badge object ***/
     /**
-     * @param string $role
-     *
-     * @return boolean
+     * @return AbstractBadge
      */
-    public function hasRole($role)
+    public function getBadgeObject()
     {
-        return in_array(
-            $role,
-            $this->getRoles()
-        );
+        $className = 'Application\\Game\\Badge\\'.
+            Badges::getClassName($this->getBadge())
+        ;
+
+        return new $className();
     }
 
     /*** User ***/
@@ -103,32 +96,11 @@ class UserCountryEntity extends AbstractBasicEntity
     /**
      * @param UserEntity $user
      *
-     * @return UserCountryEntity
+     * @return UserBadgeEntity
      */
     public function setUser(UserEntity $user)
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /*** Country ***/
-    /**
-     * @return CountryEntity
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param CountryEntity $country
-     *
-     * @return UserCountryEntity
-     */
-    public function setCountry(CountryEntity $country)
-    {
-        $this->country = $country;
 
         return $this;
     }
