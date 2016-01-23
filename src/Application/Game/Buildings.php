@@ -303,7 +303,7 @@ class Buildings
 
         // Save everything
         $app['orm.em']->flush();
-        
+
         // Check if the user has earned any new badges
         $app['game']->badgesCheck();
 
@@ -501,7 +501,7 @@ class Buildings
 
         // Save enerything
         $app['orm.em']->flush();
-        
+
         // Check if the user has earned any new badges
         $app['game']->badgesCheck();
 

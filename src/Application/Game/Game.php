@@ -19,7 +19,7 @@ class Game
     {
         $this->app = $app;
     }
-    
+
     /**
      * Check if the user has earned any new badges
      *
@@ -28,23 +28,23 @@ class Game
     public function badgesCheck()
     {
         $app = $this->app;
-        
+
         $userExperiencePoints = $app['user']->getExperiencePoints();
         $userBadgesCollection = $app['user']->getUserBadges();
         $userBadges = array();
         $allBadges = Badges::getAllWithData();
-        
+
         if (!empty($userBadgesCollection)) {
             foreach ($userBadgesCollection as $userBadge) {
                 $userBadges[] = $userBadge->getBadge();
             }
         }
-        
+
         foreach ($allBadges as $badge) {
             if ($badge->getMinimumExperiencePoints() === -1) {
                 continue;
             }
-            
+
             $badgeKey = $badge->getKey();
 
             if (
@@ -56,10 +56,10 @@ class Game
                     ->setUser($app['user'])
                     ->setBadge($badgeKey)
                 ;
-                
+
                 $app['orm.em']->persist($userBadgeEntity);
                 $app['orm.em']->flush();
-                
+
                 $app['flashbag']->add(
                     'success',
                     $app['translator']->trans(
