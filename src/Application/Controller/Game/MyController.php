@@ -5,8 +5,8 @@ namespace Application\Controller\Game;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Application\Form\Type\User\SettingsType;
-use Application\Form\Type\User\PasswordType;
+use Application\Form\Type\My\SettingsType;
+use Application\Form\Type\My\PasswordType;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>

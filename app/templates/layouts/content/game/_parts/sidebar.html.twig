@@ -41,6 +41,14 @@
                         href="{{ url('game.my.notifications') }}">
                         <i class="fa fa-bell"></i>
                     </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-default"
+                            data-toggle="tooltip"
+                            title="{{ 'Members Area' | trans }}"
+                            href="{{ url('members-area') }}">
+                            <i class="fa fa-star"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
