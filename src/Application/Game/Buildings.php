@@ -105,6 +105,11 @@ class Buildings
     /**
      * @var string
      */
+    const HOSPITAL = 'hospital';
+
+    /**
+     * @var string
+     */
     const AIRBASE = 'airbase';
 
     /**
@@ -167,6 +172,7 @@ class Buildings
             self::NUCLEAR_POWER_PLANT => 'Nuclear power plant',
             self::SOLAR_PARK => 'Solar park',
             self::WIND_FARM => 'Wind farm',
+            self::HOSPITAL => 'Hospital',
             self::BARRACKS => 'Barracks',
             self::AIRBASE => 'Airbase',
             self::MISSILE_LAUNCH_FACILITY => 'Missile launch facility',

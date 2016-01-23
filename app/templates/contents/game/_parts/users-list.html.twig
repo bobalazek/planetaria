@@ -24,6 +24,9 @@
                 <b>{{ 'Experience points' | trans }}:</b>
                 {{ user.getExperiencePoints() }}
                 <br />
+                <b>{{ 'Badges' | trans }}:</b>
+                {{ user.getUserBadges() | length }}
+                <br />
                 <b>{{ 'Countries' | trans }}:</b>
                 {{ user.getCountries() | length }}
                 <br />
