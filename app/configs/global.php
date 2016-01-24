@@ -107,6 +107,11 @@ return array(
         'registrationEnabled' => true,
     ),
 
+    // Game options
+    'gameOptions' => array(
+        'townBuildRadius' => 10, // How far away from the town center (capitol) can the building be build?
+    ),
+
     // Default settings (the setting values from the DB
     //   will override this values)
     'settings' => array(

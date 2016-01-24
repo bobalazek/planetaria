@@ -158,7 +158,7 @@ class MyController
     /********** Messages **********/
     /**
      * @param Application $app
-     * @param Request $request
+     * @param Request     $request
      *
      * @return Response
      */
@@ -175,7 +175,7 @@ class MyController
                 )
             )
         ;
-        
+
         if ($unseenUserMessages) {
             foreach ($unseenUserMessages as $unseenUserMessage) {
                 $unseenUserMessage->setTimeSeen(new \DateTime());
@@ -185,7 +185,7 @@ class MyController
 
             $app['orm.em']->flush();
         }
-        
+
         $limitPerPage = $request->query->get('limit_per_page', 10);
         $currentPage = $request->query->get('page');
         $folder = $request->query->get('folder', 'inbox');
@@ -193,7 +193,7 @@ class MyController
             ? $folder
             : 'inbox'
         ;
-        
+
         $userMessageResults = $app['orm.em']
             ->createQueryBuilder()
             ->select('um, uf, u')
@@ -230,10 +230,10 @@ class MyController
                 ),
             )
         );
-        
+
         $data['folder'] = $folder;
         $data['pagination'] = $pagination;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/my/messages.html.twig',
@@ -241,7 +241,7 @@ class MyController
             )
         );
     }
-    
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -302,7 +302,7 @@ class MyController
             )
         );
     }
-    
+
     /**
      * @param integer     $id
      * @param Application $app
@@ -329,7 +329,7 @@ class MyController
             )
         );
     }
-    
+
     /**
      * @param $id
      * @param Request     $request
@@ -415,11 +415,11 @@ class MyController
             )
         );
     }
-    
+
     /********** Notifications **********/
     /**
      * @param Application $app
-     * @param Request $request
+     * @param Request     $request
      *
      * @return Response
      */
@@ -441,7 +441,7 @@ class MyController
                 )
             )
         ;
-        
+
         if ($unseenUserNotifications) {
             foreach ($unseenUserNotifications as $unseenUserNotification) {
                 $unseenUserNotification->setTimeSeen(new \DateTime());
@@ -451,7 +451,7 @@ class MyController
 
             $app['orm.em']->flush();
         }
-        
+
         $userNotificationResults = $app['orm.em']
             ->createQuery(
                 "SELECT un
@@ -473,7 +473,7 @@ class MyController
         );
 
         $data['pagination'] = $pagination;
-        
+
         return new Response(
             $app['twig']->render(
                 'contents/game/my/notifications.html.twig',
@@ -481,7 +481,7 @@ class MyController
             )
         );
     }
-    
+
     /**
      * @param $id
      * @param Request     $request

@@ -16,6 +16,7 @@ use Application\Game\Exception\TownBuildingInConstructionException;
 use Application\Game\Exception\MissingRequiredBuildingsException;
 use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\BuildingPerCountryLimitReachedException;
+use Application\Game\Exception\BuildingNotInsideTownRadius;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -429,8 +430,16 @@ class Buildings
             );
         }
 
-        /*** Outside town radius ***/
-        // To-Do: Check if the building is too far away from Capitol (the town center)
+        /*** Inside town radius ***/
+        $isInsideRadius = $app['game.towns']
+            ->isInsideRadius($town, $startingCoordinates)
+        ;
+
+        if (!$isInsideRadius) {
+            throw new BuildingNotInsideTownRadius(
+                'This building is not inside the town radius!'
+            );
+        }
     }
 
     /**

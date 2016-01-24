@@ -165,6 +165,31 @@ class Towns
     }
 
     /**
+     * How many of this buildings are there in this town?
+     *
+     * @param TownEntity $town
+     * @param string     $building
+     *
+     * @return boolean
+     */
+    public function isInsideRadius(TownEntity $town, $startingCoordinates)
+    {
+        $app = $this->app;
+        $buildRadius = $app['gameOptions']['townBuildRadius'];
+        $x1 = $startingCoordinates[0];
+        $y1 = $startingCoordinates[1];
+        $x2 = $town->getCoordinatesX();
+        $y2 = $town->getCoordinatesY();
+        $distance = sqrt(pow($x2 - $x1, 2) + pow($y2 - $y1, 2));
+
+        if ($distance > $buildRadius) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @param TownEntity $town
      * @param boolean    $ignoreCapacityLimit Should it ignore  the capacity imit (and skipp the setter to capacity, if it's more)? Usefull when creating a new town, that does not have any storage yet (because it doesn't have any buildings that would increase it)
      *

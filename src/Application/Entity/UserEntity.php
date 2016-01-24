@@ -213,14 +213,14 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Application\Entity\UserSkillEntity", mappedBy="user", cascade={"all"})
      */
     protected $userSkills;
-    
+
     /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Application\Entity\UserNotificationEntity", mappedBy="user", cascade={"all"})
      */
     protected $userNotifications;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -703,7 +703,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             $this->getExperienceLevel()+1
         );
     }
-    
+
     /*** Next experience level percentage ***/
     /**
      * @return integer
@@ -713,7 +713,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         $now = $this->getExperiencePoints();
         $start = $this->getCurrentExperienceLevelMinimumPoints();
         $end = $this->getNextExperienceLevelMinimumPoints();
-        
+
         if ($now === 0) {
             return 0;
         }
@@ -860,7 +860,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /***** Avatar image url *****/
     /**
      * @return string
@@ -1163,7 +1163,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return 0;
     }
-    
+
     /*** User notifications ***/
     /**
      * @return array
@@ -1205,7 +1205,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             ->toArray()
         ;
     }
-    
+
     /*** User messages ***/
     /**
      * @return array
