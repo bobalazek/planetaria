@@ -178,7 +178,7 @@ class GameControllerProvider implements ControllerProviderInterface
         
         $controllers->match(
             '/my/notifications/{id}/acknowledge',
-            'Application\Controller\MembeGamersArea\MyController::notificationsAcknowledgeAction'
+            'Application\Controller\Game\MyController::notificationsAcknowledgeAction'
         )
         ->bind('game.my.notifications.acknowledge');
 

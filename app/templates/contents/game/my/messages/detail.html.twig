@@ -13,9 +13,9 @@
     <h2>
         {{ userMessage }}
         {% if userMessage.getUser() == app.user %}
-            <small>{{ 'from' | trans }} {{ userMessage.getUserFrom() }}</small>
+            <small>{{ 'from' | trans }} <b>{{ userMessage.getUserFrom() }}</b></small>
         {% elseif userMessage.getUserFrom() == app.user %}
-            <small>{{ 'to' | trans }} {{ userMessage.getUser() }}</small>
+            <small>{{ 'to' | trans }} <b>{{ userMessage.getUser() }}</b></small>
         {% endif %}
     </h2>
     <p>{{ userMessage.getContent() }}</p>

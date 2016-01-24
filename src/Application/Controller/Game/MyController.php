@@ -158,10 +158,11 @@ class MyController
     /********** Messages **********/
     /**
      * @param Application $app
+     * @param Request $request
      *
      * @return Response
      */
-    public function messagesAction(Application $app)
+    public function messagesAction(Application $app, Request $request)
     {
         $unseenUserMessages = $app['orm.em']
             ->getRepository(
@@ -185,9 +186,58 @@ class MyController
             $app['orm.em']->flush();
         }
         
+        $limitPerPage = $request->query->get('limit_per_page', 10);
+        $currentPage = $request->query->get('page');
+        $folder = $request->query->get('folder', 'inbox');
+        $folder = $folder == 'inbox' || $folder == 'sent'
+            ? $folder
+            : 'inbox'
+        ;
+        
+        $userMessageResults = $app['orm.em']
+            ->createQueryBuilder()
+            ->select('um, uf, u')
+            ->from('Application\Entity\UserMessageEntity', 'um')
+            ->leftJoin('um.user', 'u')
+            ->leftJoin('um.userFrom', 'uf')
+        ;
+
+        if ($folder == 'inbox') {
+            $userMessageResults
+                ->where('um.user = ?1')
+                ->setParameter(1, $app['user'])
+            ;
+        } elseif ($folder == 'sent') {
+            $userMessageResults
+                ->where('um.userFrom = ?1')
+                ->setParameter(1, $app['user'])
+            ;
+        }
+
+        $pagination = $app['paginator']->paginate(
+            $userMessageResults,
+            $currentPage,
+            $limitPerPage,
+            array(
+                'route' => 'game.my.messages',
+                'defaultSortFieldName' => 'um.timeCreated',
+                'defaultSortDirection' => 'desc',
+                'searchFields' => array(
+                    'um.title',
+                    'um.content',
+                    'uf.username',
+                    'uf.email',
+                ),
+            )
+        );
+        
+        $data['folder'] = $folder;
+        $data['pagination'] = $pagination;
+        
         return new Response(
             $app['twig']->render(
-                'contents/game/my/messages.html.twig'
+                'contents/game/my/messages.html.twig',
+                $data
             )
         );
     }
@@ -234,7 +284,10 @@ class MyController
 
                 return $app->redirect(
                     $app['url_generator']->generate(
-                        'game.my.messages'
+                        'game.my.messages',
+                        array(
+                            'folder' => 'sent',
+                        )
                     )
                 );
             }
@@ -342,7 +395,10 @@ class MyController
 
                 return $app->redirect(
                     $app['url_generator']->generate(
-                        'game.my.messages'
+                        'game.my.messages',
+                        array(
+                            'folder' => 'sent',
+                        )
                     )
                 );
             }
@@ -363,14 +419,109 @@ class MyController
     /********** Notifications **********/
     /**
      * @param Application $app
+     * @param Request $request
      *
      * @return Response
      */
-    public function notificationsAction(Application $app)
+    public function notificationsAction(Application $app, Request $request)
     {
+        $data = array();
+
+        $limitPerPage = $request->query->get('limit_per_page', 10);
+        $currentPage = $request->query->get('page');
+
+        $unseenUserNotifications = $app['orm.em']
+            ->getRepository(
+                'Application\Entity\UserNotificationEntity'
+            )
+            ->findBy(
+                array(
+                    'user' => $app['user'],
+                    'timeSeen' => null,
+                )
+            )
+        ;
+        
+        if ($unseenUserNotifications) {
+            foreach ($unseenUserNotifications as $unseenUserNotification) {
+                $unseenUserNotification->setTimeSeen(new \DateTime());
+
+                $app['orm.em']->persist($unseenUserNotification);
+            }
+
+            $app['orm.em']->flush();
+        }
+        
+        $userNotificationResults = $app['orm.em']
+            ->createQuery(
+                "SELECT un
+                    FROM Application\Entity\UserNotificationEntity un
+                    WHERE un.user = :user"
+            )
+            ->setParameter('user', $app['user'])
+        ;
+
+        $pagination = $app['paginator']->paginate(
+            $userNotificationResults,
+            $currentPage,
+            $limitPerPage,
+            array(
+                'route' => 'game.my.notifications',
+                'defaultSortFieldName' => 'un.timeCreated',
+                'defaultSortDirection' => 'desc',
+            )
+        );
+
+        $data['pagination'] = $pagination;
+        
         return new Response(
             $app['twig']->render(
-                'contents/game/my/notifications.html.twig'
+                'contents/game/my/notifications.html.twig',
+                $data
+            )
+        );
+    }
+    
+    /**
+     * @param $id
+     * @param Request     $request
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function notificationsAcknowledgeAction($id, Request $request, Application $app)
+    {
+        $userNotification = $app['orm.em']->find(
+            'Application\Entity\UserNotificationEntity',
+            $id
+        );
+
+        if (!$userNotification) {
+            $app->abort(404);
+        }
+
+        if (
+            $userNotification->getUser() == $app['user'] &&
+            $userNotification->getTimeAcknowledged() == null
+        ) {
+            $userNotification
+                ->setTimeAcknowledged(new \DateTime())
+            ;
+
+            $app['orm.em']->persist($userNotification);
+            $app['orm.em']->flush();
+
+            $app['flashbag']->add(
+                'success',
+                $app['translator']->trans(
+                    'game.my.notifications.acknowledge.successText'
+                )
+            );
+        }
+
+        return $app->redirect(
+            $app['url_generator']->generate(
+                'game.my.notifications'
             )
         );
     }

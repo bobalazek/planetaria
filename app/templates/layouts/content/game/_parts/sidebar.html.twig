@@ -15,38 +15,38 @@
                         data-toggle="tooltip"
                         title="{{ 'Profile' | trans }}"
                         href="{{ url('game.my.profile') }}">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-fw fa-user"></i>
                     </a>
                     <a class="btn btn-sm btn-default {{ path('game.my.settings') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Settings' | trans }}"
                         href="{{ url('game.my.settings') }}">
-                        <i class="fa fa-cog"></i>
+                        <i class="fa fa-fw fa-cog"></i>
                     </a>
                     <a class="btn btn-sm btn-default {{ path('game.my.password') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Password' | trans }}"
                         href="{{ url('game.my.password') }}">
-                        <i class="fa fa-lock"></i>
+                        <i class="fa fa-fw fa-lock"></i>
                     </a>
                     <a class="btn btn-sm btn-default {{ path('game.my.messages') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Messages' | trans }}"
                         href="{{ url('game.my.messages') }}">
-                        <i class="fa fa-envelope"></i>
+                        <i class="fa fa-fw fa-envelope"></i>
                     </a>
                     <a class="btn btn-sm btn-default {{ path('game.my.notifications') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Notifications' | trans }}"
                         href="{{ url('game.my.notifications') }}">
-                        <i class="fa fa-bell"></i>
+                        <i class="fa fa-fw fa-bell"></i>
                     </a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="btn btn-sm btn-default"
                             data-toggle="tooltip"
                             title="{{ 'Members Area' | trans }}"
                             href="{{ url('members-area') }}">
-                            <i class="fa fa-star"></i>
+                            <i class="fa fa-fw fa-star"></i>
                         </a>
                     {% endif %}
                 </div>

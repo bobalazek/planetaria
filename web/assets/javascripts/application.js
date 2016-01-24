@@ -18,6 +18,7 @@ var Application = function () {
                 Application.listActionsInitialize();
                 Application.slugsInitialize();
                 Application.confirmInitialize();
+                Application.selectsInitialize();
 
                 jQuery('#preloader').fadeOut(); // Hide preloader, when everything is ready...
 
@@ -392,6 +393,9 @@ var Application = function () {
                 
                 return false;
             });
+        },
+        selectsInitialize: function() {
+            jQuery('.select-picker').selectpicker();
         },
     }
 }();

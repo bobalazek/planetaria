@@ -13,6 +13,7 @@
     <h2>
         <small>{{ 'Reply to' | trans }}</small>
         {{ originalUserMessage }}
+        <small>{{ 'by' | trans }} <b>{{ originalUserMessage.getUserFrom() }}</b></small>
     </h2>
     <p>{{ originalUserMessage.getContent() }}</p>
     <hr />

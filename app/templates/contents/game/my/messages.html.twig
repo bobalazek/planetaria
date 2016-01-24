@@ -14,97 +14,62 @@
         role="tablist"
         style="margin-bottom: 20px;">
         <li role="presentation"
-            class="active">
-            <a href="#inbox-tab"
-                aria-controls="inbox"
-                role="tab"
-                data-toggle="tab">
+            class="{{ folder == 'inbox' ? 'active' : '' }}">
+            <a href="{{ url('game.my.messages', { folder: 'inbox' }) }}">
                 {{ 'Inbox' | trans }}
             </a>
         </li>
-        <li role="presentation">
-            <a href="#sent-tab"
-                aria-controls="sent"
-                role="tab"
-                data-toggle="tab">
+        <li role="presentation"
+            class="{{ folder == 'sent' ? 'active' : '' }}">
+            <a href="{{ url('game.my.messages', { folder: 'sent' }) }}">
                 {{ 'Sent' | trans }}
             </a>
         </li>
     </ul>
-    <div class="tab-content">
-        <div role="tabpanel"
-            class="tab-pane active"
-            id="inbox-tab">
-            {% if app.user.getUserMessages() %}
-            <table class="table">
-                <thead>
+    {% if pagination.getItems() %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="100"></th>
+                    <th>{{ paginator_sortable(pagination, 'Subject', 'um.subject') }}</th>
+                    {% if folder == 'sent' %}
+                        <th>{{ paginator_sortable(pagination, 'To', 'u.username') }}</th>
+                    {% else %}
+                        <th>{{ paginator_sortable(pagination, 'From', 'uf.username') }}</th>
+                    {% endif %}
+                    <th width="150">{{ paginator_sortable(pagination, 'Time created', 'um.timeCreated') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for userMessage in pagination.getItems() %}
                     <tr>
-                        <th></th>
-                        <th>{{ 'Subject' | trans }}</th>
-                        <th>{{ 'From' | trans }}</th>
-                        <th>{{ 'Time' | trans }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for userMessage in app.user.getUserMessages() %}
-                        <tr>
-                            <td>
-                                <a class="btn btn-sm btn-default"
-                                    href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
-                                    <i class="fa fa-info"></i>
-                                </a>
+                        <td>
+                            <a class="btn btn-sm btn-default"
+                                href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
+                                <i class="fa fa-fw fa-info"></i>
+                            </a>
+                            {% if folder != 'sent' %}
                                 <a class="btn btn-sm btn-default"
                                     href="{{ url('game.my.messages.reply', { id: userMessage.getId() }) }}">
-                                    <i class="fa fa-reply"></i>
+                                    <i class="fa fa-fw fa-reply"></i>
                                 </a>
-                            </td>
-                            <td>{{ userMessage.getSubject() }}</td>
+                            {% endif %}
+                        </td>
+                        <td>{{ userMessage.getSubject() }}</td>
+                        {% if folder == 'sent' %}
+                            <td>{{ userMessage.getUser() }}</td>
+                        {% else %}
                             <td>{{ userMessage.getUserFrom() }}</td>
-                            <td>{{ userMessage.getTimeCreated() | date(app.dateTimeFormat) }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-                <div class="alert alert-info">
-                    {{ 'You do not have any messages yet!' | trans }}
-                </div>
-            {% endif %}
+                        {% endif %}
+                        <td>{{ userMessage.getTimeCreated() | date(app.dateTimeFormat) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ paginator_bottom_render(pagination) }}
+    {% else %}
+        <div class="alert alert-info">
+            {{ 'You do not have any messages yet!' | trans }}
         </div>
-        <div role="tabpanel"
-            class="tab-pane"
-            id="sent-tab">
-            {% if app.user.getUserMessagesSent() %}
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>{{ 'Subject' | trans }}</th>
-                            <th>{{ 'To' | trans }}</th>
-                            <th>{{ 'Time' | trans }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for userMessage in app.user.getUserMessagesSent() %}
-                            <tr>
-                                <td>
-                                    <a class="btn btn-sm btn-default"
-                                        href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
-                                        <i class="fa fa-info"></i>
-                                    </a>
-                                </td>
-                                <td>{{ userMessage.getSubject() }}</td>
-                                <td>{{ userMessage.getUser() }}</td>
-                                <td>{{ userMessage.getTimeCreated() | date(app.dateTimeFormat) }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <div class="alert alert-info">
-                    {{ 'You do not have any outgoing messages yet!' | trans }}
-                </div>
-            {% endif %}
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}

@@ -5,7 +5,40 @@
 {% block main %}
     <h1>{{ 'Notifications' | trans }}</h1>
     {% if app.user.getUserNotifications() %}
-        To-Do
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ paginator_sortable(pagination, 'Priority', 'un.priority') }}</th>
+                    <th>{{ paginator_sortable(pagination, 'Type', 'un.type') }}</th>
+                    <th>{{ paginator_sortable(pagination, 'Message', 'un.message') }}</th>
+                    <th width="180">
+                        {{ paginator_sortable(pagination, 'Time created', 'un.timeCreated') }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for userNotification in pagination.getItems() %}
+                    <tr class="{{ userNotification.getTimeAcknowledged() is null ? 'info' : '' }}">
+                        <td>
+                            {% if userNotification.getTimeAcknowledged() is null %}
+                                <a class="btn btn-sm btn-default"
+                                    data-toggle="tooltip"
+                                    title="{{ 'Acknowledge' | trans }}"
+                                    href="{{ url('game.my.notifications.acknowledge', { id: userNotification.getId() }) }}">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>{{ userNotification.getPriority() }}</td>
+                        <td>{{ userNotification.getType() }}</td>
+                        <td>{{ userNotification.getMessage() }}</td>
+                        <td>{{ userNotification.getTimeCreated() | date(app.dateTimeFormat) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ paginator_bottom_render(pagination) }}
     {% else %}
         <div class="alert alert-info">
             {{ 'You do not have any notifications yet!' | trans }}
