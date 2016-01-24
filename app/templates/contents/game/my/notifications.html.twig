@@ -8,9 +8,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>{{ paginator_sortable(pagination, 'Priority', 'un.priority') }}</th>
-                    <th>{{ paginator_sortable(pagination, 'Type', 'un.type') }}</th>
+                    <th width="100"></th>
+                    <th width="100">
+                        {{ paginator_sortable(pagination, 'Priority', 'un.priority') }}
+                    </th>
                     <th>{{ paginator_sortable(pagination, 'Message', 'un.message') }}</th>
                     <th width="180">
                         {{ paginator_sortable(pagination, 'Time created', 'un.timeCreated') }}
@@ -30,8 +31,7 @@
                                 </a>
                             {% endif %}
                         </td>
-                        <td>{{ userNotification.getPriority() }}</td>
-                        <td>{{ userNotification.getType() }}</td>
+                        <td>{{ userNotification.getPriority() | humanize | trans }}</td>
                         <td>{{ userNotification.getMessage() }}</td>
                         <td>{{ userNotification.getTimeCreated() | date(app.dateTimeFormat) }}</td>
                     </tr>
