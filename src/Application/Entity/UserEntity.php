@@ -703,6 +703,23 @@ class UserEntity implements AdvancedUserInterface, \Serializable
             $this->getExperienceLevel()+1
         );
     }
+    
+    /*** Next experience level percentage ***/
+    /**
+     * @return integer
+     */
+    public function getNextExperienceLevelPercentage()
+    {
+        $now = $this->getExperiencePoints();
+        $start = $this->getCurrentExperienceLevelMinimumPoints();
+        $end = $this->getNextExperienceLevelMinimumPoints();
+        
+        if ($now === 0) {
+            return 0;
+        }
+
+        return ($now - $start) / ($end - $start) * 100;
+    }
 
     /*** Health points ***/
     /**

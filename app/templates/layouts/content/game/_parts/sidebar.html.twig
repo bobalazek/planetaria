@@ -9,6 +9,11 @@
             <div class="media-body">
                 <h3 class="media-heading">
                     <b>{{ app.user }}</b>
+                    <span class="badge"
+                        data-toggle="tooltip"
+                        title="{{ 'Level' | trans }}">
+                        {{ app.user.getExperienceLevel() }}
+                    </span>
                 </h3>
                 <div>
                     <a class="btn btn-sm btn-default {{ path('game.my.profile') in app.currentUri ? 'active' : '' }}"
@@ -57,7 +62,9 @@
             <b>{{ app.user.getHealthPointsPercentage() }}%</b>
             <small>({{ app.user.getHealthPointsLeft() }} {{ 'out of' | trans }} {{ app.user.getHealthPoints() }} {{ 'HP left' | trans }})</small>
         </h4>
-        <div class="progress">
+        <div class="progress"
+            data-toggle="tooltip"
+            title="{{ app.user.getHealthPointsPercentage() }}%">
             <div class="progress-bar progress-bar-{{ app.user.getHealthPointsColorType() }}"
                 role="progressbar"
                 aria-valuenow="{{ app.user.getHealthPointsPercentage() }}"
@@ -67,38 +74,22 @@
                 <span class="sr-only">{{ app.user.getHealthPointsPercentage() }}%</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h4>
-                    {{ 'Experience' | trans }}
-                    <span class="badge"
-                        data-toggle="tooltip"
-                        title="{{ 'Level' | trans }}">
-                        {{ app.user.getExperienceLevel() }}
-                    </span>
-                </h4>
-                <h5>
-                    {{ 'Points' | trans }}:
-                    <b>{{ app.user.getExperiencePoints() }}</b>
-                </h5>
-                <h5>
-                    {{ 'Next level' | trans }}:
-                    <b>{{ app.user.getNextExperienceLevelMinimumPoints() }}</b>
-                </h5>
+        <h4>
+            {{ 'Experience' | trans }}:
+            <b>{{ app.user.getExperiencePoints() }}</b>
+            <small>{{ 'out of' | trans }} {{ app.user.getNextExperienceLevelMinimumPoints() }} {{ 'points, to the next level' | trans }}</small>
+        </h4>
+        <div class="progress"
+            data-toggle="tooltip"
+            title="{{ app.user.getNextExperienceLevelPercentage() }}%">
+            <div class="progress-bar"
+                role="progressbar"
+                aria-valuenow="{{ app.user.getNextExperienceLevelPercentage() }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: {{ app.user.getNextExperienceLevelPercentage() }}%;">
+                <span class="sr-only">{{ app.user.getNextExperienceLevelPercentage() }}%</span>
             </div>
-            <div class="col-lg-6">
-                <h4>{{ 'Skills' | trans }}</h4>
-                <ul class="list-unstyled">
-                    {% for skillKey, skill in app.gameData.skills %}
-                        <li>
-                            <h5>
-                                {{ skill }}:
-                                <b>{{ app.user.getUserSkillPointsByKey(skillKey) }}</b>
-                            </h5>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div> <!-- /.row -->
+        </div>
     </div>
 </div>
