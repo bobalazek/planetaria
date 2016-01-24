@@ -26,7 +26,7 @@
                         {% for buildingTypeKey, buildingType in buildingTypes %}
                             <li role="presentation"
                                 class="{{ loop.first ? 'active' : '' }}">
-                                <a href="#{{ buildingTypeKey }}-building-type"
+                                <a href="#{{ buildingTypeKey }}-building-type-tab"
                                     aria-controls="{{ buildingTypeKey }}"
                                     role="tab"
                                     data-toggle="tab">
@@ -39,7 +39,7 @@
                         {% for buildingTypeKey, buildingType in buildingTypes %}
                             <div role="tabpanel"
                                 class="tab-pane {{ loop.first ? 'active' : '' }}"
-                                id="{{ buildingTypeKey }}-building-type">
+                                id="{{ buildingTypeKey }}-building-type-tab">
                                 {% for buildingKey, building in buildings if building.getType() == buildingTypeKey %}
                                     {% include 'contents/game/map/build/_building.html.twig' %}
                                 {% else %}

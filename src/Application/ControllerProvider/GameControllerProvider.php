@@ -157,6 +157,12 @@ class GameControllerProvider implements ControllerProviderInterface
         )
         ->bind('game.my.messages.detail');
         
+        $controllers->match(
+            '/my/messages/{id}/reply',
+            'Application\Controller\Game\MyController::messagesReplyAction'
+        )
+        ->bind('game.my.messages.reply');
+        
         /* Notifications */
         $controllers->match(
             '/my/notifications',
@@ -169,6 +175,12 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\MyController::notificationsDetailAction'
         )
         ->bind('game.my.notifications.detail');
+        
+        $controllers->match(
+            '/my/notifications/{id}/acknowledge',
+            'Application\Controller\MembeGamersArea\MyController::notificationsAcknowledgeAction'
+        )
+        ->bind('game.my.notifications.acknowledge');
 
         return $controllers;
     }

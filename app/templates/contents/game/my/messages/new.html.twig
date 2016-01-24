@@ -1,0 +1,22 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% block title %}{{ 'New' | trans }} | {{ 'Messages' | trans }} | {{ 'My' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'Messages' | trans }}
+        <a class="btn btn-default btn-sm"
+            href="{{ url('game.my.messages') }}">
+            {{ 'Back to Messages' | trans }}
+        </a>
+    </h1>
+    <h2>{{ 'New' | trans }}</h2>
+    {{ form_start(form) }}
+        {% if form.user is defined %}
+            {{ form_row(form.user) }}
+        {% endif %}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.submitButton) }}
+    {{ form_end(form) }}
+{% endblock %}

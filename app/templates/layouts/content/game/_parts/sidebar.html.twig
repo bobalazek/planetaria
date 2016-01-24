@@ -11,31 +11,31 @@
                     <b>{{ app.user }}</b>
                 </h3>
                 <div>
-                    <a class="btn btn-sm btn-default {{ path('game.my.profile') == app.currentUri ? 'active' : '' }}"
+                    <a class="btn btn-sm btn-default {{ path('game.my.profile') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Profile' | trans }}"
                         href="{{ url('game.my.profile') }}">
                         <i class="fa fa-user"></i>
                     </a>
-                    <a class="btn btn-sm btn-default {{ path('game.my.settings') == app.currentUri ? 'active' : '' }}"
+                    <a class="btn btn-sm btn-default {{ path('game.my.settings') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Settings' | trans }}"
                         href="{{ url('game.my.settings') }}">
                         <i class="fa fa-cog"></i>
                     </a>
-                    <a class="btn btn-sm btn-default {{ path('game.my.password') == app.currentUri ? 'active' : '' }}"
+                    <a class="btn btn-sm btn-default {{ path('game.my.password') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Password' | trans }}"
                         href="{{ url('game.my.password') }}">
                         <i class="fa fa-lock"></i>
                     </a>
-                    <a class="btn btn-sm btn-default {{ path('game.my.messages') == app.currentUri ? 'active' : '' }}"
+                    <a class="btn btn-sm btn-default {{ path('game.my.messages') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Messages' | trans }}"
                         href="{{ url('game.my.messages') }}">
                         <i class="fa fa-envelope"></i>
                     </a>
-                    <a class="btn btn-sm btn-default {{ path('game.my.notifications') == app.currentUri ? 'active' : '' }}"
+                    <a class="btn btn-sm btn-default {{ path('game.my.notifications') in app.currentUri ? 'active' : '' }}"
                         data-toggle="tooltip"
                         title="{{ 'Notifications' | trans }}"
                         href="{{ url('game.my.notifications') }}">

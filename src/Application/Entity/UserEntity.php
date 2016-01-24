@@ -213,6 +213,27 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Application\Entity\UserSkillEntity", mappedBy="user", cascade={"all"})
      */
     protected $userSkills;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\UserNotificationEntity", mappedBy="user", cascade={"all"})
+     */
+    protected $userNotifications;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\UserMessageEntity", mappedBy="user", cascade={"all"})
+     */
+    protected $userMessages;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\UserMessageEntity", mappedBy="userFrom", cascade={"all"})
+     */
+    protected $userMessagesSent;
 
     /**
      * Otherwise known as: userExpired / accountExpired
@@ -254,6 +275,9 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         $this->posts = new ArrayCollection();
         $this->towns = new ArrayCollection();
         $this->userBadges = new ArrayCollection();
+        $this->userNotifications = new ArrayCollection();
+        $this->userMessages = new ArrayCollection();
+        $this->userMessagesSent = new ArrayCollection();
     }
 
     /*** Id ***/
@@ -819,6 +843,27 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
+    
+    /***** Avatar image url *****/
+    /**
+     * @return string
+     */
+    public function getAvatarImageUrl($baseUrl)
+    {
+        $imageUrl = $this->getProfile()->getImageUrl();
+        if ($imageUrl) {
+            return $imageUrl;
+        }
+
+        // To-Do: Throw a warning or something, when no $baseUrl is given
+
+        $avatarImage = $this->getProfile()->getAvatarImage();
+        if ($avatarImage) {
+            return $baseUrl.'/assets/images/avatars/'.$avatarImage;
+        }
+
+        return $baseUrl.$this->getProfile()->getPlaceholderImageUri();
+    }
 
     /*** Expired ***/
     /**
@@ -1101,26 +1146,110 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return 0;
     }
-
-    /***** Avatar image url *****/
+    
+    /*** User notifications ***/
     /**
-     * @return string
+     * @return array
      */
-    public function getAvatarImageUrl($baseUrl)
+    public function getUserNotifications()
     {
-        $imageUrl = $this->getProfile()->getImageUrl();
-        if ($imageUrl) {
-            return $imageUrl;
-        }
+        return $this->userNotifications->toArray();
+    }
 
-        // To-Do: Throw a warning or something, when no $baseUrl is given
+    /**
+     * @param $userNotifications
+     *
+     * @return UserEntity
+     */
+    public function setUserNotifications($userNotifications)
+    {
+        $this->userNotifications = $userNotifications;
 
-        $avatarImage = $this->getProfile()->getAvatarImage();
-        if ($avatarImage) {
-            return $baseUrl.'/assets/images/avatars/'.$avatarImage;
-        }
+        return $this;
+    }
 
-        return $baseUrl.$this->getProfile()->getPlaceholderImageUri();
+    /**
+     * @return array
+     */
+    public function getUnreadUserNotifications()
+    {
+        $criteria = Criteria::create()
+            ->where(
+                Criteria::expr()->eq(
+                    'timeAcknowledged',
+                    null
+                )
+            )
+        ;
+
+        return $this
+            ->userNotifications
+            ->matching($criteria)
+            ->toArray()
+        ;
+    }
+    
+    /*** User messages ***/
+    /**
+     * @return array
+     */
+    public function getUserMessages()
+    {
+        return $this->userMessages->toArray();
+    }
+
+    /**
+     * @param $userMessages
+     *
+     * @return UserEntity
+     */
+    public function setUserMessages($userMessages)
+    {
+        $this->userMessages = $userMessages;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUnreadUserMessages()
+    {
+        $criteria = Criteria::create()
+            ->where(
+                Criteria::expr()->eq(
+                    'timeAcknowledged',
+                    null
+                )
+            )
+        ;
+
+        return $this
+            ->userMessages
+            ->matching($criteria)
+            ->toArray()
+        ;
+    }
+
+    /*** User messages sent ***/
+    /**
+     * @return array
+     */
+    public function getUserMessagesSent()
+    {
+        return $this->userMessagesSent->toArray();
+    }
+
+    /**
+     * @param $userMessagesSent
+     *
+     * @return UserEntity
+     */
+    public function setUserMessagesSent($userMessagesSent)
+    {
+        $this->userMessagesSent = $userMessagesSent;
+
+        return $this;
     }
 
     /**

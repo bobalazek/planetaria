@@ -3,6 +3,108 @@
 {% block title %}{{ 'Messages' | trans }} | {{ 'My' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ 'Messages' | trans }}</h1>
-    To-Do
+    <h1>
+        {{ 'Messages' | trans }}
+        <a class="btn btn-primary btn-sm"
+            href="{{ url('game.my.messages.new') }}">
+            {{ 'New' | trans }}
+        </a>
+    </h1>
+    <ul class="nav nav-tabs nav-justified"
+        role="tablist"
+        style="margin-bottom: 20px;">
+        <li role="presentation"
+            class="active">
+            <a href="#inbox-tab"
+                aria-controls="inbox"
+                role="tab"
+                data-toggle="tab">
+                {{ 'Inbox' | trans }}
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#sent-tab"
+                aria-controls="sent"
+                role="tab"
+                data-toggle="tab">
+                {{ 'Sent' | trans }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel"
+            class="tab-pane active"
+            id="inbox-tab">
+            {% if app.user.getUserMessages() %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'Subject' | trans }}</th>
+                        <th>{{ 'From' | trans }}</th>
+                        <th>{{ 'Time' | trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for userMessage in app.user.getUserMessages() %}
+                        <tr>
+                            <td>
+                                <a class="btn btn-sm btn-default"
+                                    href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
+                                    <i class="fa fa-info"></i>
+                                </a>
+                                <a class="btn btn-sm btn-default"
+                                    href="{{ url('game.my.messages.reply', { id: userMessage.getId() }) }}">
+                                    <i class="fa fa-reply"></i>
+                                </a>
+                            </td>
+                            <td>{{ userMessage.getSubject() }}</td>
+                            <td>{{ userMessage.getUserFrom() }}</td>
+                            <td>{{ userMessage.getTimeCreated() | date(app.dateTimeFormat) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="alert alert-info">
+                    {{ 'You do not have any messages yet!' | trans }}
+                </div>
+            {% endif %}
+        </div>
+        <div role="tabpanel"
+            class="tab-pane"
+            id="sent-tab">
+            {% if app.user.getUserMessagesSent() %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>{{ 'Subject' | trans }}</th>
+                            <th>{{ 'To' | trans }}</th>
+                            <th>{{ 'Time' | trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for userMessage in app.user.getUserMessagesSent() %}
+                            <tr>
+                                <td>
+                                    <a class="btn btn-sm btn-default"
+                                        href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
+                                        <i class="fa fa-info"></i>
+                                    </a>
+                                </td>
+                                <td>{{ userMessage.getSubject() }}</td>
+                                <td>{{ userMessage.getUser() }}</td>
+                                <td>{{ userMessage.getTimeCreated() | date(app.dateTimeFormat) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    {{ 'You do not have any outgoing messages yet!' | trans }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

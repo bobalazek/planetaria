@@ -4,5 +4,11 @@
 
 {% block main %}
     <h1>{{ 'Notifications' | trans }}</h1>
-    To-Do
+    {% if app.user.getUserNotifications() %}
+        To-Do
+    {% else %}
+        <div class="alert alert-info">
+            {{ 'You do not have any notifications yet!' | trans }}
+        </div>
+    {% endif %}
 {% endblock %}
