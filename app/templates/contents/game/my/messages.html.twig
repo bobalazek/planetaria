@@ -44,12 +44,12 @@
                 {% for userMessage in pagination.getItems() %}
                     <tr>
                         <td>
-                            <a class="btn btn-sm btn-default"
+                            <a class="btn btn-xs btn-default"
                                 href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
                                 <i class="fa fa-fw fa-info"></i>
                             </a>
                             {% if folder != 'sent' %}
-                                <a class="btn btn-sm btn-default"
+                                <a class="btn btn-xs btn-default"
                                     href="{{ url('game.my.messages.reply', { id: userMessage.getId() }) }}">
                                     <i class="fa fa-fw fa-reply"></i>
                                 </a>

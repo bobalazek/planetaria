@@ -17,6 +17,7 @@
     </h2>
     <p>{{ originalUserMessage.getContent() }}</p>
     <hr />
+    <h3>{{ 'Your response' | trans }}</h3>
     {{ form_start(form) }}
         {{ form_row(form.subject) }}
         {{ form_row(form.content) }}

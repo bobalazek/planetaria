@@ -347,11 +347,11 @@ class MyController
         );
 
         if (!$originalUserMessage) {
-            $app->abort(404);
+            $app->abort(404, 'This message does not exist!');
         }
 
-        if (!$originalUserMessage->getUser() == $app['user']) {
-            $app->abort(403);
+        if ($originalUserMessage->getUserFrom() == $app['user']) {
+            $app->abort(403, 'You can not reply to your own message!');
         }
 
         $userMessage = new UserMessageEntity();
@@ -497,7 +497,7 @@ class MyController
         );
 
         if (!$userNotification) {
-            $app->abort(404);
+            $app->abort(404, 'This message does not exist!');
         }
 
         if (

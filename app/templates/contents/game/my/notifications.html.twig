@@ -23,11 +23,11 @@
                     <tr class="{{ userNotification.getTimeAcknowledged() is null ? 'info' : '' }}">
                         <td>
                             {% if userNotification.getTimeAcknowledged() is null %}
-                                <a class="btn btn-sm btn-default"
+                                <a class="btn btn-xs btn-default"
                                     data-toggle="tooltip"
                                     title="{{ 'Acknowledge' | trans }}"
                                     href="{{ url('game.my.notifications.acknowledge', { id: userNotification.getId() }) }}">
-                                    <i class="fa fa-check"></i>
+                                    <i class="fa fa-fw fa-check"></i>
                                 </a>
                             {% endif %}
                         </td>
