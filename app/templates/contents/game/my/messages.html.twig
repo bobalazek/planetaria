@@ -45,11 +45,15 @@
                     <tr>
                         <td>
                             <a class="btn btn-xs btn-default"
+                                data-toggle="tooltip"
+                                title="{{ 'View' | trans }}"
                                 href="{{ url('game.my.messages.detail', { id: userMessage.getId() }) }}">
                                 <i class="fa fa-fw fa-info"></i>
                             </a>
                             {% if folder != 'sent' %}
                                 <a class="btn btn-xs btn-default"
+                                    data-toggle="tooltip"
+                                    title="{{ 'Reply' | trans }}"
                                     href="{{ url('game.my.messages.reply', { id: userMessage.getId() }) }}">
                                     <i class="fa fa-fw fa-reply"></i>
                                 </a>
