@@ -101,6 +101,11 @@ class Pumpjack extends AbstractBuilding
                     Resources::CRUDE_OIL => 60,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

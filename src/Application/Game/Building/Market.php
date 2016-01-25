@@ -41,6 +41,11 @@ class Market extends AbstractBuilding
                     Resources::ROCK => 1000,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

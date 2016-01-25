@@ -4,6 +4,7 @@ namespace Application\Game\Building;
 
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
+use Application\Game\TerrainTypes;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -56,6 +57,11 @@ class Airbase extends AbstractBuilding
                     Resources::WOOD => 4000,
                     Resources::ROCK => 4000,
                 ),
+            ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
             ))
         ;
     }

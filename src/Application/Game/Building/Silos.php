@@ -63,6 +63,11 @@ class Silos extends AbstractBuilding
                     Resources::ROCK => 300,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

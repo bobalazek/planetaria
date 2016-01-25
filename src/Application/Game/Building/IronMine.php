@@ -101,6 +101,11 @@ class IronMine extends AbstractBuilding
                     Resources::IRON_ORE => 60,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

@@ -68,6 +68,11 @@ class Bank extends AbstractBuilding
                     Resources::MONEY => 30,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

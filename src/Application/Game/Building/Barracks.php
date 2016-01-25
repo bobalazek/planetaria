@@ -69,6 +69,11 @@ class Barracks extends AbstractBuilding
                     Units::RIFLEMAN,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

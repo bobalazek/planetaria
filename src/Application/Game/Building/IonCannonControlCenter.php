@@ -41,6 +41,11 @@ class IonCannonControlCenter extends AbstractBuilding
                     Resources::ROCK => 200000,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

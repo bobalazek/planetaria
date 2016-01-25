@@ -67,6 +67,11 @@ class Capitol extends AbstractBuilding
                     Resources::ROCK => 16000,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

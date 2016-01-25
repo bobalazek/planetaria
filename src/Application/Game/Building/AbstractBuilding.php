@@ -240,6 +240,15 @@ class AbstractBuilding implements BuildingInterface
      */
     protected $limit = -1;
 
+    /**
+     * On which terrain types can this building be build?
+     * Example:
+     *   array( 'grassland', 'plains', 'desert' )
+     *
+     * @var array
+     */
+    protected $availableTerrainTypes;
+
     /***** Name *****/
     /**
      * @return string
@@ -850,6 +859,25 @@ class AbstractBuilding implements BuildingInterface
     public function setLimit($limit)
     {
         $this->limit = $limit;
+
+        return $this;
+    }
+
+    /***** Available terrain types *****/
+    /**
+     * @return array
+     */
+    public function getAvailableTerrainTypes()
+    {
+        return $this->availableTerrainTypes;
+    }
+
+    /**
+     * @param array $availableTerrainTypes
+     */
+    public function setAvailableTerrainTypes(array $availableTerrainTypes = array())
+    {
+        $this->availableTerrainTypes = $availableTerrainTypes;
 
         return $this;
     }

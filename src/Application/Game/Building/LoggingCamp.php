@@ -101,6 +101,11 @@ class LoggingCamp extends AbstractBuilding
                     Resources::WOOD => 60,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

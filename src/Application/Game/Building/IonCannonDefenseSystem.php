@@ -47,6 +47,11 @@ class IonCannonDefenseSystem extends AbstractBuilding
                     Buildings::AIRBASE => 0,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

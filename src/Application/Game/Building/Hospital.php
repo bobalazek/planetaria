@@ -57,6 +57,11 @@ class Hospital extends AbstractBuilding
                     Resources::ROCK => 30000,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

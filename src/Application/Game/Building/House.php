@@ -57,6 +57,11 @@ class House extends AbstractBuilding
                     Resources::ROCK => 400,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

@@ -102,6 +102,11 @@ class Farm extends AbstractBuilding
                     Resources::FOOD => 60,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

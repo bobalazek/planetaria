@@ -101,6 +101,11 @@ class Quarry extends AbstractBuilding
                     Resources::ROCK => 60,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

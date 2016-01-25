@@ -68,6 +68,11 @@ class SolarPark extends AbstractBuilding
                     Resources::ELECTRICITY => 30,
                 ),
             ))
+            ->setAvailableTerrainTypes(array(
+                TerrainTypes::GRASSLAND,
+                TerrainTypes::PLAINS,
+                TerrainTypes::DESERT,
+            ))
         ;
     }
 }

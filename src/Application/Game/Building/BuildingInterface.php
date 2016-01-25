@@ -303,4 +303,15 @@ interface BuildingInterface
      * @param integer $limit
      */
     public function setLimit($limit);
+
+    /***** Available terrain types *****/
+    /**
+     * @return array
+     */
+    public function getAvailableTerrainTypes();
+
+    /**
+     * @param array $availableTerrainTypes
+     */
+    public function setAvailableTerrainTypes(array $availableTerrainTypes);
 }
