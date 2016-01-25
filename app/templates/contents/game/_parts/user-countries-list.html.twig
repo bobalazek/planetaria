@@ -12,9 +12,6 @@
                 {% endif %}
                 <b>{{ 'Towns' | trans }}:</b>
                 {{ userCountry.getCountry().getTowns() | length }}
-                <br />
-                <b>{{ 'Units' | trans }}:</b>
-                {{ userCountry.getCountry().getCountryUnits() | length }}
             </p>
         </a>
     {% endfor %}

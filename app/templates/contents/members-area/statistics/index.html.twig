@@ -58,12 +58,6 @@
                                 {{ app['orm.em'].getRepository('Application\\Entity\\CountryEntity').countAll() }}
                             </span>
                         </li>
-                        <li class="list-group-item">
-                            {{ 'Units' | trans }}
-                            <span class="badge">
-                                {{ app['orm.em'].getRepository('Application\\Entity\\CountryUnitEntity').countAll() }}
-                            </span>
-                        </li>
                     </ul>
                 </div> <!-- /.panel -->
             </div> <!-- /.col-md-3 -->
@@ -77,6 +71,12 @@
                             {{ 'Total' | trans }}
                             <span class="badge">
                                 {{ app['orm.em'].getRepository('Application\\Entity\\TownEntity').countAll() }}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            {{ 'Units' | trans }}
+                            <span class="badge">
+                                {{ app['orm.em'].getRepository('Application\\Entity\\TownUnitEntity').countAll() }}
                             </span>
                         </li>
                         <li class="list-group-item">

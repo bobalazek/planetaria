@@ -7,15 +7,15 @@ use Doctrine\ORM\EntityRepository;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class CountryUnitRepository extends EntityRepository
+class TownUnitRepository extends EntityRepository
 {
     /**
      * @return integer
      */
     public function countAll()
     {
-        return $this->createQueryBuilder('cu')
-            ->select('COUNT(cu.id)')
+        return $this->createQueryBuilder('tu')
+            ->select('COUNT(tu.id)')
             ->getQuery()
             ->getSingleScalarResult()
         ;

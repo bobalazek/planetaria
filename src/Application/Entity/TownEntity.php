@@ -107,6 +107,13 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townBuildings;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\TownUnitEntity", mappedBy="town", cascade={"all"})
+     */
+    protected $townUnits;
 
     /**
      * How much is the limit for population?
@@ -150,6 +157,7 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $this->townResources = new ArrayCollection();
         $this->townBuildings = new ArrayCollection();
+        $this->townUnits = new ArrayCollection();
     }
 
     /*** Buildings limit ***/
@@ -480,6 +488,27 @@ class TownEntity extends AbstractAdvancedEntity
     {
         $townBuilding->setTown(null);
         $this->townBuildings->removeElement($townBuilding);
+
+        return $this;
+    }
+    
+    /*** Town Units ***/
+    /**
+     * @return ArrayCollection
+     */
+    public function getTownUnits()
+    {
+        return $this->townUnits->toArray();
+    }
+
+    /**
+     * @param ArrayCollection $townUnits
+     *
+     * @return CountryEntity
+     */
+    public function setTownUnits($townUnits)
+    {
+        $this->townUnits = $townUnits;
 
         return $this;
     }

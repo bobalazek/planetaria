@@ -5,15 +5,15 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country Unit Entity
+ * Town Unit Entity
  *
- * @ORM\Table(name="country_units")
- * @ORM\Entity(repositoryClass="Application\Repository\CountryUnitRepository")
+ * @ORM\Table(name="town_units")
+ * @ORM\Entity(repositoryClass="Application\Repository\TownUnitRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class CountryUnitEntity extends AbstractBasicEntity
+class TownUnitEntity extends AbstractBasicEntity
 {
     /**
      * @var integer
@@ -62,10 +62,10 @@ class CountryUnitEntity extends AbstractBasicEntity
     protected $timeUpdated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Entity\CountryEntity", inversedBy="countryUnits")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Application\Entity\TownEntity", inversedBy="townUnits")
+     * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
      */
-    protected $country;
+    protected $town;
 
     /*** Unit ***/
     /**
@@ -79,7 +79,7 @@ class CountryUnitEntity extends AbstractBasicEntity
     /**
      * @param string $unit
      *
-     * @return CountryUnitEntity
+     * @return TownUnitEntity
      */
     public function setUnit($unit)
     {
@@ -88,23 +88,23 @@ class CountryUnitEntity extends AbstractBasicEntity
         return $this;
     }
 
-    /*** Country ***/
+    /*** Town ***/
     /**
-     * @return CountryEntity
+     * @return TownEntity
      */
-    public function getCountry()
+    public function getTown()
     {
-        return $this->country;
+        return $this->town;
     }
 
     /**
-     * @param CountryEntity $country
+     * @param TownEntity $town
      *
-     * @return CountryUnitEntity
+     * @return TownUnitEntity
      */
-    public function setCountry(CountryEntity $country)
+    public function setTown(TownEntity $town)
     {
-        $this->country = $country;
+        $this->town = $town;
 
         return $this;
     }
@@ -121,7 +121,7 @@ class CountryUnitEntity extends AbstractBasicEntity
     /**
      * @param integer $level
      *
-     * @return CountryUnitEntity
+     * @return TownUnitEntity
      */
     public function setLevel($level)
     {
@@ -142,7 +142,7 @@ class CountryUnitEntity extends AbstractBasicEntity
     /**
      * @param integer $amount
      *
-     * @return CountryUnitEntity
+     * @return TownUnitEntity
      */
     public function setAmount($amount)
     {

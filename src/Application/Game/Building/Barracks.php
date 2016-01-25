@@ -4,6 +4,7 @@ namespace Application\Game\Building;
 
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
+use Application\Game\TerrainTypes;
 use Application\Game\Units;
 
 /**
