@@ -35,7 +35,7 @@ class TownsController
             )
         );
     }
-    
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -47,7 +47,7 @@ class TownsController
         if (!$app['user']->canCreateNewTown()) {
             $app->abort(403, 'You can not create a new town!');
         }
-        
+
         if (count($app['user']->getTowns()) < 1) {
             $app->abort(403, 'You need at least one country to which you can assign this town!');
         }
@@ -66,7 +66,7 @@ class TownsController
             if ($form->isValid()) {
                 $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
                 $townEntity = $form->getData();
-                
+
                 $townEntity
                     ->setUser($app['user'])
                     ->setPlanet($planet)
@@ -133,7 +133,7 @@ class TownsController
             )
         );
     }
-    
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -150,11 +150,11 @@ class TownsController
         if (!$town) {
             $app->abort(404, 'This town does not exist!');
         }
-        
+
         if ($town->getUser() != $app['user']) {
             $app->abort(403, 'This is not your town!');
         }
-        
+
         $form = $app['form.factory']->create(
             new TownType(),
             $town

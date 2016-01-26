@@ -38,7 +38,7 @@ class Towns
         $buildingObject = Buildings::getAllWithData($building);
         $requiredResources = $buildingObject->getResourcesCost($level);
         $availableResources = $town->getResourcesAvailable();
-        
+
         if (!empty($requiredResources)) {
             foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
                 if ($requiredResourceValue > $availableResources[$requiredResource]) {
@@ -175,14 +175,14 @@ class Towns
         $y1 = $startingCoordinates[1];
         $x2 = $town->getCoordinatesX();
         $y2 = $town->getCoordinatesY();
-        
+
         // That means, that we couln't fetched the capitol building coordinates,
         // which is the town center... means, no capitol yet...
         // You can build wherever you want!
         if ($x2 === false || $y2 === false) {
             return true;
         }
-        
+
         $distance = sqrt(pow($x2 - $x1, 2) + pow($y2 - $y1, 2));
 
         if ($distance > $buildRadius) {

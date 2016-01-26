@@ -226,7 +226,7 @@ class Buildings
      *
      * @param PlanetEntity $planet
      * @param TownEntity   $town
-     * @param array        $coordinates         The start coordinates (bottom left) of the location that building is going to be build
+     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
      * @param string       $building
      * @param string       $buildingStatus
      *
@@ -305,7 +305,7 @@ class Buildings
 
             $app['orm.em']->persist($app['user']);
         }
-        
+
         // Fully hydrate the town resources when the first building (Capitol) is built.
         if (
             empty($town->getTownBuildings()) &&
@@ -314,7 +314,7 @@ class Buildings
             $town->prepareTownResources(
                 $buildingObject->getResourcesCapacity(0)
             );
-            
+
             $app['orm.em']->persist($town);
         }
 

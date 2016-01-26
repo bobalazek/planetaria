@@ -62,7 +62,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\CountriesController::indexAction'
         )
         ->bind('game.countries');
-        
+
         $controllers->match(
             '/countries/new',
             'Application\Controller\Game\CountriesController::newAction'
@@ -74,7 +74,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\CountriesController::detailAction'
         )
         ->bind('game.countries.detail');
-        
+
         $controllers->match(
             '/countries/{id}/edit',
             'Application\Controller\Game\CountriesController::editAction'
@@ -87,7 +87,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::indexAction'
         )
         ->bind('game.towns');
-        
+
         $controllers->match(
             '/towns/new',
             'Application\Controller\Game\TownsController::newAction'
@@ -99,7 +99,7 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::detailAction'
         )
         ->bind('game.towns.detail');
-        
+
         $controllers->match(
             '/towns/{id}/edit',
             'Application\Controller\Game\TownsController::editAction'

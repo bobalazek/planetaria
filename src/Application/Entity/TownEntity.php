@@ -107,7 +107,7 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\OneToMany(targetEntity="Application\Entity\TownBuildingEntity", mappedBy="town", cascade={"all"}, orphanRemoval=true)
      */
     protected $townBuildings;
-    
+
     /**
      * @var ArrayCollection
      *
@@ -328,7 +328,7 @@ class TownEntity extends AbstractAdvancedEntity
                 $this->addTownResource($townResource);
             }
         }
-        
+
         return $this;
     }
 
@@ -507,7 +507,7 @@ class TownEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Town Units ***/
     /**
      * @return ArrayCollection

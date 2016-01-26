@@ -50,7 +50,7 @@ class CountryEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
-    
+
     /**
      * @var string
      *
@@ -91,7 +91,7 @@ class CountryEntity extends AbstractAdvancedEntity
     {
         $this->towns = new ArrayCollection();
     }
-    
+
     /*** Joining status ***/
     /**
      * @return string
@@ -112,7 +112,7 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /*** Joining statuses ***/
     /**
      * @return array
@@ -146,7 +146,7 @@ class CountryEntity extends AbstractAdvancedEntity
 
         return $this;
     }
-    
+
     /**
      * @return integer
      */

@@ -1046,7 +1046,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return $this->towns->contains($town);
     }
-    
+
     /**
      * @return integer
      */
@@ -1054,7 +1054,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return 1;
     }
-    
+
     /**
      * @return boolean
      */
@@ -1063,7 +1063,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         if ($this->hasRole('ROLE_ADMIN')) {
             return true;
         }
-        
+
         return count($this->getTowns()) < $this->getTownsLimit();
     }
 
@@ -1123,7 +1123,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -1131,7 +1131,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return 1;
     }
-    
+
     /**
      * @return boolean
      */
@@ -1140,7 +1140,7 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         if ($this->hasRole('ROLE_ADMIN')) {
             return true;
         }
-        
+
         return count($this->getCountries()) < $this->getCountriesLimit();
     }
 

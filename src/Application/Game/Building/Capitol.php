@@ -55,7 +55,7 @@ class Capitol extends AbstractBuilding
                     // It doesn't cost anything, so we can build it as the base building.
                 ),
                 1 => array(
-                    // Should be more as the building resources capacity, 
+                    // Should be more as the building resources capacity,
                     // so the players don't "accidentially" buy the next level,
                     // but then have nothing left for other production buildings.
                     Resources::WOOD => 6000,

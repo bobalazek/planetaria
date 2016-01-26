@@ -28,7 +28,7 @@ class TownType extends AbstractType
         $builder->add('description', 'textarea', array(
             'required' => false,
         ));
-        
+
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($options) {

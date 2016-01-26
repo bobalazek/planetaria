@@ -2,7 +2,7 @@
 
 return array(
     'debug' => false,
-    
+
     'databaseOptions' => array(
         'default' => array(
             'driver' => 'pdo_mysql',

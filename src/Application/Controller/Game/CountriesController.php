@@ -34,7 +34,7 @@ class CountriesController
             )
         );
     }
-    
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -57,7 +57,7 @@ class CountriesController
 
             if ($form->isValid()) {
                 $countryEntity = $form->getData();
-                
+
                 $countryEntity->setUser($app['user']);
 
                 $app['orm.em']->persist($countryEntity);
@@ -117,7 +117,7 @@ class CountriesController
             )
         );
     }
-    
+
     /**
      * @param Request     $request
      * @param Application $app
@@ -134,11 +134,11 @@ class CountriesController
         if (!$country) {
             $app->abort(404, 'This country does not exist!');
         }
-        
+
         if ($country->getUser() != $app['user']) {
             $app->abort(403, 'This is not your country!');
         }
-        
+
         $form = $app['form.factory']->create(
             new CountryType(),
             $country

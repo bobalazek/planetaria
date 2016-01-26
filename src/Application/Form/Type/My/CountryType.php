@@ -5,9 +5,6 @@ namespace Application\Form\Type\My;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Doctrine\ORM\EntityRepository;
 use Application\Entity\CountryEntity;
 
 /**
@@ -28,12 +25,12 @@ class CountryType extends AbstractType
         $builder->add('description', 'textarea', array(
             'required' => false,
         ));
-        
+
         $builder->add('joiningStatus', 'choice', array(
             'choices' => CountryEntity::getJoiningStatuses(),
             'attr' => array(
                 'data-help-text' => 'Who is allowed to join this country? If you choose "Open", everybody can join your country, when you choose "Invite only", only the people, that were invited via email can join your country and when you choose "Closed", nobody is able to join your country.',
-            )
+            ),
         ));
 
         $builder->add('submitButton', 'submit', array(

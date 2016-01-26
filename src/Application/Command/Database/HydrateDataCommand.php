@@ -66,69 +66,73 @@ class HydrateDataCommand extends ContainerAwareCommand
             }
         }
 
-        /***** Planets *****/
-        $app['game.planets']->generateNew(
-            'Earth',
-            'earth',
-            'The main planet.'
-        );
-        $output->writeln('<info>The new planet was successfully created</info>');
-
-        /***** Users *****/
-        $users = include APP_DIR.'/fixtures/users.php';
-        foreach ($users as $user) {
-            $userEntity = new UserEntity();
-            $profileEntity = new ProfileEntity();
-
-            // Profile
-            $profileEntity
-                ->setFirstName($user['profile']['firstName'])
-                ->setLastName($user['profile']['lastName'])
-            ;
-
-            if (isset($user['profile']['gender'])) {
-                $profileEntity
-                    ->setGender($user['profile']['gender'])
-                ;
-            }
-
-            if (isset($user['profile']['birthdate'])) {
-                $profileEntity
-                    ->setBirthdate($user['profile']['birthdate'])
-                ;
-            }
-
-            if (isset($user['profile']['avatarImage'])) {
-                $profileEntity
-                    ->setAvatarImage($user['profile']['avatarImage'])
-                ;
-            }
-
-            // User
-            $userEntity
-                ->setUsername($user['username'])
-                ->setEmail($user['email'])
-                ->setPlainPassword(
-                    $user['plainPassword'],
-                    $app['security.encoder_factory']
-                )
-                ->setRoles($user['roles'])
-                ->setProfile($profileEntity)
-                ->enable()
-            ;
-
-            $app['orm.em']->persist($userEntity);
-            $app['orm.em']->flush();
-
-            $app['game.countries']->prepareNew(
-                $userEntity,
-                $user['country'],
-                $user['town'],
-                $app['orm.em']->find('Application\Entity\PlanetEntity', 1),
-                $user['startingCoordinates']
+        try {
+            /***** Planets *****/
+            $app['game.planets']->generateNew(
+                'Earth',
+                'earth',
+                'The main planet.'
             );
-        }
+            $output->writeln('<info>The new planet was successfully created</info>');
+            
+            /***** Users *****/
+            $users = include APP_DIR.'/fixtures/users.php';
+            foreach ($users as $user) {
+                $userEntity = new UserEntity();
+                $profileEntity = new ProfileEntity();
 
-        $output->writeln('<info>Data was successfully hydrated!</info>');
+                // Profile
+                $profileEntity
+                    ->setFirstName($user['profile']['firstName'])
+                    ->setLastName($user['profile']['lastName'])
+                ;
+
+                if (isset($user['profile']['gender'])) {
+                    $profileEntity
+                        ->setGender($user['profile']['gender'])
+                    ;
+                }
+
+                if (isset($user['profile']['birthdate'])) {
+                    $profileEntity
+                        ->setBirthdate($user['profile']['birthdate'])
+                    ;
+                }
+
+                if (isset($user['profile']['avatarImage'])) {
+                    $profileEntity
+                        ->setAvatarImage($user['profile']['avatarImage'])
+                    ;
+                }
+
+                // User
+                $userEntity
+                    ->setUsername($user['username'])
+                    ->setEmail($user['email'])
+                    ->setPlainPassword(
+                        $user['plainPassword'],
+                        $app['security.encoder_factory']
+                    )
+                    ->setRoles($user['roles'])
+                    ->setProfile($profileEntity)
+                    ->enable()
+                ;
+
+                $app['orm.em']->persist($userEntity);
+                $app['orm.em']->flush();
+
+                $app['game.countries']->prepareNew(
+                    $userEntity,
+                    $user['country'],
+                    $user['town'],
+                    $app['orm.em']->find('Application\Entity\PlanetEntity', 1),
+                    $user['startingCoordinates']
+                );
+            }
+            
+            $output->writeln('<info>Data was successfully hydrated!</info>');
+        } catch (\Exception $e) {
+            $output->writeln('<error>'.$e->getMessage().'</error>');
+        }
     }
 }
