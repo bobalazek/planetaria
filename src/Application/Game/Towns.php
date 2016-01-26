@@ -35,21 +35,19 @@ class Towns
      */
     public function hasEnoughResourcesForBuilding(TownEntity $town, $building, $level = 0)
     {
-        $result = true;
         $buildingObject = Buildings::getAllWithData($building);
         $requiredResources = $buildingObject->getResourcesCost($level);
         $availableResources = $town->getResourcesAvailable();
-
+        
         if (!empty($requiredResources)) {
             foreach ($requiredResources as $requiredResource => $requiredResourceValue) {
                 if ($requiredResourceValue > $availableResources[$requiredResource]) {
-                    $result = false;
-                    break;
+                    return false;
                 }
             }
         }
 
-        return $result;
+        return true;
     }
 
     /**
@@ -63,7 +61,6 @@ class Towns
      */
     public function hasRequiredBuildingsForBuilding(TownEntity $town, $building, $level = 0)
     {
-        $result = true;
         $buildingObject = Buildings::getAllWithData($building);
         $requiredBuildings = $buildingObject->getBuildingsRequired($level);
         $townBuildings = $town->getTownBuildings();
@@ -89,20 +86,18 @@ class Towns
             foreach ($requiredBuildings as $requiredBuilding => $requiredBuildingLevel) {
                 // If we don't have that required building
                 if (!isset($townBuildingsArray[$requiredBuilding])) {
-                    $result = false;
-                    break;
+                    return false;
                 }
 
                 // If the building we have, has the required level
                 $buildingMaximumLevel = $townBuildingsArray[$requiredBuilding];
                 if ($buildingMaximumLevel < $requiredBuildingLevel) {
-                    $result = false;
-                    break;
+                    return false;
                 }
             }
         }
 
-        return $result;
+        return true;
     }
 
     /**
@@ -180,6 +175,14 @@ class Towns
         $y1 = $startingCoordinates[1];
         $x2 = $town->getCoordinatesX();
         $y2 = $town->getCoordinatesY();
+        
+        // That means, that we couln't fetched the capitol building coordinates,
+        // which is the town center... means, no capitol yet...
+        // You can build wherever you want!
+        if ($x2 === false || $y2 === false) {
+            return true;
+        }
+        
         $distance = sqrt(pow($x2 - $x1, 2) + pow($y2 - $y1, 2));
 
         if ($distance > $buildRadius) {
@@ -191,11 +194,10 @@ class Towns
 
     /**
      * @param TownEntity $town
-     * @param boolean    $ignoreCapacityLimit Should it ignore  the capacity imit (and skipp the setter to capacity, if it's more)? Usefull when creating a new town, that does not have any storage yet (because it doesn't have any buildings that would increase it)
      *
      * @return void
      */
-    public function updateTownResources(TownEntity $town, $ignoreCapacityLimit = false)
+    public function updateTownResources(TownEntity $town)
     {
         $app = $this->app;
         $resources = $town->getResources();
@@ -239,7 +241,6 @@ class Towns
             $amount = $townResourceAmount + $resourcesProduced;
 
             if (
-                !$ignoreCapacityLimit &&
                 $amount > $resourceData['capacity'] &&
                 $resourceData['capacity'] !== -1 // -1 capacity means inifinitve, so ignore it!
             ) {

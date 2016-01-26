@@ -116,25 +116,7 @@ class Countries
             $planet,
             $townEntity,
             array($startCoordinatesX, $startCoordinatesY),
-            Buildings::CAPITOL,
-            true // $ignoreCapacityLimit
+            Buildings::CAPITOL
         );
-
-        // Town building - Farms
-        $farmsCoordinates = array(
-            array($startCoordinatesX-1, $startCoordinatesY-1),
-            array($startCoordinatesX+2, $startCoordinatesY-1),
-            array($startCoordinatesX-1, $startCoordinatesY+2),
-            array($startCoordinatesX+2, $startCoordinatesY+2),
-        );
-        foreach ($farmsCoordinates as $farmCoordinates) {
-            $app['game.buildings']->build(
-                $planet,
-                $townEntity,
-                $farmCoordinates,
-                Buildings::FARM,
-                true // $ignoreCapacityLimit
-            );
-        }
     }
 }

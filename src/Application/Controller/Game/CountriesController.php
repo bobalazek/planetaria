@@ -34,6 +34,62 @@ class CountriesController
             )
         );
     }
+    
+    /**
+     * @param Request     $request
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function newAction(Request $request, Application $app)
+    {
+        if (!$app['user']->canCreateNewCountry()) {
+            $app->abort(403, 'You can not create a new country!');
+        }
+
+        $form = $app['form.factory']->create(
+            new CountryType(),
+            new CountryEntity()
+        );
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $countryEntity = $form->getData();
+                
+                $countryEntity->setUser($app['user']);
+
+                $app['orm.em']->persist($countryEntity);
+                $app['orm.em']->flush();
+
+                $app['flashbag']->add(
+                    'success',
+                    $app['translator']->trans(
+                        'You have successfully created a new country!'
+                    )
+                );
+
+                return $app->redirect(
+                    $app['url_generator']->generate(
+                        'game.countries.detail',
+                        array(
+                            'id' => $countryEntity->getId(),
+                        )
+                    )
+                );
+            }
+        }
+
+        $data['form'] = $form->createView();
+
+        return new Response(
+            $app['twig']->render(
+                'contents/game/countries/new.html.twig',
+                $data
+            )
+        );
+    }
 
     /**
      * @param integer     $id

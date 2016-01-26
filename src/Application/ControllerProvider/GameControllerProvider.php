@@ -62,6 +62,12 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\CountriesController::indexAction'
         )
         ->bind('game.countries');
+        
+        $controllers->match(
+            '/countries/new',
+            'Application\Controller\Game\CountriesController::newAction'
+        )
+        ->bind('game.countries.new');
 
         $controllers->match(
             '/countries/{id}',
@@ -81,12 +87,24 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\TownsController::indexAction'
         )
         ->bind('game.towns');
+        
+        $controllers->match(
+            '/towns/new',
+            'Application\Controller\Game\TownsController::newAction'
+        )
+        ->bind('game.towns.new');
 
         $controllers->match(
             '/towns/{id}',
             'Application\Controller\Game\TownsController::detailAction'
         )
         ->bind('game.towns.detail');
+        
+        $controllers->match(
+            '/towns/{id}/edit',
+            'Application\Controller\Game\TownsController::editAction'
+        )
+        ->bind('game.towns.edit');
 
         $controllers->match(
             '/towns/{id}/buildings/{buildingId}',

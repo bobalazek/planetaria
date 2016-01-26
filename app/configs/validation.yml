@@ -59,6 +59,15 @@ Application\Entity\TownEntity:
             message: 'This slug is already in use'
             groups: [ newAndEdit ]
     properties:
+        name:
+            - NotBlank:
+                groups: [ newAndEdit ]
+        slug:
+            - NotBlank:
+                groups: [ newAndEdit ]
+        country:
+            - NotBlank:
+                groups: [ newAndEdit ]
         townResources:
             - Valid: ~
 

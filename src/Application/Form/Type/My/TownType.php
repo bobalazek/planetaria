@@ -8,12 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
-use Application\Entity\CountryEntity;
+use Application\Entity\TownEntity;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class CountryType extends AbstractType
+class TownType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -29,12 +29,34 @@ class CountryType extends AbstractType
             'required' => false,
         ));
         
-        $builder->add('joiningStatus', 'choice', array(
-            'choices' => CountryEntity::getJoiningStatuses(),
-            'attr' => array(
-                'data-help-text' => 'Who is allowed to join this country? If you choose "Open", everybody can join your country, when you choose "Invite only", only the people, that were invited via email can join your country and when you choose "Closed", nobody is able to join your country.',
-            )
-        ));
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($options) {
+                $town = $event->getData();
+                $form = $event->getForm();
+
+                if ($town->getCountry() == null) {
+                    $form->add('country', 'entity', array(
+                        'required' => false,
+                        'empty_value' => false,
+                        'class' => 'Application\Entity\CountryEntity',
+                        'query_builder' => function (EntityRepository $er) use ($options) {
+                            return $er->createQueryBuilder('c')
+                                ->where('c.user = ?1')
+                                ->setParameter(
+                                    1,
+                                    $options['user']
+                                )
+                            ;
+                        },
+                        'attr' => array(
+                            'class' => 'select-picker',
+                            'data-live-search' => 'true',
+                        ),
+                    ));
+                }
+            }
+        );
 
         $builder->add('submitButton', 'submit', array(
             'label' => 'Save',
@@ -52,7 +74,7 @@ class CountryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Application\Entity\CountryEntity',
+            'data_class' => 'Application\Entity\TownEntity',
             'validation_groups' => array('newAndEdit'),
             'csrf_protection' => true,
             'csrf_field_name' => 'csrf_token',
@@ -65,6 +87,6 @@ class CountryType extends AbstractType
      */
     public function getName()
     {
-        return 'country';
+        return 'town';
     }
 }

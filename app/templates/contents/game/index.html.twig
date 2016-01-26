@@ -7,7 +7,15 @@
     <div id="main-content">
         <div class="row">
             <div class="col-md-6">
-                <h2>{{ 'My Countries' | trans }}</h2>
+                <h2>
+                    {{ 'My Countries' | trans }}
+                    {% if app.user.canCreateNewCountry() %}
+                        <a class="btn btn-default"
+                            href="{{ url('game.countries.new') }}">
+                            {{ 'New' | trans }}
+                        </a>
+                    {% endif %}
+                </h2>
                 {% if app.user.getCountries()  %}
                     {% include 'contents/game/_parts/countries-list.html.twig' with { countries: app.user.getCountries() } %}
                 {% else %}
@@ -17,7 +25,15 @@
                 {% endif %}
             </div>
             <div class="col-md-6">
-                <h2>{{ 'My Towns' | trans }}</h2>
+                <h2>
+                    {{ 'My Towns' | trans }}
+                    {% if app.user.canCreateNewTown() %}
+                        <a class="btn btn-default"
+                            href="{{ url('game.towns.new') }}">
+                            {{ 'New' | trans }}
+                        </a>
+                    {% endif %}
+                </h2>
                 {% if app.user.getTowns()  %}
                     {% include 'contents/game/_parts/towns-list.html.twig' with { towns: app.user.getTowns() } %}
                 {% else %}

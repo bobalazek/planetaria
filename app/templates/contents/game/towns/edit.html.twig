@@ -1,0 +1,21 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% block title %}{{ 'Edit' | trans }} | {{ town }} | {{ 'Towns' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ town }}
+        <a class="btn btn-default"
+            href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            {{ 'Back to the Town' | trans }}
+        </a>
+    </h1>
+    <div id="main-content">
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.slug) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.submitButton) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

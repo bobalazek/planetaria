@@ -172,7 +172,7 @@ class GameController
                     $app['flashbag']->add(
                         'success',
                         $app['translator']->trans(
-                            'The building ":building:" has started building!',
+                            'The ":building:" has started building!',
                             array(
                                 ':building:' => Buildings::getAll($building),
                             )

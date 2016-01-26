@@ -12,9 +12,7 @@
     </h1>
     <h2>{{ 'New' | trans }}</h2>
     {{ form_start(form) }}
-        {% if form.user is defined %}
-            {{ form_row(form.user) }}
-        {% endif %}
+        {{ form_row(form.user) }}
         {{ form_row(form.subject) }}
         {{ form_row(form.content) }}
         {{ form_row(form.submitButton) }}

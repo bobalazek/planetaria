@@ -1,0 +1,10 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% block title %}{{ 'New' | trans }} | {{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'New Country' | trans }}</h1>
+    <div id="main-content">
+        {{ form(form) }}
+    </div>
+{% endblock %}

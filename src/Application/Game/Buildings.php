@@ -229,7 +229,6 @@ class Buildings
      * @param array        $coordinates         The start coordinates (bottom left) of the location that building is going to be build
      * @param string       $building
      * @param string       $buildingStatus
-     * @param boolean      $ignoreCapacityLimit Useful when creating a new town, so the town resources amount is NOT set to 0 (because at that point, you do not have any buildings, that gives you storage capacity)
      *
      * @return TownBuildingEntity
      */
@@ -237,13 +236,12 @@ class Buildings
         PlanetEntity $planet,
         TownEntity $town,
         array $startingCoordinates = array(),
-        $building,
-        $ignoreCapacityLimit = false
+        $building
     ) {
         $app = $this->app;
 
         // Before the buy, update the town resources (storage) to the current state.
-        $app['game.towns']->updateTownResources($town, $ignoreCapacityLimit);
+        $app['game.towns']->updateTownResources($town);
 
         /***** Checks *****/
         $this->doPreBuildChecks(
@@ -307,6 +305,18 @@ class Buildings
 
             $app['orm.em']->persist($app['user']);
         }
+        
+        // Fully hydrate the town resources when the first building (Capitol) is built.
+        if (
+            empty($town->getTownBuildings()) &&
+            $building == Buildings::CAPITOL
+        ) {
+            $town->prepareTownResources(
+                $buildingObject->getResourcesCapacity(0)
+            );
+            
+            $app['orm.em']->persist($town);
+        }
 
         // Save everything
         $app['orm.em']->flush();
@@ -364,7 +374,7 @@ class Buildings
         ;
         if ($hasReachedBuildingPerTownLimit) {
             throw new BuildingPerTownLimitReachedException(
-                'You have reached this building limit for this town!'
+                'You have reached this buildings limit for this town!'
             );
         }
 
@@ -378,7 +388,7 @@ class Buildings
         ;
         if ($hasReachedBuildingPerCountryLimit) {
             throw new BuildingPerCountryLimitReachedException(
-                'You have reached this building limit for this country!'
+                'You have reached this buildings limit for this country!'
             );
         }
 

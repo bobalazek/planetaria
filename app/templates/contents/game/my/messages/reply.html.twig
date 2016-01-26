@@ -21,9 +21,6 @@
     {{ form_start(form) }}
         {{ form_row(form.subject) }}
         {{ form_row(form.content) }}
-        {% if form.user is defined %}
-            {{ form_row(form.user) }}
-        {% endif %}
         {{ form_row(form.submitButton) }}
     {{ form_end(form) }}
 {% endblock %}

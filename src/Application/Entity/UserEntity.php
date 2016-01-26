@@ -1054,6 +1054,18 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return 1;
     }
+    
+    /**
+     * @return boolean
+     */
+    public function canCreateNewTown()
+    {
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return true;
+        }
+        
+        return count($this->getTowns()) < $this->getTownsLimit();
+    }
 
     /*** Town buildings ***/
     /**
@@ -1118,6 +1130,18 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     public function getCountriesLimit()
     {
         return 1;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function canCreateNewCountry()
+    {
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return true;
+        }
+        
+        return count($this->getCountries()) < $this->getCountriesLimit();
     }
 
     /*** User badges ***/

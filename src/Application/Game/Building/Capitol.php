@@ -45,27 +45,29 @@ class Capitol extends AbstractBuilding
                 3 => 16000,
             ))
             ->setBuildTime(array(
-                0 => 10,
+                0 => 0,
                 1 => 30,
                 2 => 60,
                 3 => 120,
             ))
             ->setResourcesCost(array(
                 0 => array(
-                    Resources::WOOD => 2000,
-                    Resources::ROCK => 2000,
+                    // It doesn't cost anything, so we can build it as the base building.
                 ),
                 1 => array(
-                    Resources::WOOD => 4000,
-                    Resources::ROCK => 4000,
+                    // Should be more as the building resources capacity, 
+                    // so the players don't "accidentially" buy the next level,
+                    // but then have nothing left for other production buildings.
+                    Resources::WOOD => 6000,
+                    Resources::ROCK => 6000,
                 ),
                 2 => array(
-                    Resources::WOOD => 8000,
-                    Resources::ROCK => 8000,
+                    Resources::WOOD => 12000,
+                    Resources::ROCK => 12000,
                 ),
                 3 => array(
-                    Resources::WOOD => 16000,
-                    Resources::ROCK => 16000,
+                    Resources::WOOD => 18000,
+                    Resources::ROCK => 18000,
                 ),
             ))
             ->setAvailableTerrainTypes(array(

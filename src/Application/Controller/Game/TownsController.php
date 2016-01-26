@@ -3,8 +3,11 @@
 namespace Application\Controller\Game;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Application\Game\Buildings;
+use Application\Entity\TownEntity;
+use Application\Form\Type\My\TownType;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -29,6 +32,73 @@ class TownsController
                 array(
                     'towns' => $towns,
                 )
+            )
+        );
+    }
+    
+    /**
+     * @param Request     $request
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function newAction(Request $request, Application $app)
+    {
+        if (!$app['user']->canCreateNewTown()) {
+            $app->abort(403, 'You can not create a new town!');
+        }
+        
+        if (count($app['user']->getTowns()) < 1) {
+            $app->abort(403, 'You need at least one country to which you can assign this town!');
+        }
+
+        $form = $app['form.factory']->create(
+            new TownType(),
+            new TownEntity(),
+            array(
+                'user' => $app['user'],
+            )
+        );
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
+                $townEntity = $form->getData();
+                
+                $townEntity
+                    ->setUser($app['user'])
+                    ->setPlanet($planet)
+                ;
+
+                $app['orm.em']->persist($townEntity);
+                $app['orm.em']->flush();
+
+                $app['flashbag']->add(
+                    'success',
+                    $app['translator']->trans(
+                        'You have successfully created a new town!'
+                    )
+                );
+
+                return $app->redirect(
+                    $app['url_generator']->generate(
+                        'game.towns.detail',
+                        array(
+                            'id' => $townEntity->getId(),
+                        )
+                    )
+                );
+            }
+        }
+
+        $data['form'] = $form->createView();
+
+        return new Response(
+            $app['twig']->render(
+                'contents/game/towns/new.html.twig',
+                $data
             )
         );
     }
@@ -59,6 +129,70 @@ class TownsController
                 'contents/game/towns/detail.html.twig',
                 array(
                     'town' => $town,
+                )
+            )
+        );
+    }
+    
+    /**
+     * @param Request     $request
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function editAction($id, Request $request, Application $app)
+    {
+        $town = $app['orm.em']->find(
+            'Application\Entity\TownEntity',
+            $id
+        );
+
+        if (!$town) {
+            $app->abort(404, 'This town does not exist!');
+        }
+        
+        if ($town->getUser() != $app['user']) {
+            $app->abort(403, 'This is not your town!');
+        }
+        
+        $form = $app['form.factory']->create(
+            new TownType(),
+            $town
+        );
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $townEntity = $form->getData();
+
+                $app['orm.em']->persist($townEntity);
+                $app['orm.em']->flush();
+
+                $app['flashbag']->add(
+                    'success',
+                    $app['translator']->trans(
+                        'Your town settings were successfully saved!'
+                    )
+                );
+
+                return $app->redirect(
+                    $app['url_generator']->generate(
+                        'game.towns.edit',
+                        array(
+                            'id' => $townEntity->getId(),
+                        )
+                    )
+                );
+            }
+        }
+
+        return new Response(
+            $app['twig']->render(
+                'contents/game/towns/edit.html.twig',
+                array(
+                    'town' => $town,
+                    'form' => $form->createView(),
                 )
             )
         );

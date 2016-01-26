@@ -303,17 +303,33 @@ class TownEntity extends AbstractAdvancedEntity
     public function prepareTownResources($amount = 0)
     {
         $resources = Resources::getAll();
-
-        foreach ($resources as $resouce => $resourceName) {
-            $townResource = new TownResourceEntity();
-
-            $townResource
-                ->setResource($resouce)
-                ->setAmount($amount)
-            ;
-
-            $this->addTownResource($townResource);
+        $townResources = array();
+        $townResourcesCollection = $this->getTownResources();
+        if (!empty($townResourcesCollection)) {
+            foreach ($townResourcesCollection as $singleTownResouce) {
+                $key = $singleTownResouce->getResource();
+                $townResources[$key] = $singleTownResouce;
+            }
         }
+
+        foreach ($resources as $resource => $resourceName) {
+            if (isset($townResources[$resource])) {
+                $townResource = $townResources[$resource];
+                $townResource
+                    ->setAmount($amount)
+                ;
+            } else {
+                $townResource = new TownResourceEntity();
+                $townResource
+                    ->setResource($resource)
+                    ->setAmount($amount)
+                ;
+
+                $this->addTownResource($townResource);
+            }
+        }
+        
+        return $this;
     }
 
     /*** Resources production ***/

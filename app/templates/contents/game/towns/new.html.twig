@@ -1,0 +1,16 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% block title %}{{ 'New' | trans }} | {{ 'Towns' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'New Town' | trans }}</h1>
+    <div id="main-content">
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.slug) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.country) }}
+            {{ form_row(form.submitButton) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
