@@ -3,7 +3,10 @@
 namespace Application\Controller\Game;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Application\Entity\CountryEntity;
+use Application\Form\Type\My\CountryType;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -54,6 +57,70 @@ class CountriesController
                 'contents/game/countries/detail.html.twig',
                 array(
                     'country' => $country,
+                )
+            )
+        );
+    }
+    
+    /**
+     * @param Request     $request
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function editAction($id, Request $request, Application $app)
+    {
+        $country = $app['orm.em']->find(
+            'Application\Entity\CountryEntity',
+            $id
+        );
+
+        if (!$country) {
+            $app->abort(404, 'This country does not exist!');
+        }
+        
+        if ($country->getUser() != $app['user']) {
+            $app->abort(403, 'This is not your country!');
+        }
+        
+        $form = $app['form.factory']->create(
+            new CountryType(),
+            $country
+        );
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $countryEntity = $form->getData();
+
+                $app['orm.em']->persist($countryEntity);
+                $app['orm.em']->flush();
+
+                $app['flashbag']->add(
+                    'success',
+                    $app['translator']->trans(
+                        'Your country settings were successfully saved!'
+                    )
+                );
+
+                return $app->redirect(
+                    $app['url_generator']->generate(
+                        'game.countries.edit',
+                        array(
+                            'id' => $countryEntity->getId(),
+                        )
+                    )
+                );
+            }
+        }
+
+        return new Response(
+            $app['twig']->render(
+                'contents/game/countries/edit.html.twig',
+                array(
+                    'country' => $country,
+                    'form' => $form->createView(),
                 )
             )
         );

@@ -1046,6 +1046,14 @@ class UserEntity implements AdvancedUserInterface, \Serializable
     {
         return $this->towns->contains($town);
     }
+    
+    /**
+     * @return integer
+     */
+    public function getTownsLimit()
+    {
+        return 1;
+    }
 
     /*** Town buildings ***/
     /**
@@ -1102,6 +1110,14 @@ class UserEntity implements AdvancedUserInterface, \Serializable
         $this->countries = $countries;
 
         return $this;
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getCountriesLimit()
+    {
+        return 1;
     }
 
     /*** User badges ***/

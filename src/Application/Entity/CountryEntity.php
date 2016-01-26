@@ -16,6 +16,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class CountryEntity extends AbstractAdvancedEntity
 {
+    /***** Joining statuses *****/
+    const JOINING_STATUS_OPEN = 'open';
+    const JOINING_STATUS_INVITE_ONLY = 'invite_only';
+    const JOINING_STATUS_CLOSED = 'closed';
+
     /**
      * @var integer
      *
@@ -45,6 +50,13 @@ class CountryEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="joining_status", type="string", length=32)
+     */
+    protected $joiningStatus = 'closed';
 
     /**
      * @var \DateTime
@@ -79,6 +91,40 @@ class CountryEntity extends AbstractAdvancedEntity
     {
         $this->towns = new ArrayCollection();
     }
+    
+    /*** Joining status ***/
+    /**
+     * @return string
+     */
+    public function getJoiningStatus()
+    {
+        return $this->joiningStatus;
+    }
+
+    /**
+     * @param string $joiningStatus
+     *
+     * @return CountryEntity
+     */
+    public function setJoiningStatus($joiningStatus)
+    {
+        $this->joiningStatus = $joiningStatus;
+
+        return $this;
+    }
+    
+    /*** Joining statuses ***/
+    /**
+     * @return array
+     */
+    public static function getJoiningStatuses()
+    {
+        return array(
+            self::JOINING_STATUS_OPEN => 'Open',
+            self::JOINING_STATUS_INVITE_ONLY => 'Invite only',
+            self::JOINING_STATUS_CLOSED => 'Closed',
+        );
+    }
 
     /*** Towns ***/
     /**
@@ -99,6 +145,14 @@ class CountryEntity extends AbstractAdvancedEntity
         $this->towns = $towns;
 
         return $this;
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getTownsLimit()
+    {
+        return 1;
     }
 
     /*** User ***/

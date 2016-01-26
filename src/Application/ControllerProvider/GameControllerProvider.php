@@ -68,6 +68,12 @@ class GameControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\CountriesController::detailAction'
         )
         ->bind('game.countries.detail');
+        
+        $controllers->match(
+            '/countries/{id}/edit',
+            'Application\Controller\Game\CountriesController::editAction'
+        )
+        ->bind('game.countries.edit');
 
         /***** Towns *****/
         $controllers->match(

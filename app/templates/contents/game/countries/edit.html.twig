@@ -1,0 +1,16 @@
+{% extends 'layouts/content/game.html.twig' %}
+
+{% block title %}{{ 'Edit' | trans }} | {{ country }} | {{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ country }}
+        <a class="btn btn-default"
+            href="{{ url('game.countries.detail', { id: country.getId() }) }}">
+            {{ 'Back to the Country' | trans }}
+        </a>
+    </h1>
+    <div id="main-content">
+        {{ form(form) }}
+    </div>
+{% endblock %}

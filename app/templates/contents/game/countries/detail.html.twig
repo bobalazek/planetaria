@@ -3,7 +3,15 @@
 {% block title %}{{ country }} | {{ 'Countries' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ country }}</h1>
+    <h1>
+        {{ country }}
+        {% if country.getUser() == app.user %}
+            <a class="btn btn-default"
+                href="{{ url('game.countries.edit', { id: country.getId() }) }}">
+                {{ 'Edit' | trans }}
+            </a>
+        {% endif %}
+    </h1>
     <div id="main-content">
         <div class="row">
             <div class="col-md-6">

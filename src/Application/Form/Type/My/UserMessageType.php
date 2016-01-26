@@ -15,9 +15,6 @@ use Doctrine\ORM\EntityRepository;
 class UserMessageType extends AbstractType
 {
     /**
-     * buildForm
-     * Insert description here
-     *
      * @param FormBuilderInterface $builder
      * @param $options
      *
