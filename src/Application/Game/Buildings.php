@@ -554,6 +554,22 @@ class Buildings
                 'This building is currently being constructed!'
             );
         }
+        
+        // Check if the building is currently being upgraded
+        $isUpgrading = $townBuilding->isUpgrading();
+        if ($isUpgrading) {
+            throw new TownBuildingAlreadyUpgradingException(
+                'The building is currently upgrading!'
+            );
+        }
+
+        // Check if the building is upgradable
+        $isUpgradable = $townBuilding->isUpgradable();
+        if (!$isUpgradable) {
+            throw new TownBuildingNotUpgradableException(
+                'This building is not upgradable!'
+            );
+        }
 
         // Check if we have the required buildings to upgrade this building
         $hasRequiredBuildingsForBuilding = $app['game.towns']
@@ -580,20 +596,6 @@ class Buildings
         if (!$hasEnoughResourcesForBuilding) {
             throw new InsufficientResourcesException(
                 'You do not have enough resources to upgrade this building!'
-            );
-        }
-
-        $isUpgrading = $townBuilding->isUpgrading();
-        if ($isUpgrading) {
-            throw new TownBuildingAlreadyUpgradingException(
-                'The building is currently upgrading!'
-            );
-        }
-
-        $isUpgradable = $townBuilding->isUpgradable();
-        if (!$isUpgradable) {
-            throw new TownBuildingNotUpgradableException(
-                'This building is no more upgradable!'
             );
         }
     }
