@@ -8,7 +8,7 @@ return array(
     'author' => 'Borut Balazek',
 
     // Admin email (& name)
-    'email' => 'info@bobalazek.com',
+    'email' => 'planetaria@corcosoft.com',
     'emailName' => 'Planetaria Mailer',
 
     // Default Locale / Language stuff
@@ -71,8 +71,8 @@ return array(
     'swiftmailerOptions' => array(
         'host' => 'corcosoft.com',
         'port' => 465,
-        'username' => 'info@corcosoft.com',
-        'password' => '',
+        'username' => 'planetaria@corcosoft.com',
+        'password' => 'mySuperSuperSecurePassword',
         'encryption' => 'ssl',
         'auth_mode' => null,
     ),
