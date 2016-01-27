@@ -126,13 +126,17 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return;
     }
 
-    if ($code == '403') {
-        return $app->redirect(
-            $app['url_generator']->generate(
-                'index'
-            )
-        );
-    }
+    $app['application.mailer']
+        ->swiftMessageInitializeAndSend(array(
+            'subject' => $app['name'].' - '.$app['translator']->trans('An error occured'),
+            'to' => array($app['email'] => $app['emailName']),
+            'body' => 'emails/error.html.twig',
+            'templateData' => array(
+                'e' => $e,
+                'code' => $code,
+            ),
+        ))
+    ;
 
     // 404.html, or 40x.html, or 4xx.html, or default.html
     $templates = array(
