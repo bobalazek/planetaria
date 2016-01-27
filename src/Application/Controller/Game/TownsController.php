@@ -48,7 +48,7 @@ class TownsController
             $app->abort(403, 'You can not create a new town!');
         }
 
-        if (count($app['user']->getTowns()) < 1) {
+        if (count($app['user']->getCountries()) < 1) {
             $app->abort(403, 'You need at least one country to which you can assign this town!');
         }
 
