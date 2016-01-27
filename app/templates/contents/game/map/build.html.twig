@@ -17,7 +17,7 @@
     <h3>{{ 'Construct a new building' | trans }}</h3>
     <div id="main-content">
         {% if town %}
-            <h4>{{ 'Select the building, which you want to build' | trans }}</h4>
+            <h4>{{ 'Select the building, which you want to construct' | trans }}.</h4>
             <div class="row">
                 <div class="col-lg-8">
                     <ul class="nav nav-tabs"
@@ -56,18 +56,20 @@
                 </div> <!-- /.col-lg-4 -->
             </div> <!-- /.row -->
         {% else %}
-            <h4>{{ 'Select the town, in which you want to construct this building' | trans }}:</h4>
+            <h4>{{ 'For which town do you want to construct this building' | trans }}?</h4>
             <div class="row">
                 {% for town in app.user.getTowns() %}
                     <div class="col-md-4">
-                        <a class="btn btn-lg btn-default btn-block btn-lg"
-                            href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId() }) }}">
-                            {{ town }}
-                            {% if town.getDescription() %}
-                                <br />
-                                <small>{{ town.getDescription() }}</small>
-                            {% endif %}
-                        </a>
+                        <div style="padding: 10px 0";>
+                            <a class="btn btn-lg btn-default btn-block btn-lg"
+                                href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y, town_id: town.getId() }) }}">
+                                {{ town }}
+                                {% if town.getDescription() %}
+                                    <br />
+                                    <small>{{ town.getDescription() }}</small>
+                                {% endif %}
+                            </a>
+                        </div>
                     </div>
                 {% else %}
                     <div class="col-md-12">
