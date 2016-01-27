@@ -308,7 +308,7 @@ class TownsController
                 );
             }
         }
-        
+
         $referer = $request->headers->get('referer', false);
         if ($referer !== false) {
             return $app->redirect($referer);

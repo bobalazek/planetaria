@@ -74,7 +74,7 @@ class HydrateDataCommand extends ContainerAwareCommand
                 'The main planet.'
             );
             $output->writeln('<info>The new planet was successfully created</info>');
-            
+
             /***** Users *****/
             $users = include APP_DIR.'/fixtures/users.php';
             foreach ($users as $user) {
@@ -129,7 +129,7 @@ class HydrateDataCommand extends ContainerAwareCommand
                     $user['startingCoordinates']
                 );
             }
-            
+
             $output->writeln('<info>Data was successfully hydrated!</info>');
         } catch (\Exception $e) {
             $output->writeln('<error>'.$e->getMessage().'</error>');

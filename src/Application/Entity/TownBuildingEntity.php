@@ -456,7 +456,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return BuildingStatuses::OPERATIONAL;
     }
-    
+
     /*** At maximum level ***/
     /**
      * @return boolean
@@ -464,7 +464,7 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function isAtMaximumLevel()
     {
         $buildingObject = $this->getBuildingObject();
-        
+
         return $this->getLevel() >= $buildingObject->getMaximumLevel();
     }
 

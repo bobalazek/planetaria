@@ -555,7 +555,7 @@ class Buildings
                 'This building is currently being constructed!'
             );
         }
-        
+
         // Check if the building is currently being upgraded
         $isUpgrading = $townBuilding->isUpgrading();
         if ($isUpgrading) {
