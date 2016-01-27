@@ -3,11 +3,11 @@
         {% if app.user.hasTownBuilding(townBuilding) %}
             <a class="list-group-item clearfix"
                 href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
-                {% include 'contents/game/_parts/town-buildings-list/_inner.html.twig' %}
+                {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
             </a>
         {% else %}
             <div class="list-group-item clearfix">
-                {% include 'contents/game/_parts/town-buildings-list/_inner.html.twig' %}
+                {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
             </div>
         {% endif %}
     {% endfor %}

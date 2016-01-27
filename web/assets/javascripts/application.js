@@ -19,6 +19,7 @@ var Application = function () {
                 Application.slugsInitialize();
                 Application.confirmInitialize();
                 Application.selectsInitialize();
+                Application.linkButtonsInitialize();
 
                 jQuery('#preloader').fadeOut(); // Hide preloader, when everything is ready...
 
@@ -396,6 +397,15 @@ var Application = function () {
         },
         selectsInitialize: function() {
             jQuery('.select-picker').selectpicker();
+        },
+        linkButtonsInitialize: function() {
+            jQuery('.link-button').on('click', function() {
+                var href = jQuery(this).attr('href');
+                
+                window.location.href = href;
+                
+                return false;
+            });
         },
     }
 }();

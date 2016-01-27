@@ -1,6 +1,17 @@
 <img class="pull-left"
     src="{{ app.baseUrl }}/assets/images/buildings/{{ townBuilding.getImage() }}"
     style="max-width: 48px; margin-right: 20px;" />
+{% set preUpgradeChecks = app['game.buildings'].doPreUpgradeChecksResponse(
+    townBuilding
+) %}
+{% if app.user.hasTownBuilding(townBuilding) and townBuilding.isUpgradable() and preUpgradeChecks is sameas (true) %}
+    <div class="pull-right">
+        <button class="btn btn-success btn-xs link-button"
+            href="{{ url('game.towns.buildings.upgrade', { id: townBuilding.getTown().getId(), buildingId: townBuilding.getId() }) }}">
+            {{ 'Upgrade' | trans }}
+        </button>
+    </div>
+{% endif %}
 <h4 class="list-group-item-heading">
     {{ townBuilding.getBuilding() | humanize | trans }}
     <small data-toggle="tooltip"

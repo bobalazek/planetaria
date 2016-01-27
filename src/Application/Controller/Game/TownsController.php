@@ -248,10 +248,11 @@ class TownsController
      * @param integer     $id
      * @param integer     $buildingId
      * @param Application $app
+     * @param Request     $request
      *
      * @return Response
      */
-    public function buildingsUpgradeAction($id, $buildingId, Application $app)
+    public function buildingsUpgradeAction($id, $buildingId, Application $app, Request $request)
     {
         $town = $app['orm.em']->find(
             'Application\Entity\TownEntity',
@@ -306,6 +307,11 @@ class TownsController
                     )
                 );
             }
+        }
+        
+        $referer = $request->headers->get('referer', false);
+        if ($referer !== false) {
+            return $app->redirect($referer);
         }
 
         return $app->redirect(
