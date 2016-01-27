@@ -1,5 +1,23 @@
 {% extends 'layouts/email.html.twig' %}
 
 {% block main %}
-    {{ e.getMessage() }}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <h4>
+                    {{ 'An error was thrown!' | trans }}
+                </h4>
+                <p>{{ 'The user has encountered an error. Refer to the message below' | trans }}:</p>
+                <table class="twelve columns">
+                    <tr>
+                        <td class="panel">
+                            {{ e.getMessage() }}
+                        </td>
+                        <td class="expander"></td>
+                    </tr>
+                </table>
+                <p></p>
+            </td>
+        </tr>
+    </table>
 {% endblock %}

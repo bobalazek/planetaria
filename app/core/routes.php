@@ -122,13 +122,13 @@ $app->match('/set-locale/{locale}', function ($locale) use ($app) {
 
 /***** Errors *****/
 $app->error(function (\Exception $e, $code) use ($app) {
-    if ($app['debug']) {
+    /*if ($app['debug']) {
         return;
-    }
+    }*/
 
     $app['application.mailer']
         ->swiftMessageInitializeAndSend(array(
-            'subject' => $app['name'].' - '.$app['translator']->trans('An error occured'),
+            'subject' => $app['name'].' - '.$app['translator']->trans('An error occured').' ('.$code.')',
             'to' => array($app['email'] => $app['emailName']),
             'body' => 'emails/error.html.twig',
             'templateData' => array(
