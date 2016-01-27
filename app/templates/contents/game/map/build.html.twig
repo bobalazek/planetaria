@@ -14,7 +14,13 @@
         {{ planet }}
         <small>({{ tile.getCoordinates() }})</small>
     </h2>
-    <h3>{{ 'Construct a new building' | trans }}</h3>
+    <h3>
+        {{ 'New building' | trans }}
+        {% if town %}
+            {{ 'for' | trans }}
+            <b>{{ town }}</b>
+        {% endif %}
+    </h3>
     <div id="main-content">
         {% if town %}
             <h4>{{ 'Select the building, which you want to construct' | trans }}.</h4>
