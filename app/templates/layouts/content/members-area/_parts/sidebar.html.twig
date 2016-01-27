@@ -69,6 +69,12 @@
                 {{ 'Skills' | trans }}
             </a>
         </li>
+        <li class="{{ path('members-area.errors') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.errors') }}">
+                <i class="fa fa-fw fa-exclamation"></i>
+                {{ 'Errors' | trans }}
+            </a>
+        </li>
         <li class="{{ path('members-area.statistics') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.statistics') }}">
                 <i class="fa fa-fw fa-bar-chart"></i>

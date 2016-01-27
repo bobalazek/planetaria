@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
+use Application\Entity\ErrorEntity;
 
 /*========== Index ==========*/
 $app->mount(
@@ -87,6 +88,12 @@ $app->mount(
     new Application\ControllerProvider\MembersArea\SkillsControllerProvider()
 );
 
+/******** Errors ********/
+$app->mount(
+    '/members-area/errors',
+    new Application\ControllerProvider\MembersArea\ErrorsControllerProvider()
+);
+
 /******** Statistics ********/
 $app->mount(
     '/members-area/statistics',
@@ -126,7 +133,8 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return;
     }
 
-    $app['application.mailer']
+    // Send error email
+    /* $app['application.mailer']
         ->swiftMessageInitializeAndSend(array(
             'subject' => $app['name'].' - '.$app['translator']->trans('An error occured').' ('.$code.')',
             'to' => array($app['email'] => $app['emailName']),
@@ -136,7 +144,17 @@ $app->error(function (\Exception $e, $code) use ($app) {
                 'code' => $code,
             ),
         ))
+    ; */
+    // or
+    // Save into the database
+    $errorEntity = new ErrorEntity();
+    $errorEntity
+        ->setCode($code)
+        ->setMessage($e->getMessage())
+        ->setException(json_encode($e))
     ;
+    $app['orm.em']->persist($errorEntity);
+    $app['orm.em']->flush();
 
     // 404.html, or 40x.html, or 4xx.html, or default.html
     $templates = array(
