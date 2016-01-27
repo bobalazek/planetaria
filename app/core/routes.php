@@ -122,9 +122,9 @@ $app->match('/set-locale/{locale}', function ($locale) use ($app) {
 
 /***** Errors *****/
 $app->error(function (\Exception $e, $code) use ($app) {
-    /*if ($app['debug']) {
+    if ($app['debug']) {
         return;
-    }*/
+    }
 
     $app['application.mailer']
         ->swiftMessageInitializeAndSend(array(
