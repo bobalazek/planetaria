@@ -13,6 +13,7 @@ use Application\Game\Exception\TownBuildingsLimitReachedException;
 use Application\Game\Exception\TownBuildingAlreadyUpgradingException;
 use Application\Game\Exception\TownBuildingNotUpgradableException;
 use Application\Game\Exception\TownBuildingInConstructionException;
+use Application\Game\Exception\TownBuildingAtMaximumLevelException;
 use Application\Game\Exception\MissingRequiredBuildingsException;
 use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\BuildingPerCountryLimitReachedException;
@@ -564,10 +565,10 @@ class Buildings
         }
 
         // Check if the building is upgradable
-        $isUpgradable = $townBuilding->isUpgradable();
-        if (!$isUpgradable) {
-            throw new TownBuildingNotUpgradableException(
-                'This building is not upgradable!'
+        $isAtMaximumLevel = $townBuilding->isAtMaximumLevel();
+        if ($isAtMaximumLevel) {
+            throw new TownBuildingAtMaximumLevelException(
+                'This building is at maximum level!'
             );
         }
 

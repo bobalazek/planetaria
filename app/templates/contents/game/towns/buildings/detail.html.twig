@@ -24,7 +24,7 @@
                 {% include 'contents/game/_parts/town-sidebar.html.twig' %}
             </div> <!-- /.col-md-4 -->
         </div> <!-- /.row -->
-        {% if townBuilding.isUpgradable() %}
+        {% if townBuilding.isAtMaximumLevel() == false %}
             <div class="row">
                 <div class="col-md-12">
                     <hr />
@@ -45,6 +45,10 @@
                         </a>
                     </div> <!-- /.building-wrapper -->
                 </div> <!-- /.col-md-12 -->
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'This building has already reached the maximum level!' | trans }}
             </div>
         {% endif %}
         {% if townBuilding.isRemovable() is sameas(true) %}
