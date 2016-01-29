@@ -20,7 +20,7 @@ class IonCannonDefenseSystem extends AbstractBuilding
         $this
             ->setName('Ion cannon defense system')
             ->setKey('ion_cannon_defense_system')
-            ->setSlug('missile-defense-system')
+            ->setSlug('ion-cannon-defense-system')
             ->setDescription('Defense against the ion cannon satelite.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
