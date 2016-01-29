@@ -881,4 +881,36 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
+    
+    /**
+     * Returns data in array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName(),
+            'key' => $this->getKey(),
+            'slug' => $this->getSlug(),
+            'description' => $this->getDescription(),
+            'type' => $this->getType(),
+            'size' => $this->getSize(),
+            'size_x' => $this->getSizeX(),
+            'size_y' => $this->getSizeY(),
+            'maximum_level' => $this->getMaximumLevel(),
+            'health_points' => $this->getHealthPoints(),
+            'population_capacity' => $this->getPopulationCapacity(),
+            'build_time' => $this->getBuildTime(),
+            'resources_cost' => $this->getResourcesCost(),
+            'resources_capacity' => $this->getResourcesCapacity(),
+            'resources_production' => $this->getResourcesProduction(),
+            'resources_usage' => $this->getResourcesUsage(),
+            'units_production' => $this->getUnitsProduction(),
+            'units_resources_cost_bonus' => $this->getUnitsResourcesCostBonus(),
+            'units_build_time_bonus' => $this->getUnitsBuildTimeBonus(),
+            'items_production' => $this->getItemsProduction(),
+            'available_terrain_types' => $this->getAvailableTerrainTypes(),
+        );
+    }
 }

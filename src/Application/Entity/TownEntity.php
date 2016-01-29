@@ -580,6 +580,8 @@ class TownEntity extends AbstractAdvancedEntity
 
     /*** Use Resource ***/
     /**
+     * Yu MUST not forget to persist the entity after this call!
+     *
      * @param array $resources
      *
      * @return TownEntity
@@ -704,6 +706,29 @@ class TownEntity extends AbstractAdvancedEntity
     public function __toString()
     {
         return $this->getName();
+    }
+    
+    /**
+     * Returns data in array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'description' => $this->getDescription(),
+            'buildings_limit' => $this->getBuildingsLimit(),
+            'population' => $this->getPopulation(),
+            'population_capacity' => $this->getPopulationCapacity(),
+            'resources_production' => $this->getResourcesProduction(),
+            'resources_available' => $this->getResourcesAvailable(),
+            'resources_capacity' => $this->getResourcesCapacity(),
+            'time_created' => $this->getTimeCreated()->format(DATE_ATOM),
+            'country' => $this->getCountry()->toArray(),
+        );
     }
 
     /**

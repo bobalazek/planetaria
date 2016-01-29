@@ -438,6 +438,39 @@ class TileEntity extends AbstractBasicEntity
 
         return $buildingObjectSlug.'/'.$townBuildingStatus.'/'.$buildingSection.'.png';
     }
+    
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $tileResources = array();
+        $tileResourcesCollection = $this->getTileResources();
+
+        if (!empty($tileResourcesCollection)) {
+            foreach ($tileResourcesCollection as $tileResource) {
+                $tileResources[] = $tileResource->toArray();
+            }
+        }
+
+        return array(
+            'id' => $this->getId(),
+            'terrain_type' => $this->getTerrainType(),
+            'status' => $this->getStatus(),
+            'background_image' => $this->getBackgroundImage(),
+            'coordinates' => $this->getCoordinates(),
+            'coordinates_x' => $this->getCoordinatesX(),
+            'coordinates_y' => $this->getCoordinatesY(),
+            'buildable' => $this->isBuildable(),
+            'currently_buildable' => $this->isCurrentlyBuildable(),
+            'town_building' => $this->getTownBuilding() !== null
+                ? $this->getTownBuilding()->toArray()
+                : null,
+            'building_section' => $this->getBuildingSection(),
+            'planet' => $this->getPlanet()->toArray(),
+            'tile_resources' => $tileResources,
+        );
+    }
 
     /**
      * @ORM\PreUpdate

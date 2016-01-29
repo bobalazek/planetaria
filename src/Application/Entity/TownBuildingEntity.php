@@ -662,6 +662,49 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $buildingObject->getSlug().'/'.$status.'/full.png';
     }
+    
+    /**
+     * Returns data in array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $tiles = array();
+        $tilesCollection = $this->getTiles();
+        
+        if (!empty($tilesCollection)) {
+            foreach ($tilesCollection as $tile) {
+                $tiles[] = $tile->toArray();
+            }
+        }
+        
+        return array(
+            'id' => $this->getId(),
+            'building' => $this->getBuilding(),
+            'building_object' => $this->getBuildingObject()->toArray(),
+            'level' => $this->getLevel(),
+            'status' => $this->getStatus(),
+            'health_points' => $this->getHealthPoints(),
+            'health_points_total' => $this->getHealthPointsTotal(),
+            'health_points_percentage' => $this->getHealthPointsPercentage(),
+            'at_maximum_level' => $this->isAtMaximumLevel(),
+            'operational' => $this->isOperational(),
+            'upgradable' => $this->isUpgradable(),
+            'upgrading' => $this->isUpgrading(),
+            'constructing' => $this->isConstructing(),
+            'image' => $this->getImage(),
+            'time_constructed' => $this->getTileConstructed()->format(DATE_ATOM),
+            'time_next_level_upgrade_started' => $this->getTimeNextLevelUpgradeStarted() !== null
+                ? $this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM)
+                : null,
+            'time_next_level_upgrade_ends' => $this->getTimeNextLevelUpgradeEnds() !== null
+                ? $this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM)
+                : null,
+            'town' => $this->getTown()->toArray(),
+            'tiles' => $tiles,
+        );
+    }
 
     /**
      * @ORM\PreUpdate
