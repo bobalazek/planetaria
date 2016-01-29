@@ -910,6 +910,12 @@ class AbstractBuilding implements BuildingInterface
             'units_resources_cost_bonus' => $this->getUnitsResourcesCostBonus(),
             'units_build_time_bonus' => $this->getUnitsBuildTimeBonus(),
             'items_production' => $this->getItemsProduction(),
+            'items_resources_cost_bonus' => $this->getItemsResourcesCostBonus(),
+            'items_build_time_bonus' => $this->getItemsBuildTimeBonus(),
+            'per_town_limit' => $this->getPerTownLimit(),
+            'per_country_limit' => $this->getPerCountryLimit(),
+            'per_planet_limit' => $this->getPerPlanetLimit(),
+            'limit' => $this->getLimit(),
             'available_terrain_types' => $this->getAvailableTerrainTypes(),
         );
     }
