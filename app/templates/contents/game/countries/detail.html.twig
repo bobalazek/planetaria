@@ -17,6 +17,12 @@
             <div class="col-md-6">
                 <h2>{{ 'Information' | trans }}</h2>
                 <ul class="list-group">
+                    {% if country.getImageUrl() %}
+                        <li class="list-group-item">
+                            <img class="img-responsive"
+                                src="{{ country.getImageUrl() }}" />
+                        </li>
+                    {% endif %}
                     {% if country.getDescription() %}
                         <li class="list-group-item">
                             <b>{{ 'Description' | trans }}:</b>

@@ -66,6 +66,13 @@ class TownsController
             if ($form->isValid()) {
                 $planet = $app['orm.em']->find('Application\Entity\PlanetEntity', 1);
                 $townEntity = $form->getData();
+                
+                /*** Image ***/
+                $townEntity
+                    ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
+                    ->setImageUploadDir(WEB_DIR.'/assets/uploads/')
+                    ->imageUpload()
+                ;
 
                 $townEntity
                     ->setUser($app['user'])
@@ -165,6 +172,13 @@ class TownsController
 
             if ($form->isValid()) {
                 $townEntity = $form->getData();
+                
+                /*** Image ***/
+                $townEntity
+                    ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
+                    ->setImageUploadDir(WEB_DIR.'/assets/uploads/')
+                    ->imageUpload()
+                ;
 
                 $app['orm.em']->persist($townEntity);
                 $app['orm.em']->flush();

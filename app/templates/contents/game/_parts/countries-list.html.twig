@@ -1,7 +1,13 @@
 <ul class="list-group">
     {% for country in countries %}
-        <a class="list-group-item"
+        <a class="list-group-item clearfix"
             href="{{ url('game.countries.detail', { id: country.getId() }) }}">
+            <div class="pull-left"
+                style="margin-right: 20px;">
+                <img class="img-responsive"
+                    src="{{ country.getImageUrl() }}"
+                    style="max-width: 128px; max-height: 128px;" />
+            </div>
             <h4 class="list-group-item-heading">
                 {{ country.getName() }}
             </h4>

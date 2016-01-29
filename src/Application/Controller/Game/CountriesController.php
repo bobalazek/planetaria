@@ -59,6 +59,13 @@ class CountriesController
                 $countryEntity = $form->getData();
 
                 $countryEntity->setUser($app['user']);
+                
+                /*** Image ***/
+                $countryEntity
+                    ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
+                    ->setImageUploadDir(WEB_DIR.'/assets/uploads/')
+                    ->imageUpload()
+                ;
 
                 $app['orm.em']->persist($countryEntity);
                 $app['orm.em']->flush();
@@ -149,6 +156,13 @@ class CountriesController
 
             if ($form->isValid()) {
                 $countryEntity = $form->getData();
+                
+                /*** Image ***/
+                $countryEntity
+                    ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
+                    ->setImageUploadDir(WEB_DIR.'/assets/uploads/')
+                    ->imageUpload()
+                ;
 
                 $app['orm.em']->persist($countryEntity);
                 $app['orm.em']->flush();

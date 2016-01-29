@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class CountryEntity extends AbstractAdvancedEntity
+class CountryEntity extends AbstractAdvancedWithImageUploadEntity
 {
     /***** Joining statuses *****/
     const JOINING_STATUS_OPEN = 'open';
@@ -50,6 +50,13 @@ class CountryEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_url", type="text", nullable=true)
+     */
+    protected $imageUrl;
 
     /**
      * @var string

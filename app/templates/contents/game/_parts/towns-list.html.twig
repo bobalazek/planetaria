@@ -1,7 +1,13 @@
 <ul class="list-group">
     {% for town in towns %}
-        <a class="list-group-item"
+        <a class="list-group-item clearfix"
             href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            <div class="pull-left"
+                style="margin-right: 20px;">
+                <img class="img-responsive"
+                    src="{{ town.getImageUrl() }}"
+                    style="max-width: 128px; max-height: 128px;" />
+            </div>
             <h4 class="list-group-item-heading">
                 {{ town.getName() }}
             </h4>

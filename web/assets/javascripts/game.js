@@ -66,11 +66,16 @@ var Game = function () {
                         var resourceCapacity = parseInt(jQuery(this).attr('data-resource-capacity'));
                         var resourceProduction = parseInt(jQuery(this).attr('data-resource-production'));
 
-                        if (
-                            resourceProduction > 0 &&
-                            resourceAvailable < resourceCapacity 
-                        ) {
+                        if (resourceProduction > 0) {
                             resourceAvailable = resourceAvailable + (resourceProduction / 60);
+                            
+                            if (
+                                resourceCapacity !== -1 &&
+                                resourceAvailable > resourceCapacity
+                            ) {
+                                resourceAvailable = resourceCapacity;
+                            }
+                            
                             jQuery(this).attr('data-resource-available', resourceAvailable);
                             jQuery(this).find('.resource-available').text(parseInt(resourceAvailable));
                         }

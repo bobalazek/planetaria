@@ -25,6 +25,9 @@ class CountryType extends AbstractType
         $builder->add('description', 'textarea', array(
             'required' => false,
         ));
+        $builder->add('image', 'file', array(
+            'required' => false,
+        ));
 
         $builder->add('joiningStatus', 'choice', array(
             'choices' => CountryEntity::getJoiningStatuses(),

@@ -17,7 +17,7 @@ use Application\Game\Building\Building;
  *
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class TownEntity extends AbstractAdvancedEntity
+class TownEntity extends AbstractAdvancedWithImageUploadEntity
 {
     /**
      * @var integer
@@ -48,6 +48,13 @@ class TownEntity extends AbstractAdvancedEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_url", type="text", nullable=true)
+     */
+    protected $imageUrl;
 
     /**
      * @var string
