@@ -438,7 +438,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $buildingObjectSlug.'/'.$townBuildingStatus.'/'.$buildingSection.'.png';
     }
-    
+
     /**
      * @return array
      */

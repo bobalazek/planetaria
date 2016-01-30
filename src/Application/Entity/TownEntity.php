@@ -48,7 +48,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
-    
+
     /**
      * @var string
      *
@@ -714,7 +714,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
     {
         return $this->getName();
     }
-    
+
     /**
      * Returns data in array
      *

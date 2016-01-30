@@ -50,7 +50,7 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
-    
+
     /**
      * @var string
      *

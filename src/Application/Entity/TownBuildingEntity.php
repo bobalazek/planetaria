@@ -662,7 +662,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $buildingObject->getSlug().'/'.$status.'/full.png';
     }
-    
+
     /**
      * Returns data in array
      *
@@ -672,13 +672,13 @@ class TownBuildingEntity extends AbstractBasicEntity
     {
         $tiles = array();
         $tilesCollection = $this->getTiles();
-        
+
         if (!empty($tilesCollection)) {
             foreach ($tilesCollection as $tile) {
                 $tiles[] = $tile->toArray();
             }
         }
-        
+
         return array(
             'id' => $this->getId(),
             'building' => $this->getBuilding(),

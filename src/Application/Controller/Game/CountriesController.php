@@ -59,7 +59,7 @@ class CountriesController
                 $countryEntity = $form->getData();
 
                 $countryEntity->setUser($app['user']);
-                
+
                 /*** Image ***/
                 $countryEntity
                     ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
@@ -156,7 +156,7 @@ class CountriesController
 
             if ($form->isValid()) {
                 $countryEntity = $form->getData();
-                
+
                 /*** Image ***/
                 $countryEntity
                     ->setImageUploadPath($app['baseUrl'].'/assets/uploads/')
