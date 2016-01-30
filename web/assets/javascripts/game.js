@@ -114,6 +114,12 @@ var Game = function () {
                         .text(parseInt(percentage)+'%')
                     ;
                     
+                    jQuery(this)
+                        .parent()
+                        .find('.seconds-until-done')
+                        .text(secondsUntilDone)
+                    ;
+                    
                     if (
                         jQuery.isNumeric(secondsUntilDone) &&
                         secondsUntilDone <= 0
