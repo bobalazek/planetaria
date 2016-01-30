@@ -25,6 +25,12 @@ h1 {
 }
 
 /********** Content **********/
+/*** Sidebar ***/
+/* User panel */
+#user-panel-buttons .btn {
+    margin-bottom: 4px;
+}
+
 /*** Game map ***/
 #map-wrapper {
     max-width: 800px;

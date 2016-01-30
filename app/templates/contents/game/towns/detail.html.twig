@@ -58,6 +58,13 @@
                             {{ town.getPopulationCapacity() }}
                             {{ 'used' | trans }}
                         </li>
+                        <li class="list-group-item">
+                            <b>{{ 'Buildings' | trans }}:</b>
+                            {{ town.getTownBuildings() | length }}
+                            {{ 'out of' | trans }}
+                            {{ town.getBuildingsLimit() }}
+                            {{ 'constructed' | trans }}
+                        </li>
                     {% endif %}
                 </ul>
             </div> <!-- /.col-lg-10 -->
