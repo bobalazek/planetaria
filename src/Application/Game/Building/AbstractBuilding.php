@@ -881,6 +881,16 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
+    
+    /**
+     * Returns the name of that building¸
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Returns data in array

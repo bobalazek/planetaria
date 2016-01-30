@@ -310,7 +310,10 @@ class TownsController
                 $app['flashbag']->add(
                     'success',
                     $app['translator']->trans(
-                        'The upgrade for this building has started!'
+                        'The upgrade for the ":building:" building has started!',
+                        array(
+                            ':building:' => $townBuilding->getBuildingObject(),
+                        )
                     )
                 );
             } catch (\Exception $e) {
