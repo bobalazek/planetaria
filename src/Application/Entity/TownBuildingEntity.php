@@ -664,46 +664,155 @@ class TownBuildingEntity extends AbstractBasicEntity
     }
 
     /**
-     * Returns data in array
+     * @param array $fields Which fields should it show?
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($fields = array('*'))
     {
-        $tiles = array();
-        $tilesCollection = $this->getTiles();
+        $data = array();
 
-        if (!empty($tilesCollection)) {
-            foreach ($tilesCollection as $tile) {
-                $tiles[] = $tile->toArray(false);
-            }
+        if (
+            in_array('*', $fields) ||
+            in_array('id', $fields)
+        ) {
+            $data['id'] = $this->getId();
         }
 
-        return array(
-            'id' => $this->getId(),
-            'building' => $this->getBuilding(),
-            'building_object' => $this->getBuildingObject()->toArray(),
-            'level' => $this->getLevel(),
-            'status' => $this->getStatus(),
-            'health_points' => $this->getHealthPoints(),
-            'health_points_total' => $this->getHealthPointsTotal(),
-            'health_points_percentage' => $this->getHealthPointsPercentage(),
-            'at_maximum_level' => $this->isAtMaximumLevel(),
-            'operational' => $this->isOperational(),
-            'upgradable' => $this->isUpgradable(),
-            'upgrading' => $this->isUpgrading(),
-            'constructing' => $this->isConstructing(),
-            'image' => $this->getImage(),
-            'time_constructed' => $this->getTimeConstructed()->format(DATE_ATOM),
-            'time_next_level_upgrade_started' => $this->getTimeNextLevelUpgradeStarted() !== null
+        if (
+            in_array('*', $fields) ||
+            in_array('building', $fields)
+        ) {
+            $data['building'] = $this->getBuilding();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('building_object', $fields)
+        ) {
+            $data['building_object'] = $this->getBuildingObject()->toArray();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('level', $fields)
+        ) {
+            $data['level'] = $this->getLevel();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('health_points', $fields)
+        ) {
+            $data['health_points'] = $this->getHealthPoints();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('health_points_total', $fields)
+        ) {
+            $data['health_points_total'] = $this->getHealthPointsTotal();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('health_points_percentage', $fields)
+        ) {
+            $data['health_points_percentage'] = $this->getHealthPointsPercentage();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('at_maximum_level', $fields)
+        ) {
+            $data['at_maximum_level'] = $this->isAtMaximumLevel();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('operational', $fields)
+        ) {
+            $data['operational'] = $this->isOperational();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('upgradable', $fields)
+        ) {
+            $data['upgradable'] = $this->isUpgradable();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('upgrading', $fields)
+        ) {
+            $data['upgrading'] = $this->isUpgrading();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('constructing', $fields)
+        ) {
+            $data['constructing'] = $this->isConstructing();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('image', $fields)
+        ) {
+            $data['image'] = $this->getImage();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('time_constructed', $fields)
+        ) {
+            $data['time_constructed'] = $this->getTimeConstructed()->format(DATE_ATOM);
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('time_next_level_upgrade_started', $fields)
+        ) {
+            $data['time_next_level_upgrade_started'] = $this->getTimeNextLevelUpgradeStarted() !== null
                 ? $this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM)
-                : null,
-            'time_next_level_upgrade_ends' => $this->getTimeNextLevelUpgradeEnds() !== null
+                : null
+            ;
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('time_next_level_upgrade_ends', $fields)
+        ) {
+            $data['time_next_level_upgrade_ends'] = $this->getTimeNextLevelUpgradeEnds() !== null
                 ? $this->getTimeNextLevelUpgradeEnds()->format(DATE_ATOM)
-                : null,
-            'town' => $this->getTown()->toArray(),
-            'tiles' => $tiles,
-        );
+                : null
+            ;
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('town', $fields)
+        ) {
+            $data['time_next_level_upgrade_ends'] = $this->getTown()->toArray();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('tiles', $fields)
+        ) {
+            $tiles = array();
+            $tilesCollection = $this->getTiles();
+            if (!empty($tilesCollection)) {
+                foreach ($tilesCollection as $tile) {
+                    $tiles[] = $tile->toArray();
+                }
+            }
+
+            $data['tiles'] = $tiles;
+        }
+
+        return $data;
     }
 
     /**

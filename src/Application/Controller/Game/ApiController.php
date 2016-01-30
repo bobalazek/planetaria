@@ -79,7 +79,13 @@ class ApiController
         ;
 
         foreach ($tilesArray as $singleTile) {
-            $tiles[$singleTile->getCoordinates()] = $singleTile->toArray(false);
+            $tiles[$singleTile->getCoordinates()] = $singleTile->toArray(array(
+                'id', 'terrain_type', 'status', 'background_image',
+                'coordinates', 'coordinates_x', 'coordinates_y',
+                'buildable', 'currently_buildable',
+                'town_building.{id,building,building_object,level,status,health_points,health_points_total,health_points_percentage,at_maximum_level,operational,upgradable,upgrading,constructing,image,time_constructed,time_next_level_upgrade_started,time_next_level_upgrade_ends}',
+                'building_section',
+            ));
         }
 
         return $app->json(array(

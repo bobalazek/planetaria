@@ -4,6 +4,7 @@ namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Application\Game\BuildingStatuses;
+use Application\Helper;
 
 /**
  * Tile Entity
@@ -440,48 +441,134 @@ class TileEntity extends AbstractBasicEntity
     }
 
     /**
-     * @param boolean $all Should it return all the data, or just the basic, tile related?
+     * @param array $fields Which fields should it show?
      *
      * @return array
      */
-    public function toArray($all = true)
+    public function toArray($fields = array('*'))
     {
-        $data = array(
-            'id' => $this->getId(),
-            'terrain_type' => $this->getTerrainType(),
-            'status' => $this->getStatus(),
-            'background_image' => $this->getBackgroundImage(),
-            'coordinates' => $this->getCoordinates(),
-            'coordinates_x' => $this->getCoordinatesX(),
-            'coordinates_y' => $this->getCoordinatesY(),
-            'buildable' => $this->isBuildable(),
-            'currently_buildable' => $this->isCurrentlyBuildable(),
-        );
+        $data = array();
 
-        if (!$all) {
-            return $data;
+        if (
+            in_array('*', $fields) ||
+            in_array('id', $fields)
+        ) {
+            $data['id'] = $this->getId();
         }
 
-        $tileResources = array();
-        $tileResourcesCollection = $this->getTileResources();
+        if (
+            in_array('*', $fields) ||
+            in_array('terrain_type', $fields)
+        ) {
+            $data['terrain_type'] = $this->getTerrainType();
+        }
 
-        if (!empty($tileResourcesCollection)) {
-            foreach ($tileResourcesCollection as $tileResource) {
-                $tileResources[] = $tileResource->toArray();
+        if (
+            in_array('*', $fields) ||
+            in_array('status', $fields)
+        ) {
+            $data['status'] = $this->getStatus();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('background_image', $fields)
+        ) {
+            $data['background_image'] = $this->getBackgroundImage();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('coordinates', $fields)
+        ) {
+            $data['coordinates'] = $this->getCoordinates();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('coordinates_x', $fields)
+        ) {
+            $data['coordinates_x'] = $this->getCoordinatesX();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('coordinates_y', $fields)
+        ) {
+            $data['coordinates_y'] = $this->getCoordinatesY();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('buildable', $fields)
+        ) {
+            $data['buildable'] = $this->isBuildable();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('currently_buildable', $fields)
+        ) {
+            $data['currently_buildable'] = $this->isCurrentlyBuildable();
+        }
+        if (
+            in_array('*', $fields) ||
+            in_array('town_building', $fields) ||
+            Helper::strpos_array($fields, 'town_building.') !== false
+        ) {
+            $townBuildingFields = array('*');
+
+            if ($index = Helper::strpos_array($fields, 'town_building.')) {
+                $field = $fields[$index];
+                $townBuildingFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'town_building.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
             }
+
+            $data['town_building'] = $this->getTownBuilding() !== null
+                ? $this->getTownBuilding()->toArray($townBuildingFields)
+                : null
+            ;
         }
 
-        return array_merge(
-            $data,
-            array(
-                'town_building' => $this->getTownBuilding() !== null
-                    ? $this->getTownBuilding()->toArray()
-                    : null,
-                'building_section' => $this->getBuildingSection(),
-                'planet' => $this->getPlanet()->toArray(),
-                'tile_resources' => $tileResources,
-            )
-        );
+        if (
+            in_array('*', $fields) ||
+            in_array('building_section', $fields)
+        ) {
+            $data['building_section'] = $this->getBuildingSection();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('planet', $fields)
+        ) {
+            $data['planet'] = $this->getPlanet()->toArray();
+        }
+
+        if (
+            in_array('*', $fields) ||
+            in_array('tile_resources', $fields)
+        ) {
+            $tileResources = array();
+            $tileResourcesCollection = $this->getTileResources();
+            if (!empty($tileResourcesCollection)) {
+                foreach ($tileResourcesCollection as $tileResource) {
+                    $tileResources[] = $tileResource->toArray();
+                }
+            }
+
+            $data['tile_resources'] = $tileResources;
+        }
+
+        return $data;
     }
 
     /**
