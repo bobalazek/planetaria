@@ -440,20 +440,13 @@ class TileEntity extends AbstractBasicEntity
     }
 
     /**
+     * @param boolean $all Should it return all the data, or just the basic, tile related?
+     *
      * @return array
      */
-    public function toArray()
+    public function toArray($all = true)
     {
-        $tileResources = array();
-        $tileResourcesCollection = $this->getTileResources();
-
-        if (!empty($tileResourcesCollection)) {
-            foreach ($tileResourcesCollection as $tileResource) {
-                $tileResources[] = $tileResource->toArray();
-            }
-        }
-
-        return array(
+        $data = array(
             'id' => $this->getId(),
             'terrain_type' => $this->getTerrainType(),
             'status' => $this->getStatus(),
@@ -463,12 +456,31 @@ class TileEntity extends AbstractBasicEntity
             'coordinates_y' => $this->getCoordinatesY(),
             'buildable' => $this->isBuildable(),
             'currently_buildable' => $this->isCurrentlyBuildable(),
-            'town_building' => $this->getTownBuilding() !== null
-                ? $this->getTownBuilding()->toArray()
-                : null,
-            'building_section' => $this->getBuildingSection(),
-            'planet' => $this->getPlanet()->toArray(),
-            'tile_resources' => $tileResources,
+        );
+
+        if (!$all) {
+            return $data;
+        }
+
+        $tileResources = array();
+        $tileResourcesCollection = $this->getTileResources();
+
+        if (!empty($tileResourcesCollection)) {
+            foreach ($tileResourcesCollection as $tileResource) {
+                $tileResources[] = $tileResource->toArray();
+            }
+        }
+
+        return array_merge(
+            $data,
+            array(
+                'town_building' => $this->getTownBuilding() !== null
+                    ? $this->getTownBuilding()->toArray()
+                    : null,
+                'building_section' => $this->getBuildingSection(),
+                'planet' => $this->getPlanet()->toArray(),
+                'tile_resources' => $tileResources,
+            )
         );
     }
 

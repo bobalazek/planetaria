@@ -196,6 +196,24 @@ class AbstractBuilding implements BuildingInterface
     protected $itemsProduction;
 
     /**
+     * How much bonus for resources cost (in percents) do we get (per level)?
+     * Example ( level => bonusPercents ):
+     *   array( 0 => 0, 1 => 5, 2 => 10 )
+     *
+     * @var array
+     */
+    protected $itemsResourcesCostBonus;
+
+    /**
+     * How much bonus for build time (in percents) do we get (per level)?
+     * Example ( level => bonusPercents ):
+     *   array( 0 => 0, 1 => 5, 2 => 10 )
+     *
+     * @var array
+     */
+    protected $itemsBuildTimeBonus;
+
+    /**
      * Which buildings do we need before we can build this one?
      * Example ( level => array( building => minimumLevel ) ):
      *   array( 0 => array( 'farm' => 0 )) )
@@ -634,7 +652,7 @@ class AbstractBuilding implements BuildingInterface
     public function getUnitsProduction($level = null, $unit = null)
     {
         return $level === null
-            ? $this->unitProductions
+            ? $this->unitsProduction
             : ($unit === null
                 ? $this->unitsProduction[$level]
                 : $this->unitsProduction[$level][$unit])

@@ -74,10 +74,9 @@ class GameController
             $app->abort(404, 'This planet does not exist!');
         }
 
-        $radius = 16;
+        $radius = (int) $request->query->get('radius', 16);
         $centerX = (int) $request->query->get('x', 0);
         $centerY = (int) $request->query->get('y', 0);
-
         $coordinatesRangeX = range($centerX - $radius, $centerX + $radius);
         $coordinatesRangeY = range($centerY - $radius, $centerY + $radius);
 
@@ -101,6 +100,7 @@ class GameController
                     'coordinatesRangeY' => $coordinatesRangeY,
                     'centerX' => $centerX,
                     'centerY' => $centerY,
+                    'radius' => $radius,
                 )
             )
         );

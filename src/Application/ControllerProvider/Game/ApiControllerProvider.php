@@ -25,6 +25,18 @@ class ApiControllerProvider implements ControllerProviderInterface
         )
         ->bind('game.api');
 
+        $controllers->match(
+            '/map',
+            'Application\Controller\Game\ApiController::mapAction'
+        )
+        ->bind('game.api.map');
+
+        $controllers->match(
+            '/map/{id}',
+            'Application\Controller\Game\ApiController::mapDetailAction'
+        )
+        ->bind('game.api.map.detail');
+
         return $controllers;
     }
 }

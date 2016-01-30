@@ -28,7 +28,6 @@ $app->mount(
     new Application\ControllerProvider\Game\ApiControllerProvider()
 );
 
-
 /*========== Members Area ==========*/
 $app->mount(
     '/members-area',

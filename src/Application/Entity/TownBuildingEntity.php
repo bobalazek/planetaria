@@ -675,7 +675,7 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         if (!empty($tilesCollection)) {
             foreach ($tilesCollection as $tile) {
-                $tiles[] = $tile->toArray();
+                $tiles[] = $tile->toArray(false);
             }
         }
 
@@ -694,7 +694,7 @@ class TownBuildingEntity extends AbstractBasicEntity
             'upgrading' => $this->isUpgrading(),
             'constructing' => $this->isConstructing(),
             'image' => $this->getImage(),
-            'time_constructed' => $this->getTileConstructed()->format(DATE_ATOM),
+            'time_constructed' => $this->getTimeConstructed()->format(DATE_ATOM),
             'time_next_level_upgrade_started' => $this->getTimeNextLevelUpgradeStarted() !== null
                 ? $this->getTimeNextLevelUpgradeStarted()->format(DATE_ATOM)
                 : null,

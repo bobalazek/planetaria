@@ -125,6 +125,19 @@ class PlanetEntity extends AbstractAdvancedEntity
     }
 
     /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'description' => $this->getDescription(),
+        );
+    }
+
+    /**
      * @ORM\PreUpdate
      */
     public function preUpdate()
