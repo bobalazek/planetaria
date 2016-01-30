@@ -65,7 +65,7 @@
         </h4>
         <div class="progress"
             data-toggle="tooltip"
-            title="{{ app.user.getHealthPointsPercentage() }}%">
+            title="{{ app.user.getHealthPointsPercentage() | round(2) }}%">
             <div class="progress-bar progress-bar-{{ app.user.getHealthPointsColorType() }}"
                 role="progressbar"
                 aria-valuenow="{{ app.user.getHealthPointsPercentage() }}"
@@ -82,7 +82,7 @@
         </h4>
         <div class="progress"
             data-toggle="tooltip"
-            title="{{ app.user.getNextExperienceLevelPercentage() }}%">
+            title="{{ app.user.getNextExperienceLevelPercentage() | round(2) }}%">
             <div class="progress-bar"
                 role="progressbar"
                 aria-valuenow="{{ app.user.getNextExperienceLevelPercentage() }}"

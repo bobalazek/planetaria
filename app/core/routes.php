@@ -22,6 +22,13 @@ $app->mount(
     new Application\ControllerProvider\GameControllerProvider()
 );
 
+/*========== Game - API ==========*/
+$app->mount(
+    '/game/api',
+    new Application\ControllerProvider\Game\ApiControllerProvider()
+);
+
+
 /*========== Members Area ==========*/
 $app->mount(
     '/members-area',

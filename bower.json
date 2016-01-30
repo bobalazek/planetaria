@@ -24,7 +24,8 @@
     "respond": "~1.4",
     "uri.js": "~1.15.0",
     "restangular": "~1.4",
-    "jquery.nicescroll": "~3.6.6"
+    "jquery.nicescroll": "~3.6.6",
+    "toastr": "~2.1.2"
   },
   "resolutions": {
     "d3": "~3.5",
