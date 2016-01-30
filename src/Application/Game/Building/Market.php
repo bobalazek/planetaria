@@ -24,6 +24,7 @@ class Market extends AbstractBuilding
             ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')
             ->setMaximumLevel(0)
+            ->setPerTownLimit(1)
             ->setHealthPoints(array(
                 0 => 2000,
             ))

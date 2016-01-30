@@ -881,7 +881,7 @@ class AbstractBuilding implements BuildingInterface
 
         return $this;
     }
-    
+
     /**
      * Returns the name of that building¸
      *
