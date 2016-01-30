@@ -48,7 +48,7 @@
             </div>
         {% else %}
             <div class="alert alert-info">
-                {{ 'This building has already reached the maximum level!' | trans }}
+                {{ 'This building has reached the maximum level!' | trans }}
             </div>
         {% endif %}
         {% if townBuilding.isRemovable() is sameas(true) %}
