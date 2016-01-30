@@ -706,7 +706,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $this;
     }
-    
+
     /***** Coat of arms image url *****/
     /**
      * @return string
@@ -722,7 +722,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $baseUrl.$this->getPlaceholderImageUri();
     }
-    
+
     /**
      * @return string
      */

@@ -206,7 +206,7 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $townBuildings;
     }
-    
+
     /***** Flag image url *****/
     /**
      * @return string
@@ -222,7 +222,7 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $baseUrl.$this->getPlaceholderImageUri();
     }
-    
+
     /**
      * @return string
      */
