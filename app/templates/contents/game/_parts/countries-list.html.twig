@@ -5,23 +5,25 @@
             <div class="pull-left"
                 style="margin-right: 20px;">
                 <img class="img-responsive"
-                    src="{{ country.getImageUrl() }}"
-                    style="max-width: 128px; max-height: 128px;" />
+                    src="{{ country.getFlagImageUrl(app.baseUrl) }}"
+                    style="max-width: 64px; max-height: 64px;" />
             </div>
-            <h4 class="list-group-item-heading">
-                {{ country.getName() }}
-            </h4>
-            <p>
-                {% if country.getDescription() %}
-                    {{ country.getDescription() }}
-                    <br />
-                {% endif %}
-                <b>{{ 'Towns' | trans }}:</b>
-                {{ country.getTowns() | length }}
-                <br >
-                <b>{{ 'Town buildings' | trans }}:</b>
-                {{ country.getTownBuildings() | length }}
-            </p>
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">
+                    {{ country.getName() }}
+                </h4>
+                <p>
+                    {% if country.getDescription() %}
+                        {{ country.getDescription() }}
+                        <br />
+                    {% endif %}
+                    <b>{{ 'Towns' | trans }}:</b>
+                    {{ country.getTowns() | length }}
+                    <br >
+                    <b>{{ 'Town buildings' | trans }}:</b>
+                    {{ country.getTownBuildings() | length }}
+                </p>
+            </div>
         </a>
     {% endfor %}
 </ul>

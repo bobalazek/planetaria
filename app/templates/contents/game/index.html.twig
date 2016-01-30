@@ -8,25 +8,6 @@
         <div class="row">
             <div class="col-md-6">
                 <h2>
-                    {{ 'My Countries' | trans }}
-                    <span class="badge">{{ app.user.getCountries() | length }}</span>
-                    {% if app.user.canCreateNewCountry() %}
-                        <a class="btn btn-default"
-                            href="{{ url('game.countries.new') }}">
-                            {{ 'New' | trans }}
-                        </a>
-                    {% endif %}
-                </h2>
-                {% if app.user.getCountries()  %}
-                    {% include 'contents/game/_parts/countries-list.html.twig' with { countries: app.user.getCountries() } %}
-                {% else %}
-                    <div class="alert alert-info">
-                        {{ 'You do not have any towns yet!' | trans }}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="col-md-6">
-                <h2>
                     {{ 'My Towns' | trans }}
                     <span class="badge">{{ app.user.getTowns() | length }}</span>
                     {% if app.user.canCreateNewTown() %}
@@ -38,6 +19,25 @@
                 </h2>
                 {% if app.user.getTowns()  %}
                     {% include 'contents/game/_parts/towns-list.html.twig' with { towns: app.user.getTowns() } %}
+                {% else %}
+                    <div class="alert alert-info">
+                        {{ 'You do not have any towns yet!' | trans }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h2>
+                    {{ 'My Countries' | trans }}
+                    <span class="badge">{{ app.user.getCountries() | length }}</span>
+                    {% if app.user.canCreateNewCountry() %}
+                        <a class="btn btn-default"
+                            href="{{ url('game.countries.new') }}">
+                            {{ 'New' | trans }}
+                        </a>
+                    {% endif %}
+                </h2>
+                {% if app.user.getCountries()  %}
+                    {% include 'contents/game/_parts/countries-list.html.twig' with { countries: app.user.getCountries() } %}
                 {% else %}
                     <div class="alert alert-info">
                         {{ 'You do not have any towns yet!' | trans }}

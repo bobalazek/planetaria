@@ -93,3 +93,20 @@
         </div>
     </div>
 </div>
+<h4>
+    {{ 'My Towns' | trans }}
+    <span class="badge">{{ app.user.getTowns() | length }}</span>
+    {% if app.user.canCreateNewTown() %}
+        <a class="btn btn-default btn-xs"
+            href="{{ url('game.towns.new') }}">
+            {{ 'New' | trans }}
+        </a>
+    {% endif %}
+</h4>
+{% if app.user.getTowns()  %}
+    {% include 'contents/game/_parts/towns-list.html.twig' with { towns: app.user.getTowns() } %}
+{% else %}
+    <div class="alert alert-info">
+        {{ 'You do not have any towns yet!' | trans }}
+    </div>
+{% endif %}

@@ -5,26 +5,28 @@
             <div class="pull-left"
                 style="margin-right: 20px;">
                 <img class="img-responsive"
-                    src="{{ town.getImageUrl() }}"
-                    style="max-width: 128px; max-height: 128px;" />
+                    src="{{ town.getCoatOfArmsImageUrl(app.baseUrl) }}"
+                    style="max-width: 64px; max-height: 64px;" />
             </div>
-            <h4 class="list-group-item-heading">
-                {{ town.getName() }}
-            </h4>
-            <p>
-                {% if town.getDescription() %}
-                    {{ town.getDescription() }}
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">
+                    {{ town.getName() }}
+                </h4>
+                <p>
+                    {% if town.getDescription() %}
+                        {{ town.getDescription() }}
+                        <br />
+                    {% endif %}
+                    <b>{{ 'Planet' | trans }}:</b>
+                    {{ town.getPlanet() }}
                     <br />
-                {% endif %}
-                <b>{{ 'Planet' | trans }}:</b>
-                {{ town.getPlanet() }}
-                <br />
-                <b>{{ 'Country' | trans }}:</b>
-                {{ town.getCountry() }}
-                <br />
-                <b>{{ 'Buildings' | trans }}:</b>
-                {{ town.getTownBuildings() | length }}
-            </p>
+                    <b>{{ 'Country' | trans }}:</b>
+                    {{ town.getCountry() }}
+                    <br />
+                    <b>{{ 'Buildings' | trans }}:</b>
+                    {{ town.getTownBuildings() | length }}
+                </p>
+            </div>
         </a>
     {% endfor %}
 </ul>

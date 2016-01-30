@@ -11,6 +11,12 @@
                 {{ 'Edit' | trans }}
             </a>
         {% endif %}
+        {% if town.getCoordinates() is not sameas(false) %}
+            <a class="btn btn-default"
+                href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY() }) }}">
+                {{ 'Show on Map' | trans }}
+            </a>
+        {% endif %}
     </h1>
     <div id="main-content">
         {% if town.getTownBuildings() | length == 0 %}
@@ -19,15 +25,13 @@
             </div>
         {% endif %}
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-2 col-xs-6">
+                <img class="img-responsive"
+                    src="{{ town.getCoatOfArmsImageUrl(app.baseUrl) }}" />
+            </div> <!-- /.col-lg-2 -->
+            <div class="col-lg-10 col-xs-6">
                 <h3>{{ 'Information' | trans }}</h3>
                 <ul class="list-group">
-                    {% if town.getImageUrl() %}
-                        <li class="list-group-item">
-                            <img class="img-responsive"
-                                src="{{ town.getImageUrl() }}" />
-                        </li>
-                    {% endif %}
                     {% if town.getDescription() %}
                         <li class="list-group-item">
                             <b>{{ 'Description' | trans }}:</b>
@@ -56,7 +60,12 @@
                         </li>
                     {% endif %}
                 </ul>
+            </div> <!-- /.col-lg-10 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
                 {% if app.user.hasTown(town) %}
+                    <hr />
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             {{ 'Resources' | trans }}
@@ -64,8 +73,6 @@
                         {% include 'contents/game/_parts/town-resources-table.html.twig' %}
                     </div>
                 {% endif %}
-            </div> <!-- /.col-md-6 -->
-            <div class="col-md-6">
                 <h3>
                     {{ 'Buildings' | trans }}
                     <span class="badge">
@@ -79,7 +86,7 @@
                         {{ 'This town has no buildings yet' | trans }}
                     </div>
                 {% endif %}
-            </div> <!-- /.col-md-6 -->
+            </div> <!-- /.col-md-12 -->
         </div> <!-- /.row -->
     </div>
 {% endblock %}

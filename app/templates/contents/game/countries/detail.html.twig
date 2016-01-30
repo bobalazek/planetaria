@@ -14,15 +14,13 @@
     </h1>
     <div id="main-content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-2 col-xs-6">
+                <img class="img-responsive"
+                    src="{{ country.getFlagImageUrl(app.baseUrl) }}" />
+            </div> <!-- /.col-lg-2 -->
+            <div class="col-lg-10 col-xs-6">
                 <h2>{{ 'Information' | trans }}</h2>
                 <ul class="list-group">
-                    {% if country.getImageUrl() %}
-                        <li class="list-group-item">
-                            <img class="img-responsive"
-                                src="{{ country.getImageUrl() }}" />
-                        </li>
-                    {% endif %}
                     {% if country.getDescription() %}
                         <li class="list-group-item">
                             <b>{{ 'Description' | trans }}:</b>
@@ -40,8 +38,10 @@
                         {{ country.getTimeCreated() | date(app.dateTimeFormat) }}
                     </li>
                 </ul>
-            </div> <!-- /.col-md-6 -->
-            <div class="col-md-6">
+            </div> <!-- /.col-lg-10 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
                 <h2>
                     {{ 'Towns' | trans }}
                     <span class="badge">
@@ -55,7 +55,7 @@
                         {{ 'This country has no towns yet' | trans }}
                     </div>
                 {% endif %}
-            </div> <!-- /.col-md-6 -->
+            </div> <!-- /.col-md-12 -->
         </div> <!-- /.row -->
     </div>
 {% endblock %}

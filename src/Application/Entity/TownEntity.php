@@ -706,6 +706,30 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $this;
     }
+    
+    /***** Coat of arms image url *****/
+    /**
+     * @return string
+     */
+    public function getCoatOfArmsImageUrl($baseUrl)
+    {
+        $imageUrl = $this->getImageUrl();
+        if ($imageUrl) {
+            return $imageUrl;
+        }
+
+        // To-Do: Throw a warning or something, when no $baseUrl is given
+
+        return $baseUrl.$this->getPlaceholderImageUri();
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPlaceholderImageUri()
+    {
+        return '/assets/images/towns/placeholder.png';
+    }
 
     /**
      * @return string

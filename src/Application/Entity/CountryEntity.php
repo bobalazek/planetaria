@@ -206,6 +206,30 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
 
         return $townBuildings;
     }
+    
+    /***** Flag image url *****/
+    /**
+     * @return string
+     */
+    public function getFlagImageUrl($baseUrl)
+    {
+        $imageUrl = $this->getImageUrl();
+        if ($imageUrl) {
+            return $imageUrl;
+        }
+
+        // To-Do: Throw a warning or something, when no $baseUrl is given
+
+        return $baseUrl.$this->getPlaceholderImageUri();
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPlaceholderImageUri()
+    {
+        return '/assets/images/countries/placeholder.png';
+    }
 
     /**
      * @return string
