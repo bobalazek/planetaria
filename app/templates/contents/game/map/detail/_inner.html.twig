@@ -9,7 +9,12 @@
                 {% if tile %}
                     {% include 'contents/game/map/detail/_tile.html.twig' %}
                 {% else %}
-                    <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }}"></div>
+                    <div class="map-tile map-tile-unknown {{ x == centerX and y == centerY ? 'map-tile-current' : '' }} tooltip-hover"
+                        data-tooltip="{{ x ~ ',' ~ y }}"
+                        data-x="{{ x }}"
+                        data-y="{{ y }}">
+                        <div class="map-tile-hover-overlay"></div>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div> <!-- /.map-row -->
