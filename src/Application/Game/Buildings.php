@@ -227,7 +227,7 @@ class Buildings
      *
      * @param PlanetEntity  $planet
      * @param TownEntity    $town
-     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build. If it's not an array, then it won't do any coordinate related tests.
      * @param string        $building
      * @param string        $buildingStatus
      *
@@ -333,7 +333,7 @@ class Buildings
      *
      * @param PlanetEntity  $planet
      * @param TownEntity    $town
-     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build. If it's not an array, then it won't do any coordinate related tests.
      * @param string        $building
      * @param string        $buildingStatus
      *
@@ -461,7 +461,7 @@ class Buildings
      *
      * @param PlanetEntity  $planet
      * @param TownEntity    $town
-     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build. If it's not an array, then it won't do any coordinate related tests.
      * @param string        $building
      * @param string        $buildingStatus
      *
