@@ -12,13 +12,12 @@
         <div id="map-wrapper">
             <div id="map-overlay">
                 {{ 'Loading' | trans }} ...
-            </div>
+            </div> <!-- /#map-overlay -->
             <div id="map">
                 {% if app.request.isXmlHttpRequest() %}
                     {% include 'contents/game/map/detail/_inner.html.twig' %}
                 {% endif %}
             </div> <!-- /#map -->
-            <hr />
             {% include 'contents/game/map/detail/_controls.html.twig' %}
         </div> <!-- /#map-wrapper -->
     </div>
@@ -28,6 +27,18 @@
     {{ parent() }}
     <script>
         jQuery(document).ready(function() {
+            jQuery('#map-controls .btn').on('click', function() {
+                var x = jQuery('#map-controls-x').val();
+                var y = jQuery('#map-controls-y').val();
+                
+                currentUrl = updateUrlParameter(currentUrl, 'x', x);
+                currentUrl = updateUrlParameter(currentUrl, 'y', y);
+
+                loadMap();
+
+                return false;
+            });
+            
             loadMap();
 
             function loadMap(callback) {
@@ -45,9 +56,7 @@
                             var x = jQuery(this).attr('data-x');
                             var y = jQuery(this).attr('data-y');
                             
-                            loadMap(function() {
-                                jQuery('h2 small').text('('+x+','+y+')');
-                            });
+                            loadMap();
 
                             return false;
                         });
@@ -55,10 +64,19 @@
 
                     jQuery('#map-overlay').fadeOut();
                     
+                    var x = jQuery('#map-inner').attr('data-x');
+                    var y = jQuery('#map-inner').attr('data-y');
+                    jQuery('h2 small').text('('+x+','+y+')');
+                    
                     if (typeof callback === 'function') {
                         callback();
                     }
                 });
+            }
+            
+            function updateUrlParameter(url, param, value){
+                var regex = new RegExp('('+param+'=)[^\&]+');
+                return url.replace( regex , '$1' + value);
             }
         });
     </script>

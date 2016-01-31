@@ -1,4 +1,6 @@
-<div id="map-inner">
+<div id="map-inner" 
+    data-x="{{ centerX }}"
+    data-y="{{ centerY }}">
     {% for y in coordinatesRangeY | reverse %}
         <div class="map-row clearfix"
             data-y="{{ y }}">

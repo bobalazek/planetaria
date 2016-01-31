@@ -61,6 +61,35 @@ h1 {
     width: 100%;
 }
 
+#map-controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+}
+    #map-controls form {
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    #map-controls form .form-group {
+        margin-bottom: 0;   
+    }
+    
+    #map-controls form .form-control {
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    #map-controls form .input-group-addon {
+        font-size: 12px;
+        padding: 2px 8px;
+    }
+    
+    #map-controls form .btn {
+        padding: 0 10px;
+    }
+
 @media screen and (max-width: 767px) {
     #map {
         max-height: 600px;
