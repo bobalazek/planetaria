@@ -73,13 +73,13 @@ class GameController
         if (!$planet) {
             $app->abort(404, 'This planet does not exist!');
         }
-        
+
         $townId = (int) $request->query->get('town_id', 0);
         $town = $app['orm.em']->find(
             'Application\Entity\TownEntity',
             $townId
         );
-        
+
         if ($town) {
             // Update town stuff
             $app['game.towns']->checkForFinishedBuildingUpgrades($town);
@@ -101,7 +101,7 @@ class GameController
         foreach ($tilesArray as $singleTile) {
             $tiles[$singleTile->getCoordinates()] = $singleTile;
         }
-        
+
         $buildings = Buildings::getAllWithData();
 
         return new Response(
@@ -164,7 +164,7 @@ class GameController
             'Application\Entity\TownEntity',
             $townId
         );
-        
+
         if (
             !$town &&
             $townId
