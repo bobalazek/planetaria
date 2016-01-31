@@ -1,0 +1,19 @@
+<div id="map-construct-building" class="transitions">
+    <div id="map-construct-building-content">
+        {% for building in buildings %}
+            <div class="building"
+                data-name="{{ building.getName() }}"
+                data-key="{{ building.getKey() }}"
+                data-slug="{{ building.getSlug() }}"
+                data-description="{{ building.getDescription() }}"
+                data-size="{{ building.getSize() }}">
+                <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
+                <h4>{{ building.getName() }}</h4>
+                <p>{{ building.getDescription() }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="map-construct-building-handle">
+        <i class="fa fa-building"></i>
+    </div>
+</div>

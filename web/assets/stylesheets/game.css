@@ -36,6 +36,7 @@ h1 {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
+    overflow: hidden;
 }
 
 #map {
@@ -43,8 +44,6 @@ h1 {
     max-width: 800px;
     height: 800px;
     overflow: scroll;
-    padding-top: 1px;
-    padding-left: 1px;
 }
 
 #map-overlay {
@@ -60,6 +59,70 @@ h1 {
     z-index: 9;
     width: 100%;
 }
+
+#map-construct-building {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+}
+
+    #map-construct-building-content {
+        background: rgba(0, 0, 0, 0.8);
+        width: 128px;
+        margin-left: -128px;
+        overflow-y: scroll;
+        max-height: 800px;
+    }
+    
+    #map-construct-building.open #map-construct-building-content {
+        margin-left: 0;
+    }
+    
+        #map-construct-building-content .building {
+            float: left;
+            color: #fff;
+            text-align: center;
+            width: 128px;
+            min-height: 96px;
+            padding: 0 10px;
+            margin: 10px 0;
+        }
+            
+            #map-construct-building-content .building h4 {
+                margin: 0 0 10px;
+                font-size: 14px;
+            }
+            
+            #map-construct-building-content .building p {
+                margin: 0;
+                font-size: 10px;
+            }
+
+    #map-construct-building-handle {
+        text-align: center;
+        padding: 22px 5px;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        height: 64px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        margin-top: -32px;
+        margin-left: 0;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    
+    #map-construct-building.open #map-construct-building-handle {
+        margin-left: 128px;
+    }
 
 #map-controls {
     position: absolute;

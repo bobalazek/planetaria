@@ -25,7 +25,9 @@
     "uri.js": "~1.15.0",
     "restangular": "~1.4",
     "jquery.nicescroll": "~3.6.6",
-    "toastr": "~2.1.2"
+    "toastr": "~2.1.2",
+    "jquery-ui": "~1.11.4",
+    "gsap": "~1.18.2"
   },
   "resolutions": {
     "d3": "~3.5",

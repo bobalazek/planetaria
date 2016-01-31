@@ -1,7 +1,7 @@
 {% set currentTown = town is defined ? town : null %}
 <div id="map-inner"
-    data-x="{{ centerX }}"
-    data-y="{{ centerY }}">
+    data-center-x="{{ centerX }}"
+    data-center-y="{{ centerY }}">
     {% for y in coordinatesRangeY | reverse %}
         <div class="map-row clearfix"
             data-y="{{ y }}">

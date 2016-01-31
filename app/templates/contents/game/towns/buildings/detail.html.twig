@@ -16,13 +16,10 @@
     </h1>
     <div id="main-content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject() } %}
                 {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
-            </div> <!-- /.col-md-8 -->
-            <div class="col-md-4">
-                {% include 'contents/game/_parts/town-sidebar.html.twig' %}
-            </div> <!-- /.col-md-4 -->
+            </div> <!-- /.col-md-12 -->
         </div> <!-- /.row -->
         {% if townBuilding.isAtMaximumLevel() == false %}
             <div class="row">

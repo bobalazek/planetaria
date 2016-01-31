@@ -94,6 +94,9 @@
         </div>
     </div>
 </div>
+{% if (town is defined and town is not sameas(null)) and app.user.hasTown(town) %}
+    {% include 'contents/game/_parts/town-sidebar.html.twig' %}
+{% endif %}
 <h4>
     {{ 'My Towns' | trans }}
     <span class="badge">{{ app.user.getTowns() | length }}</span>

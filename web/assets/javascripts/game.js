@@ -45,6 +45,12 @@ var Game = function () {
                 preventmultitouchscrolling: false, 
             });
             
+            // Map construct
+            jQuery('#map-construct-building-content').niceScroll({
+                touchbehavior: true,
+                preventmultitouchscrolling: false, 
+            });
+            
             // Get heights, widths and calculate scroll ofsets
             var mapHeight = mapElement.outerHeight();
             var mapWidth = mapElement.outerWidth();

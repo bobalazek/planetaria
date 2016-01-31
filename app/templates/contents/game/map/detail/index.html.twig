@@ -13,6 +13,9 @@
             <div id="map-overlay">
                 {{ 'Loading' | trans }} ...
             </div> <!-- /#map-overlay -->
+            {% if town %}
+                {% include 'contents/game/map/detail/_construct-building.html.twig' %}
+            {% endif %}
             <div id="map">
                 {% if app.request.isXmlHttpRequest() %}
                     {% include 'contents/game/map/detail/_inner.html.twig' %}
@@ -37,6 +40,10 @@
                 loadMap();
 
                 return false;
+            });
+            
+            jQuery('#map-construct-building-handle').on('click', function() {
+                jQuery('#map-construct-building').toggleClass('open');
             });
 
             loadMap();
@@ -64,8 +71,8 @@
 
                     jQuery('#map-overlay').fadeOut();
 
-                    var x = jQuery('#map-inner').attr('data-x');
-                    var y = jQuery('#map-inner').attr('data-y');
+                    var x = jQuery('#map-inner').attr('data-center-x');
+                    var y = jQuery('#map-inner').attr('data-center-y');
                     jQuery('h2 small').text('('+x+','+y+')');
 
                     if (typeof callback === 'function') {

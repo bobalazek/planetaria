@@ -29,7 +29,7 @@
         {% if town %}
             <h4>{{ 'Select the building, which you want to construct' | trans }}.</h4>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-md-12">
                     <ul class="nav nav-tabs"
                         role="tablist"
                         style="margin-bottom: 20px;">
@@ -60,10 +60,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                </div> <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    {% include 'contents/game/_parts/town-sidebar.html.twig' %}
-                </div> <!-- /.col-lg-4 -->
+                </div> <!-- /.col-md-12 -->
             </div> <!-- /.row -->
         {% else %}
             <h4>{{ 'For which town do you want to construct this building' | trans }}?</h4>

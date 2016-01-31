@@ -79,6 +79,12 @@ class GameController
             'Application\Entity\TownEntity',
             $townId
         );
+        
+        if ($town) {
+            // Update town stuff
+            $app['game.towns']->checkForFinishedBuildingUpgrades($town);
+            $app['game.towns']->updateTownResources($town);
+        }
 
         $radius = (int) $request->query->get('radius', 16);
         $centerX = (int) $request->query->get('x', 0);
@@ -95,6 +101,8 @@ class GameController
         foreach ($tilesArray as $singleTile) {
             $tiles[$singleTile->getCoordinates()] = $singleTile;
         }
+        
+        $buildings = Buildings::getAllWithData();
 
         return new Response(
             $app['twig']->render(
@@ -109,6 +117,7 @@ class GameController
                     'radius' => $radius,
                     'town' => $town,
                     'townId' => $townId,
+                    'buildings' => $buildings,
                 )
             )
         );
