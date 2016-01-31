@@ -117,6 +117,17 @@ h1 {
         background-color: #000;
     }
     
+        .map-tile-selected-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0.1;
+            background-color: #fff;
+            display: block;
+        }
+    
         .map-tile-hover-overlay {
             position: absolute;
             top: 0;

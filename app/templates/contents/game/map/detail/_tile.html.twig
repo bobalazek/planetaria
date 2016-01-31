@@ -11,6 +11,9 @@
     style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
     <div class="map-tile-hover-overlay"></div>
     {% if tile.getTownBuilding() %}
+        {% if tile.getTownBuilding().getTown() == currentTown %}
+            <div class="map-tile-selected-overlay"></div>
+        {% endif %}
         <img class="img-responsive map-tile-building-image"
             src="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuildingImage() }}" />
     {% endif %}
