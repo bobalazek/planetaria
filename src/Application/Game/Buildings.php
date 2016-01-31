@@ -225,18 +225,18 @@ class Buildings
     /**
      * With this method we'll create the town building.
      *
-     * @param PlanetEntity $planet
-     * @param TownEntity   $town
-     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
-     * @param string       $building
-     * @param string       $buildingStatus
+     * @param PlanetEntity  $planet
+     * @param TownEntity    $town
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param string        $building
+     * @param string        $buildingStatus
      *
      * @return TownBuildingEntity
      */
     public function build(
         PlanetEntity $planet,
         TownEntity $town,
-        array $startingCoordinates = array(),
+        $startingCoordinates = array(),
         $building
     ) {
         $app = $this->app;
@@ -331,11 +331,11 @@ class Buildings
     /**
      * With this method we'll do checks if everyting fits before the building is being build.
      *
-     * @param PlanetEntity $planet
-     * @param TownEntity   $town
-     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
-     * @param string       $building
-     * @param string       $buildingStatus
+     * @param PlanetEntity  $planet
+     * @param TownEntity    $town
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param string        $building
+     * @param string        $buildingStatus
      *
      * @return void
      * @throws TownBuildingsLimitReachedException
@@ -348,7 +348,7 @@ class Buildings
     public function doPreBuildChecks(
         PlanetEntity $planet,
         TownEntity $town,
-        array $startingCoordinates = array(),
+        $startingCoordinates,
         $building
     ) {
         $app = $this->app;
@@ -428,28 +428,30 @@ class Buildings
             );
         }
 
-        /*** Required area space ***/
-        // Check if we have enough space to build this building
-        $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
-            $planet,
-            $startingCoordinates,
-            $building
-        );
-        if (!$hasEnoughAreaSpace) {
-            throw new InsufficientAreaSpaceException(
-                'You do not have enough space to construct this building!'
+        if (is_array($startingCoordinates)) {
+            /*** Required area space ***/
+            // Check if we have enough space to build this building
+            $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
+                $planet,
+                $startingCoordinates,
+                $building
             );
-        }
+            if (!$hasEnoughAreaSpace) {
+                throw new InsufficientAreaSpaceException(
+                    'You do not have enough space to construct this building!'
+                );
+            }
 
-        /*** Inside town radius ***/
-        $isInsideRadius = $app['game.towns']
-            ->isInsideRadius($town, $startingCoordinates)
-        ;
+            /*** Inside town radius ***/
+            $isInsideRadius = $app['game.towns']
+                ->isInsideRadius($town, $startingCoordinates)
+            ;
 
-        if (!$isInsideRadius) {
-            throw new BuildingNotInsideTownRadius(
-                'This building is not inside the town radius!'
-            );
+            if (!$isInsideRadius) {
+                throw new BuildingNotInsideTownRadius(
+                    'This building is not inside the town radius!'
+                );
+            }
         }
     }
 
@@ -457,18 +459,18 @@ class Buildings
      * Same as the method above BUT a more frontend friendly version. Outputs text instead of exceptions.
      *
      *
-     * @param PlanetEntity $planet
-     * @param TownEntity   $town
-     * @param array        $coordinates    The start coordinates (bottom left) of the location that building is going to be build
-     * @param string       $building
-     * @param string       $buildingStatus
+     * @param PlanetEntity  $planet
+     * @param TownEntity    $town
+     * @param array|boolean $startingCoordinates The start coordinates (bottom left) of the location that building is going to be build
+     * @param string        $building
+     * @param string        $buildingStatus
      *
      * @return boolean|string
      */
     public function doPreBuildChecksResponse(
         PlanetEntity $planet,
         TownEntity $town,
-        array $startingCoordinates = array(),
+        $startingCoordinates,
         $building
     ) {
         try {

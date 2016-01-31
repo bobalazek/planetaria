@@ -66,7 +66,6 @@ h1 {
     left: 0;
     height: 100%;
     z-index: 1;
-    display: none; /* Not yet ready */
 }
 
     #map-construct-building-content {
@@ -82,13 +81,18 @@ h1 {
     }
     
         #map-construct-building-content .building {
-            float: left;
+            position: relative;
             color: #fff;
             text-align: center;
-            width: 128px;
+            width: 112px;
             min-height: 96px;
-            padding: 0 10px;
-            margin: 10px 0;
+            padding: 8px;
+            margin: 8px;
+        }
+        
+        #map-construct-building-content .building-overlay {
+            padding: 20px 10px;
+            font-size: 12px;
         }
             
             #map-construct-building-content .building h4 {

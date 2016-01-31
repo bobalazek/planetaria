@@ -8,6 +8,17 @@
                 data-slug="{{ building.getSlug() }}"
                 data-description="{{ building.getDescription() }}"
                 data-size="{{ building.getSize() }}">
+                {% set preBuildChecks = app['game.buildings'].doPreBuildChecksResponse(
+                    planet,
+                    town,
+                    false,
+                    building.getKey()
+                ) %}
+                {% if preBuildChecks is not sameas (true) %}
+                    <div class="building-overlay">
+                        {{ preBuildChecks }}
+                    </div>
+                {% endif %}
                 <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
                 <h4>{{ building.getName() }}</h4>
                 <p>{{ building.getDescription() }}</p>
