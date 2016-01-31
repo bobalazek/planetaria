@@ -30,7 +30,7 @@
         jQuery(document).ready(function() {
             loadMap();
 
-            function loadMap() {
+            function loadMap(callback) {
                 jQuery('#map-overlay').fadeIn();
 
                 currentUrl = currentUrl.replace(/&amp;/g, '&');
@@ -42,13 +42,22 @@
                     jQuery('.map-tile').on('shown.bs.popover', function() {
                         jQuery('.btn-center-map').on('click', function() {
                             currentUrl = jQuery(this).attr('href');
-                            loadMap();
+                            var x = jQuery(this).attr('data-x');
+                            var y = jQuery(this).attr('data-y');
+                            
+                            loadMap(function() {
+                                jQuery('h2 small').text('('+x+','+y+')');
+                            });
 
                             return false;
                         });
                     });
 
                     jQuery('#map-overlay').fadeOut();
+                    
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
                 });
             }
         });

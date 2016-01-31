@@ -30,6 +30,15 @@ var Game = function () {
             var mapElement = jQuery('#map');
             var mapInnerElement = jQuery('#map-inner');
             
+            // Set the width of the inner map
+            var firstMapRow = mapInnerElement.find('.map-row:first');
+            if (firstMapRow.length) {
+                var firstMapRowElements = firstMapRow.find('.map-tile');
+                var elementWidth = firstMapRowElements.outerWidth();
+                
+                mapInnerElement.css('width', firstMapRowElements.length * elementWidth);
+            }
+            
             // Activate nicescroll
             mapElement.niceScroll({
                 touchbehavior: true,

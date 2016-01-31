@@ -223,7 +223,7 @@ class GameController
 
         return new Response(
             $app['twig']->render(
-                'contents/game/map/build.html.twig',
+                'contents/game/map/build/index.html.twig',
                 array(
                     'buildings' => $buildings,
                     'buildingTypes' => $buildingTypes,

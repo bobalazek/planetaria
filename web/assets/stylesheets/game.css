@@ -69,28 +69,19 @@ h1 {
 
     .map-row {
         height: 64px;
-        width: 2079px; /* To-Do */
     }
     
     .map-tile {
         position: relative;
         width: 64px;
         height: 64px;
-        border: 1px dotted #666;
         color: #fff;
         display: block;
         float: left;
-        margin-top: -1px;
-        margin-left: -1px;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-    }
-    
-    .map-tile.map-tile-current {
-        border-color: #fff;
-        z-index: 1;
     }
     
     .map-tile.map-tile-unknown {
@@ -109,7 +100,11 @@ h1 {
         }
         
         .map-tile:hover .map-tile-hover-overlay {
-            display: block;   
+            display: block;
+        }
+        
+        .map-tile.map-tile-current {
+            opacity: 0.8;
         }
         
 /*** Building ***/

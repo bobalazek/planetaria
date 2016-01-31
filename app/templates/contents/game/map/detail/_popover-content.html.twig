@@ -28,6 +28,8 @@
 {% endif %}
 <p>
     <a class="btn btn-xs btn-default btn-block btn-center-map"
+        data-x="{{ tile.getCoordinatesX() }}"
+        data-y="{{ tile.getCoordinatesY() }}"
         href="{{ url('game.map.detail', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">
         {{ 'Center map' | trans }}
     </a>
