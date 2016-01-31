@@ -2,6 +2,14 @@
     {% for town in towns %}
         <a class="list-group-item clearfix"
             href="{{ url('game.towns.detail', { id: town.getId() }) }}">
+            {% if town.getCoordinates() is not sameas(false) %}
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs link-button"
+                        href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY() }) }}">
+                        {{ 'Show on Map' | trans }}
+                    </button>
+                </div>
+            {% endif %}
             <div class="pull-left"
                 style="margin-right: 20px;">
                 <img class="img-responsive"
