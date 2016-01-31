@@ -13,7 +13,7 @@
         {% endif %}
         {% if town.getCoordinates() is not sameas(false) %}
             <a class="btn btn-default"
-                href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY() }) }}">
+                href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: townId }) }}">
                 {{ 'Show on Map' | trans }}
             </a>
         {% endif %}

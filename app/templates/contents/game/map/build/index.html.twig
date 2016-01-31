@@ -6,7 +6,7 @@
     <h1>
         {{ 'Map' | trans }}
         <a class="btn btn-default"
-            href="{{ url('game.map.detail', { id: planet.getId(), x: x, y: y }) }}">
+            href="{{ url('game.map.detail', { id: planet.getId(), x: x, y: y, town_id: townId }) }}">
             {{ 'Back to the Map' | trans }}
         </a>
     </h1>
@@ -19,6 +19,10 @@
         {% if town %}
             {{ 'for' | trans }}
             <b>{{ town }}</b>
+            <a class="btn btn-default btn-xs"
+                href="{{ url('game.map.build', { id: planet.getId(), x: x, y: y }) }}">
+                {{ 'Change Town' | trans }}
+            </a>
         {% endif %}
     </h3>
     <div id="main-content">

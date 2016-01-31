@@ -1,11 +1,12 @@
+{% set currentTown = town is defined ? town : null %}
 <ul class="list-group">
     {% for town in towns %}
-        <a class="list-group-item clearfix"
+        <a class="list-group-item clearfix {{ (townId is defined and townId == town.getId()) or currentTown == town ? 'active' : '' }}"
             href="{{ url('game.towns.detail', { id: town.getId() }) }}">
             {% if town.getCoordinates() is not sameas(false) %}
                 <div class="pull-right">
                     <button class="btn btn-default btn-xs link-button"
-                        href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY() }) }}">
+                        href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: town.getId() }) }}">
                         {{ 'Show on Map' | trans }}
                     </button>
                 </div>

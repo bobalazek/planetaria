@@ -73,6 +73,12 @@ class GameController
         if (!$planet) {
             $app->abort(404, 'This planet does not exist!');
         }
+        
+        $townId = (int) $request->query->get('town_id', 0);
+        $town = $app['orm.em']->find(
+            'Application\Entity\TownEntity',
+            $townId
+        );
 
         $radius = (int) $request->query->get('radius', 16);
         $centerX = (int) $request->query->get('x', 0);
@@ -101,6 +107,8 @@ class GameController
                     'centerX' => $centerX,
                     'centerY' => $centerY,
                     'radius' => $radius,
+                    'town' => $town,
+                    'townId' => $townId,
                 )
             )
         );
@@ -147,8 +155,19 @@ class GameController
             'Application\Entity\TownEntity',
             $townId
         );
+        
+        if (
+            !$town &&
+            $townId
+        ) {
+            $app->abort(404, 'This town does not exist!');
+        }
 
         if ($town) {
+            if (!$app['user']->hasTown($town)) {
+                $app->abort(403, 'This is not your town!');
+            }
+
             // Update town stuff
             $app['game.towns']->checkForFinishedBuildingUpgrades($town);
             $app['game.towns']->updateTownResources($town);
@@ -230,6 +249,7 @@ class GameController
                     'planet' => $planet,
                     'tile' => $tile,
                     'town' => $town,
+                    'townId' => $townId,
                     'x' => $x,
                     'y' => $y,
                 )

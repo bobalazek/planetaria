@@ -113,10 +113,11 @@ class TownsController
     /**
      * @param integer     $id
      * @param Application $app
+     * @param Request     $request
      *
      * @return Response
      */
-    public function detailAction($id, Application $app)
+    public function detailAction($id, Application $app, Request $request)
     {
         $town = $app['orm.em']->find(
             'Application\Entity\TownEntity',
@@ -136,6 +137,7 @@ class TownsController
                 'contents/game/towns/detail.html.twig',
                 array(
                     'town' => $town,
+                    'townId' => $id,
                 )
             )
         );
