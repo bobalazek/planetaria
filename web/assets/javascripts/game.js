@@ -73,7 +73,10 @@ var Game = function () {
         {
             var townResourcesTableElement = jQuery('#town-resources-table');
             
-            if (townResourcesTableElement.length) {
+            if (
+                townResourcesTableElement.length &&
+                !townResourcesTableElement.hasClass('has-interval')
+            ) {
                 function interval() {
                     townResourcesTableElement.find('tbody tr').each(function() {
                         var resource = jQuery(this).attr('data-resource');
@@ -98,6 +101,8 @@ var Game = function () {
                 }
                 
                 setInterval(interval, 1000);
+                
+                townResourcesTableElement.addClass('has-interval');
             }
         },
         liveProgressInitialize: function()
