@@ -10,7 +10,7 @@
             {{ 'Back to the Town' | trans }}
         </a>
         <a class="btn btn-default"
-            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY() }) }}">
+            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: townBuilding.getCoordinatesX(), y: townBuilding.getCoordinatesY(), town_id: town.getId() }) }}">
             {{ 'View on map' | trans }}
         </a>
     </h1>
