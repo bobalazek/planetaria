@@ -125,16 +125,43 @@ class PlanetEntity extends AbstractAdvancedEntity
     }
 
     /**
+     * @param array $fields Which fields should it show?
+     *
      * @return array
      */
-    public function toArray()
+    public function toArray($fields = array('*'))
     {
-        return array(
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'slug' => $this->getSlug(),
-            'description' => $this->getDescription(),
-        );
+        $data = array();
+
+        if (
+            in_array('*', $fields) ||
+            in_array('id', $fields)
+        ) {
+            $data['id'] = $this->getId();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('name', $fields)
+        ) {
+            $data['name'] = $this->getName();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('slug', $fields)
+        ) {
+            $data['slug'] = $this->getSlug();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('description', $fields)
+        ) {
+            $data['description'] = $this->getDescription();
+        }
+
+        return $data;
     }
 
     /**

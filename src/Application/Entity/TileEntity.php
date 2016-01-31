@@ -548,20 +548,56 @@ class TileEntity extends AbstractBasicEntity
 
         if (
             in_array('*', $fields) ||
-            in_array('planet', $fields)
+            in_array('planet', $fields) ||
+            Helper::strpos_array($fields, 'planet.') !== false
         ) {
-            $data['planet'] = $this->getPlanet()->toArray();
+            $planetFields = array('*');
+            
+            if ($index = Helper::strpos_array($fields, 'planet.')) {
+                $field = $fields[$index];
+                $planetFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'planet.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+            
+            $data['planet'] = $this->getPlanet()->toArray($planetFields);
         }
 
         if (
             in_array('*', $fields) ||
-            in_array('tile_resources', $fields)
+            in_array('tile_resources', $fields) ||
+            Helper::strpos_array($fields, 'tile_resources.') !== false
         ) {
+            $tileResourcesFields = array('*');
+            
+            if ($index = Helper::strpos_array($fields, 'tile_resources.')) {
+                $field = $fields[$index];
+                $tileResourcesFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'tile_resources.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+            
             $tileResources = array();
             $tileResourcesCollection = $this->getTileResources();
             if (!empty($tileResourcesCollection)) {
                 foreach ($tileResourcesCollection as $tileResource) {
-                    $tileResources[] = $tileResource->toArray();
+                    $tileResources[] = $tileResource->toArray($tileResourcesFields);
                 }
             }
 

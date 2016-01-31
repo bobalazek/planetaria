@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Application\Game\Buildings\AbstractBuilding;
 use Application\Game\Buildings;
 use Application\Game\BuildingStatuses;
+use Application\Helper;
 
 /**
  * Town Building Entity
@@ -792,20 +793,56 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         if (
             in_array('*', $fields) ||
-            in_array('town', $fields)
+            in_array('town', $fields) ||
+            Helper::strpos_array($fields, 'town.') !== false
         ) {
-            $data['time_next_level_upgrade_ends'] = $this->getTown()->toArray();
+            $townFields = array('*');
+            
+            if ($index = Helper::strpos_array($fields, 'town.')) {
+                $field = $fields[$index];
+                $townFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'town.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+            
+            $data['town'] = $this->getTown()->toArray($townFields);
         }
 
         if (
             in_array('*', $fields) ||
-            in_array('tiles', $fields)
+            in_array('tiles', $fields) ||
+            Helper::strpos_array($fields, 'tiles.') !== false
         ) {
+            $tilesFields = array('*');
+            
+            if ($index = Helper::strpos_array($fields, 'tiles.')) {
+                $field = $fields[$index];
+                $tilesFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'tiles.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+            
             $tiles = array();
             $tilesCollection = $this->getTiles();
             if (!empty($tilesCollection)) {
                 foreach ($tilesCollection as $tile) {
-                    $tiles[] = $tile->toArray();
+                    $tiles[] = $tile->toArray($tilesFields);
                 }
             }
 

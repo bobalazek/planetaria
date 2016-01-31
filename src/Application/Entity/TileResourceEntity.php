@@ -168,6 +168,46 @@ class TileResourceEntity extends AbstractBasicEntity
 
         return $this;
     }
+    
+    /**
+     * @param array $fields Which fields should it show?
+     *
+     * @return array
+     */
+    public function toArray($fields = array('*'))
+    {
+        $data = array();
+
+        if (
+            in_array('*', $fields) ||
+            in_array('id', $fields)
+        ) {
+            $data['id'] = $this->getId();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('resource', $fields)
+        ) {
+            $data['resource'] = $this->getResource();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('amount', $fields)
+        ) {
+            $data['amount'] = $this->getAmount();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('amount_left', $fields)
+        ) {
+            $data['amount_left'] = $this->getAmountLeft();
+        }
+
+        return $data;
+    }
 
     /**
      * @ORM\PreUpdate
