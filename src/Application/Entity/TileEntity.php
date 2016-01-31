@@ -552,7 +552,7 @@ class TileEntity extends AbstractBasicEntity
             Helper::strpos_array($fields, 'planet.') !== false
         ) {
             $planetFields = array('*');
-            
+
             if ($index = Helper::strpos_array($fields, 'planet.')) {
                 $field = $fields[$index];
                 $planetFields = explode(
@@ -567,7 +567,7 @@ class TileEntity extends AbstractBasicEntity
                     )
                 );
             }
-            
+
             $data['planet'] = $this->getPlanet()->toArray($planetFields);
         }
 
@@ -577,7 +577,7 @@ class TileEntity extends AbstractBasicEntity
             Helper::strpos_array($fields, 'tile_resources.') !== false
         ) {
             $tileResourcesFields = array('*');
-            
+
             if ($index = Helper::strpos_array($fields, 'tile_resources.')) {
                 $field = $fields[$index];
                 $tileResourcesFields = explode(
@@ -592,7 +592,7 @@ class TileEntity extends AbstractBasicEntity
                     )
                 );
             }
-            
+
             $tileResources = array();
             $tileResourcesCollection = $this->getTileResources();
             if (!empty($tileResourcesCollection)) {

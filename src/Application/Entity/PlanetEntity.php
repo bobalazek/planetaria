@@ -139,21 +139,21 @@ class PlanetEntity extends AbstractAdvancedEntity
         ) {
             $data['id'] = $this->getId();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('name', $fields)
         ) {
             $data['name'] = $this->getName();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('slug', $fields)
         ) {
             $data['slug'] = $this->getSlug();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('description', $fields)

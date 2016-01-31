@@ -30,7 +30,7 @@
             jQuery('#map-controls .btn').on('click', function() {
                 var x = jQuery('#map-controls-x').val();
                 var y = jQuery('#map-controls-y').val();
-                
+
                 currentUrl = updateUrlParameter(currentUrl, 'x', x);
                 currentUrl = updateUrlParameter(currentUrl, 'y', y);
 
@@ -38,7 +38,7 @@
 
                 return false;
             });
-            
+
             loadMap();
 
             function loadMap(callback) {
@@ -55,7 +55,7 @@
                             currentUrl = jQuery(this).attr('href');
                             var x = jQuery(this).attr('data-x');
                             var y = jQuery(this).attr('data-y');
-                            
+
                             loadMap();
 
                             return false;
@@ -63,17 +63,17 @@
                     });
 
                     jQuery('#map-overlay').fadeOut();
-                    
+
                     var x = jQuery('#map-inner').attr('data-x');
                     var y = jQuery('#map-inner').attr('data-y');
                     jQuery('h2 small').text('('+x+','+y+')');
-                    
+
                     if (typeof callback === 'function') {
                         callback();
                     }
                 });
             }
-            
+
             function updateUrlParameter(url, param, value){
                 var regex = new RegExp('('+param+'=)[^\&]+');
                 return url.replace( regex , '$1' + value);

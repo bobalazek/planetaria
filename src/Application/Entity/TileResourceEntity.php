@@ -168,7 +168,7 @@ class TileResourceEntity extends AbstractBasicEntity
 
         return $this;
     }
-    
+
     /**
      * @param array $fields Which fields should it show?
      *
@@ -184,21 +184,21 @@ class TileResourceEntity extends AbstractBasicEntity
         ) {
             $data['id'] = $this->getId();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('resource', $fields)
         ) {
             $data['resource'] = $this->getResource();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('amount', $fields)
         ) {
             $data['amount'] = $this->getAmount();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('amount_left', $fields)

@@ -797,7 +797,7 @@ class TownBuildingEntity extends AbstractBasicEntity
             Helper::strpos_array($fields, 'town.') !== false
         ) {
             $townFields = array('*');
-            
+
             if ($index = Helper::strpos_array($fields, 'town.')) {
                 $field = $fields[$index];
                 $townFields = explode(
@@ -812,7 +812,7 @@ class TownBuildingEntity extends AbstractBasicEntity
                     )
                 );
             }
-            
+
             $data['town'] = $this->getTown()->toArray($townFields);
         }
 
@@ -822,7 +822,7 @@ class TownBuildingEntity extends AbstractBasicEntity
             Helper::strpos_array($fields, 'tiles.') !== false
         ) {
             $tilesFields = array('*');
-            
+
             if ($index = Helper::strpos_array($fields, 'tiles.')) {
                 $field = $fields[$index];
                 $tilesFields = explode(
@@ -837,7 +837,7 @@ class TownBuildingEntity extends AbstractBasicEntity
                     )
                 );
             }
-            
+
             $tiles = array();
             $tilesCollection = $this->getTiles();
             if (!empty($tilesCollection)) {
