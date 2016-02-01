@@ -27,6 +27,8 @@ var Game = function () {
         },
         mapInitialize: function()
         {
+            Application.tooltipsAndPopoversInitialize();
+
             var mapElement = jQuery('#map');
             var mapInnerElement = jQuery('#map-inner');
             
@@ -62,11 +64,16 @@ var Game = function () {
             mapElement.scrollTop(scrollTop);
             mapElement.scrollLeft(scrollLeft);
             
-            // If any active popover, disable him!
+            // If any active popover, disable it!
             mapElement.on('scroll', function() {
                 if (jQuery('.popover.in').length) {
                     jQuery('.popover-click').popover('hide');
                 }
+            });
+            
+            // Construct building sidebar
+            jQuery('.btn-construct-building').on('click', function() {
+                // To-Do
             });
         },
         townResourcesTableInitialize: function()

@@ -7,7 +7,8 @@
                 data-key="{{ building.getKey() }}"
                 data-slug="{{ building.getSlug() }}"
                 data-description="{{ building.getDescription() }}"
-                data-size="{{ building.getSize() }}">
+                data-size="{{ building.getSize() }}"
+                data-resources-cost="{{ building.getResourcesCost(0) | json_encode }}">
                 {% set preBuildChecks = app['game.buildings'].doPreBuildChecksResponse(
                     planet,
                     town,
@@ -22,6 +23,20 @@
                 <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
                 <h4>{{ building.getName() }}</h4>
                 <p>{{ building.getDescription() }}</p>
+                <button class="btn btn-xs btn-success btn-block btn-construct-building"
+                    data-toggle="tooltip"
+                    title="
+                        {{ 'Cost' | trans }}: <br />
+                        {% if building.getResourcesCost(0) %}
+                            {% for resource, amount in building.getResourcesCost(0) %}
+                                {{ amount }} {{ resource | humanize | trans }} <br />
+                            {% endfor %}
+                        {% else %}
+                            {{ 'This builing is free!' | trans }}
+                        {% endif %}
+                    ">
+                    {{ 'Build' | trans }}
+                </button>
             </div>
         {% endfor %}
     </div>

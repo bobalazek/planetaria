@@ -46,6 +46,12 @@ h1 {
     overflow: scroll;
 }
 
+@media screen and (max-width: 767px) {
+    #map {
+        max-height: 600px;
+    }
+}
+
 #map-overlay {
     max-width: 800px;
     height: 800px;
@@ -58,110 +64,6 @@ h1 {
     position: absolute;
     z-index: 9;
     width: 100%;
-}
-
-#map-construct-building {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: 1;
-}
-
-    #map-construct-building-content {
-        background: rgba(0, 0, 0, 0.8);
-        width: 128px;
-        margin-left: -128px;
-        overflow-y: scroll;
-        max-height: 800px;
-    }
-    
-    #map-construct-building.open #map-construct-building-content {
-        margin-left: 0;
-    }
-    
-        #map-construct-building-content .building {
-            position: relative;
-            color: #fff;
-            text-align: center;
-            width: 112px;
-            min-height: 96px;
-            padding: 8px;
-            margin: 8px;
-        }
-        
-        #map-construct-building-content .building-overlay {
-            padding: 20px 10px;
-            font-size: 12px;
-        }
-            
-            #map-construct-building-content .building h4 {
-                margin: 0 0 10px;
-                font-size: 14px;
-            }
-            
-            #map-construct-building-content .building p {
-                margin: 0;
-                font-size: 10px;
-            }
-
-    #map-construct-building-handle {
-        text-align: center;
-        padding: 22px 5px;
-        cursor: pointer;
-        background: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        height: 64px;
-        margin: 0 auto;
-        position: absolute;
-        top: 50%;
-        margin-top: -32px;
-        margin-left: 0;
-        -webkit-border-top-right-radius: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomright: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
-    
-    #map-construct-building.open #map-construct-building-handle {
-        margin-left: 128px;
-    }
-
-#map-controls {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50%;
-}
-    #map-controls form {
-        padding: 10px;
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    #map-controls form .form-group {
-        margin-bottom: 0;   
-    }
-    
-    #map-controls form .form-control {
-        height: 20px;
-        font-size: 10px;
-    }
-    
-    #map-controls form .input-group-addon {
-        font-size: 12px;
-        padding: 2px 8px;
-    }
-    
-    #map-controls form .btn {
-        padding: 0 10px;
-    }
-
-@media screen and (max-width: 767px) {
-    #map {
-        max-height: 600px;
-    }
 }
 
     .map-row {
@@ -214,6 +116,106 @@ h1 {
         .map-tile.map-tile-current {
             opacity: 0.8;
         }
+        
+/* Map - Construct building */
+#map-construct-building {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+}
+
+    #map-construct-building-content {
+        background: rgba(0, 0, 0, 0.8);
+        width: 128px;
+        margin-left: -128px;
+        overflow-y: scroll;
+        max-height: 800px;
+    }
+    
+    #map-construct-building.open #map-construct-building-content {
+        margin-left: 0;
+    }
+    
+        #map-construct-building-content .building {
+            position: relative;
+            color: #fff;
+            text-align: center;
+            width: 112px;
+            min-height: 96px;
+            padding: 8px;
+            margin: 8px;
+        }
+        
+        #map-construct-building-content .building-overlay {
+            padding: 20px 10px;
+            font-size: 12px;
+        }
+            
+            #map-construct-building-content .building h4 {
+                margin: 0 0 10px;
+                font-size: 14px;
+            }
+            
+            #map-construct-building-content .building p {
+                font-size: 10px;
+            }
+
+    #map-construct-building-handle {
+        text-align: center;
+        padding: 22px 5px;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        height: 64px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        margin-top: -32px;
+        margin-left: 0;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    
+    #map-construct-building.open #map-construct-building-handle {
+        margin-left: 128px;
+    }
+
+/* Map - Controls */
+#map-controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+}
+
+    #map-controls form {
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    #map-controls form .form-group {
+        margin-bottom: 0;   
+    }
+    
+    #map-controls form .form-control {
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    #map-controls form .input-group-addon {
+        font-size: 12px;
+        padding: 2px 8px;
+    }
+    
+    #map-controls form .btn {
+        padding: 0 10px;
+    }
         
 /*** Building ***/
 .building-wrapper {

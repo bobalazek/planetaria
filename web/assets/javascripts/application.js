@@ -10,11 +10,7 @@ var Application = function () {
                 Application.timeAgoInitialize();
                 Application.paginatorInitialize();
                 Application.postMetasInitialize();
-                Application.districtResourcesInitialize();
                 Application.townResourcesInitialize();
-                Application.buildingResourcesInitialize();
-                Application.unitResourcesInitialize();
-                Application.itemResourcesInitialize();
                 Application.listActionsInitialize();
                 Application.slugsInitialize();
                 Application.confirmInitialize();
@@ -30,6 +26,7 @@ var Application = function () {
         tooltipsAndPopoversInitialize: function() {
             jQuery('[data-toggle="popover"], .popover-hover').popover({
                 html : true,
+                container: 'body',
                 trigger: 'hover',
                 title: function() {
                     return jQuery(this).attr('data-popover-title');
@@ -40,6 +37,7 @@ var Application = function () {
             });
             jQuery('[data-toggle="tooltip"], .tooltip-hover').tooltip({
                 html : true,
+                container: 'body',
                 trigger: 'hover',
                 title: function() {
                     return jQuery(this).attr('data-tooltip');
@@ -49,6 +47,7 @@ var Application = function () {
             jQuery('.popover-click').popover({
                 html : true,
                 trigger: 'click',
+                container: 'body',
                 title: function() {
                     return jQuery(this).attr('data-popover-title');
                 },
@@ -149,39 +148,6 @@ var Application = function () {
             }
             initializeRemovePostMetaButton();
         },
-        districtResourcesInitialize: function() {
-            var districtResourcesCount = jQuery('#districtResources-fields-list li').length;
-            
-            jQuery('#new-district-resource').on('click', function(e) {
-                e.preventDefault();
-                var districtResources = jQuery('#districtResources-fields-list');
-                var newWidget = districtResources.attr('data-prototype');
-                newWidget = newWidget.replace(/__name__/g, districtResourcesCount);
-                districtResourcesCount++;
-                var newLi = jQuery('<li></li>').html(
-                    newWidget+
-                    '<div class="clearfix">' +
-                        '<div class="pull-right">' +
-                            '<a class="btn btn-xs btn-danger remove-district-resource-button"' +
-                                'href="#">' +
-                                '<i class="fa fa-times"></i>' +
-                            '</a>' +
-                        '</div>' +
-                    '</div>'
-                );
-                newLi.appendTo(districtResources);
-                initializeRemoveDistrictResourceButton();
-            });
-            
-            function initializeRemoveDistrictResourceButton() {
-                jQuery('.remove-district-resource-button').on('click', function(e) {
-                    e.preventDefault();
-                    jQuery(this).closest('li').remove();
-                    districtResourcesCount--;
-                });
-            }
-            initializeRemoveDistrictResourceButton();
-        },
         townResourcesInitialize: function() {
             var townResourcesCount = jQuery('#townResources-fields-list li').length;
             
@@ -214,105 +180,6 @@ var Application = function () {
                 });
             }
             initializeRemoveTownResourceButton();
-        },
-        buildingResourcesInitialize: function() {
-            var buildingResourcesCount = jQuery('#buildingResources-fields-list li').length;
-            
-            jQuery('#new-building-resource').on('click', function(e) {
-                e.preventDefault();
-                var buildingResources = jQuery('#buildingResources-fields-list');
-                var newWidget = buildingResources.attr('data-prototype');
-                newWidget = newWidget.replace(/__name__/g, buildingResourcesCount);
-                buildingResourcesCount++;
-                var newLi = jQuery('<li></li>').html(
-                    newWidget+
-                    '<div class="clearfix">' +
-                        '<div class="pull-right">' +
-                            '<a class="btn btn-xs btn-danger remove-building-resource-button"' +
-                                'href="#">' +
-                                '<i class="fa fa-times"></i>' +
-                            '</a>' +
-                        '</div>' +
-                    '</div>'
-                );
-                newLi.appendTo(buildingResources);
-                initializeRemoveBuildingResourceButton();
-            });
-            
-            function initializeRemoveBuildingResourceButton() {
-                jQuery('.remove-building-resource-button').on('click', function(e) {
-                    e.preventDefault();
-                    jQuery(this).closest('li').remove();
-                    buildingResourcesCount--;
-                });
-            }
-            initializeRemoveBuildingResourceButton();
-        },
-        unitResourcesInitialize: function() {
-            var unitResourcesCount = jQuery('#unitResources-fields-list li').length;
-            
-            jQuery('#new-unit-resource').on('click', function(e) {
-                e.preventDefault();
-                var unitResources = jQuery('#unitResources-fields-list');
-                var newWidget = unitResources.attr('data-prototype');
-                newWidget = newWidget.replace(/__name__/g, unitResourcesCount);
-                unitResourcesCount++;
-                var newLi = jQuery('<li></li>').html(
-                    newWidget+
-                    '<div class="clearfix">' +
-                        '<div class="pull-right">' +
-                            '<a class="btn btn-xs btn-danger remove-unit-resource-button"' +
-                                'href="#">' +
-                                '<i class="fa fa-times"></i>' +
-                            '</a>' +
-                        '</div>' +
-                    '</div>'
-                );
-                newLi.appendTo(unitResources);
-                initializeRemoveUnitResourceButton();
-            });
-            
-            function initializeRemoveUnitResourceButton() {
-                jQuery('.remove-unit-resource-button').on('click', function(e) {
-                    e.preventDefault();
-                    jQuery(this).closest('li').remove();
-                    unitResourcesCount--;
-                });
-            }
-            initializeRemoveUnitResourceButton();
-        },
-        itemResourcesInitialize: function() {
-            var itemResourcesCount = jQuery('#itemResources-fields-list li').length;
-            
-            jQuery('#new-item-resource').on('click', function(e) {
-                e.preventDefault();
-                var itemResources = jQuery('#itemResources-fields-list');
-                var newWidget = itemResources.attr('data-prototype');
-                newWidget = newWidget.replace(/__name__/g, itemResourcesCount);
-                itemResourcesCount++;
-                var newLi = jQuery('<li></li>').html(
-                    newWidget+
-                    '<div class="clearfix">' +
-                        '<div class="pull-right">' +
-                            '<a class="btn btn-xs btn-danger remove-item-resource-button"' +
-                                'href="#">' +
-                                '<i class="fa fa-times"></i>' +
-                            '</a>' +
-                        '</div>' +
-                    '</div>'
-                );
-                newLi.appendTo(itemResources);
-                initializeRemoveItemResourceButton();
-            });
-            
-            function initializeRemoveItemResourceButton() {
-                jQuery('.remove-item-resource-button').on('click', function(e) {
-                    e.preventDefault();
-                    jQuery(this).closest('li').remove();
-                    itemResourcesCount--;
-                });
-            }
-            initializeRemoveItemResourceButton();
         },
         listActionsInitialize: function() {
             jQuery('#check-all-checkbox').on('click', function() {

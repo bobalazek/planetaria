@@ -54,8 +54,7 @@
                 currentUrl = currentUrl.replace(/&amp;/g, '&');
 
                 jQuery('#map').load(currentUrl + ' #map-inner', function() {
-                    Application.initialize();
-                    Game.initialize();
+                    Game.mapInitialize();
 
                     jQuery('.map-tile').on('shown.bs.popover', function() {
                         jQuery('.btn-center-map').on('click', function() {
