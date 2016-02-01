@@ -1,9 +1,9 @@
 <div id="map-tile-{{ tile.getId() }}"
     class="
-        map-tile 
+        map-tile
         {{ tile.getTownBuilding() and tile.getTownBuilding().getTown() == currentTown ? 'map-tile-current-town' : '' }}
         {{ x == centerX and y == centerY ? 'map-tile-center' : '' }}
-        tooltip-hover 
+        tooltip-hover
         popover-click
     "
     data-id="{{ tile.getId() }}"

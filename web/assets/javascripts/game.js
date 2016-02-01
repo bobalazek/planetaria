@@ -22,7 +22,7 @@ var Game = function () {
                 jQuery('#header-time span').text(time);
             }
             clock();
-            
+
             setInterval(clock, 1000);
         },
         mapInitialize: function()
@@ -31,28 +31,28 @@ var Game = function () {
 
             var mapElement = jQuery('#map');
             var mapInnerElement = jQuery('#map-inner');
-            
+
             // Set the width of the inner map
             var firstMapRow = mapInnerElement.find('.map-row:first');
             if (firstMapRow.length) {
                 var firstMapRowElements = firstMapRow.find('.map-tile');
                 var elementWidth = firstMapRowElements.outerWidth();
-                
+
                 mapInnerElement.css('width', firstMapRowElements.length * elementWidth);
             }
-            
+
             // Activate nicescroll
             mapElement.niceScroll({
                 touchbehavior: true,
                 preventmultitouchscrolling: false, 
             });
-            
+
             // Map construct
             jQuery('#map-construct-building-content').niceScroll({
                 touchbehavior: true,
                 preventmultitouchscrolling: false, 
             });
-            
+
             // Get heights, widths and calculate scroll ofsets
             var mapHeight = mapElement.outerHeight();
             var mapWidth = mapElement.outerWidth();
@@ -63,19 +63,19 @@ var Game = function () {
             // Set to center
             mapElement.scrollTop(scrollTop);
             mapElement.scrollLeft(scrollLeft);
-            
+
             // If any active popover, disable it!
             mapElement.on('scroll', function() {
                 if (jQuery('.popover.in').length) {
                     jQuery('.popover-click').popover('hide');
                 }
             });
-            
+
             jQuery('.map-tile').on('click', function() {
                 jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                 jQuery(this).addClass('map-tile-selected');
             });
-            
+
             // Construct building sidebar
             jQuery('.btn-construct-building').on('click', function() {
                 // To-Do
@@ -84,7 +84,7 @@ var Game = function () {
         townResourcesTableInitialize: function()
         {
             var townResourcesTableElement = jQuery('#town-resources-table');
-            
+
             if (
                 townResourcesTableElement.length &&
                 !townResourcesTableElement.hasClass('has-interval')
@@ -98,60 +98,60 @@ var Game = function () {
 
                         if (resourceProduction > 0) {
                             resourceAvailable = resourceAvailable + (resourceProduction / 60);
-                            
+
                             if (
                                 resourceCapacity !== -1 &&
                                 resourceAvailable > resourceCapacity
                             ) {
                                 resourceAvailable = resourceCapacity;
                             }
-                            
+
                             jQuery(this).attr('data-resource-available', resourceAvailable);
                             jQuery(this).find('.resource-available').text(parseInt(resourceAvailable));
                         }
                     });
                 }
-                
+
                 setInterval(interval, 1000);
-                
+
                 townResourcesTableElement.addClass('has-interval');
             }
         },
         liveProgressInitialize: function()
         {
             var liveProgress = jQuery('.live-progress');
-            
+
             function interval() {
                 liveProgress.each(function() {
                     var percentage = parseFloat(jQuery(this).attr('data-percentage'));
                     var percentagePerSecond = parseFloat(jQuery(this).attr('data-percentage-per-second'));
                     var secondsUntilDone = parseInt(jQuery(this).attr('data-seconds-until-done'));
-                    
+
                     percentage = percentage + percentagePerSecond;
                     secondsUntilDone--;
 
                     if (percentage > 100) {
                         percentage = 100;
                     }
-                    
+
                     jQuery(this)
                         .attr('data-percentage', percentage)
                         .attr('data-seconds-until-done', secondsUntilDone)
                     ;
-                    
+
                     jQuery(this)
                         .find('.progress-bar')
                         .attr('aria-valuenow', percentage)
                         .css({ width: percentage+'%' })
                         .text(parseInt(percentage)+'%')
                     ;
-                    
+
                     jQuery(this)
                         .parent()
                         .find('.seconds-until-done')
                         .text(secondsUntilDone)
                     ;
-                    
+
                     if (
                         jQuery.isNumeric(secondsUntilDone) &&
                         secondsUntilDone <= 0
@@ -160,7 +160,7 @@ var Game = function () {
                     }
                 });
             }
-            
+
             setInterval(interval, 1000);
         }
     }

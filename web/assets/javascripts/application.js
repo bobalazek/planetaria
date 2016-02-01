@@ -43,7 +43,7 @@ var Application = function () {
                     return jQuery(this).attr('data-tooltip');
                 },
             });
-            
+
             jQuery('.popover-click').popover({
                 html : true,
                 trigger: 'click',
@@ -55,7 +55,7 @@ var Application = function () {
                     return jQuery(this).attr('data-popover-content');
                 },
             });
-            
+
             jQuery('.popover-click').on('click', function() {
                 jQuery('.popover-click').not(this).popover('hide');
             });
@@ -117,7 +117,7 @@ var Application = function () {
         },
         postMetasInitialize: function() {
             var postMetasCount = jQuery('#postMetas-fields-list li').length;
-            
+
             jQuery('#new-post-meta').on('click', function(e) {
                 e.preventDefault();
                 var postMetas = jQuery('#postMetas-fields-list');
@@ -150,7 +150,7 @@ var Application = function () {
         },
         townResourcesInitialize: function() {
             var townResourcesCount = jQuery('#townResources-fields-list li').length;
-            
+
             jQuery('#new-town-resource').on('click', function(e) {
                 e.preventDefault();
                 var townResources = jQuery('#townResources-fields-list');
@@ -171,7 +171,7 @@ var Application = function () {
                 newLi.appendTo(townResources);
                 initializeRemoveTownResourceButton();
             });
-            
+
             function initializeRemoveTownResourceButton() {
                 jQuery('.remove-town-resource-button').on('click', function(e) {
                     e.preventDefault();
@@ -212,7 +212,7 @@ var Application = function () {
                     return false;
                 }
             });
-            
+
             jQuery('.object-checkbox').on('click', function() {
                 var all = jQuery('.object-checkbox').length;
                 var checked = jQuery('.object-checkbox:checked').length;
@@ -236,7 +236,7 @@ var Application = function () {
             if (slugEl.length) {
                 nameEl.on('keyup', function() {
                     var value = jQuery(this).val();
-                    
+
                     slugEl.val(Application.slugify(value));
                 })
             }
@@ -254,11 +254,11 @@ var Application = function () {
             jQuery('.confirm-alert').on('click', function() {
                 var href = jQuery(this).attr('href');
                 var text = jQuery(this).attr('data-confirm-text');
-                
+
                 if (confirm(text)) {
                     window.location.href = href;
                 }
-                
+
                 return false;
             });
         },
@@ -268,9 +268,9 @@ var Application = function () {
         linkButtonsInitialize: function() {
             jQuery('.link-button').on('click', function() {
                 var href = jQuery(this).attr('href');
-                
+
                 window.location.href = href;
-                
+
                 return false;
             });
         },
