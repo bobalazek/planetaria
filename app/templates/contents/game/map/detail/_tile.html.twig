@@ -1,5 +1,11 @@
 <div id="map-tile-{{ tile.getId() }}"
-    class="map-tile {{ x == centerX and y == centerY ? 'map-tile-current' : '' }} tooltip-hover popover-click"
+    class="
+        map-tile 
+        {{ tile.getTownBuilding() and tile.getTownBuilding().getTown() == currentTown ? 'map-tile-current-town' : '' }}
+        {{ x == centerX and y == centerY ? 'map-tile-center' : '' }}
+        tooltip-hover 
+        popover-click
+    "
     data-id="{{ tile.getId() }}"
     data-x="{{ x }}"
     data-y="{{ y }}"
@@ -9,11 +15,8 @@
     data-popover-title="{{ tile.getCoordinates() }}"
     data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
-    <div class="map-tile-hover-overlay"></div>
+    <div class="map-tile-overlay"></div>
     {% if tile.getTownBuilding() %}
-        {% if tile.getTownBuilding().getTown() == currentTown %}
-            <div class="map-tile-selected-overlay"></div>
-        {% endif %}
         <img class="img-responsive map-tile-building-image"
             src="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuildingImage() }}" />
     {% endif %}

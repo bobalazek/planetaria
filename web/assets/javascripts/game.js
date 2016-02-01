@@ -71,6 +71,11 @@ var Game = function () {
                 }
             });
             
+            jQuery('.map-tile').on('click', function() {
+                jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
+                jQuery(this).addClass('map-tile-selected');
+            });
+            
             // Construct building sidebar
             jQuery('.btn-construct-building').on('click', function() {
                 // To-Do

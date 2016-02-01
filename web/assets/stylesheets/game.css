@@ -87,34 +87,31 @@ h1 {
         background-color: #000;
     }
     
-        .map-tile-selected-overlay {
+        .map-tile-overlay {
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
             width: 100%;
-            opacity: 0.1;
-            background-color: #fff;
-            display: block;
-        }
-    
-        .map-tile-hover-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0.2;
             background-color: #fff;
             display: none;
+            opacity: 0.25;
         }
         
-        .map-tile:hover .map-tile-hover-overlay {
+        .map-tile.map-tile-current-town .map-tile-overlay {
             display: block;
+            background-color: #337ab7;
         }
         
-        .map-tile.map-tile-current {
-            opacity: 0.8;
+        .map-tile.map-tile-center .map-tile-overlay {
+            display: block;
+            background-color: #fff;
+        }
+        
+        .map-tile.map-tile-selected .map-tile-overlay,
+        .map-tile:hover .map-tile-overlay {
+            display: block;
+            background-color: #000;
         }
         
 /* Map - Construct building */
