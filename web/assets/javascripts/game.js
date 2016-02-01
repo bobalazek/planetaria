@@ -65,21 +65,120 @@ var Game = function () {
             mapElement.scrollLeft(scrollLeft);
 
             // If any active popover, disable it!
-            mapElement.on('scroll', function() {
-                if (jQuery('.popover.in').length) {
-                    jQuery('.popover-click').popover('hide');
-                }
-            });
+            mapElement
+                .off('scroll')
+                .on('scroll', function() {
+                    if (jQuery('.popover.in').length) {
+                        jQuery('.popover-click').popover('hide');
+                    }
+                })
+            ;
+            
+            // Map controls
+            jQuery('#map-controls .btn')
+                .off('click')
+                .on('click', function() {
+                    var x = jQuery('#map-controls-x').val();
+                    var y = jQuery('#map-controls-y').val();
 
-            jQuery('.map-tile').on('click', function() {
-                jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
-                jQuery(this).addClass('map-tile-selected');
-            });
+                    currentUrl = updateUrlParameter(currentUrl, 'x', x);
+                    currentUrl = updateUrlParameter(currentUrl, 'y', y);
+
+                    loadMap();
+
+                    return false;
+                })
+            ;
+
+            // Map handle for buildings sidebar
+            jQuery('#map-construct-building-handle')
+                .off('click')
+                .on('click', function() {
+                    jQuery('#map-construct-building').toggleClass('open');
+                })
+            ;
+
+            if (!jQuery('#map').hasClass('loaded')) {
+                loadMap();
+            }
+
+            function loadMap(callback) {
+                jQuery('.popover').remove(); // Hack
+                jQuery('#map-overlay').fadeIn();
+
+                currentUrl = currentUrl.replace(/&amp;/g, '&');
+
+                jQuery('#map').load(currentUrl + ' #map-inner', function() {
+                    Game.mapInitialize();
+
+                    jQuery('.map-tile').on('shown.bs.popover', function() {
+                        jQuery('.btn-center-map').on('click', function() {
+                            currentUrl = jQuery(this).attr('href');
+                            var x = jQuery(this).attr('data-x');
+                            var y = jQuery(this).attr('data-y');
+
+                            loadMap();
+
+                            return false;
+                        });
+                    });
+
+                    jQuery('#map-overlay').fadeOut();
+
+                    var x = jQuery('#map-inner').attr('data-center-x');
+                    var y = jQuery('#map-inner').attr('data-center-y');
+                    jQuery('h2 small').text('('+x+','+y+')');
+                    
+                    jQuery(this).addClass('loaded');
+
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                });
+            }
+
+            function updateUrlParameter(url, param, value){
+                var regex = new RegExp('('+param+'=)[^\&]+');
+                return url.replace( regex , '$1' + value);
+            }
+
+            // Click on map tile, to enable the build button in sidebar
+            jQuery('.map-tile-overlay')
+                .off('click')
+                .on('click', function() {
+                    jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
+                    jQuery(this).parent().addClass('map-tile-selected');
+                    jQuery('.btn-construct-building').prop('disabled', false);
+                })
+            ;
 
             // Construct building sidebar
-            jQuery('.btn-construct-building').on('click', function() {
-                // To-Do
-            });
+            jQuery('.btn-construct-building')
+                .off('click')
+                .on('click', function() {
+                    var buildingElement = jQuery(this).parent();
+                    var selectedMapTileElement = jQuery('.map-tile.map-tile-selected');
+                    var townsListActiveElement = jQuery('#towns-list .active');
+                    var x = selectedMapTileElement.attr('data-x');
+                    var y = selectedMapTileElement.attr('data-y');
+                    var townId = townsListActiveElement.attr('data-id');
+                    var planetId = townsListActiveElement.attr('data-planet-id');
+                    var building = buildingElement.attr('data-key');
+                    
+                    jQuery.get(
+                        baseUrl+'/game/api/map/'+planetId+
+                        '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
+                    ).done(function(data) {
+                        loadMap();
+                        // To-Do: Reload resources
+
+                        toastr.success(data.message);
+                    }).fail(function(response) {
+                        var data = response.responseJSON;
+                        toastr.error(data.error.message);
+                    });
+                })
+            ;
         },
         townResourcesTableInitialize: function()
         {

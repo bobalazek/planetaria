@@ -25,6 +25,7 @@
                 <p>{{ building.getDescription() }}</p>
                 <button class="btn btn-xs btn-success btn-block btn-construct-building"
                     data-toggle="tooltip"
+                    disabled="disabled"
                     title="
                         {{ 'Cost' | trans }}: <br />
                         {% if building.getResourcesCost(0) %}
