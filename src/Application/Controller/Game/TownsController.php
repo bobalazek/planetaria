@@ -426,6 +426,7 @@ class TownsController
                     'id' => $townBuilding->getTown()->getCountry()->getId(),
                     'x' => $townBuilding->getCoordinatesX(),
                     'y' => $townBuilding->getCoordinatesX(),
+                    'town_id' => $townBuilding->getTown()->getId(),
                 )
             )
         );

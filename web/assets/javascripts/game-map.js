@@ -145,12 +145,17 @@ var GameMap = function () {
             });
             
             jQuery('.map-tile').on('click', function() {
-                jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
-                jQuery(this).addClass('map-tile-selected');
-                
-                jQuery('#map-construct-building').fadeIn(function() {
-                    jQuery(this).addClass('open');
-                });
+                if (jQuery(this).attr('data-currently-buildable') == 'true') {
+                    jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
+                    jQuery(this).addClass('map-tile-selected');
+                    
+                    jQuery('#map-construct-building').fadeIn(function() {
+                        jQuery(this).addClass('open');
+                    });
+                } else {
+                    jQuery('#map-construct-building').fadeOut();
+                    jQuery('#map-construct-building').removeClass('open');
+                }
             });
         },
     }
