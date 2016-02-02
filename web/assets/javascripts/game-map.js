@@ -153,6 +153,7 @@ var GameMap = function () {
                         jQuery(this).addClass('open');
                     });
                 } else {
+                    jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                     jQuery('#map-construct-building').fadeOut();
                     jQuery('#map-construct-building').removeClass('open');
                 }
