@@ -36,7 +36,7 @@ class ApiControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\ApiController::mapDetailAction'
         )
         ->bind('game.api.map.detail');
-        
+
         $controllers->match(
             '/map/{id}/build',
             'Application\Controller\Game\ApiController::mapBuildAction'

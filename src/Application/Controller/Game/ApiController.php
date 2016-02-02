@@ -99,7 +99,7 @@ class ApiController
             'radius' => $radius,
         ));
     }
-    
+
     /**
      * @param Application $app
      *
@@ -111,7 +111,7 @@ class ApiController
             'Application\Entity\PlanetEntity',
             $id
         );
-        
+
         if (!$planet) {
             return $app->json(array(
                 'error' => array(
@@ -134,7 +134,7 @@ class ApiController
                 'coordinatesY' => $y,
             ))
         ;
-        
+
         if (!$tile) {
             return $app->json(array(
                 'error' => array(
@@ -142,7 +142,7 @@ class ApiController
                 ),
             ), 404);
         }
-        
+
         if (!$tile->isBuildableCurrently()) {
             return $app->json(array(
                 'error' => array(
@@ -150,12 +150,12 @@ class ApiController
                 ),
             ), 403);
         }
-        
+
         $town = $app['orm.em']->find(
             'Application\Entity\TownEntity',
             $townId
         );
-        
+
         if (!$town) {
             return $app->json(array(
                 'error' => array(
@@ -163,7 +163,7 @@ class ApiController
                 ),
             ), 404);
         }
-        
+
         if (!$app['user']->hasTown($town)) {
             return $app->json(array(
                 'error' => array(
@@ -175,7 +175,7 @@ class ApiController
         // Update town stuff
         $app['game.towns']->checkForFinishedBuildingUpgrades($town);
         $app['game.towns']->updateTownResources($town);
-        
+
         if (array_key_exists($building, $buildings)) {
             try {
                 $app['game.buildings']->build(
@@ -198,7 +198,7 @@ class ApiController
                 ),
             ), 404);
         }
-        
+
         return $app->json(array(
             'message' => 'You have successfully constructed a new building',
         ));
