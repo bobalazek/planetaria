@@ -30,7 +30,7 @@
     <a class="btn btn-xs btn-default btn-block btn-center-map"
         data-x="{{ tile.getCoordinatesX() }}"
         data-y="{{ tile.getCoordinatesY() }}"
-        href="{{ url('game.map.detail', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY() }) }}">
+        href="{{ url('game.map.detail', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY(), town_id: townId }) }}">
         {{ 'Center map' | trans }}
     </a>
 </p>

@@ -25,3 +25,11 @@
         </div> <!-- /#map-wrapper -->
     </div>
 {% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    <script id="game-map-js" type="text/javascript" src="{{ app.baseUri }}/assets/javascripts/game-map.js?version={{ app.version }}"></script>
+    <script id="game-map-initialize-js">
+        GameMap.initialize();
+    </script>
+{% endblock %}

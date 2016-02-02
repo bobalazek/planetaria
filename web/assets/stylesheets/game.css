@@ -87,6 +87,14 @@ h1 {
         background-color: #000;
     }
     
+    .map-tile.map-tile-center {
+        border: 1px dotted #fff;
+    }
+    
+    .map-tile:hover {
+        opacity: 0.8;
+    }
+    
         .map-tile-overlay {
             position: absolute;
             top: 0;
@@ -102,18 +110,7 @@ h1 {
             display: block;
             background-color: #337ab7;
         }
-        
-        .map-tile.map-tile-center .map-tile-overlay {
-            display: block;
-            background-color: #fff;
-        }
-        
-        .map-tile.map-tile-selected .map-tile-overlay,
-        .map-tile:hover .map-tile-overlay {
-            display: block;
-            background-color: #000;
-        }
-        
+
 /* Map - Construct building */
 #map-construct-building {
     position: absolute;
