@@ -15,6 +15,58 @@ var GameMap = function () {
         mapInitialize: function()
         {
             GameMap.reloadMap();
+            
+            // Map controls
+            jQuery('#map-controls .btn').on('click', function() {
+                var x = jQuery('#map-controls-x').val();
+                var y = jQuery('#map-controls-y').val();
+
+                currentUrl = updateUrlParameter(currentUrl, 'x', x);
+                currentUrl = updateUrlParameter(currentUrl, 'y', y);
+
+                GameMap.reloadMap();
+
+                return false;
+            });
+            
+            // Map handle for buildings sidebar
+            jQuery('#map-construct-building-handle').on('click', function() {
+                jQuery('#map-construct-building').toggleClass('open');
+            });
+            
+            // Construct building sidebar
+            var townsListActiveElement = jQuery('#towns-list .active');
+            var townId = townsListActiveElement.attr('data-id');
+            var planetId = townsListActiveElement.attr('data-planet-id');
+            
+            jQuery('.btn-construct-building').on('click', function() {
+                var buildingElement = jQuery(this).parent();
+                var selectedMapTileElement = jQuery('.map-tile.map-tile-selected');
+                var x = selectedMapTileElement.attr('data-x');
+                var y = selectedMapTileElement.attr('data-y');
+                var building = buildingElement.attr('data-key');
+                
+                jQuery.get(
+                    baseUrl+'/game/api/map/'+planetId+
+                    '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
+                ).done(function(data) {
+                    GameMap.reloadMap();
+                    
+                    jQuery('#map-construct-building').removeClass('open');
+                    jQuery('#map-construct-building').fadeOut();
+
+                    toastr.success(data.message);
+                }).fail(function(response) {
+                    var data = response.responseJSON;
+                    toastr.error(data.error.message);
+                });
+            });
+            
+            // Helper functions
+            function updateUrlParameter(url, param, value){
+                var regex = new RegExp('('+param+'=)[^\&]+');
+                return url.replace( regex , '$1' + value);
+            }
         },
         reloadMap: function() {
             jQuery('#map-overlay').fadeIn();
@@ -92,54 +144,14 @@ var GameMap = function () {
                 });
             });
             
-            // Map controls
-            jQuery('#map-controls .btn').on('click', function() {
-                var x = jQuery('#map-controls-x').val();
-                var y = jQuery('#map-controls-y').val();
-
-                currentUrl = updateUrlParameter(currentUrl, 'x', x);
-                currentUrl = updateUrlParameter(currentUrl, 'y', y);
-
-                loadMap();
-
-                return false;
-            });
-            
-            // Map handle for buildings sidebar
-            jQuery('#map-construct-building-handle').on('click', function() {
-                jQuery('#map-construct-building').toggleClass('open');
-            });
-            
-            // Construct building sidebar
-            jQuery('.btn-construct-building').on('click', function() {
-                var buildingElement = jQuery(this).parent();
-                var selectedMapTileElement = jQuery('.map-tile.map-tile-selected');
-                var townsListActiveElement = jQuery('#towns-list .active');
-                var x = selectedMapTileElement.attr('data-x');
-                var y = selectedMapTileElement.attr('data-y');
-                var townId = townsListActiveElement.attr('data-id');
-                var planetId = townsListActiveElement.attr('data-planet-id');
-                var building = buildingElement.attr('data-key');
+            jQuery('.map-tile').on('click', function() {
+                jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
+                jQuery(this).addClass('map-tile-selected');
                 
-                jQuery.get(
-                    baseUrl+'/game/api/map/'+planetId+
-                    '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
-                ).done(function(data) {
-                    loadMap();
-                    // To-Do: Reload resources
-
-                    toastr.success(data.message);
-                }).fail(function(response) {
-                    var data = response.responseJSON;
-                    toastr.error(data.error.message);
+                jQuery('#map-construct-building').fadeIn(function() {
+                    jQuery(this).addClass('open');
                 });
             });
-            
-            // Helper functions
-            function updateUrlParameter(url, param, value){
-                var regex = new RegExp('('+param+'=)[^\&]+');
-                return url.replace( regex , '$1' + value);
-            }
         },
     }
 }();
