@@ -145,7 +145,10 @@ var GameMap = function () {
             });
             
             jQuery('.map-tile').on('click', function() {
-                if (jQuery(this).attr('data-currently-buildable') == 'true') {
+                if (
+                    !jQuery(this).hasClass('map-tile-selected') &&
+                    jQuery(this).attr('data-currently-buildable') == 'true'
+                ) {
                     jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                     jQuery(this).addClass('map-tile-selected');
                     
