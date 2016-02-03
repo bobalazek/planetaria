@@ -232,7 +232,7 @@ class ApiController
             'towns' => $towns,
         ));
     }
-    
+
     /**
      * @param integer     $id
      * @param Application $app
@@ -254,7 +254,7 @@ class ApiController
                 ),
             ), 404);
         }
-        
+
         // Update town stuff
         $app['game.towns']->checkForFinishedBuildingUpgrades($town);
         $app['game.towns']->updateTownResources($town);
@@ -268,7 +268,7 @@ class ApiController
                 'id', 'name', 'slug', 'description',
                 'buildings_limit', 'population', 'population_capacity',
                 'resources', 'resources_production', 'resources_available', 'resources_capacity',
-                'town_buildings.{id,building,building_level}', 'country', 'planet'
+                'town_buildings.{id,building,building_level}', 'country', 'planet',
             );
         }
 

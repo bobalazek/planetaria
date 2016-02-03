@@ -238,7 +238,7 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
     {
         return $this->getName();
     }
-    
+
     /**
      * @param array $fields Which fields should it show?
      *
@@ -254,35 +254,35 @@ class CountryEntity extends AbstractAdvancedWithImageUploadEntity
         ) {
             $data['id'] = $this->getId();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('name', $fields)
         ) {
             $data['name'] = $this->getName();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('slug', $fields)
         ) {
             $data['slug'] = $this->getSlug();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('description', $fields)
         ) {
             $data['description'] = $this->getDescription();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('time_created', $fields)
         ) {
             $data['time_created'] = $this->getTimeCreated()->format(DATE_ATOM);
         }
-    
+
         return $data;
     }
 

@@ -736,77 +736,77 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
         ) {
             $data['id'] = $this->getId();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('name', $fields)
         ) {
             $data['name'] = $this->getName();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('slug', $fields)
         ) {
             $data['slug'] = $this->getSlug();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('description', $fields)
         ) {
             $data['description'] = $this->getDescription();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('buildings_limit', $fields)
         ) {
             $data['buildings_limit'] = $this->getBuildingsLimit();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('population', $fields)
         ) {
             $data['population'] = $this->getPopulation();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('population_capacity', $fields)
         ) {
             $data['population_capacity'] = $this->getPopulationCapacity();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('resources', $fields)
         ) {
             $data['resources'] = $this->getResources();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('resources_production', $fields)
         ) {
             $data['resources_production'] = $this->getResourcesProduction();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('resources_available', $fields)
         ) {
             $data['resources_available'] = $this->getResourcesAvailable();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('resources_capacity', $fields)
         ) {
             $data['resources_capacity'] = $this->getResourcesCapacity();
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('town_buildings', $fields) ||
@@ -814,7 +814,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
         ) {
             $townBuildings = array();
             $townBuildingsCollection = $this->getTownBuildings();
-            
+
             if (!empty($townBuildingsCollection)) {
                 $townBuildingFields = array('*');
 
@@ -832,7 +832,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
                         )
                     );
                 }
-                
+
                 foreach ($townBuildingsCollection as $townBuilding) {
                     $townBuildings[] = $townBuilding->toArray($townBuildingFields);
                 }
@@ -840,14 +840,14 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
             $data['town_buildings'] = $townBuildings;
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('time_created', $fields)
         ) {
             $data['time_created'] = $this->getTimeCreated()->format(DATE_ATOM);
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('country', $fields) ||
@@ -872,7 +872,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
             $data['country'] = $this->getCountry()->toArray($countryFields);
         }
-        
+
         if (
             in_array('*', $fields) ||
             in_array('planet', $fields) ||
@@ -897,7 +897,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
 
             $data['planet'] = $this->getPlanet()->toArray($planetFields);
         }
-        
+
         return $data;
     }
 
