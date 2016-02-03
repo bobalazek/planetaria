@@ -34,6 +34,9 @@ var Application = function () {
                 content: function() {
                     return jQuery(this).attr('data-popover-content');
                 },
+                placement: function(context, source) {
+                    return jQuery(source).attr('data-popover-placement') || 'right';
+                },
             });
             jQuery('[data-toggle="tooltip"], .tooltip-hover').tooltip({
                 html : true,
@@ -53,6 +56,9 @@ var Application = function () {
                 },
                 content: function() {
                     return jQuery(this).attr('data-popover-content');
+                },
+                placement: function(context, source) {
+                    return jQuery(source).attr('data-popover-placement') || 'right';
                 },
             });
 

@@ -753,6 +753,7 @@ class Buildings
         // Go thought the required tiles and set the current building to it
         foreach (range(1, (int) $sizeY) as $sizeYSingle) {
             $x = $startX;
+
             foreach (range(1, (int) $sizeX) as $sizeXSingle) {
                 $coordinates[] = array(
                     'x' => $x,

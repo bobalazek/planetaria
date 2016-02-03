@@ -15,7 +15,7 @@ var GameMap = function () {
         mapInitialize: function()
         {
             GameMap.reloadMap();
-            
+
             // Map controls
             jQuery('#map-controls .btn').on('click', function() {
                 var x = jQuery('#map-controls-x').val();
@@ -28,30 +28,30 @@ var GameMap = function () {
 
                 return false;
             });
-            
+
             // Map handle for buildings sidebar
             jQuery('#map-construct-building-handle').on('click', function() {
                 jQuery('#map-construct-building').toggleClass('open');
             });
-            
+
             // Construct building sidebar
             var townsListActiveElement = jQuery('#towns-list .active');
             var townId = townsListActiveElement.attr('data-id');
             var planetId = townsListActiveElement.attr('data-planet-id');
-            
+
             jQuery('.btn-construct-building').on('click', function() {
                 var buildingElement = jQuery(this).parent();
                 var selectedMapTileElement = jQuery('.map-tile.map-tile-selected');
                 var x = selectedMapTileElement.attr('data-x');
                 var y = selectedMapTileElement.attr('data-y');
                 var building = buildingElement.attr('data-key');
-                
+
                 jQuery.get(
                     baseUrl+'/game/api/map/'+planetId+
                     '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
                 ).done(function(data) {
                     GameMap.reloadMap();
-                    
+
                     jQuery('#map-construct-building').removeClass('open');
                     jQuery('#map-construct-building').fadeOut();
 
@@ -61,7 +61,7 @@ var GameMap = function () {
                     toastr.error(data.error.message);
                 });
             });
-            
+
             // Helper functions
             function updateUrlParameter(url, param, value){
                 var regex = new RegExp('('+param+'=)[^\&]+');
@@ -70,7 +70,7 @@ var GameMap = function () {
         },
         reloadMap: function() {
             jQuery('#map-overlay').fadeIn();
-            
+
             // Hack
             jQuery('.tooltip, .popover').remove()
 
@@ -82,7 +82,7 @@ var GameMap = function () {
                 var x = jQuery('#map-inner').attr('data-center-x');
                 var y = jQuery('#map-inner').attr('data-center-y');
                 jQuery('h2 small').text('('+x+','+y+')');
-                
+
                 GameMap.onMapInitialized();
             });
         },
@@ -104,13 +104,13 @@ var GameMap = function () {
             // Activate nicescroll
             mapElement.niceScroll({
                 touchbehavior: true,
-                preventmultitouchscrolling: false, 
+                preventmultitouchscrolling: false,
             });
 
             // Map construct
             jQuery('#map-construct-building-content').niceScroll({
                 touchbehavior: true,
-                preventmultitouchscrolling: false, 
+                preventmultitouchscrolling: false,
             });
 
             // Get heights, widths and calculate scroll ofsets
@@ -130,7 +130,7 @@ var GameMap = function () {
                     jQuery('.popover-click').popover('hide');
                 }
             });
-            
+
             // Center map button
             jQuery('.map-tile').on('shown.bs.popover', function() {
                 jQuery('.btn-center-map').on('click', function() {
@@ -143,7 +143,7 @@ var GameMap = function () {
                     return false;
                 });
             });
-            
+
             jQuery('.map-tile').on('click', function() {
                 if (
                     !jQuery(this).hasClass('map-tile-selected') &&
@@ -151,9 +151,85 @@ var GameMap = function () {
                 ) {
                     jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                     jQuery(this).addClass('map-tile-selected');
-                    
+
                     jQuery('#map-construct-building').fadeIn(function() {
                         jQuery(this).addClass('open');
+                    });
+
+                    jQuery('#map-construct-building .building').on({
+                        mouseenter: function() {
+                            var size = jQuery(this).attr('data-size');
+                            var building = jQuery(this).attr('data-key');
+                            var buildingSlug = jQuery(this).attr('data-slug');
+
+                            if (size === '1x1') {
+                                jQuery('.map-tile.map-tile-selected')
+                                    .addClass('map-tile-building-tiles')
+                                    .append(
+                                        jQuery('<img />')
+                                            .addClass('remove-after-hover-out img-responsive')
+                                            .attr(
+                                                'src',
+                                                baseUrl+'/assets/images/buildings/'+
+                                                buildingSlug+'/operational/'+size+'.png'
+                                            )
+                                            .css('opacity', 0.6)
+                                    )
+                                ;
+                            } else {
+                                var coordinates = [];
+                                var selectedElement = jQuery('.map-tile.map-tile-selected');
+                                var sizeX = size.split('x')[0];
+                                var sizeY = size.split('x')[1];
+                                var startX = parseInt(selectedElement.attr('data-x'));
+                                var startY = parseInt(selectedElement.attr('data-y'));
+                                var x = startX;
+                                var y = startY;
+
+                                for (var i = 1; i <= sizeY; i++) {
+                                    x = startX;
+
+                                    for (var j = 1; j <= sizeX; j++) {
+                                        coordinates.push({
+                                            x: x,
+                                            y: y,
+                                            buildingSectionX: j,
+                                            buildingSectionY: i,
+                                        });
+
+                                        x++;
+                                    }
+
+                                    y++;
+                                }
+
+                                for (var i = 0; i < coordinates.length; i++) {
+                                    var coordinate = coordinates[i];
+                                    var dataCoordinates = coordinate.x + ',' + coordinate.y;
+                                    size = coordinate.buildingSectionX + 'x' + coordinate.buildingSectionY;
+
+                                    jQuery('.map-tile[data-coordinates="'+dataCoordinates+'"]')
+                                        .addClass('map-tile-building-tiles')
+                                        .append(
+                                            jQuery('<img />')
+                                                .addClass('remove-after-hover-out img-responsive')
+                                                .attr(
+                                                    'src',
+                                                    baseUrl+'/assets/images/buildings/'+
+                                                    buildingSlug+'/operational/'+size+'.png'
+                                                )
+                                                .css('opacity', 0.6)
+                                        )
+                                    ;
+                                }
+                            }
+                        },
+                        mouseleave: function() {
+                            jQuery('.remove-after-hover-out').remove();
+                            jQuery('.map-tile.map-tile-building-tiles')
+                                .removeClass('map-tile-building-tiles')
+                            ;
+                        },
                     });
                 } else {
                     jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');

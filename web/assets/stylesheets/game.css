@@ -69,7 +69,7 @@ h1 {
     .map-row {
         height: 64px;
     }
-    
+
     .map-tile {
         position: relative;
         width: 64px;
@@ -82,23 +82,28 @@ h1 {
         -o-background-size: cover;
         background-size: cover;
     }
-    
+
     .map-tile.map-tile-unknown {
         background-color: #000;
     }
-    
+
     .map-tile.map-tile-center {
         border: 1px dotted #fff;
     }
     
-    .map-tile.map-tile-selected {
+    .map-tile.map-tile-selected,
+    .map-tile.map-tile-building-tiles {
         border: 1px dotted #5cb85c;
     }
-    
+
+    .map-tile.map-tile-building-tiles.map-tile-occupied {
+        border: 1px dotted #d9534f;
+    }
+
     .map-tile:hover {
         opacity: 0.8;
     }
-    
+
         .map-tile-overlay {
             position: absolute;
             top: 0;
@@ -109,7 +114,7 @@ h1 {
             display: none;
             opacity: 0.25;
         }
-        
+
         .map-tile.map-tile-current-town .map-tile-overlay {
             display: block;
             background-color: #337ab7;
@@ -131,11 +136,11 @@ h1 {
         overflow-y: scroll;
         max-height: 800px;
     }
-    
+
     #map-construct-building.open #map-construct-building-content {
         margin-left: 0;
     }
-    
+
         #map-construct-building-content .building {
             position: relative;
             color: #fff;
@@ -145,17 +150,17 @@ h1 {
             padding: 8px;
             margin: 8px;
         }
-        
+
         #map-construct-building-content .building-overlay {
             padding: 20px 10px;
             font-size: 12px;
         }
-            
+
             #map-construct-building-content .building h4 {
                 margin: 0 0 10px;
                 font-size: 14px;
             }
-            
+
             #map-construct-building-content .building p {
                 font-size: 10px;
             }
@@ -179,7 +184,7 @@ h1 {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
-    
+
     #map-construct-building.open #map-construct-building-handle {
         margin-left: 128px;
     }
@@ -198,23 +203,23 @@ h1 {
     }
 
     #map-controls form .form-group {
-        margin-bottom: 0;   
+        margin-bottom: 0;
     }
-    
+
     #map-controls form .form-control {
         height: 20px;
         font-size: 10px;
     }
-    
+
     #map-controls form .input-group-addon {
         font-size: 12px;
         padding: 2px 8px;
     }
-    
+
     #map-controls form .btn {
         padding: 0 10px;
     }
-        
+
 /*** Building ***/
 .building-wrapper {
     position: relative;
@@ -252,7 +257,7 @@ h1 {
     #town-sidebar h3 {
         margin-top: 0;
     }
-    
+
     #town-sidebar table {
         margin-bottom: 0;
     }

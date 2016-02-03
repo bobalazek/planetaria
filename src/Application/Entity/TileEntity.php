@@ -544,6 +544,15 @@ class TileEntity extends AbstractBasicEntity
         return $this->getTownBuilding() !== null;
     }
 
+    /*** Buildable ***/
+    /**
+     * @return boolean
+     */
+    public function isBuildable()
+    {
+        return !$this->isOccupied();
+    }
+
     /**
      * @ORM\PreUpdate
      */
