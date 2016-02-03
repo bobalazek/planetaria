@@ -54,6 +54,9 @@ var GameMap = function () {
 
                     jQuery('#map-construct-building').removeClass('open');
                     jQuery('#map-construct-building').fadeOut();
+                    
+                    var townBuildings = parseInt(jQuery('#town-buildings-data').text());
+                    jQuery('#town-buildings-data').text(townBuildings+1);
 
                     toastr.success(data.message);
                 }).fail(function(response) {

@@ -12,13 +12,13 @@
     {% endif %}
     <h5>
         <b>{{ 'Buildings' | trans }}:</b>
-        {{ town.getTownBuildings() | length }} /
-        {{ town.getBuildingsLimit() }}
+        <span id="town-buildings-data">{{ town.getTownBuildings() | length }}</span> /
+        <span id="buildings-limit-data">{{ town.getBuildingsLimit() }}</span>
     </h5>
     <h5>
         <b>{{ 'Population' | trans }}:</b>
-        {{ town.getPopulation() }} /
-        {{ town.getPopulationCapacity() }}
+        <span id="population-data">{{ town.getPopulation() }}</span> /
+        <span id="population-capacity-data">{{ town.getPopulationCapacity() }}</span>
     </h5>
     <hr />
     <h4>{{ 'Resources' | trans }}</h4>

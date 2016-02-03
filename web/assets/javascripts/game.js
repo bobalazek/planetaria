@@ -59,8 +59,14 @@ var Game = function () {
                     jQuery.get(
                         baseUrl+'/game/api/towns/'+townId
                     ).done(function(data) {
-                        var townResources = data.resources;
+                        // When we already got the data, update stuff
+                        jQuery('#town-buildings-data').text(data.town_buildings.length);
+                        jQuery('#buildings-limit-data').text(data.buildings_limit);
+                        jQuery('#population-data').text(data.population);
+                        jQuery('#population-capacity-data').text(data.population_capacity);
                         
+                        // Update the town resources table
+                        var townResources = data.resources;
                         jQuery.each(townResources, function(resource, townResource) {
                             var resourceRow = jQuery('.resource-row[data-resource="'+resource+'"]');
                             var resourceAvailable = parseFloat(townResource.available);
