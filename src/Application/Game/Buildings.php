@@ -440,7 +440,7 @@ class Buildings
             ;
             if (!$isBuildableOnTerrain) {
                 throw new BuildingNotBuildableOnThisTerrain(
-                    'This building not buildable on this terrain!'
+                    'This building not buildable on one or more of this tiles!'
                 );
             }
 
@@ -659,7 +659,7 @@ class Buildings
 
         return true;
     }
-    
+
     /**
      * @return boolean
      */
@@ -672,7 +672,7 @@ class Buildings
         if ($requiredTiles === false) {
             return false;
         }
-        
+
         $buildingObject = $this->getAllWithData($building);
 
         foreach ($requiredTiles as $requiredTile) {

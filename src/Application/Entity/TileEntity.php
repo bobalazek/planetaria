@@ -5,7 +5,6 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Game\BuildingStatuses;
 use Application\Helper;
-use Application\Game\TileTerrainTypes;
 
 /**
  * Tile Entity
@@ -535,7 +534,7 @@ class TileEntity extends AbstractBasicEntity
 
         return $data;
     }
-    
+
     /*** Occupied ***/
     /**
      * @return boolean
