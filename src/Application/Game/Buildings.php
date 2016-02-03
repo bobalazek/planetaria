@@ -18,6 +18,7 @@ use Application\Game\Exception\MissingRequiredBuildingsException;
 use Application\Game\Exception\BuildingPerTownLimitReachedException;
 use Application\Game\Exception\BuildingPerCountryLimitReachedException;
 use Application\Game\Exception\BuildingNotInsideTownRadius;
+use Application\Game\Exception\BuildingNotBuildableOnThisTerrain;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -429,6 +430,20 @@ class Buildings
         }
 
         if (is_array($startingCoordinates)) {
+            /*** Buildable on terrain ***/
+            $isBuildableOnTerrain = $this
+                ->isBuildableOnTerrain(
+                    $planet,
+                    $startingCoordinates,
+                    $building
+                )
+            ;
+            if (!$isBuildableOnTerrain) {
+                throw new BuildingNotBuildableOnThisTerrain(
+                    'This building not buildable on this terrain!'
+                );
+            }
+
             /*** Required area space ***/
             // Check if we have enough space to build this building
             $hasEnoughAreaSpace = $this->hasEnoughAreaSpace(
@@ -446,7 +461,6 @@ class Buildings
             $isInsideRadius = $app['game.towns']
                 ->isInsideRadius($town, $startingCoordinates)
             ;
-
             if (!$isInsideRadius) {
                 throw new BuildingNotInsideTownRadius(
                     'This building is not inside the town radius!'
@@ -638,7 +652,33 @@ class Buildings
         }
 
         foreach ($requiredTiles as $requiredTile) {
-            if (!$requiredTile->isCurrentlyBuildable()) {
+            if ($requiredTile->isOccupied()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isBuildableOnTerrain(
+        PlanetEntity $planet,
+        array $startingCoordinates = array(),
+        $building
+    ) {
+        $requiredTiles = $this->getRequiredTiles($planet, $startingCoordinates, $building);
+        if ($requiredTiles === false) {
+            return false;
+        }
+        
+        $buildingObject = $this->getAllWithData($building);
+
+        foreach ($requiredTiles as $requiredTile) {
+            $tileTerrainType = $requiredTile->getTerrainType();
+            $buildingTerrainTypes = $buildingObject->getAvailableTerrainTypes();
+            if (!in_array($tileTerrainType, $buildingTerrainTypes)) {
                 return false;
             }
         }

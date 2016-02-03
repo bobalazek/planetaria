@@ -83,7 +83,6 @@ class ApiController
             $tiles[$singleTile->getCoordinates()] = $singleTile->toArray(array(
                 'id', 'terrain_type', 'status', 'background_image',
                 'coordinates', 'coordinates_x', 'coordinates_y',
-                'buildable', 'currently_buildable',
                 'town_building.{id,building,building_object,level,status,health_points,health_points_total,health_points_percentage,at_maximum_level,operational,upgradable,upgrading,constructing,image,time_constructed,time_next_level_upgrade_started,time_next_level_upgrade_ends}',
                 'building_section',
             ));
@@ -143,10 +142,10 @@ class ApiController
             ), 404);
         }
 
-        if (!$tile->isBuildableCurrently()) {
+        if ($tile->isOccupied()) {
             return $app->json(array(
                 'error' => array(
-                    'message' => 'This tile is not buildable!',
+                    'message' => 'This tile is occupied!',
                 ),
             ), 403);
         }

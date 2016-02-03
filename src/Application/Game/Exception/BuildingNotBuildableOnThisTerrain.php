@@ -5,6 +5,6 @@ namespace Application\Game\Exception;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class TileNotBuildableException extends \Exception
+class BuildingNotBuildableOnThisTerrain extends \Exception
 {
 }

@@ -42,7 +42,7 @@
         </a>
     </p>
 {% endif %}
-{% if tile.isCurrentlyBuildable() %}
+{% if tile.isOccupied() is not sameas(true) %}
     <p>
         <a class="btn btn-xs btn-success btn-block"
             href="{{ url('game.map.build', { id: planet.getId(), x: tile.getCoordinatesX(), y: tile.getCoordinatesY(), town_id: townId }) }}">

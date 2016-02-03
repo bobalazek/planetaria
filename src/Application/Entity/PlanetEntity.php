@@ -88,7 +88,7 @@ class PlanetEntity extends AbstractAdvancedEntity
     {
         $this->tiles = new ArrayCollection();
     }
-    
+
     /*** Public ***/
     /**
      * @return boolean
@@ -105,7 +105,7 @@ class PlanetEntity extends AbstractAdvancedEntity
     {
         return $this->getPublic();
     }
-    
+
     /**
      * @param boolean $public
      *

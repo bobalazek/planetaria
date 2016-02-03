@@ -147,7 +147,7 @@ var GameMap = function () {
             jQuery('.map-tile').on('click', function() {
                 if (
                     !jQuery(this).hasClass('map-tile-selected') &&
-                    jQuery(this).attr('data-currently-buildable') == 'true'
+                    jQuery(this).attr('data-occupied') == 'false'
                 ) {
                     jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                     jQuery(this).addClass('map-tile-selected');

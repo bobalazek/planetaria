@@ -155,8 +155,8 @@ class GameController
             $app->abort(404, 'This tile does not exist!');
         }
 
-        if (!$tile->isBuildableCurrently()) {
-            $app->abort(404, 'This tile is not buildable!');
+        if ($tile->isOccupied()) {
+            $app->abort(403, 'This tile is occupied!');
         }
 
         $townId = (int) $request->query->get('town_id', 0);

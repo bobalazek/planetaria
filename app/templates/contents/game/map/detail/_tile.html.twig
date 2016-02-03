@@ -9,12 +9,11 @@
     data-id="{{ tile.getId() }}"
     data-x="{{ x }}"
     data-y="{{ y }}"
-    data-buildable="{{ tile.isBuildable() ? 'true' : 'false' }}"
-    data-currently-buildable="{{ tile.isCurrentlyBuildable() ? 'true' : 'false' }}"
+    data-occupied="{{ tile.isOccupied() ? 'true' : 'false' }}"
     data-tooltip="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_tooltip-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     data-popover-title="{{ tile.getCoordinates() }}"
     data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
-    style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getBackgroundImage() }}')">
+    style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getTerrainType() }}/{{ tile.getBackgroundImage() }}')">
     <div class="map-tile-overlay"></div>
     {% if tile.getTownBuilding() %}
         <img class="img-responsive map-tile-building-image"

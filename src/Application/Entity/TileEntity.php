@@ -5,6 +5,7 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Game\BuildingStatuses;
 use Application\Helper;
+use Application\Game\TileTerrainTypes;
 
 /**
  * Tile Entity
@@ -62,15 +63,6 @@ class TileEntity extends AbstractBasicEntity
      * @ORM\Column(name="coordinates_y", type="integer")
      */
     protected $coordinatesY = 0;
-
-    /**
-     * Can a building be build on it?
-     *
-     * @var integer
-     *
-     * @ORM\Column(name="buildable", type="boolean")
-     */
-    protected $buildable = true;
 
     /**
      * Because a building can be multiple sizes big, we need to split them into multiple tiles.
@@ -252,56 +244,6 @@ class TileEntity extends AbstractBasicEntity
     public function getCoordinates()
     {
         return $this->getCoordinatesX().','.$this->getCoordinatesY();
-    }
-
-    /*** Buildable ***/
-    /**
-     * @return boolean
-     */
-    public function getBuildable()
-    {
-        return $this->buildable;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isBuildable()
-    {
-        return $this->buildable;
-    }
-
-    /**
-     * @param boolean $buildable
-     *
-     * @return TileEntity
-     */
-    public function setBuildable($buildable)
-    {
-        $this->buildable = $buildable;
-
-        return $this;
-    }
-
-    /*** Buildable currently ***/
-    /**
-     * @return boolean
-     */
-    public function isBuildableCurrently()
-    {
-        return $this->isBuildable() &&
-            $this->getTownBuilding() === null
-        ;
-    }
-
-    /**
-     * Just a alias for the method above
-     *
-     * @return boolean
-     */
-    public function isCurrentlyBuildable()
-    {
-        return $this->isBuildableCurrently();
     }
 
     /*** Building section ***/
@@ -500,19 +442,6 @@ class TileEntity extends AbstractBasicEntity
 
         if (
             in_array('*', $fields) ||
-            in_array('buildable', $fields)
-        ) {
-            $data['buildable'] = $this->isBuildable();
-        }
-
-        if (
-            in_array('*', $fields) ||
-            in_array('currently_buildable', $fields)
-        ) {
-            $data['currently_buildable'] = $this->isCurrentlyBuildable();
-        }
-        if (
-            in_array('*', $fields) ||
             in_array('town_building', $fields) ||
             Helper::strpos_array($fields, 'town_building.') !== false
         ) {
@@ -605,6 +534,15 @@ class TileEntity extends AbstractBasicEntity
         }
 
         return $data;
+    }
+    
+    /*** Occupied ***/
+    /**
+     * @return boolean
+     */
+    public function isOccupied()
+    {
+        return $this->getTownBuilding() !== null;
     }
 
     /**
