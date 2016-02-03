@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "gulp-imagemin": "*"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-load-plugins": "^1.2.0"
+  }
+}

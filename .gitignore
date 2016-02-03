@@ -13,3 +13,4 @@
 /web/assets/vendor/*
 /web/assets/uploads/*
 !/web/assets/uploads/.gitkeep
+/node_modules/*

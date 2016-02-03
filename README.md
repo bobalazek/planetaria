@@ -33,13 +33,15 @@ Database
 
 Administrator login
 -------------------
-With the `bin/console application:database:hydrate-data` command, you will, per default hydrate 2 users (which you can change inside the `app/fixtures/users.php` file):
+With the `bin/console application:database:hydrate-data` command, you will, per default hydrate the following users (which you can change inside the `app/fixtures/users.php` file):
 
-* Admin User (with admin permissions)
-    * Username: `admin` or `admin@myapp.com`
+* "borut"
+    * Username: `borut`
+    * Email: `bobalazek124@gmail.com`
     * Password: `test`
-* Test User (with the default user permissions)
-    * Username: `test` or `test@myapp.com`
+* "ana"
+    * Username: `ana`
+    * Email: `anakociper124@gmail.com`
     * Password: `test`
 
 Commands
@@ -48,6 +50,12 @@ Commands
 * `bin/console application:database:hydrate-data [-r|--remove-existing-data]` - Will hydrate the tables with some basic data, like: 2 users and 6 roles (the `--remove-existing-data` flag will truncate all tables before re-hydrating them)
 * `bin/console application:storage:prepare` - Will prepare all the storage (var/) folders, like: cache, logs, sessions, etc.
 * `bin/console application:translations:prepare` - Prepares all the untranslated string into a separate (app/locales/{locale}_untranslated.yml) file. Accepts an locale argument (defaults to 'en_US' - usage: `bin/console application:translations:prepare --locale de_DE` or `bin/console application:translations:prepare -l de_DE` )
+
+Gulp Command
+--------------------
+First you'll need to install gulp and gulp's auto plugin loader `sudo npm install gulp gulp-load-plugins`
+
+* `gulp optimize-tile-images` - Optimizes the tile images
 
 Other commands
 ----------------------
