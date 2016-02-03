@@ -1,6 +1,7 @@
 <div class="table-responsive">
     <table id="town-resources-table"
         class="table"
+        data-town-id="{{ town.getId() }}"
         data-time-last-updated="{{ town.getTimeLastUpdatedResources() | date('Y-m-d H:i:s') }}">
         <thead>
             <tr>

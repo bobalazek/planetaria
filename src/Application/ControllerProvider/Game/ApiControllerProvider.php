@@ -25,6 +25,7 @@ class ApiControllerProvider implements ControllerProviderInterface
         )
         ->bind('game.api');
 
+        /***** Map *****/
         $controllers->match(
             '/map',
             'Application\Controller\Game\ApiController::mapAction'
@@ -42,6 +43,19 @@ class ApiControllerProvider implements ControllerProviderInterface
             'Application\Controller\Game\ApiController::mapBuildAction'
         )
         ->bind('game.api.map.build');
+
+        /***** Towns *****/
+        $controllers->match(
+            '/towns',
+            'Application\Controller\Game\ApiController::townsAction'
+        )
+        ->bind('game.api.towns');
+
+        $controllers->match(
+            '/towns/{id}',
+            'Application\Controller\Game\ApiController::townsDetailAction'
+        )
+        ->bind('game.api.towns.detail');
 
         return $controllers;
     }

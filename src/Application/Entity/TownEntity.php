@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Application\Game\Resources;
 use Application\Game\Buildings;
 use Application\Game\Building\Building;
+use Application\Helper;
 
 /**
  * Town Entity
@@ -721,26 +722,183 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
     }
 
     /**
-     * Returns data in array
+     * @param array $fields Which fields should it show?
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($fields = array('*'))
     {
-        return array(
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'slug' => $this->getSlug(),
-            'description' => $this->getDescription(),
-            'buildings_limit' => $this->getBuildingsLimit(),
-            'population' => $this->getPopulation(),
-            'population_capacity' => $this->getPopulationCapacity(),
-            'resources_production' => $this->getResourcesProduction(),
-            'resources_available' => $this->getResourcesAvailable(),
-            'resources_capacity' => $this->getResourcesCapacity(),
-            'time_created' => $this->getTimeCreated()->format(DATE_ATOM),
-            'country' => $this->getCountry()->toArray(),
-        );
+        $data = array();
+
+        if (
+            in_array('*', $fields) ||
+            in_array('id', $fields)
+        ) {
+            $data['id'] = $this->getId();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('name', $fields)
+        ) {
+            $data['name'] = $this->getName();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('slug', $fields)
+        ) {
+            $data['slug'] = $this->getSlug();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('description', $fields)
+        ) {
+            $data['description'] = $this->getDescription();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('buildings_limit', $fields)
+        ) {
+            $data['buildings_limit'] = $this->getBuildingsLimit();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('population', $fields)
+        ) {
+            $data['population'] = $this->getPopulation();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('population_capacity', $fields)
+        ) {
+            $data['population_capacity'] = $this->getPopulationCapacity();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('resources', $fields)
+        ) {
+            $data['resources'] = $this->getResources();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('resources_production', $fields)
+        ) {
+            $data['resources_production'] = $this->getResourcesProduction();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('resources_available', $fields)
+        ) {
+            $data['resources_available'] = $this->getResourcesAvailable();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('resources_capacity', $fields)
+        ) {
+            $data['resources_capacity'] = $this->getResourcesCapacity();
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('town_buildings', $fields) ||
+            Helper::strpos_array($fields, 'town_buildings.') !== false
+        ) {
+            $townBuildings = array();
+            $townBuildingsCollection = $this->getTownBuildings();
+            
+            if (!empty($townBuildingsCollection)) {
+                $townBuildingFields = array('*');
+
+                if ($index = Helper::strpos_array($fields, 'town_buildings.')) {
+                    $field = $fields[$index];
+                    $townBuildingFields = explode(
+                        ',',
+                        trim(
+                            str_replace(
+                                'town_buildings.',
+                                '',
+                                $field
+                            ),
+                            '{}'
+                        )
+                    );
+                }
+                
+                foreach ($townBuildingsCollection as $townBuilding) {
+                    $townBuildings[] = $townBuilding->toArray($townBuildingFields);
+                }
+            }
+
+            $data['town_buildings'] = $townBuildings;
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('time_created', $fields)
+        ) {
+            $data['time_created'] = $this->getTimeCreated()->format(DATE_ATOM);
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('country', $fields) ||
+            Helper::strpos_array($fields, 'country.') !== false
+        ) {
+            $countryFields = array('*');
+
+            if ($index = Helper::strpos_array($fields, 'country.')) {
+                $field = $fields[$index];
+                $countryFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'country.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+
+            $data['country'] = $this->getCountry()->toArray($countryFields);
+        }
+        
+        if (
+            in_array('*', $fields) ||
+            in_array('planet', $fields) ||
+            Helper::strpos_array($fields, 'planet.') !== false
+        ) {
+            $planetFields = array('*');
+
+            if ($index = Helper::strpos_array($fields, 'planet.')) {
+                $field = $fields[$index];
+                $planetFields = explode(
+                    ',',
+                    trim(
+                        str_replace(
+                            'planet.',
+                            '',
+                            $field
+                        ),
+                        '{}'
+                    )
+                );
+            }
+
+            $data['planet'] = $this->getPlanet()->toArray($planetFields);
+        }
+        
+        return $data;
     }
 
     /**

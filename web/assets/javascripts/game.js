@@ -52,6 +52,41 @@ var Game = function () {
                 }
 
                 setInterval(interval, 1000);
+                
+                // Synchronize every 20 seconds
+                var townId = parseInt(townResourcesTableElement.attr('data-town-id'));
+                function synchronize() {
+                    jQuery.get(
+                        baseUrl+'/game/api/towns/'+townId
+                    ).done(function(data) {
+                        var townResources = data.resources;
+                        
+                        jQuery.each(townResources, function(resource, townResource) {
+                            var resourceRow = jQuery('.resource-row[data-resource="'+resource+'"]');
+                            var resourceAvailable = parseFloat(townResource.available);
+                            var resourceCapacity = parseInt(townResource.capacity);
+                            var resourceProduction = parseInt(townResource.production);
+                            
+                            resourceRow
+                                .attr('data-resource-available', resourceAvailable)
+                                .attr('data-resource-capacity', resourceCapacity)
+                                .attr('data-resource-production', resourceProduction)
+                            ;
+                            resourceRow.find('.resource-available').text(parseInt(resourceAvailable));
+                            resourceRow.find('.resource-capacity').html(
+                                resourceCapacity === -1
+                                    ? '&infin;'
+                                    : parseInt(resourceCapacity)
+                            );
+                            resourceRow.find('.resource-production').text(parseInt(resourceProduction));
+                        });
+                    }).fail(function(response) {
+                        var data = response.responseJSON;
+                        toastr.error(data.error.message);
+                    });
+                }
+                
+                setInterval(synchronize, 20000);
             }
         },
         liveProgressInitialize: function()

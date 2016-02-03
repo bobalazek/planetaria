@@ -24,6 +24,7 @@ class ApiController
         ));
     }
 
+    /***** Map *****/
     /**
      * @param Application $app
      *
@@ -100,7 +101,9 @@ class ApiController
     }
 
     /**
+     * @param integer     $id
      * @param Application $app
+     * @param Request     $request
      *
      * @return Response
      */
@@ -201,5 +204,74 @@ class ApiController
         return $app->json(array(
             'message' => 'You have successfully constructed a new building',
         ));
+    }
+
+    /***** Towns *****/
+    /**
+     * @param Application $app
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function townsAction(Application $app)
+    {
+        $towns = array();
+        $townsCollection = $app['orm.em']
+            ->getRepository('Application\Entity\TownEntity')
+            ->findAll()
+        ;
+
+        if (!empty($townsCollection)) {
+            foreach ($townsCollection as $town) {
+                $towns[] = $town->toArray(array(
+                    'id', 'name', 'slug', 'description',
+                ));
+            }
+        }
+
+        return $app->json(array(
+            'towns' => $towns,
+        ));
+    }
+    
+    /**
+     * @param integer     $id
+     * @param Application $app
+     * @param Request     $request
+     *
+     * @return Response
+     */
+    public function townsDetailAction($id, Application $app, Request $request)
+    {
+        $town = $app['orm.em']->find(
+            'Application\Entity\TownEntity',
+            $id
+        );
+
+        if (!$town) {
+            return $app->json(array(
+                'error' => array(
+                    'message' => 'This town does not exist!',
+                ),
+            ), 404);
+        }
+        
+        // Update town stuff
+        $app['game.towns']->checkForFinishedBuildingUpgrades($town);
+        $app['game.towns']->updateTownResources($town);
+
+        if ($town->getUser() !== $app['user']) {
+            $townFields = array(
+                'id', 'name', 'slug', 'description',
+            );
+        } else {
+            $townFields = array(
+                'id', 'name', 'slug', 'description',
+                'buildings_limit', 'population', 'population_capacity',
+                'resources', 'resources_production', 'resources_available', 'resources_capacity',
+                'town_buildings.{id,building,building_level}', 'country', 'planet'
+            );
+        }
+
+        return $app->json($town->toArray($townFields));
     }
 }
