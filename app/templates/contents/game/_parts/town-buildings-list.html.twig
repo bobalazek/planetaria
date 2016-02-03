@@ -1,14 +1,53 @@
-<ul class="list-group">
-    {% for townBuilding in townBuildings %}
-        {% if app.user.hasTownBuilding(townBuilding) %}
-            <a class="list-group-item clearfix"
-                href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
-                {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
-            </a>
-        {% else %}
-            <div class="list-group-item clearfix">
-                {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
-            </div>
-        {% endif %}
-    {% endfor %}
-</ul>
+{% if townBuildings | length > 1 %}
+    {% set count = townBuildings | length %}
+    {% set countHalf = (count / 2) | round %}
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group">
+                {% for index, townBuilding in townBuildings if index < countHalf %}
+                    {% if app.user.hasTownBuilding(townBuilding) %}
+                        <a class="list-group-item clearfix"
+                            href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                            {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                        </a>
+                    {% else %}
+                        <div class="list-group-item clearfix">
+                            {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                {% for index, townBuilding in townBuildings if index >= countHalf %}
+                    {% if app.user.hasTownBuilding(townBuilding) %}
+                        <a class="list-group-item clearfix"
+                            href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                            {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                        </a>
+                    {% else %}
+                        <div class="list-group-item clearfix">
+                            {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% else %}
+    <ul class="list-group">
+        {% for townBuilding in townBuildings %}
+            {% if app.user.hasTownBuilding(townBuilding) %}
+                <a class="list-group-item clearfix"
+                    href="{{ url('game.towns.buildings.detail', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
+                    {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                </a>
+            {% else %}
+                <div class="list-group-item clearfix">
+                    {% include 'contents/game/_parts/town-buildings-list/_single-inner.html.twig' %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
