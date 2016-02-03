@@ -14,27 +14,27 @@ class Badges
      * @var string
      */
     const ROOKIE = 'rookie';
-    
+
     /**
      * @var string
      */
     const BEGINNER = 'beginner';
-    
+
     /**
      * @var string
      */
     const INTERMEDIATE = 'intermediate';
-    
+
     /**
      * @var string
      */
     const EXPERIENCED = 'experienced';
-    
+
     /**
      * @var string
      */
     const ADVANCED = 'advanced';
-    
+
     /**
      * @var string
      */

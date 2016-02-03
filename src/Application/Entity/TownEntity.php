@@ -57,13 +57,6 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
     protected $imageUrl;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="buildings_limit", type="integer")
-     */
-    protected $buildingsLimit = 16;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time_last_updated_resources", type="datetime", nullable=true)
@@ -165,27 +158,6 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
         $this->townResources = new ArrayCollection();
         $this->townBuildings = new ArrayCollection();
         $this->townUnits = new ArrayCollection();
-    }
-
-    /*** Buildings limit ***/
-    /**
-     * @return integer
-     */
-    public function getBuildingsLimit()
-    {
-        return $this->buildingsLimit;
-    }
-
-    /**
-     * @param integer $buildingsLimit
-     *
-     * @return TownEntity
-     */
-    public function setBuildingsLimit($buildingsLimit)
-    {
-        $this->buildingsLimit = $buildingsLimit;
-
-        return $this;
     }
 
     /*** Planet ***/
@@ -705,6 +677,15 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
         $this->timeLastUpdatedResources = $timeLastUpdatedResources;
 
         return $this;
+    }
+
+    /*** Buildings limit ***/
+    /**
+     * @return integer
+     */
+    public function getBuildingsLimit()
+    {
+        return 16; // To-Do: What will increase the limit?
     }
 
     /***** Coat of arms image url *****/

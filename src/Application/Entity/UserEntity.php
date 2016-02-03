@@ -1052,7 +1052,11 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      */
     public function getTownsLimit()
     {
-        return 1;
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return 10;
+        }
+
+        return 1; // To-Do: What will increase the limit?
     }
 
     /**
@@ -1060,10 +1064,6 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      */
     public function canCreateNewTown()
     {
-        if ($this->hasRole('ROLE_ADMIN')) {
-            return true;
-        }
-
         return count($this->getTowns()) < $this->getTownsLimit();
     }
 
@@ -1129,7 +1129,11 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      */
     public function getCountriesLimit()
     {
-        return 1;
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return 10;
+        }
+
+        return 1; // To-Do: What will increase the limit?
     }
 
     /**
@@ -1137,10 +1141,6 @@ class UserEntity implements AdvancedUserInterface, \Serializable
      */
     public function canCreateNewCountry()
     {
-        if ($this->hasRole('ROLE_ADMIN')) {
-            return true;
-        }
-
         return count($this->getCountries()) < $this->getCountriesLimit();
     }
 
