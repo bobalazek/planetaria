@@ -4,7 +4,7 @@ namespace Application\Game\Building;
 
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
-use Application\Game\TerrainTypes;
+use Application\Game\TileTerrainTypes;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -65,9 +65,9 @@ class Silos extends AbstractBuilding
                 ),
             ))
             ->setAvailableTerrainTypes(array(
-                TerrainTypes::GRASSLAND,
-                TerrainTypes::PLAINS,
-                TerrainTypes::DESERT,
+                TileTerrainTypes::GRASSLAND,
+                TileTerrainTypes::PLAINS,
+                TileTerrainTypes::DESERT,
             ))
         ;
     }

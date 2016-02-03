@@ -48,27 +48,27 @@ class Planets
         $terrains = array(
             array(
                 'backgroundImage' => 'grassland/001.png',
-                'type' => TerrainTypes::GRASSLAND,
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
             array(
                 'backgroundImage' => 'grassland/002.png',
-                'type' => TerrainTypes::GRASSLAND,
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
             array(
                 'backgroundImage' => 'grassland/003.png',
-                'type' => TerrainTypes::GRASSLAND,
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
             array(
-                'backgroundImage' => 'desert/001.png',
-                'type' => TerrainTypes::DESERT,
+                'backgroundImage' => 'grassland/004.png',
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
             array(
-                'backgroundImage' => 'desert/002.png',
-                'type' => TerrainTypes::DESERT,
+                'backgroundImage' => 'grassland/005.png',
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
             array(
-                'backgroundImage' => 'desert/003.png',
-                'type' => TerrainTypes::DESERT,
+                'backgroundImage' => 'grassland/006.png',
+                'type' => TileTerrainTypes::GRASSLAND,
             ),
         );
 

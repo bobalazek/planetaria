@@ -47,6 +47,13 @@ class PlanetEntity extends AbstractAdvancedEntity
     protected $description;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="public", type="boolean")
+     */
+    protected $public = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time_created", type="datetime")
@@ -80,6 +87,35 @@ class PlanetEntity extends AbstractAdvancedEntity
     public function __construct()
     {
         $this->tiles = new ArrayCollection();
+    }
+    
+    /*** Public ***/
+    /**
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return $this->getPublic();
+    }
+    
+    /**
+     * @param boolean $public
+     *
+     * @return PlanetEntity
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+
+        return $this;
     }
 
     /*** Towns ***/

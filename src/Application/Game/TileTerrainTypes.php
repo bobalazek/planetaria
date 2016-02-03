@@ -5,7 +5,7 @@ namespace Application\Game;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class TerrainTypes
+class TileTerrainTypes
 {
     /**
      * @var string
@@ -50,7 +50,7 @@ class TerrainTypes
     /**
      * @var string
      */
-    const GLACIER = 'glacier';
+    const GLACIERS = 'glaciers';
 
     /**
      * @var string
@@ -71,7 +71,7 @@ class TerrainTypes
             self::HILLS => 'Hills',
             self::MOUNTAINS => 'Mountains',
             self::OCEAN => 'Ocean',
-            self::GLACIER => 'Glacier',
+            self::GLACIERS => 'Glaciers',
             self::TUNDRA => 'Tundra',
         );
     }
@@ -88,19 +88,62 @@ class TerrainTypes
                 '001.png',
                 '002.png',
                 '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
             ),
             self::PLAINS => array(),
-            self::FOREST => array(),
+            self::FOREST => array(
+                '001.png',
+                '002.png',
+                '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
+            ),
             self::DESERT => array(
                 '001.png',
                 '002.png',
                 '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
+                '007.png',
+                '008.png',
+                '009.png',
             ),
             self::SWAMP => array(),
             self::HILLS => array(),
-            self::MOUNTAINS => array(),
-            self::OCEAN => array(),
-            self::GLACIER => array(),
+            self::MOUNTAINS => array(
+                '001.png',
+                '002.png',
+                '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
+                '007.png',
+                '008.png',
+                '009.png',
+            ),
+            self::OCEAN => array(
+                '001.png',
+                '002.png',
+                '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
+                '007.png',
+                '008.png',
+                '009.png',
+            ),
+            self::GLACIERS => array(
+                '001.png',
+                '002.png',
+                '003.png',
+                '004.png',
+                '005.png',
+                '006.png',
+            ),
             self::TUNDRA => array(),
         );
 
