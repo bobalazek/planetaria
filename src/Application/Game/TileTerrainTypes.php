@@ -15,27 +15,12 @@ class TileTerrainTypes
     /**
      * @var string
      */
-    const PLAINS = 'plains';
-
-    /**
-     * @var string
-     */
     const FOREST = 'forest';
 
     /**
      * @var string
      */
     const DESERT = 'desert';
-
-    /**
-     * @var string
-     */
-    const SWAMP = 'swamp';
-
-    /**
-     * @var string
-     */
-    const HILLS = 'hills';
 
     /**
      * @var string
@@ -53,26 +38,17 @@ class TileTerrainTypes
     const GLACIERS = 'glaciers';
 
     /**
-     * @var string
-     */
-    const TUNDRA = 'tundra';
-
-    /**
      * @return array
      */
     public static function getAll()
     {
         return array(
             self::GRASSLAND => 'Grassland',
-            self::PLAINS => 'Plains',
             self::FOREST => 'Forest',
             self::DESERT => 'Desert',
-            self::SWAMP => 'Swamp',
-            self::HILLS => 'Hills',
             self::MOUNTAINS => 'Mountains',
             self::OCEAN => 'Ocean',
             self::GLACIERS => 'Glaciers',
-            self::TUNDRA => 'Tundra',
         );
     }
 
@@ -92,7 +68,6 @@ class TileTerrainTypes
                 '005.png',
                 '006.png',
             ),
-            self::PLAINS => array(),
             self::FOREST => array(
                 '001.png',
                 '002.png',
@@ -112,8 +87,6 @@ class TileTerrainTypes
                 '008.png',
                 '009.png',
             ),
-            self::SWAMP => array(),
-            self::HILLS => array(),
             self::MOUNTAINS => array(
                 '001.png',
                 '002.png',
@@ -144,7 +117,6 @@ class TileTerrainTypes
                 '005.png',
                 '006.png',
             ),
-            self::TUNDRA => array(),
         );
 
         return $terrain == null

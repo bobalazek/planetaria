@@ -44,7 +44,6 @@ class IonCannonControlCenter extends AbstractBuilding
             ))
             ->setAvailableTerrainTypes(array(
                 TileTerrainTypes::GRASSLAND,
-                TileTerrainTypes::PLAINS,
                 TileTerrainTypes::DESERT,
             ))
         ;

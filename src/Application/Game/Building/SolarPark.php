@@ -71,7 +71,6 @@ class SolarPark extends AbstractBuilding
             ))
             ->setAvailableTerrainTypes(array(
                 TileTerrainTypes::GRASSLAND,
-                TileTerrainTypes::PLAINS,
                 TileTerrainTypes::DESERT,
             ))
         ;

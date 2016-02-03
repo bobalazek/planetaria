@@ -71,7 +71,6 @@ class NuclearPowerPlant extends AbstractBuilding
             ))
             ->setAvailableTerrainTypes(array(
                 TileTerrainTypes::GRASSLAND,
-                TileTerrainTypes::PLAINS,
                 TileTerrainTypes::DESERT,
             ))
         ;

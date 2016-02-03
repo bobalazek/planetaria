@@ -22,10 +22,18 @@
             </a>
         </li>
     {% endif %}
+    {% if is_granted('ROLE_PLANET_EDITOR') or is_granted('ROLE_ADMIN') %}
+        <li class="{{ path('members-area.planets') in app.currentUri ? 'active' : '' }}" role="presentation">
+            <a href="{{ url('members-area.planets') }}">
+                <i class="fa fa-fw fa-globe"></i>
+                {{ 'Planets' | trans }}
+            </a>
+        </li>
+    {% endif %}
     {% if is_granted('ROLE_COUNTRIES_EDITOR') or is_granted('ROLE_ADMIN') %}
         <li class="{{ path('members-area.countries') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.countries') }}">
-                <i class="fa fa-fw fa-globe"></i>
+                <i class="fa fa-fw fa-flag"></i>
                 {{ 'Countries' | trans }}
             </a>
         </li>

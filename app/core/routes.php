@@ -52,6 +52,12 @@ $app->mount(
     new Application\ControllerProvider\MembersArea\PostsControllerProvider()
 );
 
+/******** Planets ********/
+$app->mount(
+    '/members-area/planets',
+    new Application\ControllerProvider\MembersArea\PlanetsControllerProvider()
+);
+
 /******** Countries ********/
 $app->mount(
     '/members-area/countries',

@@ -1,0 +1,31 @@
+{% extends 'layouts/content/members-area.html.twig' %}
+
+{% block title %}{{ 'Edit' | trans }} | {{ 'Planets' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'Edit Planet' | trans }}
+        <a class="btn btn-primary btn-sm"
+            href="{{ url('members-area.planets.new') }}">
+            {{ 'New' | trans }}
+        </a>
+        <br />
+        <small>{{ planet }}</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('members-area') }}">
+                {{ 'Home' | trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('members-area.planets') }}">
+                {{ 'Planets' | trans }}
+            </a>
+        </li>
+        <li class="active">
+            {{ 'Edit' | trans }}
+        </li>
+    </ol>
+    {% include 'contents/members-area/planets/_form.html.twig' %}
+{% endblock %}
