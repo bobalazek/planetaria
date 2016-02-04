@@ -20,7 +20,7 @@ class Pumpjack extends AbstractBuilding
             ->setName('Pumpjack')
             ->setKey('pumpjack')
             ->setSlug('pumpjack')
-            ->setDescription('With a pumpjack you can produce crude oil.')
+            ->setDescription('A pumpjack is a mechanism for pumping crude oil to the surface.')
             ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(5)

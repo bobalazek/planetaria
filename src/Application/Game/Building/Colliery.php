@@ -20,7 +20,7 @@ class Colliery extends AbstractBuilding
             ->setName('Colliery')
             ->setKey('colliery')
             ->setSlug('colliery')
-            ->setDescription('With a colliery you can produce coal.')
+            ->setDescription('With colliery you can obtain coal from the ground.')
             ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(5)

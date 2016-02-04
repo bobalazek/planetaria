@@ -20,7 +20,7 @@ class IonCannonControlCenter extends AbstractBuilding
             ->setName('Ion cannon control center')
             ->setKey('ion_cannon_control_center')
             ->setSlug('ion-cannon-control-center')
-            ->setDescription('A super strong weapon, that pulverizes everything is shoots.')
+            ->setDescription('Ion Cannon control center is a facility that can interact and send orders to Ion Cannon weapon.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
             ->setMaximumLevel(0)

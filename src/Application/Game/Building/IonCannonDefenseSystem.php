@@ -21,7 +21,7 @@ class IonCannonDefenseSystem extends AbstractBuilding
             ->setName('Ion cannon defense system')
             ->setKey('ion_cannon_defense_system')
             ->setSlug('ion-cannon-defense-system')
-            ->setDescription('Defense against the ion cannon satelite.')
+            ->setDescription('Ion Cannon defense system protects your town in case of an Ion Cannon attack.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
             ->setMaximumLevel(0)

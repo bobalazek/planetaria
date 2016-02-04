@@ -21,7 +21,7 @@ class MissileDefenseSystem extends AbstractBuilding
             ->setName('Missile defense system')
             ->setKey('missile_defense_system')
             ->setSlug('missile-defense-system')
-            ->setDescription('Defense against missiles.')
+            ->setDescription('A missile defense system can shield your town, in case you are under missile attack.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
             ->setMaximumLevel(0)

@@ -21,7 +21,7 @@ class MissileLaunchFacility extends AbstractBuilding
             ->setName('Missile launch facility')
             ->setKey('missile_launch_facility')
             ->setSlug('missile-launch-facility')
-            ->setDescription('For shooting nuclear bombs and smaller rockets.')
+            ->setDescription('A missile launch facility is used for storage and launching missiles.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
             ->setMaximumLevel(0)

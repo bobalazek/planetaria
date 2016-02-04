@@ -20,7 +20,7 @@ class Hospital extends AbstractBuilding
             ->setName('Hospital')
             ->setKey('hospital')
             ->setSlug('hospital')
-            ->setDescription('Regenerate health points')
+            ->setDescription('A hospital is a health care building that provides you with better healing for your population and soldiers.')
             ->setType(BuildingTypes::OTHER)
             ->setSize('1x1')
             ->setMaximumLevel(2)

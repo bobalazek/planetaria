@@ -20,7 +20,7 @@ class Airbase extends AbstractBuilding
             ->setName('Airbase')
             ->setKey('airbase')
             ->setSlug('airbase')
-            ->setDescription('With a airbase you can produce air units.')
+            ->setDescription('An airbase is a military aerodrome used for military aircrafts.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('2x2')
             ->setMaximumLevel(2)

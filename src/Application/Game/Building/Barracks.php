@@ -21,7 +21,7 @@ class Barracks extends AbstractBuilding
             ->setName('Barracks')
             ->setKey('barracks')
             ->setSlug('barracks')
-            ->setDescription('With a barracks you can produce land units.')
+            ->setDescription('Barracks are military buildings in which you can train your soldiers.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
             ->setMaximumLevel(2)
