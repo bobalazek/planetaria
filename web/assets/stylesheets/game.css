@@ -109,7 +109,7 @@ h1 {
     .map-tile.map-tile-center {
         border: 1px dotted #fff;
     }
-    
+
     .map-tile.map-tile-selected,
     .map-tile.map-tile-building-tiles {
         border: 1px dotted #5cb85c;
@@ -155,11 +155,11 @@ h1 {
         overflow-y: scroll;
         height: 800px;
     }
-    
+
     .map-full-screen #map-construct-building-content {
         height: 100%;
     }
-    
+
     #map-construct-building-content h5 {
         margin-top: 0;
         color: #fff;
@@ -168,24 +168,24 @@ h1 {
     #map-construct-building.open #map-construct-building-content {
         margin-left: 0;
     }
-    
+
         #map-construct-building-content-building-types {
             padding: 10px;
         }
-        
+
             #map-construct-building-content-building-types a {
                 color: #fff;
             }
-            
+
             #map-construct-building-content-building-types a:hover,
             #map-construct-building-content-building-types a:focus {
                 color: #337ab7;
             }
-            
+
             #map-construct-building-content-building-types .active a {
                 color: #fff;
             }
-        
+
         #map-construct-building-content-buildings h5 {
             margin: 0 10px;
         }
