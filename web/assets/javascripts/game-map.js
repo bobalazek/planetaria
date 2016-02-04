@@ -50,13 +50,8 @@ var GameMap = function () {
                     baseUrl+'/game/api/map/'+planetId+
                     '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
                 ).done(function(data) {
-                    // Because we don't have a building center yet,
-                    // we will redirect the user to the center,
-                    // if he builds the Capitol building
-                    if (building === 'capitol') {
-                        currentUrl = updateUrlParameter(currentUrl, 'x', x);
-                        currentUrl = updateUrlParameter(currentUrl, 'y', y);
-                    }
+                    currentUrl = updateUrlParameter(currentUrl, 'x', x);
+                    currentUrl = updateUrlParameter(currentUrl, 'y', y);
 
                     GameMap.reloadMap();
                     GameMap.reloadMapSidebar(data.building_checks);
@@ -286,6 +281,19 @@ var GameMap = function () {
                     jQuery('#map-construct-building').fadeOut();
                     jQuery('#map-construct-building').removeClass('open');
                 }
+            });
+            
+            // Check for constructing images on map
+            jQuery('.map-tile-town-building-constructing').each(function() {
+                var imageElement = jQuery(this).find('.map-tile-building-image');
+                var imageUrl = jQuery(this).attr('data-town-building-image-url');
+                var secondsUntilDone = parseInt(
+                    jQuery(this).attr('data-town-building-constructing-seconds-until-done')
+                );
+
+                setTimeout(function() {
+                    imageElement.attr('src', imageUrl);
+                }, secondsUntilDone*1000);
             });
         },
     }

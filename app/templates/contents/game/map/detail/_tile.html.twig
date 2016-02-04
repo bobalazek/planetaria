@@ -1,24 +1,29 @@
 <div id="map-tile-{{ tile.getId() }}"
     class="
         map-tile
-        {{ tile.getTownBuilding() and tile.getTownBuilding().getTown() == currentTown ? 'map-tile-current-town' : '' }}
-        {{ x == centerX and y == centerY ? 'map-tile-center' : '' }}
+        {{ tile.isOccupied() and tile.getTownBuilding().getTown() == currentTown ? 'map-tile-current-town' : '' }}
+        {{ tile.getCoordinatesX() == centerX and tile.getCoordinatesY() == centerY ? 'map-tile-center' : '' }}
         {{ tile.isOccupied() ? 'map-tile-occupied' : '' }}
+        {{ tile.isOccupied() and tile.getTownBuilding().isConstructing() ? 'map-tile-town-building-constructing' : '' }}
         tooltip-hover
         popover-click
     "
     data-id="{{ tile.getId() }}"
-    data-x="{{ x }}"
-    data-y="{{ y }}"
-    data-coordinates="{{ x ~ ',' ~ y }}"
+    data-x="{{ tile.getCoordinatesX() }}"
+    data-y="{{ tile.getCoordinatesY() }}"
+    data-coordinates="{{ tile.getCoordinates() }}"
     data-occupied="{{ tile.isOccupied() ? 'true' : 'false' }}"
+    {% if tile.isOccupied() and tile.getTownBuilding().isConstructing() %}
+        data-town-building-constructing-seconds-until-done="{{ tile.getTownBuilding().getSecondsUntilConstructingDone() | json_encode }}"
+        data-town-building-image-url="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuildingImage(true) }}"
+    {% endif %}
     data-tooltip="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_tooltip-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     data-popover-title="{{ tile.getCoordinates() }}"
     data-popover-content="{% filter escape %}{% spaceless %}{% include 'contents/game/map/detail/_popover-content.html.twig' %}{% endspaceless %}{% endfilter %}"
     data-popover-placement="bottom"
     style="background-image: url('{{ app.baseUrl }}/assets/images/tiles/{{ tile.getTerrainType() }}/{{ tile.getBackgroundImage() }}')">
     <div class="map-tile-overlay"></div>
-    {% if tile.getTownBuilding() %}
+    {% if tile.isOccupied() %}
         <img class="img-responsive map-tile-building-image"
             src="{{ app.baseUrl }}/assets/images/buildings/{{ tile.getTownBuildingImage() }}" />
     {% endif %}

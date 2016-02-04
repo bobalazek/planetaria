@@ -363,9 +363,11 @@ class TileEntity extends AbstractBasicEntity
 
     /*** Town Building Image ***/
     /**
+     * @param boolean $forceOperational Forces the town building status to be 'operational'. May be useful, when we need the "real" image of the building (regarding what the current status is).
+     *
      * @return string
      */
-    public function getTownBuildingImage()
+    public function getTownBuildingImage($forceOperational = false)
     {
         $townBuilding = $this->getTownBuilding();
         $buildingObject = $townBuilding->getBuildingObject();
@@ -373,6 +375,10 @@ class TileEntity extends AbstractBasicEntity
         $buildingObjectSize = $buildingObject->getSize();
         $townBuildingStatus = $townBuilding->getStatus();
         $buildingSection = $this->getBuildingSection();
+        
+        if ($forceOperational) {
+            $townBuildingStatus = BuildingStatuses::OPERATIONAL;
+        }
 
         if ($townBuildingStatus === BuildingStatuses::CONSTRUCTING) {
             return '_constructing/'.$buildingObjectSize.'/'.$buildingSection.'.png';
