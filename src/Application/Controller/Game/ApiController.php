@@ -200,10 +200,10 @@ class ApiController
                 ),
             ), 404);
         }
-        
+
         // Refresh the town, to get the newest data for this town (after the flush)
         $app['orm.em']->refresh($town);
-        
+
         $buildingChecks = array();
         foreach ($buildings as $buildingKey => $building) {
             $buildingChecks[$buildingKey] = $app['game.buildings']->doPreBuildChecksResponse(

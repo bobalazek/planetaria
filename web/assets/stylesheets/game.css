@@ -46,6 +46,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 999;
 }
 
 #map {
@@ -63,6 +64,10 @@ h1 {
 @media screen and (max-width: 767px) {
     #map {
         max-height: 600px;
+    }
+    
+    .map-full-screen #map {
+        max-height: 100%;
     }
 }
 
@@ -258,6 +263,12 @@ h1 {
     #map-controls form .form-control {
         height: 20px;
         font-size: 10px;
+    }
+    
+    @media screen and (max-width: 991px) {
+        #map-controls .form-group {
+            margin-bottom: 10px !important;
+        }
     }
 
     #map-controls form .input-group-addon {

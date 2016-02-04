@@ -35,57 +35,59 @@
                         </a>
                     </div>
                 </div>
-                <ul class="nav nav-tabs nav-justified">
-                    <li role="presentation"
-                        class="{{ path('game') == app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game') }}">
-                            <i class="fa fa-dashboard"></i>
-                            {{ 'Dashboard' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.map') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.map') }}">
-                            <i class="fa fa-map"></i>
-                            {{ 'Map' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.countries') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.countries') }}">
-                            <i class="fa fa-flag"></i>
-                            {{ 'Countries' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.towns') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.towns') }}">
-                            <i class="fa fa-building"></i>
-                            {{ 'Towns' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.users') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.users') }}">
-                            <i class="fa fa-users"></i>
-                            {{ 'Users' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.statistics') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.statistics') }}">
-                            <i class="fa fa-bar-chart"></i>
-                            {{ 'Statistics' | trans }}
-                        </a>
-                    </li>
-                    <li role="presentation"
-                        class="{{ path('game.premium') in app.currentUri ? 'active' : '' }}">
-                        <a href="{{ url('game.premium') }}">
-                            <i class="fa fa-star"></i>
-                            {{ 'Premium' | trans }}
-                        </a>
-                    </li>
-                </ul>
+                <div class="table-responsive">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li role="presentation"
+                            class="{{ path('game') == app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game') }}">
+                                <i class="fa fa-dashboard"></i>
+                                {{ 'Dashboard' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.map') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.map') }}">
+                                <i class="fa fa-map"></i>
+                                {{ 'Map' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.countries') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.countries') }}">
+                                <i class="fa fa-flag"></i>
+                                {{ 'Countries' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.towns') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.towns') }}">
+                                <i class="fa fa-building"></i>
+                                {{ 'Towns' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.users') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.users') }}">
+                                <i class="fa fa-users"></i>
+                                {{ 'Users' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.statistics') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.statistics') }}">
+                                <i class="fa fa-bar-chart"></i>
+                                {{ 'Statistics' | trans }}
+                            </a>
+                        </li>
+                        <li role="presentation"
+                            class="{{ path('game.premium') in app.currentUri ? 'active' : '' }}">
+                            <a href="{{ url('game.premium') }}">
+                                <i class="fa fa-star"></i>
+                                {{ 'Premium' | trans }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -375,7 +375,7 @@ class TileEntity extends AbstractBasicEntity
         $buildingObjectSize = $buildingObject->getSize();
         $townBuildingStatus = $townBuilding->getStatus();
         $buildingSection = $this->getBuildingSection();
-        
+
         if ($forceOperational) {
             $townBuildingStatus = BuildingStatuses::OPERATIONAL;
         }
