@@ -612,7 +612,7 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
                 $buildingResourcesProduction = $townBuilding->getResourcesProduction();
                 if (!empty($buildingResourcesProduction)) {
                     foreach ($buildingResourcesProduction as $resource => $value) {
-                        $resourcesProduction[$resource] += $value;
+                        $resourcesProduction[$resource] += ($value / 100) * $townBuilding->getResourcesProductionPercentage();
                     }
                 }
 

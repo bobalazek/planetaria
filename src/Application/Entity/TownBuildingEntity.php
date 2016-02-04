@@ -299,6 +299,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     }
 
     /**
+     * How much output does it give (the more damaged the building, the less output it gives)?
+     *
+     * @return integer
+     */
+    public function getResourcesProductionPercentage()
+    {
+        return $this->getHealthPointsPercentage();
+    }
+
+    /**
      * @todo: Take damages & stuff into consideration
      *
      * @return array
