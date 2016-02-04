@@ -2,44 +2,69 @@
     class="transitions"
     style="display: none;">
     <div id="map-construct-building-content">
-        {% for building in buildings %}
-            <div class="building"
-                data-name="{{ building.getName() }}"
-                data-key="{{ building.getKey() }}"
-                data-slug="{{ building.getSlug() }}"
-                data-description="{{ building.getDescription() }}"
-                data-size="{{ building.getSize() }}"
-                data-resources-cost="{{ building.getResourcesCost(0) | json_encode }}">
-                {% set preBuildChecks = app['game.buildings'].doPreBuildChecksResponse(
-                    planet,
-                    town,
-                    false,
-                    building.getKey()
-                ) %}
-                {% if preBuildChecks is not sameas (true) %}
-                    <div class="building-overlay">
-                        {{ preBuildChecks }}
-                    </div>
-                {% endif %}
-                <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
-                <h4>{{ building.getName() }}</h4>
-                <p>{{ building.getDescription() }}</p>
-                <button class="btn btn-xs btn-success btn-block btn-construct-building"
-                    data-toggle="tooltip"
-                    title="
-                        {{ 'Cost' | trans }}: <br />
-                        {% if building.getResourcesCost(0) %}
-                            {% for resource, amount in building.getResourcesCost(0) %}
-                                {{ amount }} {{ resource | humanize | trans }} <br />
-                            {% endfor %}
-                        {% else %}
-                            {{ 'This builing is free!' | trans }}
-                        {% endif %}
-                    ">
-                    {{ 'Build' | trans }}
-                </button>
-            </div>
-        {% endfor %}
+        <div id="map-construct-building-content-building-types">
+            <h5>{{ 'Types' | trans }}</h5>
+            <ul id="map-construct-building-content-building-types-list"
+                class="nav nav-pills nav-stacked">
+                <li class="active"
+                    role="presentation">
+                    <a href="#"
+                        data-type="*">
+                        {{ 'All' | trans }}
+                    </a>
+                </li>
+                {% for buildingTypeKey, buildingType in buildingTypes %}
+                    <li role="presentation" >
+                        <a href="#"
+                            data-type="{{ buildingTypeKey }}">
+                            {{ buildingType }}
+                        </a>
+                    </li>
+                {% endfor %}
+        </div> <!-- /#map-construct-building-content-building-types -->
+        <hr />
+        <div id="map-construct-building-content-buildings">
+            <h5>{{ 'Buildings' | trans }}</h5>
+            {% for building in buildings %}
+                <div class="building"
+                    data-name="{{ building.getName() }}"
+                    data-key="{{ building.getKey() }}"
+                    data-slug="{{ building.getSlug() }}"
+                    data-description="{{ building.getDescription() }}"
+                    data-type="{{ building.getType() }}"
+                    data-size="{{ building.getSize() }}"
+                    data-resources-cost="{{ building.getResourcesCost(0) | json_encode }}">
+                    {% set preBuildChecks = app['game.buildings'].doPreBuildChecksResponse(
+                        planet,
+                        town,
+                        false,
+                        building.getKey()
+                    ) %}
+                    {% if preBuildChecks is not sameas (true) %}
+                        <div class="building-overlay">
+                            {{ preBuildChecks }}
+                        </div>
+                    {% endif %}
+                    <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
+                    <h4>{{ building.getName() }}</h4>
+                    <p>{{ building.getDescription() }}</p>
+                    <button class="btn btn-xs btn-success btn-block btn-construct-building"
+                        data-toggle="tooltip"
+                        title="
+                            {{ 'Cost' | trans }}: <br />
+                            {% if building.getResourcesCost(0) %}
+                                {% for resource, amount in building.getResourcesCost(0) %}
+                                    {{ amount }} {{ resource | humanize | trans }} <br />
+                                {% endfor %}
+                            {% else %}
+                                {{ 'This builing is free!' | trans }}
+                            {% endif %}
+                        ">
+                        {{ 'Build' | trans }}
+                    </button>
+                </div>
+            {% endfor %}
+        </div> <!-- /#map-construct-building-content-buildings -->
     </div>
     <div id="map-construct-building-handle">
         <i class="fa fa-building"></i>

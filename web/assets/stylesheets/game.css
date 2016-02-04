@@ -134,12 +134,38 @@ h1 {
         width: 128px;
         margin-left: -128px;
         overflow-y: scroll;
-        max-height: 800px;
+        height: 800px;
+    }
+    
+    #map-construct-building-content h5 {
+        margin-top: 0;
+        color: #fff;
     }
 
     #map-construct-building.open #map-construct-building-content {
         margin-left: 0;
     }
+    
+        #map-construct-building-content-building-types {
+            padding: 10px;
+        }
+        
+            #map-construct-building-content-building-types a {
+                color: #fff;
+            }
+            
+            #map-construct-building-content-building-types a:hover,
+            #map-construct-building-content-building-types a:focus {
+                color: #337ab7;
+            }
+            
+            #map-construct-building-content-building-types .active a {
+                color: #fff;
+            }
+        
+        #map-construct-building-content-buildings h5 {
+            margin: 0 10px;
+        }
 
         #map-construct-building-content .building {
             position: relative;

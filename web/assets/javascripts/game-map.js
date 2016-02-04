@@ -64,6 +64,23 @@ var GameMap = function () {
                     toastr.error(data.error.message);
                 });
             });
+            
+            // Show types
+            jQuery('#map-construct-building-content-building-types-list a').on('click', function() {
+                var type = jQuery(this).attr('data-type');
+                
+                jQuery('#map-construct-building-content-building-types-list li').removeClass('active');
+                jQuery(this).parent().addClass('active');
+                
+                if (type === '*') {
+                    jQuery('#map-construct-building-content-buildings .building').fadeIn();
+                } else {
+                    jQuery('#map-construct-building-content-buildings .building:not([data-type="'+type+'"])').fadeOut();
+                    jQuery('#map-construct-building-content-buildings .building[data-type="'+type+'"]').fadeIn();
+                }
+                
+                return false;
+            });
 
             // Helper functions
             function updateUrlParameter(url, param, value){
