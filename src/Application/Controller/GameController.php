@@ -4,9 +4,6 @@ namespace Application\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Application\Game\Buildings;
-use Application\Game\BuildingTypes;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>

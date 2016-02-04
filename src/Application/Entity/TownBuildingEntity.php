@@ -661,6 +661,10 @@ class TownBuildingEntity extends AbstractBasicEntity
             return '_constructing/full.png';
         }
 
+        if ($status === BuildingStatuses::DESTROYED) {
+            return '_destroyed/full.png';
+        }
+
         return $buildingObject->getSlug().'/'.$status.'/full.png';
     }
 

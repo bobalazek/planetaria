@@ -378,6 +378,10 @@ class TileEntity extends AbstractBasicEntity
             return '_constructing/'.$buildingObjectSize.'/'.$buildingSection.'.png';
         }
 
+        if ($townBuildingStatus === BuildingStatuses::DESTROYED) {
+            return '_destroyed/'.$buildingObjectSize.'/'.$buildingSection.'.png';
+        }
+
         return $buildingObjectSlug.'/'.$townBuildingStatus.'/'.$buildingSection.'.png';
     }
 
