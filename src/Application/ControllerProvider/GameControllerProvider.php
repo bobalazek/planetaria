@@ -28,19 +28,19 @@ class GameControllerProvider implements ControllerProviderInterface
         /***** Map *****/
         $controllers->match(
             '/map',
-            'Application\Controller\GameController::mapAction'
+            'Application\Controller\Game\MapController::indexAction'
         )
         ->bind('game.map');
 
         $controllers->match(
             '/map/{id}',
-            'Application\Controller\GameController::mapDetailAction'
+            'Application\Controller\Game\MapController::detailAction'
         )
         ->bind('game.map.detail');
 
         $controllers->match(
             '/map/{id}/build',
-            'Application\Controller\GameController::mapBuildAction'
+            'Application\Controller\Game\MapController::buildAction'
         )
         ->bind('game.map.build');
 
