@@ -39,11 +39,25 @@ h1 {
     overflow: hidden;
 }
 
+.map-full-screen #map-wrapper {
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 #map {
     margin: 0 auto;
     max-width: 800px;
     height: 800px;
     overflow: scroll;
+}
+
+.map-full-screen #map {
+    max-width: 100%;
+    height: 100%;
 }
 
 @media screen and (max-width: 767px) {
@@ -64,6 +78,11 @@ h1 {
     position: absolute;
     z-index: 9;
     width: 100%;
+}
+
+.map-full-screen #map-overlay {
+    height: 100%;
+    max-width: 100%;
 }
 
     .map-row {
@@ -135,6 +154,10 @@ h1 {
         margin-left: -128px;
         overflow-y: scroll;
         height: 800px;
+    }
+    
+    .map-full-screen #map-construct-building-content {
+        height: 100%;
     }
     
     #map-construct-building-content h5 {
@@ -245,6 +268,14 @@ h1 {
     #map-controls form .btn {
         padding: 0 10px;
     }
+
+/* Map - Full screen toggle button */
+#map-full-screen-mode-toggle-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+}
 
 /*** Building ***/
 .building-wrapper {

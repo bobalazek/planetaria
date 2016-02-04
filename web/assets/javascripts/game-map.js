@@ -70,6 +70,26 @@ var GameMap = function () {
                     toastr.error(data.error.message);
                 });
             });
+            
+            // Full screen
+            jQuery('#map-full-screen-mode-toggle-button').on('click', function() {
+                jQuery('#body').toggleClass('map-full-screen');
+                
+                var isFullScreen = jQuery('#body').hasClass('map-full-screen');
+                if (isFullScreen) {
+                    jQuery(this)
+                        .find('i')
+                        .removeClass('fa-expand')
+                        .addClass('fa-compress')
+                    ;
+                } else {
+                    jQuery(this)
+                        .find('i')
+                        .removeClass('fa-compress')
+                        .addClass('fa-expand')
+                    ;
+                }
+            })
 
             // Show types
             jQuery('#map-construct-building-content-building-types-list a').on('click', function() {
