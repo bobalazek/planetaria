@@ -6,14 +6,12 @@
             href="{{ url('game.towns.detail', { id: town.getId() }) }}"
             data-id="{{ town.getId() }}"
             data-planet-id="{{ town.getPlanet().getId() }}">
-            {% if town.getCoordinates() is not sameas(false) %}
-                <div class="pull-right">
-                    <button class="btn btn-default btn-xs link-button"
-                        href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: town.getId() }) }}">
-                        {{ 'Show on Map' | trans }}
-                    </button>
-                </div>
-            {% endif %}
+            <div class="pull-right">
+                <button class="btn btn-default btn-xs link-button"
+                    href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: town.getId() }) }}">
+                    {{ 'Show on Map' | trans }}
+                </button>
+            </div>
             <div class="pull-left"
                 style="margin-right: 20px;">
                 <img class="img-responsive"

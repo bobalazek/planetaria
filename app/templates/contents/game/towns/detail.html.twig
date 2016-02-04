@@ -11,17 +11,15 @@
                 {{ 'Edit' | trans }}
             </a>
         {% endif %}
-        {% if town.getCoordinates() is not sameas(false) %}
-            <a class="btn btn-default"
-                href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: townId }) }}">
-                {{ 'Show on Map' | trans }}
-            </a>
-        {% endif %}
+        <a class="btn btn-default"
+            href="{{ url('game.map.detail', { id: town.getPlanet().getId(), x: town.getCoordinatesX(), y: town.getCoordinatesY(), town_id: townId }) }}">
+            {{ 'Show on Map' | trans }}
+        </a>
     </h1>
     <div id="main-content">
-        {% if town.getTownBuildings() | length == 0 %}
+        {% if (town.getTownBuildings() | length) == 0 and app.user.hasTown(town) %}
             <div class="alert alert-info">
-                {{ 'You do not have any buildings yet. Please go to the map, click on a buildable tile, click "Build here" inside the popover, select this town and construct the Capitol building.' }}
+                {{ 'This town has no buildings yet. Please click the "Show on Map" button above, click on a buildable tile and construct the "Capitol" building from the sidebar.' | trans }}
             </div>
         {% endif %}
         <div class="row">
