@@ -50,11 +50,22 @@ var GameMap = function () {
                     baseUrl+'/game/api/map/'+planetId+
                     '/build?x='+x+'&y='+y+'&town_id='+townId+'&building='+building
                 ).done(function(data) {
+                    // Because we don't have a building center yet,
+                    // we will redirect the user to the center,
+                    // if he builds the Capitol building
+                    if (building === 'capitol') {
+                        currentUrl = updateUrlParameter(currentUrl, 'x', x);
+                        currentUrl = updateUrlParameter(currentUrl, 'y', y);
+                    }
+
                     GameMap.reloadMap();
+                    GameMap.reloadMapSidebar(data.building_checks);
 
                     jQuery('#map-construct-building').removeClass('open');
                     jQuery('#map-construct-building').fadeOut();
-                    
+
+                    jQuery('#town-no-buildings-alert').fadeOut();
+
                     var townBuildings = parseInt(jQuery('#town-buildings-data').text());
                     jQuery('#town-buildings-data').text(townBuildings+1);
 
@@ -64,21 +75,21 @@ var GameMap = function () {
                     toastr.error(data.error.message);
                 });
             });
-            
+
             // Show types
             jQuery('#map-construct-building-content-building-types-list a').on('click', function() {
                 var type = jQuery(this).attr('data-type');
-                
+
                 jQuery('#map-construct-building-content-building-types-list li').removeClass('active');
                 jQuery(this).parent().addClass('active');
-                
+
                 if (type === '*') {
                     jQuery('#map-construct-building-content-buildings .building').fadeIn();
                 } else {
                     jQuery('#map-construct-building-content-buildings .building:not([data-type="'+type+'"])').fadeOut();
                     jQuery('#map-construct-building-content-buildings .building[data-type="'+type+'"]').fadeIn();
                 }
-                
+
                 return false;
             });
 
@@ -104,6 +115,25 @@ var GameMap = function () {
                 jQuery('h2 small').text('('+x+','+y+')');
 
                 GameMap.onMapInitialized();
+            });
+        },
+        reloadMapSidebar: function(buildingChecks) {
+            jQuery('#map-construct-building-content-buildings .building').each(function() {
+                var building = jQuery(this).attr('data-key');
+                var buildingCheck = buildingChecks[building];
+
+                if (buildingCheck === true) {
+                    jQuery(this)
+                        .find('.building-overlay')
+                        .fadeOut()
+                    ;
+                } else {
+                    jQuery(this)
+                        .find('.building-overlay')
+                        .fadeIn()
+                        .text(buildingCheck)
+                    ;
+                }
             });
         },
         onMapInitialized: function() {

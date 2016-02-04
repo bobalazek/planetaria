@@ -40,11 +40,10 @@
                         false,
                         building.getKey()
                     ) %}
-                    {% if preBuildChecks is not sameas (true) %}
-                        <div class="building-overlay">
-                            {{ preBuildChecks }}
-                        </div>
-                    {% endif %}
+                    <div class="building-overlay" 
+                        style="display: {{ preBuildChecks is not sameas (true) ? 'block' : 'none' }};">
+                        {{ preBuildChecks }}
+                    </div>
                     <img src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
                     <h4>{{ building.getName() }}</h4>
                     <p>{{ building.getDescription() }}</p>

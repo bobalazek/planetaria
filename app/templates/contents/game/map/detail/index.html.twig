@@ -10,7 +10,8 @@
     </h2>
     <div id="main-content">
         {% if (town.getTownBuildings() | length) == 0 %}
-            <div class="alert alert-info">
+            <div id="town-no-buildings-alert"
+                class="alert alert-info">
                 {{ 'This town has no buildings yet.' }}
             </div>
         {% endif %}
