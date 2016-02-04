@@ -20,7 +20,7 @@ class WindFarm extends AbstractBuilding
             ->setName('Wind farm')
             ->setKey('wind_farm')
             ->setSlug('wind-farm')
-            ->setDescription('You can produce electricity with it.')
+            ->setDescription('Wind farm is another green solution for your town electricity in this game. It generate electricity with help of strong, steady winds.')
             ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(2)

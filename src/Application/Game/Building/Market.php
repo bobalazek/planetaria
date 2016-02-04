@@ -20,7 +20,7 @@ class Market extends AbstractBuilding
             ->setName('Market')
             ->setKey('market')
             ->setSlug('market')
-            ->setDescription('With a market, you will be able to exchange resources and items.')
+            ->setDescription('Market provides economic improvement in a game. You can exchange one resource for another.')
             ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')
             ->setMaximumLevel(0)

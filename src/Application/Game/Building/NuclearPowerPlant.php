@@ -20,7 +20,7 @@ class NuclearPowerPlant extends AbstractBuilding
             ->setName('Nuclear power plant')
             ->setKey('nuclear_power_plant')
             ->setSlug('nuclear-power-plant')
-            ->setDescription('You can produce electricity with it.')
+            ->setDescription('Nuclear power plant it\'s a thermal power station with a nuclear reactor that will produce electricity for your town.')
             ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(2)

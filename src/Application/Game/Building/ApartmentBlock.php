@@ -20,7 +20,7 @@ class ApartmentBlock extends AbstractBuilding
             ->setName('Apartment block')
             ->setKey('apartment_block')
             ->setSlug('apartment-block')
-            ->setDescription('A apartment block will increase your population capacity.')
+            ->setDescription('An apartment block it\'s a high residential building that will increase your population limit.')
             ->setType(BuildingTypes::RESIDENTIAL)
             ->setSize('1x1')
             ->setMaximumLevel(2)
