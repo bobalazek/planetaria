@@ -9,7 +9,7 @@
         <small>({{ centerX ~ ',' ~ centerY }})</small>
     </h2>
     <div id="main-content">
-        {% if (town.getTownBuildings() | length) == 0 %}
+        {% if town and (town.getTownBuildings() | length) == 0 %}
             <div id="town-no-buildings-alert"
                 class="alert alert-info">
                 {{ 'This town has no buildings yet.' }}
