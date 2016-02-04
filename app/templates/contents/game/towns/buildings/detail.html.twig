@@ -48,6 +48,27 @@
                 {{ 'This building has reached the maximum level!' | trans }}
             </div>
         {% endif %}
+        {% if townBuilding.getHealthPointsPercentage() < 100 %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr />
+                    <a class="btn btn-warning btn-block btn-lg confirm-alert"
+                        data-confirm-text="{{ 'Are you really sure you want to do this? This action will cost you the same as a new building of this level!' | trans }}"
+                        href="{{ url('game.towns.buildings.repair', { id: town.getId(), buildingId: townBuilding.getId() }) }}"
+                        {% if app['game.towns'].hasEnoughResourcesForBuilding(
+                            town,
+                            townBuilding.getBuilding(),
+                            townBuilding.getLevel()
+                        ) is not sameas(true) %}
+                            disabled="disabled"
+                            data-toggle="tooltip"
+                            title="{{ 'You do not have enough resources to repair this building!' | trans }}"
+                        {% endif %}>
+                        {{ 'Repair' | trans }}
+                    </a>
+                </div>
+            </div> <!-- /.row -->
+        {% endif %}
         {% if townBuilding.isRemovable() is sameas(true) %}
             <div class="row">
                 <div class="col-md-12">

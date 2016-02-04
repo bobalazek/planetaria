@@ -119,6 +119,12 @@ class GameControllerProvider implements ControllerProviderInterface
         ->bind('game.towns.buildings.upgrade');
 
         $controllers->match(
+            '/towns/{id}/buildings/{buildingId}/repair',
+            'Application\Controller\Game\TownsController::buildingsRepairAction'
+        )
+        ->bind('game.towns.buildings.repair');
+
+        $controllers->match(
             '/towns/{id}/buildings/{buildingId}/remove',
             'Application\Controller\Game\TownsController::buildingsRemoveAction'
         )

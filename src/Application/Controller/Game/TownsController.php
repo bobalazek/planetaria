@@ -5,9 +5,10 @@ namespace Application\Controller\Game;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Application\Game\Buildings;
 use Application\Entity\TownEntity;
 use Application\Form\Type\My\TownType;
+use Application\Game\Buildings;
+use Application\Game\Exception\InsufficientResourcesException;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -331,6 +332,93 @@ class TownsController
         $referer = $request->headers->get('referer', false);
         if ($referer !== false) {
             return $app->redirect($referer);
+        }
+
+        return $app->redirect(
+            $app['url_generator']->generate(
+                'game.towns.buildings.detail',
+                array(
+                    'id' => $town->getId(),
+                    'buildingId' => $townBuilding->getId(),
+                )
+            )
+        );
+    }
+
+    /**
+     * @param integer     $id
+     * @param integer     $buildingId
+     * @param Application $app
+     *
+     * @return Response
+     */
+    public function buildingsRepairAction($id, $buildingId, Application $app)
+    {
+        $town = $app['orm.em']->find(
+            'Application\Entity\TownEntity',
+            $id
+        );
+
+        if (!$town) {
+            $app->abort(404, 'This town does not exist!');
+        }
+
+        $townBuilding = $app['orm.em']->find(
+            'Application\Entity\TownBuildingEntity',
+            $buildingId
+        );
+
+        if (!$townBuilding) {
+            $app->abort(404, 'This town building does not exist!');
+        }
+
+        if (!$app['user']->hasTownBuilding($townBuilding)) {
+            $app->abort(403, 'This is not your town building!');
+        }
+
+        $townBuilding->setHealthPoints(
+            $townBuilding->getHealthPointsTotal()
+        );
+
+        $app['orm.em']->persist($townBuilding);
+
+        // Substract the building bost
+        $buildingResourcesCost = $townBuilding
+            ->getBuildingObject()
+            ->getResourcesCost(
+                $townBuilding->getLevel()
+            )
+        ;
+        $town->useResources($buildingResourcesCost);
+        $app['orm.em']->persist($town);
+
+        try {
+            $hasEnoughResourcesForBuilding = $app['game.towns']
+                ->hasEnoughResourcesForBuilding(
+                    $town,
+                    $townBuilding->getBuilding(),
+                    $townBuilding->getLevel()
+                )
+            ;
+            if (!$hasEnoughResourcesForBuilding) {
+                throw new InsufficientResourcesException(
+                    'You do not have enough resources to repair this building!'
+                );
+            }
+
+            $app['orm.em']->flush();
+
+            $app['flashbag']->add(
+                'success',
+                $app['translator']->trans(
+                    'The building was successfully repaired!'
+                )
+            );
+        } catch (\Exception $e) {
+            $app['flashbag']->add(
+                'danger',
+                $e->getMessage()
+            );
         }
 
         return $app->redirect(
