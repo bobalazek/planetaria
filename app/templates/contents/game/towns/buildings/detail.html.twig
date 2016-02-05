@@ -35,7 +35,7 @@
                                 {{ preUpgradeChecks }}
                             </div>
                         {% endif %}
-                        {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel() + 1, building: townBuilding.getBuildingObject() } %}
+                        {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getNextLevel(), building: townBuilding.getBuildingObject() } %}
                         <a class="btn btn-success btn-block btn-lg"
                             href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: townBuilding.getId() }) }}">
                             {{ 'Upgrade' | trans }}
