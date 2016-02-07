@@ -1,9 +1,1 @@
 <b>{{ tile.getCoordinates() }}</b>
-{% if tile.tileResources() %}
-    <br />
-    {{ 'Resources' | trans }}: <br />
-    {% for tileResource in tile.tileResources() %}
-        {{ tileResource.getResource() | humanize | trans }}
-        <small>{{ tileResource.getAmountPercentage() }}%</small> <br />
-    {% endfor %}
-{% endif %}
