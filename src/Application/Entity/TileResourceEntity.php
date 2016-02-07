@@ -46,6 +46,15 @@ class TileResourceEntity extends AbstractBasicEntity
      * @ORM\Column(name="amount_left", type="integer")
      */
     protected $amountLeft = 10000;
+    
+    /**
+     * How much is that resource left?
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="bonus_percentage", type="smallint", options={"unsigned"=true})
+     */
+    protected $bonusPercentage = 0;
 
     /**
      * @var \DateTime
@@ -146,6 +155,27 @@ class TileResourceEntity extends AbstractBasicEntity
         }
 
         return ceil(($left / $total) * 100);
+    }
+    
+    /*** Bonus percentage ***/
+    /**
+     * @return integer
+     */
+    public function getBonusPrecentage()
+    {
+        return $this->bonusPercentage;
+    }
+
+    /**
+     * @param integer $bonusPercentage
+     *
+     * @return TileResourceEntity
+     */
+    public function setBonusPrecentage($bonusPercentage)
+    {
+        $this->$bonusPercentage = $bonusPercentage;
+
+        return $this;
     }
 
     /*** Tile ***/

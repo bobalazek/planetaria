@@ -108,12 +108,14 @@ class Planets
                     $tileResourceEntity = new TileResourceEntity();
 
                     $amount = rand(5000, 20000);
+                    $bonusPercentage = rand(0, 50);
 
                     $tileResourceEntity
                         ->setTile($tileEntity)
                         ->setResource($randomResourceKey)
                         ->setAmount($amount)
                         ->setAmountLeft($amount)
+                        ->setBonusPrecentage($bonusPercentage)
                     ;
 
                     $app['orm.em']->persist($tileResourceEntity);
