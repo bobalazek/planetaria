@@ -218,9 +218,13 @@ var GameMap = function () {
                     jQuery('.map-tile.map-tile-selected').removeClass('map-tile-selected');
                     jQuery(this).addClass('map-tile-selected');
 
-                    jQuery('#map-construct-building').fadeIn(function() {
-                        jQuery(this).addClass('open');
-                    });
+                    // If we have already shown the sidebar (and then closed again),
+                    // don't show again (there's probably a reason why we have closed it)!
+                    if (!jQuery('#map-construct-building').is(":visible")) {
+                        jQuery('#map-construct-building').fadeIn(function() {
+                            jQuery(this).addClass('open');
+                        });
+                    }
 
                     jQuery('#map-construct-building .building').on({
                         mouseenter: function() {
