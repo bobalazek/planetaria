@@ -150,6 +150,16 @@ class TownBuildingEntity extends AbstractBasicEntity
 
         return $this;
     }
+    
+    /**
+     * Used for the frontend, because we don't want to show zero levels!
+     *
+     * @return integer
+     */
+    public function getLevelDisplay()
+    {
+        return $this->getLevel() + 1;
+    }
 
     /*** Next level ***/
     /**
@@ -158,6 +168,16 @@ class TownBuildingEntity extends AbstractBasicEntity
     public function getNextLevel()
     {
         return $this->getLevel() + 1;
+    }
+    
+    /**
+     * Used for the frontend, because we don't want to show zero levels!
+     *
+     * @return integer
+     */
+    public function getNextLevelDisplay()
+    {
+        return $this->getNextLevel() + 1;
     }
 
     /*** Health points ***/
@@ -652,8 +672,8 @@ class TownBuildingEntity extends AbstractBasicEntity
             return '(constructing)';
         }
 
-        return $this->getLevel().
-            ($this->isUpgrading() ? ' => '.($this->getNextLevel()).' (upgrading)' : '')
+        return $this->getLevelDisplay().
+            ($this->isUpgrading() ? ' => '.($this->getNextLevelDisplay()).' (upgrading)' : '')
         ;
     }
 

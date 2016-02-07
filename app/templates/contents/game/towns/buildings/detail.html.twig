@@ -17,7 +17,7 @@
     <div id="main-content">
         <div class="row">
             <div class="col-md-12">
-                {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject() } %}
+                {% include 'contents/game/_parts/building-media.html.twig' with { level: townBuilding.getLevel(), building: townBuilding.getBuildingObject(), townBuilding: townBuilding } %}
                 {% include 'contents/game/_parts/town-building-progresses.html.twig' %}
             </div> <!-- /.col-md-12 -->
         </div> <!-- /.row -->

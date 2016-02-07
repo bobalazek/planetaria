@@ -1,4 +1,5 @@
 {% set level = level is defined ? level : 0 %}
+{% set townBuilding = townBuilding is defined ? townBuilding : null %}
 <div class="building media"
     data-name="{{ building.getName() }}"
     data-key="{{ building.getKey() }}"
@@ -15,7 +16,8 @@
             <span class="badge"
                 data-toggle="tooltip"
                 title="{{ 'Level' | trans }}">
-                {{ level }}
+                {{ townBuilding ? townBuilding.getBadgeText() : (level + 1) }}
+                {# becase we don't want zero levels! #}
             </span>
         </h4>
         <p>{{ building.getDescription() }}</p>
@@ -40,10 +42,10 @@
                 <p>
                     <b data-toggle="tooltip"
                         data-placement="right"
-                        title="{{ 'To which level can the building be upgraded (starting from 0)?' | trans }}">
+                        title="{{ 'To which level can the building be upgraded?' | trans }}">
                         {{ 'Maximum level' | trans }}:
                     </b>
-                    {{ building.getMaximumLevel() }}
+                    {{ building.getMaximumLevelDisplay() }}
                 </p>
             </div> <!-- /.col-md-4 -->
             <div class="col-md-4 col-sm-6">

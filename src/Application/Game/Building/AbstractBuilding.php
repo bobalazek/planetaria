@@ -450,6 +450,16 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
+    /**
+     * Used for the frontend, because we don't want to show zero levels!
+     *
+     * @return integer
+     */
+    public function getMaximumLevelDisplay()
+    {
+        return $this->getMaximumLevel() + 1;
+    }
+
     /***** Health points *****/
     /**
      * @return array|integer
