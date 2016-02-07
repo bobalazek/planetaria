@@ -55,6 +55,7 @@ var GameMap = function () {
 
                     GameMap.reloadMap();
                     GameMap.reloadMapSidebar(data.building_checks);
+                    Game.reloadTownResources();
 
                     jQuery('#map-construct-building').removeClass('open');
                     jQuery('#map-construct-building').fadeOut();
