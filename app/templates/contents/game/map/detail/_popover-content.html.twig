@@ -36,6 +36,26 @@
 </p>
 {% if tile.getTownBuilding() and app.user.hasTownBuilding(tile.getTownBuilding()) %}
     <p>
+        {% set preUpgradeChecks = app['game.buildings'].doPreUpgradeChecksResponse(
+            tile.getTownBuilding()
+        ) %}
+        <span {% if preUpgradeChecks is not sameas (true) %}
+            class="popover-tooltip"
+            data-placement="left"
+            title="{{ preUpgradeChecks }}"
+            style="display: block;"
+        {% endif %}>
+            <a class="btn btn-xs btn-success btn-block"
+                href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: tile.getTownBuilding().getId() }) }}"
+                {% if preUpgradeChecks is not sameas (true) %}
+                    disabled="disabled"
+                    style="pointer-events: none;"
+                {% endif %}>
+                {{ 'Upgrade' | trans }}
+            </a>
+        </span>
+    </p>
+    <p>
         <a class="btn btn-xs btn-default btn-block"
             href="{{ url('game.towns.buildings.detail', { id: tile.getTownBuilding().getTown().getId(), buildingId: tile.getTownBuilding().getId() }) }}">
             {{ 'Go to the Building' | trans }}

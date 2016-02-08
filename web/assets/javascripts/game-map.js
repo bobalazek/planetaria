@@ -199,6 +199,8 @@ var GameMap = function () {
 
             // Center map button
             jQuery('.map-tile').on('shown.bs.popover', function() {
+                jQuery('.popover-tooltip').tooltip();
+
                 jQuery('.btn-center-map').on('click', function() {
                     currentUrl = jQuery(this).attr('href');
                     var x = jQuery(this).attr('data-x');
