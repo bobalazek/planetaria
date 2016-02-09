@@ -46,7 +46,7 @@
             style="display: block;"
         {% endif %}>
             <a class="btn btn-xs btn-success btn-block"
-                href="{{ url('game.towns.buildings.upgrade', { id: town.getId(), buildingId: tile.getTownBuilding().getId() }) }}"
+                href="{{ url('game.towns.buildings.upgrade', { id: town ? town.getId() : 0, buildingId: tile.getTownBuilding().getId() }) }}"
                 {% if preUpgradeChecks is not sameas (true) %}
                     disabled="disabled"
                     style="pointer-events: none;"
