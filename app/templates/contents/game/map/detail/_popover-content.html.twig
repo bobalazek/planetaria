@@ -34,7 +34,7 @@
         {{ 'Center map' | trans }}
     </a>
 </p>
-{% if tile.getTownBuilding() and app.user.hasTownBuilding(tile.getTownBuilding()) %}
+{% if tile.getTownBuilding() and tile.getTownBuilding().getTown() == town and app.user.hasTownBuilding(tile.getTownBuilding()) %}
     <p>
         {% set preUpgradeChecks = app['game.buildings'].doPreUpgradeChecksResponse(
             tile.getTownBuilding()
