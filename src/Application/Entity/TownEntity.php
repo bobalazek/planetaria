@@ -425,10 +425,19 @@ class TownEntity extends AbstractAdvancedWithImageUploadEntity
         $resourcesAvailable = $this->getResourcesAvailable();
 
         foreach ($allResources as $resourceKey => $resourceName) {
+            $available = $resourcesAvailable[$resourceKey];
+            $capacity = $resourcesCapacity[$resourceKey];
+            $capacityPercentage = $capacity > 0 && $available > 0
+                ? ($available / $capacity) * 100
+                : 0
+            ;
+            $production = $resourcesProduction[$resourceKey];
+
             $resources[$resourceKey] = array(
-                'available' => $resourcesAvailable[$resourceKey],
-                'capacity' => $resourcesCapacity[$resourceKey],
-                'production' => $resourcesProduction[$resourceKey],
+                'available' => $available,
+                'capacity' => $capacity,
+                'capacity_percentage' => $capacityPercentage,
+                'production' => $production,
             );
         }
 

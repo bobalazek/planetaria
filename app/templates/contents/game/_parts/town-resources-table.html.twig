@@ -18,6 +18,7 @@
                     data-resource="{{ resourceKey }}"
                     data-resource-available="{{ resourceData.available }}"
                     data-resource-capacity="{{ resourceData.capacity }}"
+                    data-resource-capacity-percentage="{{ resourceData.capacity_percentage }}"
                     data-resource-production="{{ resourceData.production }}">
                     <td class="resource-name">
                         <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getSlug() }}.png"
@@ -32,6 +33,23 @@
                     </td>
                     <td class="resource-production">
                         {{ resourceData.production }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"
+                        style="border-top: 0;">
+                        <div class="progress live-progress-resource-percentage"
+                            data-resource="{{ resourceKey }}"
+                            data-toggle="tooltip"
+                            title="{{ resourceData.capacity_percentage }}%">
+                            <div class="progress-bar"
+                                aria-valuenow="{{ resourceData.capacity_percentage }}"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width: {{ resourceData.capacity_percentage }}%; min-width: 2em;">
+                                {{ resourceData.capacity_percentage | round }}%
+                            </div>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

@@ -33,6 +33,7 @@ var Game = function () {
                         var resource = jQuery(this).attr('data-resource');
                         var resourceAvailable = parseFloat(jQuery(this).attr('data-resource-available'));
                         var resourceCapacity = parseInt(jQuery(this).attr('data-resource-capacity'));
+                        var resourceCapacityPercentage = parseFloat(jQuery(this).attr('data-resource-capacity-percentage'));
                         var resourceProduction = parseInt(jQuery(this).attr('data-resource-production'));
 
                         if (resourceProduction > 0) {
@@ -47,6 +48,27 @@ var Game = function () {
 
                             jQuery(this).attr('data-resource-available', resourceAvailable);
                             jQuery(this).find('.resource-available').text(parseInt(resourceAvailable));
+                            
+                            if (
+                                resourceCapacity > 0 && 
+                                resourceAvailable > 0
+                            ) {
+                                resourceCapacityPercentage = (resourceAvailable / resourceCapacity) * 100;
+                                
+                                jQuery(this).attr('data-resource-capacity-percentage', resourceCapacityPercentage);
+                                
+                                var liveProgressElement = jQuery('.live-progress-resource-percentage[data-resource="'+resource+'"]');
+                                
+                                if (liveProgressElement) {
+                                    liveProgressElement
+                                        .find('.progress-bar')
+                                        .attr('aria-valuenow', resourceCapacityPercentage)
+                                        .attr('title', parseInt(resourceCapacityPercentage)+'%')
+                                        .css({ width: resourceCapacityPercentage+'%' })
+                                        .text(parseInt(resourceCapacityPercentage)+'%')
+                                    ;
+                                }
+                            }
                         }
                     });
                 }
