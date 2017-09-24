@@ -28,6 +28,11 @@ class UnitTypes
     const NAVAL = 'naval';
 
     /**
+     * @var string
+     */
+    const WEAPON = 'weapon';
+
+    /**
      * @return array
      */
     public static function getAll()
@@ -37,6 +42,7 @@ class UnitTypes
             self::VEHICLE => 'Vehicle',
             self::AIRCRAFT => 'Aircraft',
             self::NAVAL => 'Naval',
+            self::WEAPON => 'Weapon',
         );
     }
 }
