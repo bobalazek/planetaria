@@ -15,7 +15,6 @@ class Expert extends AbstractBadge
         $this
             ->setName('Expert')
             ->setKey('expert')
-            ->setSlug('expert')
             ->setDescription('You are the man!')
             ->setMinimumExperiencePoints(5000)
         ;

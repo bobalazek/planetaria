@@ -38,11 +38,6 @@ class BuildingTypes
     const INDUSTRIAL = 'industrial';
 
     /**
-     * @var string
-     */
-    const OTHER = 'other';
-
-    /**
      * @return array
      */
     public static function getAll()
@@ -54,7 +49,6 @@ class BuildingTypes
             self::COMMERCIAL => 'Commercial',
             self::MILITARY => 'Military',
             self::INDUSTRIAL => 'Industrial',
-            self::OTHER => 'Other',
         );
     }
 }

@@ -19,7 +19,6 @@ class ApartmentBlock extends AbstractBuilding
         $this
             ->setName('Apartment block')
             ->setKey('apartment_block')
-            ->setSlug('apartment-block')
             ->setDescription('An apartment block it\'s a high residential building that will increase your population limit.')
             ->setType(BuildingTypes::RESIDENTIAL)
             ->setSize('1x1')

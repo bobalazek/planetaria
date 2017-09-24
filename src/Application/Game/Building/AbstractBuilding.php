@@ -188,12 +188,12 @@ class AbstractBuilding implements BuildingInterface
 
     /**
      * What does that building produce (per level)?
-     * Example ( level => array( item, item2 ) ):
+     * Example ( level => array( weapon, weapon2 ) ):
      *   array( 0 => array( 'ion_cannon_satelite' )), 1 => array( 'ion_cannon_satelite', 'nuclear_bomb' ) )
      *
      * @var array
      */
-    protected $itemsProduction;
+    protected $weaponsProduction;
 
     /**
      * How much bonus for resources cost (in percents) do we get (per level)?
@@ -202,7 +202,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var array
      */
-    protected $itemsResourcesCostBonus;
+    protected $weaponsResourcesCostBonus;
 
     /**
      * How much bonus for build time (in percents) do we get (per level)?
@@ -211,7 +211,7 @@ class AbstractBuilding implements BuildingInterface
      *
      * @var array
      */
-    protected $itemsBuildTimeBonus;
+    protected $weaponsBuildTimeBonus;
 
     /**
      * Which buildings do we need before we can build this one?
@@ -301,25 +301,6 @@ class AbstractBuilding implements BuildingInterface
     public function setKey($key)
     {
         $this->key = $key;
-
-        return $this;
-    }
-
-    /***** Slug *****/
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -723,70 +704,70 @@ class AbstractBuilding implements BuildingInterface
         return $this;
     }
 
-    /***** Items production *****/
+    /***** Weapons production *****/
     /**
      * @return array
      */
-    public function getItemsProduction($level = null, $item = null)
+    public function getWeaponsProduction($level = null, $weapon = null)
     {
         return $level === null
-            ? $this->itemsProduction
-            : ($item === null
-                ? $this->itemsProduction[$level]
-                : $this->itemsProduction[$level][$item])
+            ? $this->weaponsProduction
+            : ($weapon === null
+                ? $this->weaponsProduction[$level]
+                : $this->weaponsProduction[$level][$weapon])
         ;
     }
 
     /**
-     * @param array $itemsProduction
+     * @param array $weaponsProduction
      */
-    public function setItemsProduction(array $itemsProduction = array())
+    public function setWeaponsProduction(array $weaponsProduction = array())
     {
-        $this->itemsProduction = $itemsProduction;
+        $this->weaponsProduction = $weaponsProduction;
 
         return $this;
     }
 
-    /***** Items resources cost bonus *****/
+    /***** Weapons resources cost bonus *****/
     /**
      * @return array|integer
      */
-    public function getItemsResourcesCostBonus($level = null)
+    public function getWeaponsResourcesCostBonus($level = null)
     {
         return $level === null
-            ? $this->itemsResourcesCostBonus
-            : $this->itemsResourcesCostBonus[$level]
+            ? $this->weaponsResourcesCostBonus
+            : $this->weaponsResourcesCostBonus[$level]
         ;
     }
 
     /**
-     * @param array $itemsResourcesCostBonus
+     * @param array $weaponsResourcesCostBonus
      */
-    public function setItemsResourcesCostBonus(array $itemsResourcesCostBonus = array())
+    public function setWeaponsResourcesCostBonus(array $weaponsResourcesCostBonus = array())
     {
-        $this->itemsResourcesCostBonus = $itemsResourcesCostBonus;
+        $this->weaponsResourcesCostBonus = $weaponsResourcesCostBonus;
 
         return $this;
     }
 
-    /***** Items build time bonus *****/
+    /***** Weapons build time bonus *****/
     /**
      * @return array|integer
      */
-    public function getItemsBuildTimeBonus($level = null)
+    public function getWeaponsBuildTimeBonus($level = null)
     {
         return $level === null
-            ? $this->itemsBuildTimeBonus
-            : $this->itemsBuildTimeBonus[$level]
+            ? $this->weaponsBuildTimeBonus
+            : $this->weaponsBuildTimeBonus[$level]
         ;
     }
 
     /**
-     * @param array $itemsBuildTimeBonus
+     * @param array $weaponsBuildTimeBonus
      */
-    public function setItemsBuildTimeBonus(array $itemsBuildTimeBonus = array())
+    public function setWeaponsBuildTimeBonus(array $weaponsBuildTimeBonus = array())
     {
-        $this->itemsBuildTimeBonus = $itemsBuildTimeBonus;
+        $this->weaponsBuildTimeBonus = $weaponsBuildTimeBonus;
 
         return $this;
     }
@@ -947,9 +928,9 @@ class AbstractBuilding implements BuildingInterface
             'units_production' => $this->getUnitsProduction(),
             'units_resources_cost_bonus' => $this->getUnitsResourcesCostBonus(),
             'units_build_time_bonus' => $this->getUnitsBuildTimeBonus(),
-            'items_production' => $this->getItemsProduction(),
-            'items_resources_cost_bonus' => $this->getItemsResourcesCostBonus(),
-            'items_build_time_bonus' => $this->getItemsBuildTimeBonus(),
+            'weapons_production' => $this->getWeaponsProduction(),
+            'weapons_resources_cost_bonus' => $this->getWeaponsResourcesCostBonus(),
+            'weapons_build_time_bonus' => $this->getWeaponsBuildTimeBonus(),
             'per_town_limit' => $this->getPerTownLimit(),
             'per_country_limit' => $this->getPerCountryLimit(),
             'per_planet_limit' => $this->getPerPlanetLimit(),

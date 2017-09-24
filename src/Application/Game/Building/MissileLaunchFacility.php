@@ -6,6 +6,7 @@ use Application\Game\Buildings;
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
 use Application\Game\TileTerrainTypes;
+use Application\Game\Weapons;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -20,7 +21,6 @@ class MissileLaunchFacility extends AbstractBuilding
         $this
             ->setName('Missile launch facility')
             ->setKey('missile_launch_facility')
-            ->setSlug('missile-launch-facility')
             ->setDescription('A missile launch facility is used for storage and launching missiles.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
@@ -46,6 +46,11 @@ class MissileLaunchFacility extends AbstractBuilding
             ->setBuildingsRequired(array(
                 0 => array(
                     Buildings::AIRBASE => 0,
+                ),
+            ))
+            ->setWeaponsProduction(array(
+                0 => array(
+                    Weapons::NUCLEAR_BOMB,
                 ),
             ))
             ->setAvailableTerrainTypes(array(

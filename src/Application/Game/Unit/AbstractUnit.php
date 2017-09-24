@@ -148,25 +148,6 @@ class AbstractUnit implements UnitInterface
         return $this;
     }
 
-    /***** Slug *****/
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     /***** Description *****/
     /**
      * @return string

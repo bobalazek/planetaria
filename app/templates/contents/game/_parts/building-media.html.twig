@@ -3,12 +3,11 @@
 <div class="building media"
     data-name="{{ building.getName() }}"
     data-key="{{ building.getKey() }}"
-    data-slug="{{ building.getSlug() }}"
     data-description="{{ building.getDescription() }}"
     data-type="{{ building.getType() }}">
     <div class="media-left">
         <img class="media-object"
-            src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getSlug() }}/thumbnail.png" />
+            src="{{ app.baseUrl }}/assets/images/buildings/{{ building.getKey() }}/thumbnail.png" />
     </div>
     <div class="media-body">
         <h4 class="media-heading">
@@ -136,9 +135,9 @@
                 </div> <!-- /.col-md-6 -->
             {% endif %}
             {% if i is divisible by(2) %}</div><div class="row">{% endif %}
-            {% if building.getItemsProduction(level) %}
+            {% if building.getWeaponsProduction(level) %}
                 <div class="col-md-6">
-                    {% include 'contents/game/_parts/building-media/items-production-section.html.twig' %}
+                    {% include 'contents/game/_parts/building-media/weapons-production-section.html.twig' %}
                     {% set i = i + 1 %}
                 </div> <!-- /.col-md-6 -->
             {% endif %}

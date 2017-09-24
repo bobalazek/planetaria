@@ -19,7 +19,6 @@ class Farm extends AbstractBuilding
         $this
             ->setName('Farm')
             ->setKey('farm')
-            ->setSlug('farm')
             ->setDescription('A farm is a building that provides food for population and military.')
             ->setUserExperiencePoints(10)
             ->setType(BuildingTypes::AGRICULTURAL)

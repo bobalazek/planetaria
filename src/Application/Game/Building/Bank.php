@@ -19,7 +19,6 @@ class Bank extends AbstractBuilding
         $this
             ->setName('Bank')
             ->setKey('bank')
-            ->setSlug('bank')
             ->setDescription('Bank is a building that produces money that you can use in a game.')
             ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')

@@ -15,7 +15,6 @@ class Experienced extends AbstractBadge
         $this
             ->setName('Experienced')
             ->setKey('experienced')
-            ->setSlug('experienced')
             ->setDescription('You are getting better and better.')
             ->setMinimumExperiencePoints(1000)
         ;

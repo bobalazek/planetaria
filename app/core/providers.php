@@ -181,7 +181,7 @@ $app['game.towns'] = $app->share(function () use ($app) {
 });
 
 $app['game.resources'] = $app->share(function () use ($app) {
-    return new Application\Game\Resources($app);
+    return new Application\Game\Resources();
 });
 
 /***** Form *****/

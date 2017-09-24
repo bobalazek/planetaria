@@ -88,10 +88,10 @@ $app->mount(
     new Application\ControllerProvider\MembersArea\UnitsControllerProvider()
 );
 
-/******** Items ********/
+/******** Weapons ********/
 $app->mount(
-    '/members-area/items',
-    new Application\ControllerProvider\MembersArea\ItemsControllerProvider()
+    '/members-area/weapons',
+    new Application\ControllerProvider\MembersArea\WeaponsControllerProvider()
 );
 
 /******** Skills ********/

@@ -1,9 +1,9 @@
 {% extends 'layouts/content/members-area.html.twig' %}
 
-{% block title %}{{ 'Items' | trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'Weapons' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ 'Items' | trans }}</h1>
+    <h1>{{ 'Weapons' | trans }}</h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ url('members-area') }}">
@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="active">
-            {{ 'Items' | trans }}
+            {{ 'Weapons' | trans }}
         </li>
     </ol>
     <div class="table-responsive">
@@ -23,10 +23,10 @@
                 </tr>
             </thead>
             <tbody>
-                {% for itemKey, item in items %}
+                {% for weaponKey, weapon in weapons %}
                     <tr>
-                        <td>{{ itemKey }}</td>
-                        <td>{{ item }}</td>
+                        <td>{{ weaponKey }}</td>
+                        <td>{{ weapon }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

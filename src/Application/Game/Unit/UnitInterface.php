@@ -29,17 +29,6 @@ interface UnitInterface
      */
     public function setKey($name);
 
-    /***** Slug *****/
-    /**
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug);
-
     /***** Description *****/
     /**
      * @return string

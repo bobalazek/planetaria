@@ -15,7 +15,6 @@ class Beginner extends AbstractBadge
         $this
             ->setName('Beginner')
             ->setKey('beginner')
-            ->setSlug('beginner')
             ->setDescription('This is just the begining.')
             ->setMinimumExperiencePoints(200)
         ;

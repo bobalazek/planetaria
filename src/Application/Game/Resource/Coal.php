@@ -15,7 +15,6 @@ class Coal extends AbstractResource
         $this
             ->setName('Coal')
             ->setKey('coal')
-            ->setSlug('coal')
             ->setDescription('Used primarily for buildings.')
         ;
     }

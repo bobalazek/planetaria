@@ -5,6 +5,7 @@ namespace Application\Game\Building;
 use Application\Game\Resources;
 use Application\Game\BuildingTypes;
 use Application\Game\TileTerrainTypes;
+use Application\Game\Weapons;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
@@ -19,7 +20,6 @@ class IonCannonControlCenter extends AbstractBuilding
         $this
             ->setName('Ion cannon control center')
             ->setKey('ion_cannon_control_center')
-            ->setSlug('ion-cannon-control-center')
             ->setDescription('Ion Cannon control center is a facility that can interact and send orders to Ion Cannon weapon.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')
@@ -40,6 +40,11 @@ class IonCannonControlCenter extends AbstractBuilding
                 0 => array(
                     Resources::WOOD => 200000,
                     Resources::ROCK => 200000,
+                ),
+            ))
+            ->setWeaponsProduction(array(
+                0 => array(
+                    Weapons::ION_CANNON_SATELITE,
                 ),
             ))
             ->setAvailableTerrainTypes(array(

@@ -15,7 +15,6 @@ class Rookie extends AbstractBadge
         $this
             ->setName('Rookie')
             ->setKey('rookie')
-            ->setSlug('rookie')
             ->setDescription('You are just getting started.')
             ->setMinimumExperiencePoints(100)
         ;

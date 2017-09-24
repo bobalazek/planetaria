@@ -15,7 +15,6 @@ class Money extends AbstractResource
         $this
             ->setName('Money')
             ->setKey('money')
-            ->setSlug('money')
             ->setDescription('Used primarily for buildings.')
         ;
     }

@@ -19,7 +19,6 @@ class Capitol extends AbstractBuilding
         $this
             ->setName('Capitol')
             ->setKey('capitol')
-            ->setSlug('capitol')
             ->setDescription('Capitol is a main building in this game.')
             ->setUserExperiencePoints(200)
             ->setType(BuildingTypes::GOVERNMENT)

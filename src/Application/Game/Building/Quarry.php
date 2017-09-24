@@ -19,9 +19,8 @@ class Quarry extends AbstractBuilding
         $this
             ->setName('Quarry')
             ->setKey('quarry')
-            ->setSlug('quarry')
             ->setDescription('A quarry is a place where you can extract rocks.')
-            ->setType(BuildingTypes::OTHER)
+            ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

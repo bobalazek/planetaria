@@ -8,7 +8,7 @@ use Silex\ControllerProviderInterface;
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class ItemsControllerProvider implements ControllerProviderInterface
+class WeaponsControllerProvider implements ControllerProviderInterface
 {
     /**
      * @param Application $app
@@ -21,9 +21,9 @@ class ItemsControllerProvider implements ControllerProviderInterface
 
         $controllers->match(
             '',
-            'Application\Controller\MembersArea\ItemsController::indexAction'
+            'Application\Controller\MembersArea\WeaponsController::indexAction'
         )
-        ->bind('members-area.items');
+        ->bind('members-area.weapons');
 
         return $controllers;
     }

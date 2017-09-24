@@ -51,19 +51,6 @@ class Resources
     const MONEY = 'money';
 
     /**
-     * @var Application
-     */
-    protected $app;
-
-    /**
-     * @param Application $app
-     */
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
-    }
-
-    /**
      * @return array
      */
     public static function getAll($key = null)

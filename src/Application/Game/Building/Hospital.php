@@ -19,10 +19,9 @@ class Hospital extends AbstractBuilding
         $this
             ->setName('Hospital')
             ->setKey('hospital')
-            ->setSlug('hospital')
             ->setDescription('A hospital is a health care building that provides you with better healing for your population and soldiers.')
-            ->setType(BuildingTypes::OTHER)
-            ->setSize('1x1')
+            ->setType(BuildingTypes::RESIDENTIAL)
+            ->setSize('2x2')
             ->setMaximumLevel(2)
             ->setHealthPoints(array(
                 0 => 1000,

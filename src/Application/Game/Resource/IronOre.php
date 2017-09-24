@@ -15,7 +15,6 @@ class IronOre extends AbstractResource
         $this
             ->setName('Iron ore')
             ->setKey('iron_ore')
-            ->setSlug('iron-ore')
             ->setDescription('Used primarily for buildings.')
         ;
     }

@@ -19,9 +19,8 @@ class LoggingCamp extends AbstractBuilding
         $this
             ->setName('Logging camp')
             ->setKey('logging_camp')
-            ->setSlug('logging-camp')
             ->setDescription('A logging camp is a place that produces wood.')
-            ->setType(BuildingTypes::OTHER)
+            ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

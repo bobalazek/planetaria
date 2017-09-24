@@ -15,7 +15,6 @@ class Wood extends AbstractResource
         $this
             ->setName('Wood')
             ->setKey('wood')
-            ->setSlug('wood')
             ->setDescription('Used primarily for buildings.')
         ;
     }

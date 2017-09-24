@@ -19,7 +19,6 @@ class SolarPark extends AbstractBuilding
         $this
             ->setName('Solar park')
             ->setKey('solar_park')
-            ->setSlug('solar-park')
             ->setDescription('Solar park is a photovoltaic system that converts sunlight into electricity that will later supplie your town.')
             ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')

@@ -19,9 +19,8 @@ class Colliery extends AbstractBuilding
         $this
             ->setName('Colliery')
             ->setKey('colliery')
-            ->setSlug('colliery')
             ->setDescription('With colliery you can obtain coal from the ground.')
-            ->setType(BuildingTypes::OTHER)
+            ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

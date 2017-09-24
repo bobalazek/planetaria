@@ -15,7 +15,6 @@ class Electricity extends AbstractResource
         $this
             ->setName('Electricity')
             ->setKey('electricity')
-            ->setSlug('electricity')
             ->setDescription('Used primarily for buildings.')
         ;
     }

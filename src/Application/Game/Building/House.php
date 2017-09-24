@@ -19,7 +19,6 @@ class House extends AbstractBuilding
         $this
             ->setName('House')
             ->setKey('house')
-            ->setSlug('house')
             ->setDescription('A house it\'s a residential building that will increase your population limit.')
             ->setType(BuildingTypes::RESIDENTIAL)
             ->setSize('1x1')

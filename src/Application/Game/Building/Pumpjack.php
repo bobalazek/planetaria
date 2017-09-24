@@ -19,9 +19,8 @@ class Pumpjack extends AbstractBuilding
         $this
             ->setName('Pumpjack')
             ->setKey('pumpjack')
-            ->setSlug('pumpjack')
             ->setDescription('A pumpjack is a mechanism for pumping crude oil to the surface.')
-            ->setType(BuildingTypes::OTHER)
+            ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

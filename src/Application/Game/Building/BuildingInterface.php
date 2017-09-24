@@ -29,17 +29,6 @@ interface BuildingInterface
      */
     public function setKey($name);
 
-    /***** Slug *****/
-    /**
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug);
-
     /***** Description *****/
     /**
      * @return string
@@ -216,38 +205,38 @@ interface BuildingInterface
      */
     public function setUnitsBuildTimeBonus(array $unitsBuildTimeBonus);
 
-    /***** Items production *****/
+    /***** Weapons production *****/
     /**
      * @return array
      */
-    public function getItemsProduction($level, $item);
+    public function getWeaponsProduction($level, $weapon);
 
     /**
-     * @param array $itemsProduction
+     * @param array $weaponsProduction
      */
-    public function setItemsProduction(array $itemsProduction);
+    public function setWeaponsProduction(array $weaponsProduction);
 
-    /***** Items resources cost bonus *****/
-    /**
-     * @return array
-     */
-    public function getItemsResourcesCostBonus($level);
-
-    /**
-     * @param array $itemsResourcesCostBonus
-     */
-    public function setItemsResourcesCostBonus(array $itemsResourcesCostBonus);
-
-    /***** Items build time bonus *****/
+    /***** Weapons resources cost bonus *****/
     /**
      * @return array
      */
-    public function getItemsBuildTimeBonus($level);
+    public function getWeaponsResourcesCostBonus($level);
 
     /**
-     * @param array $itemsBuildTimeBonus
+     * @param array $weaponsResourcesCostBonus
      */
-    public function setItemsBuildTimeBonus(array $itemsBuildTimeBonus);
+    public function setWeaponsResourcesCostBonus(array $weaponsResourcesCostBonus);
+
+    /***** Weapons build time bonus *****/
+    /**
+     * @return array
+     */
+    public function getWeaponsBuildTimeBonus($level);
+
+    /**
+     * @param array $weaponsBuildTimeBonus
+     */
+    public function setWeaponsBuildTimeBonus(array $weaponsBuildTimeBonus);
 
     /***** Buildings required *****/
     /**

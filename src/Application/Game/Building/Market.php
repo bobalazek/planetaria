@@ -19,7 +19,6 @@ class Market extends AbstractBuilding
         $this
             ->setName('Market')
             ->setKey('market')
-            ->setSlug('market')
             ->setDescription('Market provides economic improvement in a game. You can exchange one resource for another.')
             ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')

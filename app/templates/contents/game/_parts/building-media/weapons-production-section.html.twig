@@ -1,0 +1,11 @@
+<section class="building-weapons-production-section">
+    <h4>{{ 'Weapons production' | trans }}</h4>
+    <ul class="list-group">
+        {% for weapon in building.getWeaponsProduction(level) %}
+            <li class="list-group-item">
+                {{ weapon | humanize | trans }}
+                {# To-Do: Cost! #}
+            </li>
+        {% endfor %}
+    </ul>
+</div> <!-- /.building-weapons-production-section -->

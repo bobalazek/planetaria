@@ -15,7 +15,6 @@ class Food extends AbstractResource
         $this
             ->setName('Food')
             ->setKey('food')
-            ->setSlug('food')
             ->setDescription('Used to feed the units and maybe for buildings production.')
         ;
     }

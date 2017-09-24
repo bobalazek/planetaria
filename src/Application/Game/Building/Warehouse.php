@@ -19,7 +19,6 @@ class Warehouse extends AbstractBuilding
         $this
             ->setName('Warehouse')
             ->setKey('warehouse')
-            ->setSlug('warehouse')
             ->setDescription('Warehouse is a storage building for store more goods that you produced.')
             ->setType(BuildingTypes::COMMERCIAL)
             ->setSize('1x1')

@@ -15,7 +15,6 @@ class Advanced extends AbstractBadge
         $this
             ->setName('Advanced')
             ->setKey('advanced')
-            ->setSlug('advanced')
             ->setDescription('You are really good.')
             ->setMinimumExperiencePoints(2000)
         ;

@@ -19,9 +19,8 @@ class IronMine extends AbstractBuilding
         $this
             ->setName('Iron mine')
             ->setKey('iron_mine')
-            ->setSlug('iron-mine')
             ->setDescription('Iron mine is a place in which you can dig up an iron ore.')
-            ->setType(BuildingTypes::OTHER)
+            ->setType(BuildingTypes::INDUSTRIAL)
             ->setSize('1x1')
             ->setMaximumLevel(5)
             ->setHealthPoints(array(

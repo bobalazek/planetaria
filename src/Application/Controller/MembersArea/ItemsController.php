@@ -4,12 +4,12 @@ namespace Application\Controller\MembersArea;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Application\Game\Items;
+use Application\Game\Weapons;
 
 /**
  * @author Borut Balažek <bobalazek124@gmail.com>
  */
-class ItemsController
+class WeaponsController
 {
     /**
      * @param Application $app
@@ -20,9 +20,9 @@ class ItemsController
     {
         return new Response(
             $app['twig']->render(
-                'contents/members-area/items/index.html.twig',
+                'contents/members-area/weapons/index.html.twig',
                 array(
-                    'items' => Items::getAll(),
+                    'weapons' => Weapons::getAll(),
                 )
             )
         );

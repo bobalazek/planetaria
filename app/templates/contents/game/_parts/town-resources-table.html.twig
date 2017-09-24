@@ -21,7 +21,7 @@
                     data-resource-capacity-percentage="{{ resourceData.capacity_percentage }}"
                     data-resource-production="{{ resourceData.production }}">
                     <td class="resource-name">
-                        <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getSlug() }}.png"
+                        <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getKey() }}.png"
                             style="max-width: 16px;" />
                         {{ resourceObject.getName() | trans }}
                     </td>

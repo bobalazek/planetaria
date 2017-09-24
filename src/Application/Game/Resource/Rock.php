@@ -15,7 +15,6 @@ class Rock extends AbstractResource
         $this
             ->setName('Rock')
             ->setKey('rock')
-            ->setSlug('rock')
             ->setDescription('Used primarily for buildings.')
         ;
     }

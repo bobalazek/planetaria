@@ -19,7 +19,6 @@ class Airbase extends AbstractBuilding
         $this
             ->setName('Airbase')
             ->setKey('airbase')
-            ->setSlug('airbase')
             ->setDescription('An airbase is a military aerodrome used for military aircrafts.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('2x2')

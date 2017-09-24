@@ -20,7 +20,6 @@ class Barracks extends AbstractBuilding
         $this
             ->setName('Barracks')
             ->setKey('barracks')
-            ->setSlug('barracks')
             ->setDescription('Barracks are military buildings in which you can train your soldiers.')
             ->setType(BuildingTypes::MILITARY)
             ->setSize('1x1')

@@ -15,7 +15,6 @@ class Intermediate extends AbstractBadge
         $this
             ->setName('Intermediate')
             ->setKey('intermediate')
-            ->setSlug('intermediate')
             ->setDescription('That is the spirit.')
             ->setMinimumExperiencePoints(500)
         ;

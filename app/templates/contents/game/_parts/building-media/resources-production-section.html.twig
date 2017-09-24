@@ -10,7 +10,7 @@
                 <span class="badge">
                     {{ resourceAmount }}
                 </span>
-                <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getSlug() }}.png"
+                <img src="{{ app.baseUrl }}/assets/images/resources/{{ resourceObject.getKey() }}.png"
                     style="max-width: 16px;" />
                 {{ resourceObject.getName() | trans }}
             </li>

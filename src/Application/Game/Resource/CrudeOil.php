@@ -15,7 +15,6 @@ class CrudeOil extends AbstractResource
         $this
             ->setName('Crude oil')
             ->setKey('crude_oil')
-            ->setSlug('crude-oil')
             ->setDescription('Used primarily for buildings.')
         ;
     }

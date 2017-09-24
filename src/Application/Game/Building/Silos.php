@@ -19,7 +19,6 @@ class Silos extends AbstractBuilding
         $this
             ->setName('Silos')
             ->setKey('silos')
-            ->setSlug('silos')
             ->setDescription('Food silos store food, so your population is always sufficiently fed.')
             ->setType(BuildingTypes::AGRICULTURAL)
             ->setSize('1x1')
