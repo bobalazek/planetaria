@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: planetaria_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - database
+  database:
+    container_name: planetaria_database
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: planetaria
+      MYSQL_DATABASE: planetaria
+      MYSQL_USER: planetaria
+      MYSQL_PASSWORD: planetaria
+    ports:
+      - "3306:3306"
+    volumes:
+      - .:/app
+      - planetaria-database-data:/var/lib/mysql
+
+volumes:
+  planetaria-database-data:

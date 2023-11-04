@@ -23,6 +23,12 @@ Setup / Development
     * `bin/console application:database:hydrate-data` (to hydrate some data)
 * You are done! Start developing!
 
+Setup with Docker
+-------------------
+* Prepare config in `./app/configs/global-local.php.example` and save it as `./app/configs/global-local.php`
+* Run: `docker compose up -d`
+* SSH into the `planetaria_web` container and follow the steps outlined above
+
 Database
 -------------------
 * We use the Doctrine database
@@ -38,10 +44,6 @@ With the `bin/console application:database:hydrate-data` command, you will, per 
 * "borut"
     * Username: `borut`
     * Email: `bobalazek124@gmail.com`
-    * Password: `test`
-* "ana"
-    * Username: `ana`
-    * Email: `anakociper124@gmail.com`
     * Password: `test`
 
 Commands

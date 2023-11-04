@@ -65,12 +65,6 @@
                 {{ 'Units' | trans }}
             </a>
         </li>
-        <li class="{{ path('members-area.items') in app.currentUri ? 'active' : '' }}" role="presentation">
-            <a href="{{ url('members-area.items') }}">
-                <i class="fa fa-fw fa-archive"></i>
-                {{ 'Items' | trans }}
-            </a>
-        </li>
         <li class="{{ path('members-area.skills') in app.currentUri ? 'active' : '' }}" role="presentation">
             <a href="{{ url('members-area.skills') }}">
                 <i class="fa fa-fw fa-bolt"></i>

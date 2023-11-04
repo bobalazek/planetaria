@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 umask(0000);
 
+error_reporting(0);
+
 /********** Set Timezone **********/
 date_default_timezone_set('Europe/Vienna');
 

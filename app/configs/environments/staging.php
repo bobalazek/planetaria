@@ -9,7 +9,7 @@ return array(
             'host' => 'localhost',
             'dbname' => 'corcosof_planetaria',
             'user' => 'corcosof_planeta',
-            'password' => 'vUaVxi!#5r?T',
+            'password' => 'z5PeCTU6tMWjhRF',
             'charset' => 'utf8',
         ),
     ),
